@@ -1,5 +1,5 @@
 // scripts/daily-refresh.mjs
-// Standalone Content Gathering & Meta Aggregation Engine for Meta Center
+// High-Volume Content Gathering, Multi-Desk Article & Meta Aggregation Engine for Meta Center
 // Zero external npm dependencies required (uses native Node 20 fetch + fs).
 import fs from "node:fs/promises";
 
@@ -8,68 +8,152 @@ const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim();
 const YOUTUBE_API_KEY = (process.env.YOUTUBE_API_KEY || GEMINI_API_KEY).trim();
 const DATA_PATH = "./data.json";
 
-const MAX_NEWS_ITEMS = 100;
+// High-volume configuration with strict quality floors
+const MAX_NEWS_ITEMS = 250;
 const MIN_NEWS_RELEVANCE = 7;
+const MAX_POSTS_ARCHIVE = 60;
+const ARTICLES_PER_RUN = Number(process.env.ARTICLES_PER_RUN || (process.env.FORCE_ARTICLE === "true" ? 3 : 2));
 
-// Source Authority Directory: guides Gemini's search & weights consensus rankings
+// Expanded Source Authority Directory (18 specialist creators, outlets & wikis)
 const TRUSTED_SOURCES_DIRECTORY = [
   { name: "Broughy1322 (YouTube Track Lap Tests)", url: "https://www.youtube.com/@Broughy1322", kind: "youtube", weight: 1.25 },
   { name: "Digital Car Addict (YouTube Customization & Dyno)", url: "https://www.youtube.com/@DigitalCarAddict", kind: "youtube", weight: 1.2 },
   { name: "GhillieMaster (YouTube Weapon TTK & Combat Meta)", url: "https://www.youtube.com/@GhillieMaster", kind: "youtube", weight: 1.25 },
   { name: "TGG (YouTube Solo Money & Business Guides)", url: "https://www.youtube.com/@TGG", kind: "youtube", weight: 1.2 },
   { name: "Digital Foundry (Technical & Frame-Rate Analysis)", url: "https://www.youtube.com/@DigitalFoundry", kind: "youtube", weight: 1.25 },
+  { name: "TheProfessional (YouTube Heist & Money Grinding)", url: "https://www.youtube.com/@TheProfessional1994", kind: "youtube", weight: 1.2 },
+  { name: "HarmNone (YouTube Vehicle & Gear Reviews)", url: "https://www.youtube.com/@HarmNone", kind: "youtube", weight: 1.15 },
+  { name: "Pyrerealm Gaming (YouTube Mythbusting & Comparisons)", url: "https://www.youtube.com/@PyrerealmGaming", kind: "youtube", weight: 1.15 },
+  { name: "DarkViperAU (YouTube Speedrun & Mechanics Science)", url: "https://www.youtube.com/@DarkViperAU", kind: "youtube", weight: 1.15 },
   { name: "IGN GTA 6 Wiki & Interactive Map", url: "https://www.ign.com/wikis/gta-6", kind: "web", weight: 1.0 },
   { name: "Kotaku GTA 6 Coverage", url: "https://kotaku.com", kind: "web", weight: 1.0 },
   { name: "Eurogamer GTA 6 Guides", url: "https://www.eurogamer.net", kind: "web", weight: 1.0 },
   { name: "TechRadar GTA 6 Coverage", url: "https://www.techradar.com", kind: "web", weight: 1.0 },
   { name: "Inven Global GTA 6 Guides", url: "https://www.invenglobal.com", kind: "web", weight: 1.0 },
   { name: "PC Gamer GTA 6 Coverage", url: "https://www.pcgamer.com", kind: "web", weight: 1.0 },
-  { name: "GameSpot GTA 6 Guides", url: "https://www.gamespot.com", kind: "web", weight: 1.0 }
+  { name: "GameSpot GTA 6 Guides", url: "https://www.gamespot.com", kind: "web", weight: 1.0 },
+  { name: "GamesRadar+ GTA 6 Guides", url: "https://www.gamesradar.com", kind: "web", weight: 1.0 },
+  { name: "Video Games Chronicle (VGC)", url: "https://www.videogameschronicle.com", kind: "web", weight: 1.0 }
 ];
 
+// Multi-query category configuration + target catalog growth
 const CATEGORY_CONFIG = {
   cars: {
-    youtubeQuery: "GTA 6 best cars supercars lap time test tier list",
-    searchFocus: "lap times, top speed mph tests, wet/dry handling, theft tool requirements (hotwire, slim jim, key cloner), and price/value"
+    targetCatalogSize: 15,
+    factKeys: ["Top speed", "Handling", "Theft"],
+    youtubeQueries: [
+      "GTA 6 best cars supercars lap time test tier list",
+      "GTA 6 fastest sports cars armored getaway vehicles tested"
+    ],
+    searchFocus: "lap times, top speed mph tests, wet/dry handling, armor durability, theft tool requirements (hotwire, slim jim, key cloner), and price/value across Super, Sports, Muscle, SUV, and Motorcycle classes"
   },
   weapons: {
-    youtubeQuery: "GTA 6 best weapons guns TTK damage test tier list",
-    searchFocus: "time-to-kill (TTK), recoil pattern, free-aim accuracy, suppressor synergy, and shared inventory mechanics between Jason and Lucia"
+    targetCatalogSize: 14,
+    factKeys: ["Damage", "Range", "Recoil"],
+    youtubeQueries: [
+      "GTA 6 best weapons guns TTK damage test tier list",
+      "GTA 6 best rifles shotguns pistols drive-by SMG comparison"
+    ],
+    searchFocus: "time-to-kill (TTK), headshot multiplier, recoil pattern, free-aim accuracy, drive-by fire rate, suppressor synergy, and shared inventory mechanics between Jason and Lucia"
   },
   money: {
-    youtubeQuery: "GTA 6 best money methods solo guide per hour",
-    searchFocus: "solo cash per hour ($/hr), startup requirements, police heat risk, chop shop/fence payouts, and early vs. late game scaling"
+    targetCatalogSize: 12,
+    factKeys: ["Payout", "Time", "Risk"],
+    youtubeQueries: [
+      "GTA 6 best money methods solo guide per hour",
+      "GTA 6 heist payouts chop shop fencing passive income guide"
+    ],
+    searchFocus: "solo cash per hour ($/hr), cooldown timers, startup requirements, police heat risk, chop shop/fence payouts, ATM laundering, and early vs. late game scaling"
   },
   gear: {
-    youtubeQuery: "GTA 6 best gear upgrades tools key cloner slim jim",
-    searchFocus: "unlock timing, return on investment, stealth/police delay benefits, vehicle theft access, and survivability"
+    targetCatalogSize: 12,
+    factKeys: ["Effect", "Cost", "Unlocks"],
+    youtubeQueries: [
+      "GTA 6 best gear upgrades tools key cloner slim jim",
+      "GTA 6 best weapon attachments armor stealth heist equipment"
+    ],
+    searchFocus: "unlock timing, return on investment, stealth/police delay benefits, vehicle theft access, carry capacity upgrades, and combat survivability"
   }
 };
 
+// 6 Specialized News Beats (Up to 8 stories per beat = up to 48 high-signal stories per run)
 const NEWS_BEATS = [
   {
-    name: "Patches, Performance & Official Rockstar Updates",
+    name: "Patches, Hotfixes & Official Rockstar Updates",
     cats: ["launch", "world"],
-    targetCount: 6,
-    youtubeQuery: "GTA 6 patch notes update performance PS5 Xbox Rockstar news",
+    targetCount: 8,
+    youtubeQuery: "GTA 6 patch notes hotfix update Rockstar official news",
     searchPrompt: (today) =>
-      `Today is ${today}. Search Rockstar Newswire, PlayStation/Xbox updates, Digital Foundry, IGN, Eurogamer, TechRadar, VGC, and GameSpot for the most important recent Grand Theft Auto VI (GTA 6) official announcements, patch notes, balance changes, console performance findings, or major world updates. Focus strictly on verifiable facts—skip rumors or clickbait.`
+      `Today is ${today}. Search Rockstar Newswire, PlayStation/Xbox system updates, IGN, Eurogamer, VGC, GameSpot, and PC Gamer for the latest Grand Theft Auto VI (GTA 6) patch notes, hotfixes, balance changes, server/online updates, and official Rockstar announcements.`
   },
   {
-    name: "Combat, Vehicles & Tested Gameplay Mechanics",
-    cats: ["weapons", "vehicles", "tips"],
-    targetCount: 6,
-    youtubeQuery: "GTA 6 hidden mechanics tips combat weapons cars tested",
+    name: "Console Performance, Frame-Rate & Settings Optimization",
+    cats: ["launch", "tips"],
+    targetCount: 8,
+    youtubeQuery: "GTA 6 Digital Foundry PS5 Pro Xbox Series X performance settings deadzone",
     searchPrompt: (today) =>
-      `Today is ${today}. Search IGN, Kotaku, Inven Global, PC Gamer, GameSpot, and GTA 6 creator testing videos for high-value gameplay tips, combat mechanics, weapon/vehicle balance discoveries, controller settings optimizations, and police/stealth tricks that players can immediately use in GTA 6.`
+      `Today is ${today}. Search Digital Foundry, TechRadar, Eurogamer, Kotaku, and creator benchmarks for GTA 6 PS5/PS5 Pro/Xbox Series X frame-rate tests, graphics modes, controller aiming dead-zone fixes, HDR calibration, and audio/visual settings tips.`
   },
   {
-    name: "Money Routes, Economy & Verified Secret Finds",
-    cats: ["items", "eggs", "world"],
-    targetCount: 6,
-    youtubeQuery: "GTA 6 money guide easter eggs secrets map finds Leonida",
+    name: "Vehicle Meta, Lap Times & Customization Discoveries",
+    cats: ["vehicles", "tips"],
+    targetCount: 8,
+    youtubeQuery: "GTA 6 fastest car test Broughy1322 Digital Car Addict Pay n Spray",
     searchPrompt: (today) =>
-      `Today is ${today}. Search gaming press and community roundups (IGN, VGTimes, Dexerto, Kotaku, Inven Global, TechRadar) for confirmed GTA 6 money-making discoveries, heist/chop-shop economy tips, rare item locations, and verified Leonida easter eggs or secret encounters.`
+      `Today is ${today}. Search GTA 6 vehicle testing channels (Broughy1322, Digital Car Addict, HarmNone) and gaming guides for new fastest car lap-time tests, secret vehicle spawn locations, Pay 'n' Spray registration tricks, key cloner/slim jim theft mechanics, and hidden customization upgrades.`
+  },
+  {
+    name: "Weapon Loadouts, Combat Science & Police Evasion",
+    cats: ["weapons", "tips"],
+    targetCount: 8,
+    youtubeQuery: "GTA 6 weapon damage test GhillieMaster combat tips police wanted level",
+    searchPrompt: (today) =>
+      `Today is ${today}. Search GhillieMaster, IGN, Kotaku, Inven Global, and GamesRadar for GTA 6 weapon damage breakdowns, attachment synergies (suppressors, extended mags, scopes), free-aim disarming mechanics, Jason/Lucia shared inventory rules, and police dispatch evasion tactics.`
+  },
+  {
+    name: "Solo Money Routes, Chop Shops & Heist Economy",
+    cats: ["items", "tips"],
+    targetCount: 8,
+    youtubeQuery: "GTA 6 solo money guide TGG chop shop fence heist payout",
+    searchPrompt: (today) =>
+      `Today is ${today}. Search TGG, TheProfessional, Inven Global, GameSpot, and PC Gamer for verified GTA 6 money-making methods, store robbery stealth loops, chop-shop tracker removal payouts, fence reputation unlocks, ATM cash cap management, and heist setup optimizations.`
+  },
+  {
+    name: "Leonida Easter Eggs, Random Events & World Secrets",
+    cats: ["eggs", "world"],
+    targetCount: 8,
+    youtubeQuery: "GTA 6 easter eggs secrets Vice City Lake Cottonmouth mysteries found",
+    searchPrompt: (today) =>
+      `Today is ${today}. Search VGTimes, Kotaku, GamesRadar, IGN, and community discovery channels for confirmed GTA 6 easter eggs, Lake Cottonmouth mysteries, rare random encounters, safehouse secrets, and hidden collectibles across Leonida.`
+  }
+];
+
+// 5 Rotating Editorial Desks for Multi-Source Cited Articles
+const EDITORIAL_DESKS = [
+  {
+    id: "vehicle-lap-meta",
+    tag: "Vehicle Analysis",
+    topicPrompt: "Deep-dive comparison of the fastest GTA 6 supercars, sports cars, and getaway vehicles—analyzing track lap times, wet-road handling penalties, and key cloner acquisition costs."
+  },
+  {
+    id: "weapon-ttk-loadouts",
+    tag: "Combat & Loadouts",
+    topicPrompt: "Comprehensive GTA 6 weapon meta and TTK guide—comparing Rifles, Shotguns, Revolvers, and Drive-by SMGs, plus suppressor police-delay mechanics and Jason/Lucia inventory split."
+  },
+  {
+    id: "solo-money-economy",
+    tag: "Money & Economy",
+    topicPrompt: "The definitive GTA 6 solo money-making breakdown—comparing early-game clean store robberies, mid-game chop-shop car flipping (with tracker removal), and late-game heist payouts per hour."
+  },
+  {
+    id: "stealth-police-gear",
+    tag: "Gear & Mechanics",
+    topicPrompt: "How GTA 6's 3-tier car theft system (Hotwire, Slim Jim, Key Cloner), witness/police dispatch timers, and essential gear upgrades change how you plan every robbery and getaway."
+  },
+  {
+    id: "performance-settings-patch",
+    tag: "Technical & Settings",
+    topicPrompt: "Essential GTA 6 settings, controller dead-zone tuning, manual save strategies, and console performance optimizations tested by reviewers and technical analysts."
   }
 ];
 
@@ -125,7 +209,7 @@ function isSimilarHeadline(candidateTitle, existingList) {
       if (prev.has(word)) overlap++;
     }
     const ratio = overlap / Math.min(cand.size, prev.size);
-    if (ratio >= 0.6) return true;
+    if (ratio >= 0.65) return true;
   }
   return false;
 }
@@ -194,11 +278,11 @@ async function callGeminiJson(parts, responseSchema) {
   throw lastErr || new Error("All candidate models failed");
 }
 
-/* Fetches top viewer comments on a YouTube video to verify enthusiasm & reject clickbait */
+/* Evaluates top viewer comments on a YouTube video to confirm quality & reject clickbait */
 async function evaluateVideoComments(videoId) {
   if (!YOUTUBE_API_KEY || !videoId) return { positiveHits: 0, negativeHits: 0, topQuotes: [] };
   try {
-    const cUrl = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${encodeURIComponent(videoId)}&maxResults=15&order=relevance&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
+    const cUrl = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${encodeURIComponent(videoId)}&maxResults=20&order=relevance&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
     const resp = await fetch(cUrl);
     if (!resp.ok) return { positiveHits: 0, negativeHits: 0, topQuotes: [] };
     const json = await resp.json();
@@ -209,7 +293,7 @@ async function evaluateVideoComments(videoId) {
       const text = item.snippet?.topLevelComment?.snippet?.textOriginal || "";
       if (POSITIVE_COMMENT_TERMS.test(text)) positiveHits++;
       if (NEGATIVE_COMMENT_TERMS.test(text)) negativeHits++;
-      if (topQuotes.length < 3 && text.length >= 15 && text.length <= 180) {
+      if (topQuotes.length < 4 && text.length >= 15 && text.length <= 180) {
         topQuotes.push(text.replace(/\s+/g, " ").trim());
       }
     }
@@ -219,23 +303,33 @@ async function evaluateVideoComments(videoId) {
   }
 }
 
-/* Discovers high-signal YouTube videos using Views + Like Ratio + Comment Sentiment */
-async function discoverHighSignalVideos(categoryQuery, maxResults = 3, recentDays = null) {
+/* Discovers high-signal YouTube videos across one or more queries */
+async function discoverHighSignalVideos(queriesInput, maxResults = 5, recentDays = null) {
   if (!YOUTUBE_API_KEY) return [];
+  const queries = Array.isArray(queriesInput) ? queriesInput : [queriesInput];
+  const allVideoIds = new Set();
+
   try {
     let publishedParam = "";
     if (recentDays) {
       const since = new Date(Date.now() - recentDays * 86400000).toISOString();
       publishedParam = `&publishedAfter=${encodeURIComponent(since)}`;
     }
-    const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&order=relevance${publishedParam}&q=${encodeURIComponent(categoryQuery)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
-    const sResp = await fetch(searchUrl);
-    if (!sResp.ok) return [];
-    const sJson = await sResp.json();
-    const videoIds = (sJson.items || []).map((i) => i.id?.videoId).filter(Boolean);
-    if (!videoIds.length) return [];
 
-    const statsUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${encodeURIComponent(videoIds.join(","))}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
+    for (const q of queries) {
+      const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=12&order=relevance${publishedParam}&q=${encodeURIComponent(q)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
+      const sResp = await fetch(searchUrl);
+      if (!sResp.ok) continue;
+      const sJson = await sResp.json();
+      for (const item of sJson.items || []) {
+        if (item.id?.videoId) allVideoIds.add(item.id.videoId);
+      }
+    }
+
+    const idList = [...allVideoIds].slice(0, 25);
+    if (!idList.length) return [];
+
+    const statsUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${encodeURIComponent(idList.join(","))}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
     const vResp = await fetch(statsUrl);
     if (!vResp.ok) return [];
     const vJson = await vResp.json();
@@ -247,10 +341,10 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 3, recentDay
       const likeRatio = views > 0 ? (likes / views) * 100 : 0;
       const isAgeRestricted = vid.contentDetails?.contentRating?.ytRating === "ytAgeRestricted";
 
-      if (views < 2500 || likeRatio < 2.0) continue;
+      // Balanced floor: captures emerging specialist testing videos while filtering low-effort spam
+      if (views < 1000 || likeRatio < 1.8) continue;
 
       const commentSignals = await evaluateVideoComments(vid.id);
-      // Disqualify videos where top comments call out clickbait or patched glitches
       if (commentSignals.negativeHits >= 3 && commentSignals.negativeHits > commentSignals.positiveHits) {
         continue;
       }
@@ -281,7 +375,7 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 3, recentDay
   }
 }
 
-/* 1. High-Volume 3-Beat News Aggregator */
+/* 1. High-Volume 6-Beat News Aggregator (Up to 48 stories per run) */
 async function refreshCommandCenterNews(existingNews, today) {
   const collected = [];
   const newsSchema = {
@@ -312,8 +406,8 @@ async function refreshCommandCenterNews(existingNews, today) {
   for (const beat of NEWS_BEATS) {
     try {
       console.log(`  [News Beat] Scanning: ${beat.name}...`);
-      const knownTitles = [...existingNews, ...collected].slice(0, 50).map((n) => n.title);
-      const beatVideos = await discoverHighSignalVideos(beat.youtubeQuery, 3, 14);
+      const knownTitles = [...existingNews, ...collected].slice(0, 80).map((n) => n.title);
+      const beatVideos = await discoverHighSignalVideos(beat.youtubeQuery, 4, 21);
       const liveResearch = await callGeminiGroundedSearch(
         `${beat.searchPrompt(today)}\nDo NOT repeat any of these existing headlines: ${JSON.stringify(knownTitles)}.\nReturn ${beat.targetCount} distinct, high-value items with exact publisher names and verified URLs.`
       );
@@ -327,7 +421,7 @@ Date: ${today}.
 Extract up to ${beat.targetCount} distinct, factual, high-signal GTA 6 news items, patch details, or tested gameplay tips.
 Strict Quality Rules:
 1. Only include concrete, verifiable updates, tested mechanics, or confirmed finds.
-2. Score relevanceScore from 1-10 (reserve 8-10 for major patches, high-impact tips, or confirmed discoveries).
+2. Score relevanceScore from 1-10 (require >= 7 for inclusion).
 3. Mark isClickbaitOrSpeculation = true for unverified rumors or filler listicles.
 4. Use ONLY verified https:// URLs from the research or YouTube list below.
 5. Do NOT duplicate any of these existing titles: ${JSON.stringify(knownTitles)}.
@@ -384,29 +478,30 @@ ${JSON.stringify(beatVideos)}`
   return collected;
 }
 
-/* 2. Category Meta Aggregator (Cars, Weapons, Money, Gear) */
+/* 2. Category Meta Aggregator + Automatic Catalog Expansion */
 async function refreshCategory(category, existingItems, today) {
   const cfg = CATEGORY_CONFIG[category];
-  const discoveredVideos = await discoverHighSignalVideos(cfg.youtubeQuery, 3);
+  const discoveredVideos = await discoverHighSignalVideos(cfg.youtubeQueries, 5);
   const itemList = existingItems.map((i) => ({ id: i.id, name: i.name, type: i.type, get: i.get, facts: i.facts }));
+  const expansionNeeded = Math.max(2, cfg.targetCatalogSize - existingItems.length);
 
   const liveWebResearch = await callGeminiGroundedSearch(
-    `As of ${today}, search the web and YouTube for the latest Grand Theft Auto VI (GTA 6) rankings, tier lists, creator testing, and guide site consensus for category: "${category}" (${cfg.youtubeQuery}).
+    `As of ${today}, search the web and YouTube for the latest Grand Theft Auto VI (GTA 6) rankings, tier lists, creator testing, and guide site consensus for category: "${category}".
     Evaluation criteria: ${cfg.searchFocus}.
-    Existing tracked items: ${JSON.stringify(itemList)}.
-    Identify updated rankings for existing items AND any top-tier newly discovered ${category} items worth adding, along with real source names (IGN, Kotaku, Eurogamer, Inven Global, TechRadar, Broughy1322, Digital Car Addict, GhillieMaster, TGG) and verified URLs.`
+    Existing tracked items (${existingItems.length}): ${JSON.stringify(itemList)}.
+    IMPORTANT QUANTITY & DEPTH GOAL: In addition to updating the existing ${existingItems.length} items, identify at least ${Math.min(4, expansionNeeded)} additional high-interest GTA 6 ${category} items tested by guide sites and YouTube creators that are not yet in the list above, along with real source names (IGN, Kotaku, Eurogamer, Inven Global, TechRadar, GamesRadar, Broughy1322, Digital Car Addict, GhillieMaster, TGG) and verified URLs.`
   );
 
-  // Inspect individual non-age-restricted YouTube videos natively (1 video per call)
+  // Inspect top non-age-restricted YouTube videos natively (up to 3 videos per category)
   const videoInsights = [];
-  for (const vid of discoveredVideos) {
+  for (const vid of discoveredVideos.slice(0, 3)) {
     if (!vid.isAgeRestricted) {
       try {
         const vParsed = await callGeminiJson(
           [
             { fileData: { fileUri: vid.url, mimeType: "video/mp4" } },
             {
-              text: `Context: Benign gaming frame analysis of Grand Theft Auto VI (${category}). Extract any ranked or tested items, exact MM:SS timestamp, rank position (1 to 10), and a 1-sentence testing quote.`
+              text: `Context: Benign gaming frame analysis of Grand Theft Auto VI (${category}). Extract every ranked or tested item, exact MM:SS timestamp, rank position (1 to 15), and a 1-sentence testing quote.`
             }
           ],
           {
@@ -451,6 +546,17 @@ async function refreshCategory(category, existingItems, today) {
             type: { type: "STRING" },
             get: { type: "STRING" },
             blurb: { type: "STRING" },
+            facts: {
+              type: "ARRAY",
+              items: {
+                type: "OBJECT",
+                properties: {
+                  label: { type: "STRING" },
+                  value: { type: "STRING" }
+                },
+                required: ["label", "value"]
+              }
+            },
             ranks: {
               type: "ARRAY",
               items: {
@@ -467,7 +573,7 @@ async function refreshCategory(category, existingItems, today) {
               }
             }
           },
-          required: ["id", "name", "ranks"]
+          required: ["id", "name", "type", "get", "blurb", "ranks"]
         }
       }
     }
@@ -477,41 +583,38 @@ async function refreshCategory(category, existingItems, today) {
     [
       {
         text: `Context: Benign software analysis of fictional video game item rankings for Meta Center (Grand Theft Auto VI).
-Update the rankings for category "${category}".
+Update the rankings for category "${category}" AND expand the catalog with at least ${Math.min(4, expansionNeeded)} newly discovered items from the research below.
 Evaluation focus: ${cfg.searchFocus}.
+Preferred fact labels for each item: ${JSON.stringify(cfg.factKeys)}.
 Existing items: ${JSON.stringify(itemList)}
 High-Engagement YouTube Videos & Viewer Consensus: ${JSON.stringify(videoInsights)}
 Live Web Search Research: ${liveWebResearch}
 Rules:
-1. Every item MUST have at least 3 real named sources (combining YouTube testing channels and guide sites).
-2. Never output "Sample site A/B/C".
-3. Include an exact MM:SS timestamp and testing quote for YouTube sources.`
+1. Return all existing items with updated multi-source rankings PLUS 2 to 4 new well-sourced items for "${category}".
+2. Every item MUST have between 3 and 6 real named sources (combining YouTube testing channels and guide sites).
+3. Never output "Sample site A/B/C".
+4. Include an exact MM:SS timestamp and testing quote for YouTube sources.`
       }
     ],
     schema
   );
 }
 
-/* 3. Automated 3-Day Multi-Source Cited Article Generator */
-async function maybeGenerateThreeDayArticle(data, today) {
-  const posts = data.posts || [];
-  const lastDate = posts[0]?.published || "2026-11-01";
-  const daysSince = (new Date(today).getTime() - new Date(lastDate).getTime()) / 86400000;
+/* 3. Multi-Desk Cited Article Engine (Generates up to ARTICLES_PER_RUN deep-dive articles per run) */
+async function generateBatchCitedArticles(data, today) {
+  const existingPosts = data.posts || [];
+  const existingSlugs = new Set(existingPosts.map((p) => p.slug));
+  const existingTitles = existingPosts.map((p) => p.title);
+  const recentHeadlines = (data.news || []).slice(0, 25).map((n) => `${n.title} (${n.source}: ${n.url})`);
 
-  if (daysSince < 3 && process.env.FORCE_ARTICLE !== "true" && posts.length > 0) {
-    console.log(`Skipping article generation (${daysSince.toFixed(1)} days since last post).`);
-    return null;
-  }
+  // Prioritize editorial desks that have the fewest recent articles
+  const deskCounts = EDITORIAL_DESKS.map((desk) => ({
+    desk,
+    count: existingPosts.filter((p) => (p.tags || []).includes(desk.tag)).length
+  })).sort((a, b) => a.count - b.count);
 
-  console.log("Researching new 3-day multi-source cited article...");
-  const existingSlugs = posts.map((p) => p.slug);
-  const recentHeadlines = (data.news || []).slice(0, 12).map((n) => `${n.title} (${n.source}: ${n.url})`);
-
-  const research = await callGeminiGroundedSearch(
-    `As of ${today}, identify the biggest Grand Theft Auto VI (GTA 6) meta discovery, weapon/vehicle balance comparison, or solo money-making breakdown corroborated by at least 3 distinct gaming outlets or creators.
-    Recent site headlines for context: ${JSON.stringify(recentHeadlines)}.
-    Avoid existing article slugs: ${JSON.stringify(existingSlugs)}.`
-  );
+  const selectedDesks = deskCounts.slice(0, Math.max(1, ARTICLES_PER_RUN)).map((d) => d.desk);
+  const generatedPosts = [];
 
   const articleSchema = {
     type: "OBJECT",
@@ -550,35 +653,63 @@ async function maybeGenerateThreeDayArticle(data, today) {
     required: ["hasEnoughSources", "slug", "title", "dek", "sections", "sources"]
   };
 
-  const article = await callGeminiJson(
-    [
-      {
-        text: `Write an original, deeply researched GTA 6 analysis article for Meta Center based on this live research:
+  for (const desk of selectedDesks) {
+    try {
+      console.log(`  [Article Desk] Researching "${desk.tag}" feature...`);
+      const research = await callGeminiGroundedSearch(
+        `As of ${today}, research a fresh, specific, high-value Grand Theft Auto VI (GTA 6) analysis feature for our "${desk.tag}" desk.
+        Focus: ${desk.topicPrompt}
+        Recent site headlines for context: ${JSON.stringify(recentHeadlines)}.
+        Do NOT repeat any of these existing article titles: ${JSON.stringify([...existingTitles, ...generatedPosts.map((p) => p.title)])}.
+        Find at least 4 distinct gaming outlets, wikis, or specialist YouTube testing channels with verified URLs.`
+      );
+
+      const article = await callGeminiJson(
+        [
+          {
+            text: `Write an original, deeply researched 4-section GTA 6 analysis article for Meta Center's "${desk.tag}" desk based on this live research:
 ${research}
 
-Strict Editorial Rules:
-1. Require at least 3 distinct, real sources in the sources array (if fewer than 3 exist, set hasEnoughSources = false).
-2. Cite sources inline in paragraphs using bracketed numbers like [1], [2], [3].
-3. Write in a sharp, human editorial voice with concrete stats, payouts, or lap-time comparisons.`
-      }
-    ],
-    articleSchema
-  );
+Strict Editorial & Quality Rules:
+1. Require at least 3 to 5 distinct, real sources in the sources array with verified https:// URLs (if fewer than 3 exist, set hasEnoughSources = false).
+2. Cite sources inline in paragraphs using bracketed numbers like [1], [2], [3], [4].
+3. Include 3 to 4 substantive sections (each with a clear subheading "h", 2 detailed paragraphs in "p", and an optional bulleted takeaway "list").
+4. Write in a sharp, authoritative human editorial voice with concrete stats, payouts, or test figures.
+5. Do not duplicate any existing titles: ${JSON.stringify(existingTitles)}.`
+          }
+        ],
+        articleSchema
+      );
 
-  if (article && article.hasEnoughSources && (article.sources || []).length >= 3) {
-    return {
-      slug: article.slug,
-      title: article.title,
-      dek: article.dek,
-      author: "Meta Center Staff",
-      published: today,
-      updated: today,
-      tags: article.tags?.length ? article.tags : ["Meta Analysis"],
-      sections: article.sections,
-      sources: article.sources
-    };
+      const validSources = (article?.sources || []).filter((s) => /^https:\/\//.test(s.url || ""));
+      if (
+        article &&
+        article.hasEnoughSources &&
+        validSources.length >= 3 &&
+        article.slug &&
+        !existingSlugs.has(article.slug) &&
+        !isSimilarHeadline(article.title, [...existingPosts, ...generatedPosts])
+      ) {
+        existingSlugs.add(article.slug);
+        generatedPosts.push({
+          slug: article.slug,
+          title: article.title.trim(),
+          dek: article.dek.trim(),
+          author: "Meta Center Staff",
+          published: today,
+          updated: today,
+          tags: [desk.tag, ...(article.tags || []).filter((t) => t !== desk.tag)].slice(0, 3),
+          sections: article.sections,
+          sources: validSources
+        });
+        console.log(`  [Article Desk] Published: "${article.title}" (${validSources.length} sources)`);
+      }
+    } catch (err) {
+      console.warn(`  [Article Desk] Warning on ${desk.id}:`, err.message);
+    }
   }
-  return null;
+
+  return generatedPosts;
 }
 
 async function main() {
@@ -607,32 +738,47 @@ async function main() {
     }
   }
 
+  let addedNewsCount = 0;
+  let addedItemsCount = 0;
+  let addedArticlesCount = 0;
+
   if (GEMINI_API_KEY) {
-    // 1. Run 3-Beat High-Volume News Engine
+    // 1. Run 6-Beat High-Volume News Engine (Up to 48 fresh stories per run)
     try {
-      console.log("Running 3-Beat High-Signal News Sweep...");
+      console.log("Running 6-Beat High-Signal News Sweep...");
       const freshHeadlines = await refreshCommandCenterNews(data.news, today);
+      addedNewsCount = freshHeadlines.length;
       for (const h of freshHeadlines.reverse()) {
         data.news.unshift(h);
       }
       data.news = data.news.slice(0, MAX_NEWS_ITEMS);
-      console.log(`Added ${freshHeadlines.length} verified headlines (Archive size: ${data.news.length}).`);
+      console.log(`Added ${addedNewsCount} verified headlines (Archive size: ${data.news.length}).`);
     } catch (err) {
       console.warn("News sweep warning:", err.message);
     }
 
-    // 2. Refresh Category Rankings & YouTube Creator Breakdowns
+    // 2. Refresh Category Rankings & Expand Catalogs
     for (const cat of Object.keys(data.categories)) {
       try {
-        console.log(`Refreshing category: ${cat}...`);
+        console.log(`Refreshing & expanding category: ${cat}...`);
         const res = await refreshCategory(cat, data.categories[cat], today);
         for (const upd of res?.items || []) {
           const target = data.categories[cat].find(
             (i) => i.id === upd.id || i.name.toLowerCase() === String(upd.name || "").toLowerCase()
           );
+          const factsObj = {};
+          for (const f of upd.facts || []) {
+            if (f.label && f.value) factsObj[f.label] = f.value;
+          }
+
           if (target && upd.ranks?.length >= 2) {
             target.ranks = upd.ranks;
             if (upd.blurb) target.blurb = upd.blurb;
+            if (upd.type) target.type = upd.type;
+            if (upd.get) target.get = upd.get;
+            if (Object.keys(factsObj).length > 0) {
+              target.facts = { ...(target.facts || {}), ...factsObj };
+            }
             target.sample = false;
           } else if (!target && upd.name && upd.ranks?.length >= 2) {
             data.categories[cat].push({
@@ -640,12 +786,13 @@ async function main() {
               name: upd.name,
               type: upd.type || "Meta Pick",
               get: upd.get || "In-game unlock",
-              facts: {},
+              facts: Object.keys(factsObj).length > 0 ? factsObj : { Status: "Reviewer tested" },
               blurb: upd.blurb || "",
               ranks: upd.ranks,
               sample: false,
               added: today
             });
+            addedItemsCount++;
           }
         }
       } catch (err) {
@@ -653,13 +800,16 @@ async function main() {
       }
     }
 
-    // 3. Check & Run 3-Day Cited Article Generator
+    // 3. Run Multi-Desk Cited Article Engine (2+ new articles per run)
     try {
-      const newPost = await maybeGenerateThreeDayArticle(data, today);
-      if (newPost && !data.posts.some((p) => p.slug === newPost.slug)) {
-        data.posts.unshift(newPost);
-        console.log(`Published new cited article: "${newPost.title}"`);
+      console.log(`Running Multi-Desk Article Engine (target: ${ARTICLES_PER_RUN} new articles)...`);
+      const newPosts = await generateBatchCitedArticles(data, today);
+      addedArticlesCount = newPosts.length;
+      for (const post of newPosts.reverse()) {
+        data.posts.unshift(post);
       }
+      data.posts = data.posts.slice(0, MAX_POSTS_ARCHIVE);
+      console.log(`Added ${addedArticlesCount} new multi-source articles (Total posts: ${data.posts.length}).`);
     } catch (err) {
       console.warn("Article generator warning:", err.message);
     }
@@ -671,9 +821,9 @@ async function main() {
 
   data.changelog.unshift({
     date: today,
-    text: `Synced ${data.news.length} Command Center headlines, verified YouTube comment signals, and refreshed category rankings.`
+    text: `Expanded coverage: +${addedNewsCount} verified headlines (${data.news.length} total), +${addedArticlesCount} cited articles (${data.posts.length} total), and +${addedItemsCount} newly ranked items.`
   });
-  data.changelog = data.changelog.slice(0, 40);
+  data.changelog = data.changelog.slice(0, 50);
 
   await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
   console.log("Saved updated data.json successfully.");
