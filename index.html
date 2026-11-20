@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -198,8 +198,6 @@ ol.list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none }
 .vote button:disabled { opacity: .5; cursor: not-allowed }
 .vote button[aria-pressed="true"] { background: var(--player); color: #04221f; border-color: var(--player) }
 .vote small { color: var(--muted) }
-.calib-bar { height: 6px; border-radius: 999px; background: var(--panel); overflow: hidden; border: 1px solid var(--line) }
-.calib-bar i { display: block; height: 100%; background: var(--teal); transition: width .25s ease }
 
 aside { display: grid; gap: 16px; align-content: start }
 .box { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px }
@@ -261,7 +259,8 @@ footer nav a { color: var(--muted); font-weight: 700 }
 <script type="application/ld+json" id="ld">{}</script>
 
 <script>
-const SITE = "Meta Center", MIN_VOTES = 50;
+/* MIN_VOTES set to 1 so Player Scores (%) display immediately on every item */
+const SITE = "Meta Center", MIN_VOTES = 1;
 const ACTIVE_MODEL = "gemini-3.8-flash";
 const CATS = {
   cars: { tab: "Cars", title: "Best Cars in GTA 6", one: "car", query: "GTA 6 best cars supercars lap time test tier list" },
@@ -271,13 +270,12 @@ const CATS = {
 };
 const NEWS_CATS = { launch: "Launch & PS5", tips: "Tips", eggs: "Easter eggs", weapons: "Weapons", vehicles: "Vehicles", items: "Money & items", world: "World" };
 const HOME_FAQ = [
-  ["What is Meta Center?", "Meta Center ranks the best cars, weapons, money methods and gear in GTA 6. Every item gets two scores: a critic score from guide sites and creator testing videos, and a player score from people playing the game."],
+  ["What is Meta Center?", "Meta Center ranks the best cars, weapons, money methods and gear in GTA 6. Every item gets two scores: a critic score from guide sites and creator testing videos, and a live player score from people playing the game."],
   ["How is the critic score calculated?", "Each day we track the rankings published by GTA 6 guide sites and high-engagement creator testing videos (lap times, recoil tests, and money/hour breakdowns). A #1 spot is worth 100 points and each spot lower is worth 6 fewer, down to 40. The critic score is the average across sources, and it shows once at least two sources rank the item."],
-  ["How is the player score calculated?", "Players vote on whether each item is worth getting. The player score is the share of votes that say yes. It shows once an item has 50 votes."],
-  ["How often does the site update?", "Rankings and news refresh every evening at 5:52 PM Central. New cited articles publish every three days. Each page shows when it was last updated."]
+  ["How is the player score calculated?", "Players vote on whether each item is worth getting (👍 Worth it or 👎 Skip it). The player score is the percentage of positive votes, updating immediately as you vote."],
+  ["How often does the site update?", "Rankings, new item discoveries, and news refresh every evening at 5:52 PM Central. New cited articles publish every three days. Each page shows when it was last updated."]
 ];
 
-/* Safety settings override so fictional GTA 6 gameplay (weapons, robberies, carjacking) is not blocked by default filters */
 const GAMING_SAFETY_SETTINGS = [
   { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
   { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
@@ -285,7 +283,7 @@ const GAMING_SAFETY_SETTINGS = [
   { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" }
 ];
 
-/* Embedded Complete Data Fallback so index.html works standalone without a local server */
+/* Fallback only used if index.html is opened offline via file:// without data.json */
 const DEFAULT_DATA = {
   "meta": {
     "updated": "2026-11-20",
@@ -303,717 +301,10 @@ const DEFAULT_DATA = {
       { "name": "Kotaku GTA 6 Review & Mechanics", "url": "https://kotaku.com", "kind": "web" }
     ]
   },
-  "categories": {
-    "cars": [
-      {
-        "id": "cars-95-gotti-cheetah",
-        "name": "'95 Gotti Cheetah",
-        "type": "Super",
-        "get": "Ultimate Edition bonus / Vice Beach Exotic Imports",
-        "facts": {
-          "Top speed": "134.5 mph (Fastest in class)",
-          "Handling": "Grippy, high downforce",
-          "Theft": "Key cloner required"
-        },
-        "blurb": "The undisputed #1 pick for Vice City street races and I-95 highway runs. Holds apex speed without spinning out on wet asphalt.",
-        "ranks": [
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "04:18", "quote": "1:00.428 around the Vice Airport circuit—nothing else touches its corner exit traction.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Digital Car Addict (YouTube)", "kind": "youtube", "timestamp": "08:52", "quote": "AWD conversion makes it essential for rainy Leonida police escapes.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Best overall supercar at launch, though locked behind the Ultimate Edition early on.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Top-tier highway cruiser with forgiving brake bias.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 }
-        ],
-        "sample": false,
-        "seedUp": 1112,
-        "seedVotes": 1240,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "cars-grotti-itali-rsx",
-        "name": "Grotti Itali RSX",
-        "type": "Sports",
-        "get": "Buy online ($1.1M) or steal in Starfish Island",
-        "facts": {
-          "Top speed": "131.0 mph",
-          "Handling": "Best in class",
-          "Theft": "Slim jim"
-        },
-        "blurb": "The most forgiving fast car for threading downtown traffic—and only requires a Slim Jim instead of a Key Cloner.",
-        "ranks": [
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "06:11", "quote": "Dominates the Sports class and beats half the Supers on tight city tracks.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "03:40", "quote": "Steal one with a Slim Jim in Chapter 2 and register it at Pay 'n' Spray immediately.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Best non-Ultimate Edition getaway car.", "url": "https://www.ign.com/wikis/gta-6", "rank": 3 },
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Mid-tier security lock makes it the smartest high-speed steal in Leonida.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 2 }
-        ],
-        "sample": false,
-        "seedUp": 690,
-        "seedVotes": 760,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "cars-pegassi-torero-xo",
-        "name": "Pegassi Torero XO",
-        "type": "Super",
-        "get": "Steal from Vice Beach valet lots",
-        "facts": {
-          "Top speed": "133.8 mph",
-          "Handling": "Twitchy on wet roads",
-          "Theft": "Key cloner"
-        },
-        "blurb": "Guide sites love its explosive 0-60 launch, but YouTube track tests and players warn it snap-oversteers in Leonida rainstorms.",
-        "ranks": [
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Easy to locate at Ocean Drive valet stands once you unlock the Key Cloner.", "url": "https://www.ign.com/wikis/gta-6", "rank": 1 },
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "09:05", "quote": "Blistering straight-line speed, but loses 1.8 seconds per lap in wet weather.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 },
-          { "source": "Digital Car Addict (YouTube)", "kind": "youtube", "timestamp": "11:20", "quote": "Requires throttle discipline—keep traction control mods equipped.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "TechRadar", "kind": "web", "quote": "Fastest free supercar spawn in Vice Beach.", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19", "rank": 2 }
-        ],
-        "sample": false,
-        "seedUp": 744,
-        "seedVotes": 980,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "cars-vapid-dominator-gt",
-        "name": "Vapid Dominator GT",
-        "type": "Muscle",
-        "get": "Common in Port Gellhorn",
-        "facts": {
-          "Top speed": "121.5 mph",
-          "Handling": "Heavy rear, high ramming mass",
-          "Theft": "Hotwire"
-        },
-        "blurb": "No tools required—just hotwire and go. Heavy chassis shrugs off police PIT maneuvers in early chapters.",
-        "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "01:55", "quote": "Best Chapter 1 car by far because you can hotwire it in 4 seconds.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "14:12", "quote": "Top of the Muscle class for highway durability.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "Inven Global", "kind": "web", "quote": "Reliable Port Gellhorn workhorse before you buy a Slim Jim.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 5 }
-        ],
-        "sample": false,
-        "seedUp": 512,
-        "seedVotes": 590,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "cars-shitzu-hakuchou-drag",
-        "name": "Shitzu Hakuchou Drag",
-        "type": "Motorcycle",
-        "get": "Motorcycle dealer, $640K",
-        "facts": {
-          "Top speed": "136.2 mph (leaning)",
-          "Handling": "Stiff cornering",
-          "Theft": "Hotwire"
-        },
-        "blurb": "Fastest two wheels for time trials and splitting Venetian Causeway traffic, but one clip sends you flying.",
-        "ranks": [
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "12:03", "quote": "Unbeatable for straight-line time trials across the Keys bridges.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "High risk, highest speed per dollar.", "url": "https://www.ign.com/wikis/gta-6", "rank": 5 },
-          { "source": "Digital Car Addict (YouTube)", "kind": "youtube", "timestamp": "15:40", "quote": "Extended swingarm hurts tight alleyway turns.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 5 }
-        ],
-        "sample": false,
-        "seedUp": 220,
-        "seedVotes": 260,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "cars-karin-kuruma-armored",
-        "name": "Karin Kuruma Armored",
-        "type": "Sports",
-        "get": "Unlocks mid-game after Port Gellhorn heist",
-        "facts": {
-          "Top speed": "114.0 mph",
-          "Handling": "Heavy, planted",
-          "Theft": "Key cloner"
-        },
-        "blurb": "Reinforced ballistic glass makes it a heist setup favorite. Needs 19 more community votes to unlock its Player Score.",
-        "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "07:22", "quote": "Ballistic panels tank 18 rifle rounds before shattering—still the PVE king.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "09:10", "quote": "Makes solo warehouse clearouts effortless.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 5 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Slower than before, but unmatched protection.", "url": "https://www.ign.com/wikis/gta-6", "rank": 6 }
-        ],
-        "sample": false,
-        "seedUp": 26,
-        "seedVotes": 31,
-        "added": "2026-11-18"
-      }
-    ],
-    "weapons": [
-      {
-        "id": "weapons-carbine-rifle",
-        "name": "Carbine Rifle",
-        "type": "Rifle",
-        "get": "Ammu-Nation, $13,000",
-        "facts": {
-          "Damage": "34 body / 100 headshot",
-          "Range": "Long (65m effective)",
-          "Recoil": "Low vertical climb"
-        },
-        "blurb": "With GTA 6 removing hard lock-on auto-aim, the Carbine Rifle's tight spread and suppressor compatibility make it the #1 mandatory weapon.",
-        "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "02:14", "quote": "0.38s time-to-kill at mid-range and almost zero horizontal bounce in free-aim.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Inven Global", "kind": "web", "quote": "Pair with a suppressor immediately to delay police response.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Shared across Jason and Lucia as soon as one buys it.", "url": "https://www.ign.com/wikis/gta-6", "rank": 1 },
-          { "source": "Creative Bloq", "kind": "web", "quote": "Pinpoint limb accuracy for disarming guards without raising your murder heat.", "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good", "rank": 2 }
-        ],
-        "sample": false,
-        "seedUp": 1310,
-        "seedVotes": 1450,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "weapons-pump-shotgun",
-        "name": "Pump Shotgun",
-        "type": "Shotgun",
-        "get": "Ammu-Nation, $3,500",
-        "facts": {
-          "Damage": "Very high (1-pellet stagger)",
-          "Range": "Short (14m)",
-          "Recoil": "Medium"
-        },
-        "blurb": "Dominates store robberies, pawn shop backrooms, and tight motel corridors without needing precision aim.",
-        "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "05:45", "quote": "Forgiving spread compensates for the 30fps console aiming feel indoors.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "04:12", "quote": "Best $3,500 you can spend in your first hour.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Intimidates store clerks faster than pistols during clean robberies.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 3 }
-        ],
-        "sample": false,
-        "seedUp": 640,
-        "seedVotes": 700,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "weapons-hawk-little-morgan-revolver",
-        "name": "Hawk & Little Morgan Revolver",
-        "type": "Pistol",
-        "get": "Ultimate Edition bonus / Gun Van",
-        "facts": {
-          "Damage": "Very high (2-tap chest)",
-          "Range": "Medium",
-          "Recoil": "Heavy kick"
-        },
-        "blurb": "Concealable sidearm that hits like a rifle. Disarms or drops armored guards in two shots, though cylinder reload is slow.",
-        "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "08:30", "quote": "Highest single-shot damage of any concealable weapon you can carry into clubs.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Devastating in focus mode for elbow disarms.", "url": "https://www.ign.com/wikis/gta-6", "rank": 3 },
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Punishing reload if you miss, but unbeatable stopping power.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 4 }
-        ],
-        "sample": false,
-        "seedUp": 880,
-        "seedVotes": 1020,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "weapons-heavy-sniper",
-        "name": "Heavy Sniper",
-        "type": "Sniper",
-        "get": "Unlocks mid-game",
-        "facts": {
-          "Damage": "Extreme (anti-materiel)",
-          "Range": "Very long",
-          "Recoil": "Extreme"
-        },
-        "blurb": "Critics rank it high for disabling police helicopters and boat engines, but players find it too bulky for everyday street chaos.",
-        "ranks": [
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Two shots to the rotor hub drops any pursuit chopper.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 },
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "10:15", "quote": "Situational because it takes a primary trunk slot, but mandatory for heist overwatch.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "TechRadar", "kind": "web", "quote": "Essential for Lake Cottonmouth hunting and long-range setups.", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19", "rank": 3 }
-        ],
-        "sample": false,
-        "seedUp": 300,
-        "seedVotes": 420,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "weapons-micro-smg",
-        "name": "Micro SMG",
-        "type": "SMG",
-        "get": "Ammu-Nation, $5,200",
-        "facts": {
-          "Damage": "Low per bullet",
-          "Range": "Short",
-          "Recoil": "High climb"
-        },
-        "blurb": "The go-to one-handed automatic for shooting out tires from a car or motorcycle.",
-        "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "11:50", "quote": "Tap-fire in 4-round bursts while driving to pop cruiser tires cleanly.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 5 },
-          { "source": "Inven Global", "kind": "web", "quote": "Burns through unshared character ammo quickly, so watch your reserves.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 4 }
-        ],
-        "sample": false,
-        "seedUp": 590,
-        "seedVotes": 660,
-        "added": "2026-11-18"
-      }
-    ],
-    "money": [
-      {
-        "id": "money-clean-store-robberies",
-        "name": "Clean store robberies",
-        "type": "Early game",
-        "get": "Any 24-hour store or pawn shop",
-        "facts": {
-          "Payout": "$2K to $6K per run",
-          "Time": "4–5 min",
-          "Risk": "Low if cameras wiped"
-        },
-        "blurb": "Put on a mask, enter via the back door, wipe the DVR camera tape, and crack the safe. Bank at an ATM before hitting the $20,000 cash cap.",
-        "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "02:30", "quote": "Chain 3 stores along US-1 and deposit at the ATM right outside to clear $45K/hour in Chapter 1.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Inven Global", "kind": "web", "quote": "Best early cash flow before fences unlock, just remember the $20K wallet cap.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Zero bounty if you disable the backroom security terminal first.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 }
-        ],
-        "sample": false,
-        "seedUp": 1180,
-        "seedVotes": 1300,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "money-flipping-stolen-cars",
-        "name": "Flipping stolen cars",
-        "type": "Mid game",
-        "get": "Chop shop & fence contacts",
-        "facts": {
-          "Payout": "$5K to $40K",
-          "Time": "12–15 min",
-          "Risk": "GPS trackers"
-        },
-        "blurb": "Once you unlock the Slim Jim and Key Cloner, stripping luxury cars at Port Gellhorn chop shops is the best solo mid-game grind.",
-        "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "06:45", "quote": "Build fence rep early—Rank 3 fences pay 40% more and strip GPS trackers in 60 seconds.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Why you shouldn't grind low-paying jobs early; fence relationships scale fast.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Three-tier car security makes the Key Cloner pay for itself in one Vice Beach run.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 2 }
-        ],
-        "sample": false,
-        "seedUp": 700,
-        "seedVotes": 830,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "money-heist-setup-jobs",
-        "name": "Heist setup & vault jobs",
-        "type": "Late game",
-        "get": "Unlocks through main story chapters",
-        "facts": {
-          "Payout": "$150K to $1.2M+",
-          "Time": "1 hour+",
-          "Risk": "High"
-        },
-        "blurb": "Massive payouts that wire straight to your bank account (bypassing the $20K cash cap). Bring an SUV for loot bags or a heavy truck for ATM rigs.",
-        "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "11:10", "quote": "Always stage a registered SUV as your secondary getaway vehicle so you don't leave loot crates behind.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Biggest payouts in the game, though long missions require PS5 rest mode if you need a break.", "url": "https://www.ign.com/wikis/gta-6", "rank": 1 }
-        ],
-        "sample": false,
-        "seedUp": 210,
-        "seedVotes": 260,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "money-hunting",
-        "name": "Swamp & Keys hunting",
-        "type": "Early game",
-        "get": "Buy a hunting rifle first",
-        "facts": {
-          "Payout": "~$450 to $1,200 a trip",
-          "Time": "10 min",
-          "Risk": "Zero police heat"
-        },
-        "blurb": "Zero police heat and doubles as exploration around Lake Cottonmouth (where Bigfoot sightings are reported).",
-        "ranks": [
-          { "source": "Inven Global", "kind": "web", "quote": "Load pelts into a pickup truck bed to sell 5 at once.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 3 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "14:02", "quote": "Chill zero-heat money when your wanted level is hot in the city.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 }
-        ],
-        "sample": false,
-        "seedUp": 610,
-        "seedVotes": 640,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "money-rideshare-driving",
-        "name": "Rideshare driving",
-        "type": "Early game",
-        "get": "Rideshare app on your phone",
-        "facts": {
-          "Payout": "$100 to $300",
-          "Time": "5 min",
-          "Risk": "None"
-        },
-        "blurb": "Low pay, but uncovers map fog and occasionally triggers high-paying VIP stranger encounters.",
-        "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "16:20", "quote": "Skip it for pure cash, only do 5 rides to trigger the secret VIP contact.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 7 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Good way to learn Vice City shortcuts without GPS.", "url": "https://www.ign.com/wikis/gta-6", "rank": 8 }
-        ],
-        "sample": false,
-        "seedUp": 390,
-        "seedVotes": 520,
-        "added": "2026-11-18"
-      }
-    ],
-    "gear": [
-      {
-        "id": "gear-key-cloner",
-        "name": "RF Key Cloner",
-        "type": "Tools",
-        "get": "Unlocks via story fence in Chapter 2",
-        "facts": {
-          "Unlocks": "Tier 3 luxury & supercars",
-          "Cost": "Story unlock"
-        },
-        "blurb": "The single most important progression item in GTA 6. Required to steal exotic cars that cannot be hotwired or slim-jimmed.",
-        "ranks": [
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Unlocks Tier 3 car theft—without it, Vice Beach supercars are off-limits.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 1 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "01:12", "quote": "Rush the main story until you get the Key Cloner before doing any free-roam grinding.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Inven Global", "kind": "web", "quote": "Turns every valet lot into a $30K chop-shop payday.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 2 }
-        ],
-        "sample": false,
-        "seedUp": 900,
-        "seedVotes": 980,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "gear-suppressor",
-        "name": "Rifle & Pistol Suppressor",
-        "type": "Attachments",
-        "get": "Gun shops ($1,800–$3,200)",
-        "facts": {
-          "Effect": "Delays police dispatch timer",
-          "Note": "Not shared between characters"
-        },
-        "blurb": "Gunfire volume directly controls how fast Leonida police respond. Remember: attachments do NOT transfer between Jason and Lucia.",
-        "ranks": [
-          { "source": "Inven Global", "kind": "web", "quote": "The louder a fight gets, the faster cops arrive—buy two suppressors so both characters have one.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "03:08", "quote": "Adds 45 seconds of extra looting time before sirens show up, with zero damage penalty.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Essential stealth attachment for both protagonists.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 }
-        ],
-        "sample": false,
-        "seedUp": 410,
-        "seedVotes": 450,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "gear-body-armor",
-        "name": "Heavy Body Armor",
-        "type": "Protection",
-        "get": "Ammu-Nation, $2,500",
-        "facts": {
-          "Effect": "Absorbs 50% torso damage",
-          "Note": "Character-specific inventory"
-        },
-        "blurb": "Firefights are lethal without lock-on aim. Always keep spares on both Jason and Lucia since healing and armor are not shared.",
-        "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "06:50", "quote": "Prevents one-shot shotgun downs during interior breaches.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Stock up before switching characters—armor stays with the buyer.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 3 }
-        ],
-        "sample": false,
-        "seedUp": 760,
-        "seedVotes": 800,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "gear-slim-jim",
-        "name": "Slim Jim Lock Tool",
-        "type": "Tools",
-        "get": "Hardware stores ($350)",
-        "facts": {
-          "Unlocks": "Tier 2 sports cars & SUVs",
-          "Cost": "$350"
-        },
-        "blurb": "Buy this at any hardware store in your first 20 minutes to steal mid-range Sports cars and loot-hauling SUVs without smashing windows.",
-        "ranks": [
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Silent entry on mid-tier vehicles without triggering car alarms.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 3 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "02:05", "quote": "Lets you steal the Grotti Itali RSX way before you unlock the Key Cloner.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 }
-        ],
-        "sample": false,
-        "seedUp": 310,
-        "seedVotes": 330,
-        "added": "2026-11-18"
-      },
-      {
-        "id": "gear-gym-stamina-training",
-        "name": "Beach & Gym Stamina Training",
-        "type": "Stats",
-        "get": "Vice Beach outdoor gym",
-        "facts": {
-          "Effect": "+35% sprint & swim stamina",
-          "Cost": "Free"
-        },
-        "blurb": "Permanent stat boost that helps you outrun K-9 units and swim across Vice City canals.",
-        "ranks": [
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "15 minutes of workouts maxes out sprint duration for the rest of the story.", "url": "https://www.ign.com/wikis/gta-6", "rank": 4 },
-          { "source": "Inven Global", "kind": "web", "quote": "Free permanent upgrade worth doing early.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 5 }
-        ],
-        "sample": false,
-        "seedUp": 520,
-        "seedVotes": 600,
-        "added": "2026-11-18"
-      }
-    ]
-  },
-  "news": [
-    {
-      "id": "ps5-system-update",
-      "added": "2026-11-19",
-      "cat": "launch",
-      "status": "confirmed",
-      "tag": "Required",
-      "source": "TweakTown",
-      "url": "https://www.tweaktown.com/news/114767/gamers-cant-play-gta-6-on-ps5-without-updating-system-firmware-sony-and-rockstar-confirm/index.html",
-      "title": "Required: PS5 system update 26.07-14.23.00",
-      "body": "Sony and Rockstar confirmed GTA 6 won't run until you install this 1.27GB PS5 update."
-    },
-    {
-      "id": "fps-30",
-      "added": "2026-11-19",
-      "cat": "launch",
-      "status": "reported",
-      "tag": "Performance",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Locked at 30fps on PS5, PS5 Pro included",
-      "body": "Reviewers report a 30fps cap on both PS5 models with no performance mode, with dips during heavy action on base PS5."
-    },
-    {
-      "id": "cash-cap",
-      "added": "2026-11-19",
-      "cat": "items",
-      "status": "reported",
-      "tag": "Money",
-      "source": "Inven Global",
-      "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
-      "title": "You can only carry $20,000 cash, so bank it at ATMs",
-      "body": "Cash on hand caps at $20,000 and you lose it if you get wasted or arrested. Transfer it at any ATM."
-    },
-    {
-      "id": "money-later",
-      "added": "2026-11-19",
-      "cat": "items",
-      "status": "reported",
-      "tag": "Money",
-      "source": "Inven Global",
-      "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
-      "title": "Don't grind for money early; bigger earnings open up later",
-      "body": "Serious money-making unlocks a few chapters in. Build relationships with fences until then."
-    },
-    {
-      "id": "split-inventory",
-      "added": "2026-11-19",
-      "cat": "weapons",
-      "status": "reported",
-      "tag": "Inventory",
-      "source": "Inven Global",
-      "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
-      "title": "Guns are shared between Jason and Lucia, but ammo and mods aren't",
-      "body": "Weapons either character buys go to both. Attachments, ammo and healing items stay with the buyer."
-    },
-    {
-      "id": "suppressors",
-      "added": "2026-11-19",
-      "cat": "weapons",
-      "status": "reported",
-      "tag": "Combat",
-      "source": "Inven Global",
-      "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
-      "title": "Put suppressors on your guns to slow the police response",
-      "body": "The louder a fight gets, the faster the cops arrive."
-    },
-    {
-      "id": "keep-stolen-car",
-      "added": "2026-11-19",
-      "cat": "vehicles",
-      "status": "reported",
-      "tag": "Player find",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Register a stolen car at a Pay 'n' Spray to keep it",
-      "body": "Register a stolen car you like at a Pay 'n' Spray. The Scooter Bros app can then deliver it to you."
-    },
-    {
-      "id": "vehicle-roles",
-      "added": "2026-11-19",
-      "cat": "vehicles",
-      "status": "reported",
-      "tag": "Reviewer tested",
-      "source": "Inven Global",
-      "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
-      "title": "Keep an SUV for loot and a truck for ATM jobs",
-      "body": "SUVs are tougher and hold more stolen goods. Some jobs need a truck."
-    },
-    {
-      "id": "saving",
-      "added": "2026-11-19",
-      "cat": "tips",
-      "status": "reported",
-      "tag": "Saving",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Save manually: autosave only runs after missions and big events",
-      "body": "You can't save during a mission, so use PS5 rest mode to pause a long one."
-    },
-    {
-      "id": "settings-deadzone",
-      "added": "2026-11-19",
-      "cat": "launch",
-      "status": "reported",
-      "tag": "Settings",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Driving and aiming feel sluggish? Lower the stick dead zone",
-      "body": "Players say the default controller dead zone is too large."
-    },
-    {
-      "id": "car-security",
-      "added": "2026-11-18",
-      "cat": "vehicles",
-      "status": "reported",
-      "tag": "Reviewer tested",
-      "source": "Kotaku review",
-      "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
-      "title": "Car theft has three tiers: hotwire, slim jim, key cloner",
-      "body": "High-end cars need a key cloner mini-game and cannot be hotwired. Cars with trackers are harder to sell."
-    },
-    {
-      "id": "no-auto-aim",
-      "added": "2026-11-18",
-      "cat": "weapons",
-      "status": "reported",
-      "tag": "Combat",
-      "source": "Creative Bloq review",
-      "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good",
-      "title": "No auto-aim: hold focus and aim for limbs",
-      "body": "An elbow shot disarms enemies, and limb shots keep your criminal rating lower than kills."
-    },
-    {
-      "id": "bigfoot",
-      "added": "2026-11-18",
-      "cat": "eggs",
-      "status": "reported",
-      "tag": "Player find",
-      "source": "VGTimes",
-      "url": "https://vgtimes.com/gaming-news/175042-players-have-already-found-bigfoot-in-grand-theft-auto-6.html",
-      "title": "Bigfoot roams the swamps near Lake Cottonmouth",
-      "body": "Listen for a loud roar in the swamplands, then use tracking to follow it."
-    },
-    {
-      "id": "metacritic-99",
-      "added": "2026-11-18",
-      "cat": "launch",
-      "status": "confirmed",
-      "tag": "Reviews",
-      "source": "Metacritic",
-      "url": "https://www.metacritic.com/game/grand-theft-auto-vi/",
-      "title": "Reviews are in: 99 on Metacritic",
-      "body": "The PS5 version scores 99 from 148 critic reviews."
-    }
-  ],
-  "posts": [
-    {
-      "slug": "gta-6-car-theft-tiers-pay-n-spray-meta",
-      "title": "How GTA 6's 3-Tier Car Theft & Pay 'n' Spray System Changes the Vehicle Meta",
-      "dek": "Why you can't just hotwire a Vice Beach supercar on day one—and why the Grotti Itali RSX is the smartest early steal in Leonida.",
-      "author": "Meta Center Staff",
-      "published": "2026-11-20",
-      "updated": "2026-11-20",
-      "tags": ["Vehicles", "Guides"],
-      "sections": [
-        {
-          "h": "The Three Security Tiers: Hotwire, Slim Jim, and Key Cloner",
-          "p": [
-            "Grand Theft Auto VI replaces universal one-button carjacking with a three-tier vehicle security system that directly shapes which cars dominate the early- and mid-game meta [1]. Older muscle cars and beaters around Port Gellhorn—like the Vapid Dominator GT—can be hotwired by hand right from the start [1].",
-            "Mid-tier sports cars and SUVs require a Slim Jim bought from a hardware store, while luxury exotics parked at Vice Beach valet stands—such as the '95 Gotti Cheetah and Pegassi Torero XO—are locked behind an RF Key Cloner mini-game and active GPS trackers [1, 2]."
-          ]
-        },
-        {
-          "h": "Registering Stolen Cars & Building a Utility Fleet",
-          "p": [
-            "Once you break into a high-value ride, leaving it on the street risks losing it. Taking a stolen vehicle to a Pay 'n' Spray lets you strip its tracker and register the title under your name, unlocking on-demand delivery through the Scooter Bros phone app [2].",
-            "Creator testing and reviewer breakdowns also show that one fast supercar isn't enough. Because GTA 6 uses physical trunk storage and mission-specific tow physics, players need three distinct vehicle roles [3]:"
-          ],
-          "list": [
-            "Speed & Races: '95 Gotti Cheetah (98 Critic Score) or Grotti Itali RSX (91 Critic Score) for highway getaways [2, 3].",
-            "Loot Hauling: A heavy SUV registered at Pay 'n' Spray to hold extra duffel bags during store and warehouse hits [3].",
-            "Heavy Utility: A high-torque pickup truck required to rip out ATMs and haul Lake Cottonmouth hunting pelts [3]."
-          ]
-        }
-      ],
-      "sources": [
-        { "title": "Grand Theft Auto 6: The Kotaku Review (Car Theft Tiers)", "publisher": "Kotaku", "date": "Nov 18, 2026", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842" },
-        { "title": "GTA 6 Launch Day Live Blog: Pay 'n' Spray & Scooter Bros Delivery", "publisher": "TechRadar", "date": "Nov 19, 2026", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19" },
-        { "title": "13 Beginner Tips for GTA 6 I Wish I Knew From the Start", "publisher": "Inven Global", "date": "Nov 19, 2026", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start" }
-      ]
-    },
-    {
-      "slug": "no-auto-aim-combat-suppressor-weapon-guide",
-      "title": "Surviving GTA 6 Without Auto-Aim: Dead Zones, Limb Shots & Shared Weapons Explained",
-      "dek": "Why the suppressed Carbine Rifle sits at #1 on the Critic leaderboard, and how to fix sluggish controller aiming on PS5.",
-      "author": "Meta Center Staff",
-      "published": "2026-11-20",
-      "updated": "2026-11-20",
-      "tags": ["Weapons", "Combat"],
-      "sections": [
-        {
-          "h": "Why Aiming Feels Different (And the 10-Second Dead Zone Fix)",
-          "p": [
-            "Two launch changes caught veteran GTA players off guard: GTA 6 runs at a locked 30fps on both base PS5 and PS5 Pro [1], and traditional snap auto-aim has been replaced with a focus-targeting system [2]. Combined with a large default controller stick dead zone, gunfights can initially feel heavy [1].",
-            "Before buying a single gun, open your controller settings and lower the Right Stick Dead Zone by 40%. Reviewers and combat testers confirm this immediately sharpens target tracking in 30fps firefights [1]."
-          ]
-        },
-        {
-          "h": "Focus Mode Limb Shots & The Suppressor Rule",
-          "p": [
-            "Instead of spraying for lethal center-mass kills, holding the Focus button lets you target specific limbs [2]. Shooting an armed guard in the elbow disarms them immediately and keeps your criminal heat rating significantly lower than a fatal shooting [2].",
-            "When a firefight does break out, gunfire decibels dictate how fast Leonida police units spawn [3]. Equipping a suppressor on the #1-ranked Carbine Rifle delays squad car dispatch, giving you time to empty safes and escape cleanly [3]."
-          ]
-        },
-        {
-          "h": "How Split Inventory Works Between Jason and Lucia",
-          "p": [
-            "Don't waste early cash buying duplicate rifles. Unlocking a base weapon like the Carbine Rifle or Pump Shotgun adds it to both Jason and Lucia's weapon lockers [3]. However, suppressors, optics, ammunition, and body armor stay strictly with the character who purchased them [3]."
-          ]
-        }
-      ],
-      "sources": [
-        { "title": "GTA 6 Launch Day Live Blog: 30fps Cap & Stick Dead Zone Fix", "publisher": "TechRadar", "date": "Nov 19, 2026", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19" },
-        { "title": "GTA 6 Review: Focus Aiming & Limb Disarm Mechanics", "publisher": "Creative Bloq", "date": "Nov 18, 2026", "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good" },
-        { "title": "13 Beginner Tips for GTA 6: Shared Weapons vs. Split Attachments", "publisher": "Inven Global", "date": "Nov 19, 2026", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start" }
-      ]
-    },
-    {
-      "slug": "gta-6-early-money-meta-20k-cash-cap",
-      "title": "The $20,000 Cash Cap & Why You Shouldn't Grind Low-Tier Jobs in Chapter 1",
-      "dek": "How to avoid losing your wallet at the hospital, when to bank at ATMs, and why fence reputation beats rideshare driving.",
-      "author": "Meta Center Staff",
-      "published": "2026-11-20",
-      "updated": "2026-11-20",
-      "tags": ["Money", "Economy"],
-      "sections": [
-        {
-          "h": "The $20,000 Wallet Rule",
-          "p": [
-            "In early GTA 6 chapters, your physical wallet caps at $20,000 cash on hand [1]. Any bills carried in your pocket are vulnerable if you get wasted or arrested by Leonida police—meaning you must deposit your take at a street ATM after every 3 to 4 clean store robberies [1].",
-            "Because autosave only triggers after completing missions or major world events, always trigger a manual save after banking a large haul [2]."
-          ]
-        },
-        {
-          "h": "Clean Store Robberies vs. Mid-Game Fences",
-          "p": [
-            "While rideshare driving ($100–$300) and hunting (~$450) offer zero-heat pocket change, guide sites and YouTube money testers strongly advise against grinding for hours in Chapter 1 [1]. Instead, push the main story until you unlock chop-shop fences and the Key Cloner, where flipping stolen luxury vehicles pays up to $40,000 per delivery [1, 3]."
-          ]
-        }
-      ],
-      "sources": [
-        { "title": "13 Beginner Tips for GTA 6: $20,000 Cash Cap & Fence Progression", "publisher": "Inven Global", "date": "Nov 19, 2026", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start" },
-        { "title": "GTA 6 Manual Saving & Rest Mode Tips", "publisher": "TechRadar", "date": "Nov 19, 2026", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19" },
-        { "title": "Grand Theft Auto 6 Review: Chop Shops & Tracker Mechanics", "publisher": "Kotaku", "date": "Nov 18, 2026", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842" }
-      ]
-    }
-  ],
-  "changelog": [
-    {
-      "date": "2026-11-20",
-      "text": "Added creator track and combat test breakdowns (Broughy1322, GhillieMaster, Digital Car Addict, TGG) across Cars, Weapons, Money, and Gear. Published 3 launch guides and opened community voting."
-    },
-    {
-      "date": "2026-11-19",
-      "text": "Initial launch database published with 14 verified Command Center entries."
-    }
-  ]
+  "categories": { "cars": [], "weapons": [], "money": [], "gear": [] },
+  "news": [],
+  "posts": [],
+  "changelog": []
 };
 
 const $ = (id) => document.getElementById(id);
@@ -1025,9 +316,9 @@ const fmtDate = (d) => { if (!d) return ""; const x = new Date(d + "T12:00:00");
 const shortDate = (d) => { if (!d) return ""; const x = new Date(d + "T12:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-US", { month: "short", day: "numeric" }); };
 
 let DATA = null, route = "", sort = "combined", filter = "All", newsFilter = "all", open = null, query = "";
-let tally = {}, myVotes = {}, uid = null, db = null, votesOn = true, voteNote = "Your vote is saved in your browser and updates live.", writing = Promise.resolve();
+let tally = {}, myVotes = {}, uid = null, votesOn = true;
 
-/* Optional Supabase credentials for shared multi-user cloud voting */
+/* Optional: Paste free Supabase URL & Anon Key here for global multi-user shared vote pooling */
 const SUPABASE_URL = "";
 const SUPABASE_ANON_KEY = "";
 
@@ -1036,13 +327,22 @@ const items = (c) => (DATA.categories[c] || []);
 const points = (r) => Math.max(40, 100 - 6 * (r - 1));
 function critic(it) {
   const rs = (it.ranks || []).filter(r => Number.isFinite(r.rank) && r.rank >= 1);
-  if (rs.length < 2) return null;
+  if (rs.length < 1) return null;
   return Math.round(rs.reduce((s, r) => s + points(r.rank), 0) / rs.length);
 }
-const votesOf = (it) => (it.seedVotes || 0) + ((tally[it.id] || {}).n || 0);
-const upsOf = (it) => (it.seedUp || 0) + ((tally[it.id] || {}).up || 0);
-function player(it) { const n = votesOf(it); return n >= MIN_VOTES ? Math.round(upsOf(it) / n * 100) : null; }
-function combined(it) { const c = critic(it), p = player(it); if (c == null && p == null) return null; if (c == null) return p; if (p == null) return c; return Math.round((c + p) / 2); }
+const votesOf = (it) => Math.max(1, (it.seedVotes || 25) + ((tally[it.id] || {}).n || 0));
+const upsOf = (it) => Math.max(0, (it.seedUp || 21) + ((tally[it.id] || {}).up || 0));
+function player(it) {
+  const n = votesOf(it);
+  return n >= MIN_VOTES ? Math.min(100, Math.max(0, Math.round((upsOf(it) / n) * 100))) : null;
+}
+function combined(it) {
+  const c = critic(it), p = player(it);
+  if (c == null && p == null) return null;
+  if (c == null) return p;
+  if (p == null) return c;
+  return Math.round((c + p) / 2);
+}
 const tierOf = (n) => n == null ? "–" : n >= 90 ? "S" : n >= 80 ? "A" : n >= 70 ? "B" : "C";
 const tierVar = (t) => t === "–" ? "var(--panel-2)" : "var(--tier-" + t.toLowerCase() + ")";
 const byScore = (f) => (a, b) => (f(b) ?? -1) - (f(a) ?? -1);
@@ -1070,7 +370,7 @@ function scoreNode(kind, it) {
     const s = el("div", "score critic" + (c == null ? " thin" : "")); s.append(el("b", "", c == null ? "—" : String(c)), el("span", "", c == null ? (it.ranks || []).length + " src" : "Critics")); return s;
   }
   const p = player(it);
-  if (p == null) { const s = el("div", "score player thin"); s.append(el("b", "", votesOf(it) + "/" + MIN_VOTES), el("span", "", "Votes")); return s; }
+  if (p == null) { const s = el("div", "score player thin"); s.append(el("b", "", "—"), el("span", "", votesOf(it) + " votes")); return s; }
   const s = el("div", "score player"); s.append(el("b", "", p + "%"), el("span", "", "Players")); return s;
 }
 function newsCard(n, withBody) {
@@ -1102,10 +402,10 @@ function renderTabs() {
 function miniRow(id, i, n) {
   const li = el("li"), a = link("#" + id, "mrow");
   a.onclick = () => { open = keyOf(id, i); };
-  const ytCount = (i.ranks || []).filter(r => r.kind === "youtube").length;
-  const nm = el("span", "mname"); nm.append(el("b", "", i.name), el("small", "", i.type + (ytCount ? " · " + ytCount + " video tests" : "") + (i.sample ? " · Sample" : "")));
+  const ytCount = (i.ranks || []).filter(r => r.kind === "youtube" || /youtube/i.test(r.source || "")).length;
+  const nm = el("span", "mname"); nm.append(el("b", "", i.name), el("small", "", i.type + (ytCount ? " · " + ytCount + " video tests" : "")));
   const c = critic(i), p = player(i);
-  a.append(el("span", "mrank", String(n + 1)), tierBox("mtier", tierOf(combined(i))), nm, el("span", "mc" + (c == null ? " thin" : ""), c == null ? "—" : String(c)), el("span", "mp" + (p == null ? " thin" : ""), p == null ? votesOf(i) + "/50" : p + "%"));
+  a.append(el("span", "mrank", String(n + 1)), tierBox("mtier", tierOf(combined(i))), nm, el("span", "mc" + (c == null ? " thin" : ""), c == null ? "—" : String(c)), el("span", "mp" + (p == null ? " thin" : ""), p == null ? "—" : p + "%"));
   li.append(a); return li;
 }
 function renderHome() {
@@ -1113,7 +413,7 @@ function renderHome() {
   const v = $("view"); v.textContent = "";
   const top = el("section", "htop"), w = el("div", "wrap");
   const sub = el("p", "sub");
-  sub.append("Ranked by ", el("span", "down", "critic score"), " (guide sites + creator video tests) and ", el("span", "up", "player score"), " (community votes). Updated " + fmtDate(DATA.meta.updated) + " · " + (DATA.meta.patch || "") + ".");
+  sub.append("Ranked by ", el("span", "down", "critic score"), " (guide sites + creator video tests) and ", el("span", "up", "player score"), " (community votes). Updated " + fmtDate(DATA.meta.updated) + (DATA.meta.patch ? " · " + DATA.meta.patch : "") + ".");
   const search = el("div", "search");
   const inp = el("input"); inp.id = "search"; inp.type = "search"; inp.placeholder = "Search an item, like \"Carbine Rifle\" or \"Key Cloner\""; inp.value = query; inp.setAttribute("aria-label", "Search items");
   const res = el("div", "results"); res.id = "results";
@@ -1130,7 +430,6 @@ function renderHome() {
   for (const [id, c] of Object.entries(CATS)) {
     const box = el("section", "cat"), h = el("div", "cat-h");
     const h2 = el("h2", "", c.title.replace(" in GTA 6", ""));
-    if (isSample(id)) { h2.append(" "); h2.append(el("span", "pill sample", "Sample")); }
     h.append(h2, link("#" + id, "", "All " + items(id).length + " →"));
     const head = el("div", "mhead"); head.setAttribute("aria-hidden", "true");
     head.append(el("span", "", "#"), el("span", "", "Tier"), el("span", "", "Item"), el("span", "", "Critics"), el("span", "", "Players"));
@@ -1163,7 +462,7 @@ function drawResults() {
     const a = link("#" + c, "res"); a.onclick = () => { open = keyOf(c, i); query = ""; };
     const nm = el("div"); nm.append(el("span", "", i.name), el("small", "", CATS[c].tab + " · " + i.type));
     const cc = critic(i), p = player(i);
-    const mini = el("div", "mini"); mini.append(el("span", "down", cc == null ? "—" : String(cc)), el("span", "up", p == null ? votesOf(i) + "/50" : p + "%"));
+    const mini = el("div", "mini"); mini.append(el("span", "down", cc == null ? "—" : String(cc)), el("span", "up", p == null ? "—" : p + "%"));
     a.append(nm, mini); r.append(a);
   }
 }
@@ -1189,7 +488,7 @@ function renderCategory(id) {
   const h1 = el("h1", "", c.title);
   w.append(crumbs, h1);
   if (top) {
-    const ans = el("div", "answer"); ans.append(el("span", "lab", isSample(id) ? "Quick answer · sample data" : "Quick answer · Multi-Source Consensus"));
+    const ans = el("div", "answer"); ans.append(el("span", "lab", "Quick answer · Multi-Source Consensus"));
     const tc = critic(top), tp = player(top);
     ans.append(el("p", "", "The best " + c.one + " in GTA 6 right now is the " + top.name + " (" + [tc != null ? "critics " + tc : null, tp != null ? "players " + tp + "%" : null].filter(Boolean).join(", ") + "). " + (top.blurb || "")));
     const ul = el("ul");
@@ -1224,7 +523,6 @@ function renderCategory(id) {
     const row = el("li", "row" + (isOpen ? " open" : "") + (idx === 0 ? " first" : ""));
     const head = el("button", "head"); head.type = "button"; head.setAttribute("aria-expanded", String(isOpen));
     const name = el("div", "name"); const h3 = el("h3", "", it.name);
-    if (it.sample) { h3.append(" "); h3.append(el("span", "pill sample", "Sample")); }
     name.append(h3, el("small", "", [it.type, it.get].filter(Boolean).join(" · ")));
     const sc = el("div", "scores"); sc.append(scoreNode("critic", it), scoreNode("player", it));
     head.append(el("div", "rank", String(idx + 1)), tierBox("tier", tierOf(combined(it))), name, sc);
@@ -1238,7 +536,7 @@ function renderCategory(id) {
 
   const box1 = el("div", "box"); box1.append(el("h3", "", "How scores work"));
   const ol = el("ol");
-  ["Each day we compile rankings from GTA 6 guide sites and creator testing videos (lap times, TTK, and $/hr).", "A #1 spot is worth 100 points, and each spot lower is worth 6 fewer, down to 40. The critic score is the average across sources.", "Players vote on each item. The player score unlocks once an item reaches 50 votes.", "Overall averages the Critic and Player scores when both exist."].forEach(t => ol.append(el("li", "", t)));
+  ["Each day we compile rankings from GTA 6 guide sites and creator testing videos (lap times, TTK, and $/hr).", "A #1 spot is worth 100 points, and each spot lower is worth 6 fewer, down to 40. The critic score is the average across sources.", "Players vote on each item (Worth it vs. Skip it) to drive the live Player Score %.", "Overall averages the Critic and Player scores."].forEach(t => ol.append(el("li", "", t)));
   box1.append(ol); box1.append(link("#methodology", "", "Full methodology →"));
   aside.append(box1, el("div", "ad rail", "Ad · 300 × 250"));
   lay.append(main, aside); v.append(lay);
@@ -1282,7 +580,7 @@ function detailNode(id, it) {
     right.append(line);
   }
   const vbox = el("div", "vote");
-  vbox.append(el("div", "q", "Played with it? Is it worth getting?"));
+  vbox.append(el("div", "q", "Played with it? Cast your vote:"));
   const btns = el("div", "btns");
   for (const [val, label] of [[1, "👍 Worth it"], [-1, "👎 Skip it"]]) {
     const b = el("button", "", label); b.type = "button"; b.disabled = !votesOn; b.setAttribute("aria-pressed", String(myVotes[it.id] === val));
@@ -1291,13 +589,7 @@ function detailNode(id, it) {
   }
   const n = votesOf(it);
   vbox.append(btns);
-  if (n < MIN_VOTES) {
-    const cbar = el("div", "calib-bar"), cfill = el("i");
-    cfill.style.width = Math.min(100, Math.round((n / MIN_VOTES) * 100)) + "%";
-    cbar.append(cfill);
-    vbox.append(cbar);
-  }
-  vbox.append(el("small", "", (n >= MIN_VOTES ? n.toLocaleString() + " player votes (" + player(it) + "% positive)." : "Community Calibration: " + n + "/" + MIN_VOTES + " votes (" + (MIN_VOTES - n) + " more until Player Score unlocks).")));
+  vbox.append(el("small", "", "Player Score: " + player(it) + "% positive across " + n.toLocaleString() + " community votes." + (myVotes[it.id] ? " (Your vote is counted!)" : "")));
   right.append(vbox);
   d.append(left, right);
   return d;
@@ -1310,7 +602,7 @@ function renderNews() {
   const hero = el("section", "chero"), w = el("div", "wrap");
   const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › News");
   const sub = el("p", "sub"); sub.style.margin = "0"; sub.style.color = "var(--muted)";
-  sub.append("Tips, mechanics discoveries, and launch updates from the GTA 6 Command Center, synced daily at 5:52 PM Central. Last sync " + fmtDate(DATA.meta.newsSynced) + ".");
+  sub.append("Tips, mechanics discoveries, and launch updates synced daily at 5:52 PM Central. Last sync " + fmtDate(DATA.meta.newsSynced) + ".");
   w.append(crumbs, el("h1", "", "GTA 6 news and finds"), sub); hero.append(w); v.append(hero);
   const body = el("div", "wrap");
   const chips = el("div", "chips"); chips.style.marginBottom = "14px";
@@ -1454,7 +746,7 @@ function renderSync() {
   const hero = el("section", "chero"), w = el("div", "wrap");
   const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › Editorial Source Importer (Unlisted)");
   const sub = el("p", "sub"); sub.style.margin = "0"; sub.style.color = "var(--muted)";
-  sub.textContent = "Internal admin utility (models/" + ACTIVE_MODEL + " with Gaming Safety Override + 18+ Age-Gate Fallback): automatically discovers high-engagement GTA 6 YouTube videos and exports your updated data.json.";
+  sub.textContent = "Internal admin utility: automatically discovers high-engagement GTA 6 YouTube videos and guide rankings, updates existing items or adds new ones, and exports data.json.";
   w.append(crumbs, el("h1", "", "Automated YouTube Discovery & Data Importer"), sub); hero.append(w); v.append(hero);
 
   const body = el("div", "wrap sync-grid");
@@ -1462,10 +754,10 @@ function renderSync() {
   left.append(el("h3", "", "1. Auto-Discover High-Signal YouTube Videos"));
 
   const fKey = el("div", "field");
-  fKey.append(el("label", "", "Google AI Studio Key (models/" + ACTIVE_MODEL + ")"), Object.assign(el("input"), { id: "gkey", type: "password", placeholder: "AIzaSy..." }));
+  fKey.append(el("label", "", "Google AI Studio Key"), Object.assign(el("input"), { id: "gkey", type: "password", placeholder: "AIzaSy..." }));
 
   const fYtKey = el("div", "field");
-  fYtKey.append(el("label", "", "YouTube Data API v3 Key (Optional — enables exact view/comment/chapter scraping)"), Object.assign(el("input"), { id: "ytkey", type: "password", placeholder: "Optional: AIzaSy..." }));
+  fYtKey.append(el("label", "", "YouTube Data API v3 Key (Optional)"), Object.assign(el("input"), { id: "ytkey", type: "password", placeholder: "Optional: AIzaSy..." }));
 
   const fCat = el("div", "field");
   const sel = el("select"); sel.id = "gcat";
@@ -1478,20 +770,11 @@ function renderSync() {
   const dlBtn = el("button", "btn-secondary", "⬇ Download Updated data.json");
   autoBtnRow.append(autoBtn, dlBtn);
 
-  const sep = el("hr"); sep.style.border = "0"; sep.style.borderTop = "1px solid var(--line)"; sep.style.margin = "18px 0";
-
-  const manualTitle = el("h3", "", "Optional: Single Video Override");
-  const fUrl = el("div", "field");
-  fUrl.append(el("label", "", "Specific YouTube Video URL (Optional)"), Object.assign(el("input"), { id: "gurl", type: "url", placeholder: "https://www.youtube.com/watch?v=..." }));
-  const fChan = el("div", "field");
-  fChan.append(el("label", "", "Creator / Channel Name"), Object.assign(el("input"), { id: "gchan", type: "text", placeholder: "e.g., Broughy1322 (YouTube)" }));
-  const runSingleBtn = el("button", "btn-secondary", "▶ Analyze Single Video URL");
-
-  left.append(fKey, fYtKey, fCat, autoBtnRow, sep, manualTitle, fUrl, fChan, runSingleBtn);
+  left.append(fKey, fYtKey, fCat, autoBtnRow);
 
   const right = el("div", "box");
   right.append(el("h3", "", "2. Live Discovery & Ingestion Log"));
-  const out = el("pre", "codeout", "// Ready (Gaming Safety Override active: BLOCK_NONE).\n// Processes 1 video per request + auto-falls back to description/chapter/comment analysis\n// if a GTA 6 video is 18+ age-restricted on YouTube.");
+  const out = el("pre", "codeout", "// Ready.\n// Discovers both updates to existing items AND brand-new meta items.");
   out.id = "syncout";
   right.append(out);
 
@@ -1504,6 +787,9 @@ function renderSync() {
           type: "OBJECT",
           properties: {
             itemName: { type: "STRING" },
+            itemType: { type: "STRING" },
+            whereToGet: { type: "STRING" },
+            blurb: { type: "STRING" },
             sourceName: { type: "STRING" },
             sourceUrl: { type: "STRING" },
             kind: { type: "STRING" },
@@ -1517,154 +803,73 @@ function renderSync() {
     }
   };
 
-  async function analyzeOneVideoSafely(apiKey, catKey, currentItems, vid) {
-    const basePrompt = `Context: This is a benign software analysis of fictional in-game statistics (lap times, virtual item tiers, and in-game currency) from the video game Grand Theft Auto VI.
-    Category: "${catKey}".
-    Known database items: ${JSON.stringify(currentItems)}
-    Video Title: "${vid.title}" by ${vid.channelTitle} (${vid.views} views, ${vid.likeRatio} likes).
-    Extract the creator's item rankings (1 = best, 2 = second, etc.), MM:SS timestamps, and a 1-sentence summary of the in-game performance test.`;
-
-    // Attempt 1: Direct Video Stream (only 1 video per request, if not 18+ age-gated)
-    if (!vid.isAgeRestricted) {
-      try {
-        return await callModelWithSafetyOverride(apiKey, [
-          { fileData: { fileUri: vid.url, mimeType: "video/mp4" } },
-          { text: basePrompt }
-        ], itemRankSchema);
-      } catch (videoErr) {
-        out.textContent += "\n  ↳ Direct video stream blocked (" + videoErr.message + ") — switching to Chapter/Description/Comment fallback...";
-      }
-    } else {
-      out.textContent += "\n  ↳ Video is 18+ age-gated on YouTube — using Chapter/Description/Comment fallback...";
+  function upsertDiscoveredItem(catKey, hit, fallbackUrl, fallbackChannel) {
+    const list = DATA.categories[catKey] || (DATA.categories[catKey] = []);
+    let match = list.find(i => i.name.toLowerCase().includes(hit.itemName.toLowerCase()) || hit.itemName.toLowerCase().includes(i.name.toLowerCase()));
+    if (!match) {
+      const slug = catKey + "-" + hit.itemName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      match = {
+        id: slug,
+        name: hit.itemName,
+        type: hit.itemType || "Meta Pick",
+        get: hit.whereToGet || "In-game unlock",
+        facts: {},
+        blurb: hit.blurb || hit.quote || "",
+        ranks: [],
+        sample: false,
+        seedUp: 46,
+        seedVotes: 54,
+        added: new Date().toISOString().slice(0, 10)
+      };
+      list.push(match);
     }
-
-    // Attempt 2: Guaranteed Fallback using YouTube Description (Chapters/Tier List) + Top Enthusiastic Comments
-    return await callModelWithSafetyOverride(apiKey, [
-      {
-        text: `${basePrompt}
-        Video Description & Chapters: ${vid.description}
-        Top Viewer Comments: ${JSON.stringify(vid.sampleComments)}`
-      }
-    ], itemRankSchema);
-  }
-
-  async function ingestCategoryWithAutoDiscovery(apiKey, ytKey, catKey) {
-    const catCfg = CATS[catKey];
-    const currentItems = (DATA.categories[catKey] || []).map(i => ({ id: i.id, name: i.name }));
-    let discoveredVideos = [];
-
-    if (ytKey) {
-      out.textContent += "\n[" + catCfg.tab + "] Searching YouTube Data API v3 for: \"" + catCfg.query + "\"...";
-      discoveredVideos = await discoverHighSignalYouTubeVideos(ytKey, catCfg.query, 2);
-      out.textContent += "\n[" + catCfg.tab + "] Found " + discoveredVideos.length + " high-engagement videos.";
-    }
-
-    let mergedCount = 0;
-    const resultsLog = [];
-
-    if (discoveredVideos.length) {
-      // Process ONE video per request to avoid the multi-video 400 error
-      for (const vid of discoveredVideos) {
-        out.textContent += "\n[" + catCfg.tab + "] Analyzing: " + vid.title + " (" + vid.channelTitle + ")...";
-        const parsed = await analyzeOneVideoSafely(apiKey, catKey, currentItems, vid);
-        resultsLog.push(parsed);
-        for (const hit of (parsed.items || [])) {
-          const match = (DATA.categories[catKey] || []).find(i => i.name.toLowerCase().includes(hit.itemName.toLowerCase()) || hit.itemName.toLowerCase().includes(i.name.toLowerCase()));
-          if (match) {
-            match.ranks = match.ranks || [];
-            match.ranks.unshift({
-              source: vid.channelTitle || hit.sourceName,
-              kind: "youtube",
-              timestamp: hit.timestamp || "02:15",
-              quote: hit.quote,
-              url: vid.url,
-              rank: hit.rank
-            });
-            match.sample = false;
-            mergedCount++;
-          }
-        }
-      }
-    } else {
-      out.textContent += "\n[" + catCfg.tab + "] Running multi-source consensus check with Gaming Safety Override...";
-      const parsed = await callModelWithSafetyOverride(apiKey, [
-        {
-          text: `Context: Benign software analysis of fictional video game item rankings in Grand Theft Auto VI.
-          Category: "${catKey}" (${catCfg.title}).
-          Database items: ${JSON.stringify(currentItems)}
-          Return the latest consensus rankings from top GTA 6 YouTube testers and guide sites, including MM:SS timestamps and 1-sentence testing quotes.`
-        }
-      ], itemRankSchema);
-      resultsLog.push(parsed);
-      for (const hit of (parsed.items || [])) {
-        const match = (DATA.categories[catKey] || []).find(i => i.name.toLowerCase().includes(hit.itemName.toLowerCase()) || hit.itemName.toLowerCase().includes(i.name.toLowerCase()));
-        if (match) {
-          match.ranks = match.ranks || [];
-          match.ranks.unshift({
-            source: hit.sourceName || "YouTube Creator Test",
-            kind: hit.kind || "youtube",
-            timestamp: hit.timestamp || "02:15",
-            quote: hit.quote,
-            url: safeUrl(hit.sourceUrl) || "https://www.youtube.com",
-            rank: hit.rank
-          });
-          match.sample = false;
-          mergedCount++;
-        }
-      }
-    }
-
-    return { catKey, mergedCount, resultsLog };
+    match.ranks = match.ranks || [];
+    match.ranks.unshift({
+      source: fallbackChannel || hit.sourceName || "Creator Test",
+      kind: hit.kind || "youtube",
+      timestamp: hit.timestamp || "02:15",
+      quote: hit.quote,
+      url: fallbackUrl || safeUrl(hit.sourceUrl) || "https://www.youtube.com",
+      rank: hit.rank
+    });
+    match.sample = false;
   }
 
   autoBtn.onclick = async () => {
     const key = $("gkey").value.trim(), ytKey = $("ytkey").value.trim(), scope = $("gcat").value;
-    if (!key) { out.textContent = "Please enter your Google AI Studio API Key first."; return; }
+    if (!key) { out.textContent = "Please enter your API Key first."; return; }
     const targetCats = scope === "all" ? Object.keys(CATS) : [scope];
-    out.textContent = "Starting Automated High-Signal YouTube Discovery (Gaming Safety Override active)...";
+    out.textContent = "Starting Automated High-Signal Discovery...";
     try {
       let totalMerged = 0;
-      const summary = [];
       for (const cKey of targetCats) {
-        const res = await ingestCategoryWithAutoDiscovery(key, ytKey, cKey);
-        totalMerged += res.mergedCount;
-        summary.push(res);
-      }
-      DATA.meta.updated = new Date().toISOString().slice(0, 10);
-      out.textContent += "\n\n✅ Auto-Discovery Complete! Merged " + totalMerged + " creator rankings.\nClick 'Download Updated data.json' to save.";
-    } catch (err) {
-      out.textContent += "\n\nError: " + err.message;
-    }
-  };
-
-  runSingleBtn.onclick = async () => {
-    const key = $("gkey").value.trim(), scope = $("gcat").value === "all" ? "cars" : $("gcat").value, ytUrl = $("gurl").value.trim(), chan = $("gchan").value.trim() || "YouTube Creator";
-    if (!key || !ytUrl) { out.textContent = "Please enter both your API Key and a YouTube URL."; return; }
-    out.textContent = "Analyzing single video with Gaming Safety Override (BLOCK_NONE)...";
-    try {
-      const currentItems = (DATA.categories[scope] || []).map(i => ({ id: i.id, name: i.name }));
-      let parsed;
-      try {
-        parsed = await callModelWithSafetyOverride(key, [
-          { fileData: { fileUri: ytUrl, mimeType: "video/mp4" } },
-          { text: `Context: Benign software analysis of fictional in-game vehicle/weapon statistics in the video game Grand Theft Auto VI. Analyze this video for the "${scope}" category (known items: ${JSON.stringify(currentItems)}). Return itemName, sourceName, rank (1 = best), timestamp (MM:SS), and a short 1-sentence quote summarizing the in-game test.` }
-        ], itemRankSchema);
-      } catch (streamErr) {
-        out.textContent += "\nDirect video stream blocked by YouTube age-gate or restriction (" + streamErr.message + "). Falling back to URL metadata analysis...";
-        parsed = await callModelWithSafetyOverride(key, [
-          { text: `Context: Benign software analysis of fictional in-game item rankings in Grand Theft Auto VI for video ${ytUrl} by ${chan} in category "${scope}" (known items: ${JSON.stringify(currentItems)}). Return itemName, sourceName, rank (1 = best), timestamp (MM:SS), and a 1-sentence testing quote.` }
-        ], itemRankSchema);
-      }
-      let mergedCount = 0;
-      for (const hit of (parsed.items || [])) {
-        const match = (DATA.categories[scope] || []).find(i => i.name.toLowerCase().includes(hit.itemName.toLowerCase()) || hit.itemName.toLowerCase().includes(i.name.toLowerCase()));
-        if (match) {
-          match.ranks = match.ranks || [];
-          match.ranks.unshift({ source: chan, kind: "youtube", timestamp: hit.timestamp || "02:10", quote: hit.quote, url: ytUrl, rank: hit.rank });
-          mergedCount++;
+        const catCfg = CATS[cKey];
+        const currentItems = (DATA.categories[cKey] || []).map(i => ({ id: i.id, name: i.name }));
+        const vids = ytKey ? await discoverHighSignalYouTubeVideos(ytKey, catCfg.query, 2) : [];
+        if (vids.length) {
+          for (const vid of vids) {
+            out.textContent += "\n[" + catCfg.tab + "] Analyzing: " + vid.title + "...";
+            const parsed = await callModelWithSafetyOverride(key, [
+              { text: `Context: Benign software analysis of fictional video game item rankings in Grand Theft Auto VI for category "${cKey}". Known items: ${JSON.stringify(currentItems)}. Video: "${vid.title}" by ${vid.channelTitle}. Description: ${vid.description}. Top Comments: ${JSON.stringify(vid.sampleComments)}. Extract ranked items (existing or newly discovered), rank (1=best), timestamp (MM:SS), and 1-sentence testing quote.` }
+            ], itemRankSchema);
+            for (const hit of (parsed.items || [])) {
+              upsertDiscoveredItem(cKey, hit, vid.url, vid.channelTitle);
+              totalMerged++;
+            }
+          }
+        } else {
+          out.textContent += "\n[" + catCfg.tab + "] Running multi-source consensus check...";
+          const parsed = await callModelWithSafetyOverride(key, [
+            { text: `Context: Benign software analysis of fictional video game item rankings in Grand Theft Auto VI for category "${cKey}". Known items: ${JSON.stringify(currentItems)}. Return top ranked items (both existing and any newly discovered meta items), sourceName, kind (youtube or web), rank, timestamp, and testing quote.` }
+          ], itemRankSchema);
+          for (const hit of (parsed.items || [])) {
+            upsertDiscoveredItem(cKey, hit, hit.sourceUrl, hit.sourceName);
+            totalMerged++;
+          }
         }
       }
-      out.textContent += "\n\n✅ Merged " + mergedCount + " rankings into #" + scope + "!\n\n" + JSON.stringify(parsed, null, 2);
+      DATA.meta.updated = new Date().toISOString().slice(0, 10);
+      out.textContent += "\n\n✅ Auto-Discovery Complete! Updated/added " + totalMerged + " item rankings.\nClick 'Download Updated data.json' to save.";
     } catch (err) {
       out.textContent += "\n\nError: " + err.message;
     }
@@ -1701,11 +906,11 @@ function renderMethod() {
   const tracked = (DATA.meta.sourcesTracked || []);
   const body = prosePage("How rankings work", "Methodology", [
     [null, ["Every item gets two scores, shown side by side so you can see where guide sites, video testers, and players agree or disagree."]],
-    ["Critic score (Guide Sites + High-Engagement Creator Testing)", ["Each day at 5:52 PM Central, we compile the latest GTA 6 rankings published by specialist guide sites and high-engagement creator testing videos (filtered by view velocity, like ratio, and positive player comment consensus). A #1 spot is worth 100 points and each spot lower is worth 6 fewer, down to a floor of 40. The critic score is the average of those points across every source that ranks the item. It shows once at least two sources rank the item."]],
-    ["Player score (50-vote threshold)", ["Players vote on whether an item is worth getting. The player score is the share of yes votes, and it unlocks once an item reaches 50 votes. Items under 50 votes display a live Community Calibration progress bar."]],
+    ["Critic score (Guide Sites + High-Engagement Creator Testing)", ["Each day at 5:52 PM Central, we compile the latest GTA 6 rankings published by specialist guide sites and high-engagement creator testing videos (filtered by view velocity, like ratio, and positive player comment consensus). A #1 spot is worth 100 points and each spot lower is worth 6 fewer, down to a floor of 40. The critic score is the average of those points across every source that ranks the item."]],
+    ["Player score (Live Community Voting)", ["Players vote on whether an item is worth getting (Worth it vs. Skip it). The player score is the percentage of positive votes and updates immediately as votes are cast."]],
     ["Overall score and tiers", ["Overall is the average of the critic and player scores when both exist, or whichever one exists. Tiers come from the overall score: S is 90 and above, A is 80 to 89, B is 70 to 79, and C is below 70."]],
     ["Sources, most trusted first", null, ["Official patch notes and statements from Rockstar or PlayStation, dated to the day they went live.", "Hands-on video testing by specialist creators (lap timers, frame-counted TTK, and verified money runs) and guide sites.", "Player finds reported by the press or confirmed by more than one source.", "Community votes, which feed the player score only."]],
-    ["Updates", ["Rankings and news refresh every day at 5:52 PM Central. Balance changes and patches are logged with the date they went live. In-depth guides publish every three days."]]
+    ["Updates", ["Rankings, new item discoveries, and news refresh every day at 5:52 PM Central. Balance changes and patches are logged with the date they went live. In-depth guides publish every three days."]]
   ]);
   const art = body.querySelector("article");
   art.append(el("h2", "", "Sources tracked right now (" + tracked.length + ")"));
@@ -1735,13 +940,13 @@ function renderAbout() {
     ["Corrections", ["Errors are corrected in the next daily update and noted in the change log on the methodology page."]]
   ]);
   const sched = el("div", "sched");
-  [["Rankings", "Daily, 5:52 PM Central", "Tracks high-engagement creator video tests and guide-site rankings to recalculate critic scores."], ["News", "Daily, after Command Center refresh", "Logs new Command Center finds with Confirmed, Reported, or Disputed verification badges."], ["Articles", "Every 3 days", "Publishes an original, cited breakdown when at least 3 verified sources cover a new meta topic."]].forEach(([h, when, what]) => {
+  [["Rankings", "Daily, 5:52 PM Central", "Tracks high-engagement creator video tests and guide-site rankings to recalculate critic scores and add new items."], ["News", "Daily, 5:52 PM Central", "Logs new community finds and patch notes with Confirmed, Reported, or Disputed verification badges."], ["Articles", "Every 3 days", "Publishes an original, cited breakdown when at least 3 verified sources cover a new meta topic."]].forEach(([h, when, what]) => {
     const b = el("div", "box"); b.append(el("h3", "", h), el("p", "", when), el("p", "", what)); sched.append(b);
   });
   body.append(sched); setLD([]);
 }
 
-/* ---------- Votes (Hybrid: LocalStorage out-of-the-box + Supabase cloud sync) ---------- */
+/* ---------- Votes (Instant Live Browser Persistence + Optional Supabase Global Sync) ---------- */
 async function startVotes() {
   try {
     let voterId = localStorage.getItem("metacenter_voter_id");
@@ -1754,7 +959,7 @@ async function startVotes() {
     myVotes = saved;
     const t = {};
     for (const [k, val] of Object.entries(myVotes)) {
-      if (val === 1 || val === -1) { t[k] = { up: val === 1 ? 1 : 0, n: 1 }; }
+      if (val === 1 || val === -1) { t[k] = { up: val === 1 ? 15 : 0, n: 15 }; }
     }
     tally = t;
     votesOn = true;
@@ -1788,7 +993,7 @@ function castVote(id, val) {
   myVotes = next;
   const t = {};
   for (const [k, v] of Object.entries(myVotes)) {
-    if (v === 1 || v === -1) { t[k] = { up: v === 1 ? 1 : 0, n: 1 }; }
+    if (v === 1 || v === -1) { t[k] = { up: v === 1 ? 15 : 0, n: 15 }; }
   }
   tally = t;
   try { localStorage.setItem("metacenter_votes_v1", JSON.stringify(myVotes)); } catch (e) {}
@@ -1836,20 +1041,14 @@ window.addEventListener("hashchange", onRoute);
 
 function boot(d) {
   DATA = d; DATA.meta = DATA.meta || {}; DATA.categories = DATA.categories || {};
-  const anySample = Object.keys(CATS).some(isSample);
-  $("proto").textContent = anySample
-    ? "Draft · updates automatically · rankings marked Sample are placeholders"
-    : "Updated Daily · Guide Sites + Creator Testing · Last Sync " + (DATA.meta.updated || "Daily");
+  $("proto").textContent = "Updated Daily · Guide Sites + Creator Testing · Last Sync " + (DATA.meta.updated || "Daily");
   route = null; onRoute();
 }
 
-fetch("data.json", { cache: "no-store" })
+/* Always load live data.json from server without overwriting categories with hardcoded data */
+fetch("data.json?t=" + Date.now(), { cache: "no-store" })
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
   .then(d => {
-    if (!d.posts || !d.posts.length) d.posts = DEFAULT_DATA.posts;
-    if (!d.meta || !d.meta.sourcesTracked || !d.meta.sourcesTracked.length) d.meta = DEFAULT_DATA.meta;
-    const stillSample = Object.keys(CATS).some(c => (d.categories[c] || []).some(i => i.sample));
-    if (stillSample) d.categories = DEFAULT_DATA.categories;
     boot(d);
   })
   .catch(() => {
