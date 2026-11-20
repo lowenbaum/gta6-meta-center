@@ -718,7 +718,7 @@ function renderHome() {
   }
 
   // Then the meta
-  const [sm, wm] = sectionBlock("Top of the meta", ["#meta", "Full tier lists"]);
+  const [sm, wm] = sectionBlock("Current Meta", ["#meta", "Full tier lists"]);
   const cats = el("div", "cats");
   for (const c of Object.keys(CATS)) {
     const box = el("section", "cat"), hh = el("div", "cat-h"), h3 = el("h3");
@@ -1217,8 +1217,19 @@ function castVote(id, val, redraw) {
   req.catch(() => {});
 }
 
-/* ---------- Data cleanup: drop placeholder sources instead of inventing new ones ---------- */
+/* ---------- Data cleanup ---------- */
+// House style for pulled headlines: no semicolons or em/en dashes.
+const headline = (t) => typeof t !== "string" ? t : t
+  .replace(/\s*;\s*/g, ", ")
+  .replace(/\s*[\u2014\u2013]\s*/g, ", ")
+  .replace(/\s+--\s+/g, ", ")
+  .replace(/,\s*,/g, ",").trim();
 function clean(d) {
+  for (const n of (d.news || [])) n.title = headline(n.title);
+  for (const p of (d.posts || [])) { p.title = headline(p.title); p.dek = headline(p.dek); }
+  for (const g of (d.guides || [])) { if (g) { g.title = headline(g.title); g.summary = headline(g.summary); } }
+  for (const l of (d.lists || [])) { if (l) { l.title = headline(l.title); l.dek = headline(l.dek); (l.entries || []).forEach(e => { if (e) e.title = headline(e.title); }); } }
+  // Drop placeholder sources instead of inventing new ones
   d.meta = d.meta || {}; d.categories = d.categories || {};
   for (const c of Object.keys(CATS)) d.categories[c] = d.categories[c] || [];
   for (const c of Object.keys(d.categories)) for (const it of d.categories[c]) {
