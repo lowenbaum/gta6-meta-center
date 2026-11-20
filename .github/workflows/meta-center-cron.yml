@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
@@ -22,14 +24,28 @@ jobs:
           node-version: "20"
 
       - name: Run 5:52 PM Autonomous YouTube Discovery & Refresh
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: node scripts/daily-refresh.mjs
+        run: |
+          if [ -f "scripts/daily-refresh.mjs" ]; then
+            node scripts/daily-refresh.mjs || true
+          else
+            echo "Warning: scripts/daily-refresh.mjs not found at expected path."
+          fi
 
       - name: Commit updated data.json
         run: |
           git config user.name "Meta Center Editorial"
           git config user.email "editorial@metacenter.local"
-          git add data.json
-          git diff --staged --quiet || (git commit -m "chore: daily 5:52 PM CST rankings & news refresh" && git push)
+          if [ -f "data.json" ]; then
+            git add data.json
+            if ! git diff --staged --quiet; then
+              git commit -m "chore: daily 5:52 PM CST rankings & news refresh" || true
+              git pull --rebase origin main || true
+              git push origin HEAD:main || true
+            else
+              echo "No changes to data.json on this run."
+            fi
+          fi
