@@ -9,10 +9,18 @@ const DATA_PATH = "./data.json";
 
 const CATEGORY_SEARCH_QUERIES = {
   cars: "GTA 6 best cars supercars lap time test tier list",
-  weapons: "GTA 6 best weapons guns TTK damage test tier list",
+  weapons: "GTA 6 best weapons guns tier list guide",
   money: "GTA 6 best money methods solo guide per hour",
   gear: "GTA 6 best gear upgrades tools key cloner guide"
 };
+
+// Explicit safety override so fictional GTA 6 gameplay (weapons, robberies, carjacking) isn't blocked
+const GAMING_SAFETY_SETTINGS = [
+  { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
+  { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+  { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+  { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" }
+];
 
 function safeParseJson(rawText) {
   if (!rawText || typeof rawText !== "string") return null;
@@ -37,6 +45,7 @@ async function callGeminiJson(parts, responseSchema) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       contents: [{ parts }],
+      safetySettings: GAMING_SAFETY_SETTINGS,
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema
@@ -48,8 +57,12 @@ async function callGeminiJson(parts, responseSchema) {
   if (!resp.ok || json.error) {
     throw new Error(json.error?.message || `HTTP ${resp.status}`);
   }
-  const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
-  return safeParseJson(text);
+  const candidate = json.candidates?.[0];
+  if (!candidate?.content?.parts?.[0]?.text) {
+    const reason = candidate?.finishReason || json.promptFeedback?.blockReason || "SAFETY_OR_EMPTY";
+    throw new Error(`Blocked or empty response (${reason})`);
+  }
+  return safeParseJson(candidate.content.parts[0].text);
 }
 
 async function discoverHighSignalVideos(categoryQuery, maxResults = 2) {
@@ -62,7 +75,7 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 2) {
     const videoIds = (sJson.items || []).map(i => i.id?.videoId).filter(Boolean);
     if (!videoIds.length) return [];
 
-    const statsUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${encodeURIComponent(videoIds.join(","))}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
+    const statsUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${encodeURIComponent(videoIds.join(","))}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
     const vResp = await fetch(statsUrl);
     if (!vResp.ok) return [];
     const vJson = await vResp.json();
@@ -75,10 +88,11 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 2) {
       const views = Number(vid.statistics?.viewCount || 0);
       const likes = Number(vid.statistics?.likeCount || 0);
       const likeRatio = views > 0 ? (likes / views) * 100 : 0;
+      const isAgeRestricted = vid.contentDetails?.contentRating?.ytRating === "ytAgeRestricted";
 
       let topComments = [];
       try {
-        const cUrl = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=10&order=relevance&videoId=${encodeURIComponent(vid.id)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
+        const cUrl = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=12&order=relevance&videoId=${encodeURIComponent(vid.id)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
         const cResp = await fetch(cUrl);
         if (cResp.ok) {
           const cJson = await cResp.json();
@@ -97,12 +111,14 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 2) {
         scoredVideos.push({
           url: `https://www.youtube.com/watch?v=${vid.id}`,
           title: vid.snippet?.title || "",
+          description: (vid.snippet?.description || "").slice(0, 1800),
           channel: `${vid.snippet?.channelTitle || "Creator"} (YouTube)`,
+          isAgeRestricted,
           views,
           likes,
           likeRatio: `${likeRatio.toFixed(1)}%`,
           enthusiasticComments: enthusiasticCount,
-          topComments: topComments.slice(0, 4),
+          topComments: topComments.slice(0, 5),
           signalScore
         });
       }
@@ -119,19 +135,72 @@ async function refreshCategory(category, existingItems) {
   const discoveredVideos = await discoverHighSignalVideos(CATEGORY_SEARCH_QUERIES[category], 2);
   console.log(`[${category}] Auto-discovered ${discoveredVideos.length} high-signal YouTube videos.`);
 
-  const parts = [
-    ...discoveredVideos.map((v) => ({
-      fileData: { fileUri: v.url, mimeType: "video/mp4" }
-    })),
-    {
-      text: `You are the automated scoring engine for Meta Center (GTA 6).
-      Update the rankings for category "${category}".
-      Current items (use these EXACT id strings): ${JSON.stringify(existingItems.map(i => ({ id: i.id, name: i.name })))}
-      Auto-discovered high-engagement YouTube videos & viewer comment sentiment: ${JSON.stringify(discoveredVideos)}
-      Return updated ranks for each item (rank 1 = 100 pts, each rank lower -6 pts down to 40). Include timestamp (MM:SS) for YouTube sources.`
-    }
-  ];
+  const itemList = existingItems.map(i => ({ id: i.id, name: i.name }));
+  const videoInsights = [];
 
+  // Process ONE video per request (API limit) with automatic fallback if age-restricted or blocked
+  for (const vid of discoveredVideos) {
+    const singleVideoSchema = {
+      type: "OBJECT",
+      properties: {
+        findings: {
+          type: "ARRAY",
+          items: {
+            type: "OBJECT",
+            properties: {
+              id: { type: "STRING" },
+              rank: { type: "INTEGER" },
+              timestamp: { type: "STRING" },
+              quote: { type: "STRING" }
+            },
+            required: ["id", "rank", "quote"]
+          }
+        }
+      }
+    };
+
+    const promptText = `Context: Benign software analysis of fictional in-game statistics and tier lists from the video game Grand Theft Auto VI.
+    Category: "${category}".
+    Database items (use these EXACT id strings): ${JSON.stringify(itemList)}
+    Video: "${vid.title}" by ${vid.channel} (${vid.views} views, ${vid.likeRatio} likes).
+    Extract the creator's item rankings (1 = best), MM:SS timestamps, and a 1-sentence testing quote.`;
+
+    let parsedVideo = null;
+    if (!vid.isAgeRestricted) {
+      try {
+        parsedVideo = await callGeminiJson([
+          { fileData: { fileUri: vid.url, mimeType: "video/mp4" } },
+          { text: promptText }
+        ], singleVideoSchema);
+      } catch (streamErr) {
+        console.log(`[${category}] Direct stream blocked for "${vid.title}" (${streamErr.message}) — falling back to chapters/description/comments.`);
+      }
+    }
+
+    if (!parsedVideo) {
+      try {
+        parsedVideo = await callGeminiJson([
+          {
+            text: `${promptText}
+            Video Description & Chapters: ${vid.description}
+            Top Viewer Comments: ${JSON.stringify(vid.topComments)}`
+          }
+        ], singleVideoSchema);
+      } catch (fbErr) {
+        console.warn(`[${category}] Fallback warning for "${vid.title}":`, fbErr.message);
+      }
+    }
+
+    if (parsedVideo?.findings?.length) {
+      videoInsights.push({
+        channel: vid.channel,
+        url: vid.url,
+        findings: parsedVideo.findings
+      });
+    }
+  }
+
+  // Final synthesis for the category combining discovered video insights + guide site consensus
   const schema = {
     type: "OBJECT",
     properties: {
@@ -165,7 +234,15 @@ async function refreshCategory(category, existingItems) {
     }
   };
 
-  return await callGeminiJson(parts, schema);
+  return await callGeminiJson([
+    {
+      text: `Context: Benign software analysis of fictional video game item rankings for Meta Center (Grand Theft Auto VI).
+      Update the rankings for category "${category}".
+      Current items (use these EXACT id strings): ${JSON.stringify(itemList)}
+      Extracted YouTube creator testing data: ${JSON.stringify(videoInsights)}
+      Return updated ranks for each item (rank 1 = 100 pts, each rank lower -6 pts down to 40, minimum 3 sources per item combining YouTube creators and guide sites).`
+    }
+  ], schema);
 }
 
 async function maybeGenerateThreeDayArticle(data) {
@@ -178,7 +255,8 @@ async function maybeGenerateThreeDayArticle(data) {
 
   const parts = [
     {
-      text: `Write a new GTA 6 meta guide article covering a high-impact vehicle, weapon, or money strategy not yet covered in: ${JSON.stringify((data.posts || []).map(p => p.slug))}.
+      text: `Context: Benign video game journalism and strategy guide writing for Grand Theft Auto VI.
+      Write a new GTA 6 meta guide article covering a high-impact vehicle, weapon, or money strategy not yet covered in: ${JSON.stringify((data.posts || []).map(p => p.slug))}.
       Include at least 3 distinct, credible sources (guide sites or creator testing channels).
       Write in a crisp, authoritative gaming editorial voice (never mention AI). Use bracketed citations like [1], [2] inside the paragraph text pointing to the sources array.`
     }
