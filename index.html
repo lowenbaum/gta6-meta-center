@@ -75,13 +75,25 @@ p { margin: 0 0 1em; }
 .top { position: sticky; top: 0; z-index: 20; background: rgba(26, 11, 54, .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 .top .wrap { display: flex; align-items: center; gap: 20px; height: 68px; }
 .logo { display: flex; align-items: center; flex: none; text-decoration: none; }
-.logo svg { height: 48px; width: auto; display: block; }
-.hsearch { flex: 1; max-width: 460px; position: relative; }
-.hsearch input { width: 100%; height: 42px; border-radius: 999px; border: 1px solid var(--line); background: var(--night-2); padding: 0 44px 0 42px; font-size: .95rem; }
-.hsearch input::placeholder { color: var(--haze-2); }
-.hsearch input:focus { border-color: var(--aqua); outline: none; box-shadow: 0 0 0 3px rgba(34, 228, 211, .25); }
-.hsearch .ico { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--haze-2); pointer-events: none; }
-.hsearch kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font: 500 .75rem var(--body); color: var(--haze-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
+.wordmark { /* sunset-filled type, cut by horizon stripes */
+  font: italic 800 2.1rem/1 var(--display); letter-spacing: .03em; padding: 4px .14em 4px 0; white-space: nowrap;
+  background:
+    linear-gradient(180deg, transparent 0 57%, var(--night) 57% 62%, transparent 62% 70%, var(--night) 70% 74%, transparent 74%),
+    linear-gradient(180deg, var(--sun-top) 18%, var(--sunset) 42%, var(--flamingo) 78%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.logo:hover .wordmark { opacity: .85; }
+.hsearch { flex: 1; max-width: 540px; position: relative; }
+.hsearch input {
+  width: 100%; height: 44px; border-radius: 999px; padding: 0 48px 0 46px; font-size: .97rem;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--night-2), var(--night-2)) padding-box, linear-gradient(90deg, var(--flamingo), var(--sunset) 50%, var(--aqua)) border-box;
+  transition: box-shadow .2s;
+}
+.hsearch input::placeholder { color: var(--haze); }
+.hsearch input:focus { outline: none; box-shadow: 0 0 0 4px rgba(255, 61, 139, .18), 0 0 28px rgba(34, 228, 211, .28); }
+.hsearch .ico { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 19px; height: 19px; color: var(--aqua); pointer-events: none; }
+.hsearch kbd { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font: 500 .75rem var(--body); color: var(--haze); background: var(--dusk); border-radius: 6px; padding: 2px 8px; }
 .pillars { display: flex; gap: 4px; margin-left: auto; }
 .pillars a { display: flex; align-items: center; gap: 8px; color: var(--haze); text-decoration: none; font-weight: 500; padding: 8px 14px; border-radius: 999px; }
 .pillars a:hover { color: var(--foam); background: var(--night-2); }
@@ -90,14 +102,7 @@ p { margin: 0 0 1em; }
 .pillars svg { display: none; }
 
 /* ---------- Home ---------- */
-.intro { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 36px 0 26px; margin-bottom: 30px; }
-.intro::after { /* the one sunset stripe on the page */
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; border-radius: 4px;
-  background: linear-gradient(90deg, var(--flamingo), var(--sunset) 50%, var(--aqua));
-}
-.intro h1 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
-.intro p { color: var(--haze); margin: 8px 0 0; max-width: 60ch; }
-.intro .stamp { color: var(--haze-2); font-size: .9rem; white-space: nowrap; }
+.status-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; padding-top: 22px; padding-bottom: 18px; font-size: .88rem; color: var(--haze-2); }
 .home-top { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: start; }
 .cats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .cat { background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px 20px 8px; }
@@ -317,7 +322,6 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
   .wrap { padding: 0 18px; }
   .top { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--night); } /* a backdrop filter would trap the fixed tab bar inside the header */
   .top .wrap { height: 60px; gap: 12px; }
-  .logo svg { height: 38px; }
   .hsearch kbd { display: none; }
   .pillars { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 30; background: rgba(26, 11, 54, .97); border-top: 1px solid var(--line); padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); justify-content: space-around; }
   .pillars a { flex-direction: column; gap: 2px; padding: 6px 10px; font-size: .76rem; border-radius: 12px; }
@@ -325,7 +329,10 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
   .pillars svg { display: block; width: 22px; height: 22px; color: var(--c); }
   .pillars a[aria-current="page"] { background: var(--dusk); }
   .mrows li:nth-child(n+4) { display: none; } /* top 3 on phones keeps news within reach */
-  .intro { flex-direction: column; align-items: flex-start; gap: 6px; padding-top: 24px; }
+  .wordmark { font-size: 1.45rem; }
+  .status-row { padding-top: 14px; padding-bottom: 12px; font-size: .8rem; }
+  .hsearch input { padding-left: 40px; padding-right: 14px; }
+  .hsearch .ico { left: 14px; }
   .cats, .lists.three, .news, .tips, .posts, .lists, .sync-grid { grid-template-columns: 1fr; }
   .lcard.big { grid-column: auto; }
   .trow { grid-template-columns: 54px 1fr; min-height: 76px; }
@@ -343,25 +350,10 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
 <a class="skip" href="#view" onclick="event.preventDefault();document.getElementById('view').focus()">Skip to content</a>
 
 <header class="top"><div class="wrap">
-  <a class="logo" href="#" aria-label="Beat Six home">
-    <svg viewBox="0 0 196 60" role="img" aria-hidden="true">
-      <defs>
-        <linearGradient id="lgSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc65c"/><stop offset=".45" stop-color="#ffb447"/><stop offset="1" stop-color="#ff3d8b"/></linearGradient>
-        <clipPath id="lgClip"><circle cx="30" cy="30" r="25"/></clipPath>
-        <filter id="lgGlow" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-      <g clip-path="url(#lgClip)">
-        <rect x="0" y="0" width="60" height="60" fill="url(#lgSun)"/>
-        <g fill="#1a0b36"><rect x="0" y="33" width="60" height="2.4"/><rect x="0" y="39" width="60" height="3.2"/><rect x="0" y="46" width="60" height="4.4"/><rect x="0" y="53.5" width="60" height="7"/></g>
-      </g>
-      <text x="40" y="35" font-family="Yellowtail, cursive" font-size="34" fill="#ff3d8b" filter="url(#lgGlow)">Beat</text>
-      <text x="106" y="50" font-family="Kanit, sans-serif" font-style="italic" font-weight="800" font-size="27" letter-spacing="1.5" fill="#22e4d3">SIX</text>
-      <rect x="106" y="54" width="62" height="2.2" fill="#22e4d3" opacity=".6"/>
-    </svg>
-  </a>
+  <a class="logo" href="#"><span class="wordmark">BEAT SIX</span></a>
   <form class="hsearch" role="search" id="hsearch">
     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <input id="hq" type="search" placeholder="Search guides, missions, cars, tips" aria-label="Search Beat Six" autocomplete="off">
+    <input id="hq" type="search" placeholder="Search guides, cars, tips" aria-label="Search Beat Six" autocomplete="off">
     <kbd>/</kbd>
   </form>
   <nav class="pillars" id="pillars" aria-label="Main">
@@ -696,11 +688,9 @@ function postCard(p) {
 function renderHome() {
   setMeta("Beat Six: the GTA 6 meta, guides and news in one place", "The best GTA 6 cars, weapons, money methods and gear, ranked by guide sites, creator tests and player votes, plus checklists, guides and daily news.");
   const v = view();
-  const iw = el("div", "wrap"), intro = el("section", "intro"), it = el("div");
-  it.append(el("h1", "", "The GTA 6 meta, sorted."),
-    el("p", "", "The best cars, weapons, money methods and gear, ranked by guide sites, creator tests and player votes. Plus what to do next and today's news."));
-  intro.append(it, el("span", "stamp", "Updated " + fmtDate(DATA.meta.updated)));
-  iw.append(intro); v.append(iw);
+  const status = el("div", "wrap status-row");
+  status.append(el("span", "", DATA.meta.patch || ""), el("span", "", "Rankings updated " + fmtDate(DATA.meta.updated)));
+  v.append(status);
 
   // Above the fold: the meta on the left, news on the right
   const top = el("div", "wrap home-top"), cats = el("div", "cats");
