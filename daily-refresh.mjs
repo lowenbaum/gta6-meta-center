@@ -1,5 +1,5 @@
 // scripts/daily-refresh.mjs
-// High-Volume Content Gathering, Multi-Desk Article & Meta Aggregation Engine for Meta Center
+// High-Volume Content Gathering, Hero Story Curation, Multi-Desk Article & Meta Aggregation Engine
 // Zero external npm dependencies required (uses native Node 20 fetch + fs).
 import fs from "node:fs/promises";
 
@@ -13,6 +13,10 @@ const MAX_NEWS_ITEMS = 250;
 const MIN_NEWS_RELEVANCE = 7;
 const MAX_POSTS_ARCHIVE = 60;
 const ARTICLES_PER_RUN = Number(process.env.ARTICLES_PER_RUN || (process.env.FORCE_ARTICLE === "true" ? 3 : 2));
+
+// Boilerplate/utility story IDs or patterns that must NEVER occupy the #1 Primary/Hero slot
+const BOILERPLATE_UTILITY_IDS = new Set(["ps5-system-update", "saving", "settings-deadzone"]);
+const BOILERPLATE_TITLE_REGEX = /\b(firmware|system update|install update|rest mode|dead\s*zone|patch size|preload)\b/i;
 
 // Expanded Source Authority Directory (18 specialist creators, outlets & wikis)
 const TRUSTED_SOURCES_DIRECTORY = [
@@ -76,23 +80,15 @@ const CATEGORY_CONFIG = {
   }
 };
 
-// 6 Specialized News Beats (Up to 8 stories per beat = up to 48 high-signal stories per run)
+// 6 Specialized News Beats — Ordered so Major Meta, Gameplay & Headline Stories lead first
 const NEWS_BEATS = [
   {
-    name: "Patches, Hotfixes & Official Rockstar Updates",
-    cats: ["launch", "world"],
+    name: "Major Meta Shifts, Breaking Rockstar Headlines & World Events",
+    cats: ["world", "launch"],
     targetCount: 8,
-    youtubeQuery: "GTA 6 patch notes hotfix update Rockstar official news",
+    youtubeQuery: "GTA 6 biggest news meta update Rockstar announcement",
     searchPrompt: (today) =>
-      `Today is ${today}. Search Rockstar Newswire, PlayStation/Xbox system updates, IGN, Eurogamer, VGC, GameSpot, and PC Gamer for the latest Grand Theft Auto VI (GTA 6) patch notes, hotfixes, balance changes, server/online updates, and official Rockstar announcements.`
-  },
-  {
-    name: "Console Performance, Frame-Rate & Settings Optimization",
-    cats: ["launch", "tips"],
-    targetCount: 8,
-    youtubeQuery: "GTA 6 Digital Foundry PS5 Pro Xbox Series X performance settings deadzone",
-    searchPrompt: (today) =>
-      `Today is ${today}. Search Digital Foundry, TechRadar, Eurogamer, Kotaku, and creator benchmarks for GTA 6 PS5/PS5 Pro/Xbox Series X frame-rate tests, graphics modes, controller aiming dead-zone fixes, HDR calibration, and audio/visual settings tips.`
+      `Today is ${today}. Search Rockstar Newswire, IGN, Kotaku, Eurogamer, VGC, GameSpot, and PC Gamer for the biggest, most timely Grand Theft Auto VI (GTA 6) headlines, major gameplay revelations, meta shifts, high-impact balance updates, and official Rockstar announcements. Avoid mundane firmware/install notices.`
   },
   {
     name: "Vehicle Meta, Lap Times & Customization Discoveries",
@@ -125,6 +121,14 @@ const NEWS_BEATS = [
     youtubeQuery: "GTA 6 easter eggs secrets Vice City Lake Cottonmouth mysteries found",
     searchPrompt: (today) =>
       `Today is ${today}. Search VGTimes, Kotaku, GamesRadar, IGN, and community discovery channels for confirmed GTA 6 easter eggs, Lake Cottonmouth mysteries, rare random encounters, safehouse secrets, and hidden collectibles across Leonida.`
+  },
+  {
+    name: "Console Performance, Frame-Rate & Tactical Settings",
+    cats: ["tips", "launch"],
+    targetCount: 8,
+    youtubeQuery: "GTA 6 Digital Foundry PS5 Pro Xbox Series X performance settings",
+    searchPrompt: (today) =>
+      `Today is ${today}. Search Digital Foundry, TechRadar, Eurogamer, and creator benchmarks for GTA 6 frame-rate tests, graphics modes, aiming settings, and gameplay optimization tips.`
   }
 ];
 
@@ -212,6 +216,23 @@ function isSimilarHeadline(candidateTitle, existingList) {
     if (ratio >= 0.65) return true;
   }
   return false;
+}
+
+/* Calculates how worthy a news story is for the #1 Primary/Hero slot */
+function computeHeroScore(story, today) {
+  if (!story || !story.title) return -100;
+  let score = Number(story.heroPriorityScore || story.relevanceScore || 7) * 10;
+
+  if (story.isTimelyHeroLead) score += 35;
+  if (story.added === today) score += 25;
+  if (story.status === "confirmed") score += 12;
+  if (["vehicles", "weapons", "items", "world"].includes(story.cat)) score += 10;
+
+  // Strongly demote dry utility/install/firmware notices so they never become the Hero story
+  if (BOILERPLATE_UTILITY_IDS.has(story.id) || BOILERPLATE_TITLE_REGEX.test(story.title)) {
+    score -= 150;
+  }
+  return score;
 }
 
 async function callGeminiGroundedSearch(promptText) {
@@ -341,7 +362,6 @@ async function discoverHighSignalVideos(queriesInput, maxResults = 5, recentDays
       const likeRatio = views > 0 ? (likes / views) * 100 : 0;
       const isAgeRestricted = vid.contentDetails?.contentRating?.ytRating === "ytAgeRestricted";
 
-      // Balanced floor: captures emerging specialist testing videos while filtering low-effort spam
       if (views < 1000 || likeRatio < 1.8) continue;
 
       const commentSignals = await evaluateVideoComments(vid.id);
@@ -375,7 +395,7 @@ async function discoverHighSignalVideos(queriesInput, maxResults = 5, recentDays
   }
 }
 
-/* 1. High-Volume 6-Beat News Aggregator (Up to 48 stories per run) */
+/* 1. High-Volume 6-Beat News Aggregator + Hero Lead Ranking (Up to 48 stories per run) */
 async function refreshCommandCenterNews(existingNews, today) {
   const collected = [];
   const newsSchema = {
@@ -394,10 +414,15 @@ async function refreshCommandCenterNews(existingNews, today) {
             url: { type: "STRING" },
             title: { type: "STRING" },
             body: { type: "STRING" },
-            relevanceScore: { type: "INTEGER" },
+            relevanceScore: { type: "INTEGER", description: "1 to 10 quality score" },
+            heroPriorityScore: { type: "INTEGER", description: "1 to 100 editorial headline impact score" },
+            isTimelyHeroLead: { type: "BOOLEAN", description: "True if this is a major front-page lead story" },
             isClickbaitOrSpeculation: { type: "BOOLEAN" }
           },
-          required: ["id", "cat", "status", "source", "url", "title", "body", "relevanceScore", "isClickbaitOrSpeculation"]
+          required: [
+            "id", "cat", "status", "source", "url", "title", "body",
+            "relevanceScore", "heroPriorityScore", "isTimelyHeroLead", "isClickbaitOrSpeculation"
+          ]
         }
       }
     }
@@ -415,16 +440,17 @@ async function refreshCommandCenterNews(existingNews, today) {
       const parsed = await callGeminiJson(
         [
           {
-            text: `Context: Senior gaming editor for Meta Center (Grand Theft Auto VI).
+            text: `Context: Editor-in-Chief for Meta Center (Grand Theft Auto VI).
 Beat: ${beat.name} (preferred categories: ${beat.cats.join(", ")}).
 Date: ${today}.
-Extract up to ${beat.targetCount} distinct, factual, high-signal GTA 6 news items, patch details, or tested gameplay tips.
-Strict Quality Rules:
-1. Only include concrete, verifiable updates, tested mechanics, or confirmed finds.
+Extract up to ${beat.targetCount} distinct, factual, high-signal GTA 6 news items, meta breakthroughs, or tested gameplay findings.
+Strict Quality & Hero Curation Rules:
+1. Only include concrete, verifiable updates, tested meta findings, or confirmed news.
 2. Score relevanceScore from 1-10 (require >= 7 for inclusion).
-3. Mark isClickbaitOrSpeculation = true for unverified rumors or filler listicles.
-4. Use ONLY verified https:// URLs from the research or YouTube list below.
-5. Do NOT duplicate any of these existing titles: ${JSON.stringify(knownTitles)}.
+3. Score heroPriorityScore from 1-100 based on how exciting, timely, and important the story is for the #1 Front-Page Hero Headline. Major meta shifts, new fastest car/weapon tests, huge money discoveries, or big Rockstar announcements should score 85-100. Routine firmware/system update notices must score below 25 and have isTimelyHeroLead = false.
+4. Mark isClickbaitOrSpeculation = true for unverified rumors or filler listicles.
+5. Use ONLY verified https:// URLs from the research or YouTube list below.
+6. Do NOT duplicate any of these existing titles: ${JSON.stringify(knownTitles)}.
 
 Live Web Research:
 ${liveResearch}
@@ -466,7 +492,10 @@ ${JSON.stringify(beatVideos)}`
             source: h.source,
             url: h.url,
             title: h.title.trim(),
-            body: h.body.trim()
+            body: h.body.trim(),
+            relevanceScore: Number(h.relevanceScore || 8),
+            heroPriorityScore: Number(h.heroPriorityScore || 75),
+            isTimelyHeroLead: Boolean(h.isTimelyHeroLead)
           });
         }
       }
@@ -492,7 +521,6 @@ async function refreshCategory(category, existingItems, today) {
     IMPORTANT QUANTITY & DEPTH GOAL: In addition to updating the existing ${existingItems.length} items, identify at least ${Math.min(4, expansionNeeded)} additional high-interest GTA 6 ${category} items tested by guide sites and YouTube creators that are not yet in the list above, along with real source names (IGN, Kotaku, Eurogamer, Inven Global, TechRadar, GamesRadar, Broughy1322, Digital Car Addict, GhillieMaster, TGG) and verified URLs.`
   );
 
-  // Inspect top non-age-restricted YouTube videos natively (up to 3 videos per category)
   const videoInsights = [];
   for (const vid of discoveredVideos.slice(0, 3)) {
     if (!vid.isAgeRestricted) {
@@ -607,7 +635,6 @@ async function generateBatchCitedArticles(data, today) {
   const existingTitles = existingPosts.map((p) => p.title);
   const recentHeadlines = (data.news || []).slice(0, 25).map((n) => `${n.title} (${n.source}: ${n.url})`);
 
-  // Prioritize editorial desks that have the fewest recent articles
   const deskCounts = EDITORIAL_DESKS.map((desk) => ({
     desk,
     count: existingPosts.filter((p) => (p.tags || []).includes(desk.tag)).length
@@ -714,6 +741,8 @@ Strict Editorial & Quality Rules:
 
 async function main() {
   const today = new Date().toISOString().slice(0, 10);
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+
   const raw = await fs.readFile(DATA_PATH, "utf8");
   const data = safeParseJson(raw) || {
     meta: {},
@@ -728,6 +757,19 @@ async function main() {
   data.news = data.news || [];
   data.posts = data.posts || [];
   data.changelog = data.changelog || [];
+
+  // CRITICAL FIX: Normalize any hardcoded future "2026-11-..." dates on legacy starter items
+  // so they never out-sort fresh daily stories, and demote the old PS5 firmware update notice.
+  for (const n of data.news) {
+    if (!n.added || n.added > today) {
+      n.added = yesterday;
+    }
+    if (BOILERPLATE_UTILITY_IDS.has(n.id) || BOILERPLATE_TITLE_REGEX.test(n.title || "")) {
+      n.added = "2025-01-01";
+      n.heroPriorityScore = 10;
+      n.isTimelyHeroLead = false;
+    }
+  }
 
   // Clean out any legacy sample flags or dummy seed votes
   for (const cat of Object.keys(data.categories)) {
@@ -748,11 +790,32 @@ async function main() {
       console.log("Running 6-Beat High-Signal News Sweep...");
       const freshHeadlines = await refreshCommandCenterNews(data.news, today);
       addedNewsCount = freshHeadlines.length;
-      for (const h of freshHeadlines.reverse()) {
-        data.news.unshift(h);
+
+      // Combine fresh headlines with existing archive
+      const combinedNews = [...freshHeadlines, ...data.news];
+
+      // Sort by Hero Priority Score first among today's stories, then by date descending
+      combinedNews.sort((a, b) => {
+        if (a.added !== b.added) {
+          return (b.added || "").localeCompare(a.added || "");
+        }
+        return computeHeroScore(b, today) - computeHeroScore(a, today);
+      });
+
+      // Guarantee the #1 Primary/Hero slot is the highest-scoring timely story (never a firmware/install notice)
+      const bestHeroIdx = combinedNews.findIndex(
+        (n) => !BOILERPLATE_UTILITY_IDS.has(n.id) && !BOILERPLATE_TITLE_REGEX.test(n.title || "")
+      );
+      if (bestHeroIdx > 0) {
+        const [heroStory] = combinedNews.splice(bestHeroIdx, 1);
+        heroStory.added = today;
+        combinedNews.unshift(heroStory);
       }
-      data.news = data.news.slice(0, MAX_NEWS_ITEMS);
-      console.log(`Added ${addedNewsCount} verified headlines (Archive size: ${data.news.length}).`);
+
+      data.news = combinedNews.slice(0, MAX_NEWS_ITEMS);
+      console.log(
+        `Added ${addedNewsCount} verified headlines (Total: ${data.news.length}). Hero Lead: "${data.news[0]?.title}"`
+      );
     } catch (err) {
       console.warn("News sweep warning:", err.message);
     }
