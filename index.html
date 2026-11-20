@@ -225,8 +225,11 @@ aside { display: grid; gap: 16px; align-content: start }
 .box li, .box p { color: var(--soft); font-size: 14px }
 .box p { margin: 0 0 8px }
 .box ol, .box ul { margin: 0; padding-left: 18px; display: grid; gap: 6px }
-.ad { border: 1px dashed #4a3866; border-radius: 14px; color: var(--muted); display: grid; place-items: center; text-align: center; font: 600 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 18px }
+.ad { border: 1px dashed #4a3866; border-radius: 14px; color: var(--muted); display: grid; place-items: center; text-align: center; font: 600 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 18px; overflow: hidden; text-decoration: none }
 .ad.inline { min-height: 90px } .ad.rail { min-height: 250px } .ad.wide { min-height: 90px; margin-top: 34px }
+.ad.promo { border-style: solid; border-color: var(--line); background: linear-gradient(135deg, rgba(26,18,41,.95), rgba(36,24,56,.95)); text-transform: none; font-family: var(--body) }
+.ad.promo strong { color: var(--orange); font-size: 15px; display: block; margin-bottom: 4px }
+.ad.promo span { color: var(--soft); font-size: 13px }
 
 .prose { max-width: 70ch; padding-block: 8px 10px }
 .prose h2 { font: 800 21px/1.3 var(--body); margin: 30px 0 8px; text-wrap: balance }
@@ -280,6 +283,22 @@ footer nav a { color: var(--muted); font-weight: 700 }
 <script>
 const SITE = "Meta Center", MIN_VOTES = 1;
 const MODEL_CANDIDATES = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
+
+/* ---------- 1. Global Multi-User Voting (Paste Free Supabase URL & Key Here) ---------- */
+const SUPABASE_URL = "https://qbixagsroeexcnpgdsax.supabase.co/rest/v1/";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFiaXhhZ3Nyb2VleGNucGdkc2F4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNDgwODYsImV4cCI6MjExMDcyNDA4Nn0.HYEkYxt2uuGx829AWzNIx6VcQhc9IpaL6HiVtcpsgtM";
+
+/* ---------- 2. Ad Monetization Config (AdSense or Custom Affiliate Banners) ---------- */
+const AD_CONFIG = {
+  adsenseClient: "", // e.g., "ca-pub-1234567890123456"
+  wideSlotId: "",    // e.g., "1122334455" (728x90 Leaderboard)
+  railSlotId: "",    // e.g., "5566778899" (300x250 Sidebar Rectangle)
+  customBanners: {
+    wide: { title: "", subtitle: "", url: "" }, // Fill to show a live clickable affiliate banner!
+    rail: { title: "", subtitle: "", url: "" }
+  }
+};
+
 const CATS = {
   cars: { tab: "Cars", title: "Best Cars in GTA 6", one: "car", query: "GTA 6 best cars supercars lap time test tier list" },
   weapons: { tab: "Weapons", title: "Best Weapons in GTA 6", one: "weapon", query: "GTA 6 best weapons guns tier list guide" },
@@ -291,7 +310,7 @@ const HOME_FAQ = [
   ["What is Meta Center?", "Meta Center ranks the best cars, weapons, money methods and gear in GTA 6. Every item gets two scores: a critic score from guide sites and creator testing videos, and a live player score from real community votes."],
   ["How is the critic score calculated?", "Each day we track the rankings published by GTA 6 guide sites and high-engagement creator testing videos (lap times, recoil tests, and money/hour breakdowns). A #1 spot is worth 100 points and each spot lower is worth 6 fewer, down to 40. The critic score is the average across sources."],
   ["How is the player score calculated?", "Players vote on whether each item is worth getting (👍 Worth it or 👎 Skip it). There are zero dummy or pre-seeded votes—the player score shows as soon as the first real vote is cast and updates live."],
-  ["How often does the site update?", "Rankings, new item discoveries, and news refresh every evening at 5:52 PM Central. New cited articles publish every three days. Each page shows when it was last updated."]
+  ["How often does the site update?", "Rankings, breaking Command Center news finds, and new item discoveries refresh every evening at 5:52 PM Central. New cited articles publish every three days."]
 ];
 
 const GAMING_SAFETY_SETTINGS = [
@@ -301,7 +320,6 @@ const GAMING_SAFETY_SETTINGS = [
   { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" }
 ];
 
-/* Fallback upgrade map applied automatically if data.json still has initial Sample site A-E placeholders */
 const UPGRADED_SOURCES_FALLBACK = {
   "cars-95-gotti-cheetah": [
     { source: "Broughy1322 (YouTube Track Test)", kind: "youtube", timestamp: "04:12", quote: "Fastest lap time around Vice International Circuit by 1.4 seconds.", url: "https://www.youtube.com/@Broughy1322", rank: 1 },
@@ -342,11 +360,36 @@ const fmtDate = (d) => { if (!d) return ""; const x = new Date(d + "T12:00:00");
 const shortDate = (d) => { if (!d) return ""; const x = new Date(d + "T12:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-US", { month: "short", day: "numeric" }); };
 
 let DATA = null, route = "", sort = "combined", filter = "All", newsFilter = "all", open = null, query = "";
-let tally = {}, myVotes = {}, uid = null, votesOn = true;
+let tally = {}, myVotes = {}, uid = null, votesOn = true, sharedVotesActive = false;
 
-/* Optional: Paste free Supabase URL & Anon Key here for global multi-user shared vote pooling */
-const SUPABASE_URL = "";
-const SUPABASE_ANON_KEY = "";
+/* ---------- Ad Slot Renderer ---------- */
+function renderAdSlot(kind, tag = "div") {
+  const isRail = kind === "rail";
+  const banner = isRail ? AD_CONFIG.customBanners.rail : AD_CONFIG.customBanners.wide;
+  if (banner && banner.url && banner.title) {
+    const a = ext(banner.url, "");
+    a.className = "ad promo " + kind;
+    const inner = el("div");
+    inner.append(el("strong", "", banner.title), el("span", "", banner.subtitle || "Sponsored Partner"));
+    a.append(inner);
+    return a;
+  }
+  const slotId = isRail ? AD_CONFIG.railSlotId : AD_CONFIG.wideSlotId;
+  if (AD_CONFIG.adsenseClient && slotId) {
+    const wrap = el(tag, "ad " + kind);
+    const ins = document.createElement("ins");
+    ins.className = "adsbygoogle";
+    ins.style.display = "block";
+    ins.setAttribute("data-ad-client", AD_CONFIG.adsenseClient);
+    ins.setAttribute("data-ad-slot", slotId);
+    ins.setAttribute("data-ad-format", "auto");
+    ins.setAttribute("data-full-width-responsive", "true");
+    wrap.append(ins);
+    setTimeout(() => { try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {} }, 50);
+    return wrap;
+  }
+  return el(tag, "ad " + kind, isRail ? "Ad · 300 × 250" : "Ad · 728 × 90");
+}
 
 /* ---------- Scoring (100% Real User Votes — Zero Dummy Seed Votes) ---------- */
 const items = (c) => (DATA.categories[c] || []);
@@ -356,7 +399,6 @@ function critic(it) {
   if (rs.length < 1) return null;
   return Math.round(rs.reduce((s, r) => s + points(r.rank), 0) / rs.length);
 }
-/* Strictly counts real votes stored in tally (ignores it.seedVotes & it.seedUp completely!) */
 const votesOf = (it) => (tally[it.id] || {}).n || 0;
 const upsOf = (it) => (tally[it.id] || {}).up || 0;
 function player(it) {
@@ -471,7 +513,7 @@ function renderHome() {
   else wp.append(el("div", "empty", "New articles publish every three days."));
   v.append(sp);
 
-  const adw = el("div", "wrap"); adw.append(el("div", "ad wide", "Ad · 728 × 90")); v.append(adw);
+  const adw = el("div", "wrap"); adw.append(renderAdSlot("wide")); v.append(adw);
   const [s3, w3] = section("About the rankings"); w3.append(faqNode(HOME_FAQ)); v.append(s3);
 
   setLD([
@@ -558,7 +600,7 @@ function renderCategory(id) {
     row.append(head);
     if (isOpen) row.append(detailNode(id, it));
     list.append(row);
-    if (idx === 2 && shown.length > 3) list.append(el("li", "ad inline", "Ad · 728 × 90"));
+    if (idx === 2 && shown.length > 3) list.append(renderAdSlot("inline", "li"));
   });
   main.append(list);
 
@@ -566,7 +608,7 @@ function renderCategory(id) {
   const ol = el("ol");
   ["Each day we compile rankings from GTA 6 guide sites and creator testing videos (lap times, TTK, and $/hr).", "A #1 spot is worth 100 points, and each spot lower is worth 6 fewer, down to 40. The critic score is the average across sources.", "Players vote on each item (Worth it vs. Skip it) with zero dummy votes.", "Overall averages the Critic and Player scores when both exist."].forEach(t => ol.append(el("li", "", t)));
   box1.append(ol); box1.append(link("#methodology", "", "Full methodology →"));
-  aside.append(box1, el("div", "ad rail", "Ad · 300 × 250"));
+  aside.append(box1, renderAdSlot("rail"));
   lay.append(main, aside); v.append(lay);
 
   const fq = catFaq(id);
@@ -617,10 +659,11 @@ function detailNode(id, it) {
   }
   const n = votesOf(it);
   vbox.append(btns);
+  const modeLabel = sharedVotesActive ? "Global Community Pool" : "Browser Vote";
   if (n === 0) {
     vbox.append(el("small", "", "0 user votes cast yet — be the first to vote and unlock the Player Score!"));
   } else {
-    vbox.append(el("small", "", "Live Player Score: " + player(it) + "% positive (" + upsOf(it) + " of " + n + " real " + (n === 1 ? "vote" : "votes") + ")."));
+    vbox.append(el("small", "", "Live Player Score (" + modeLabel + "): " + player(it) + "% positive (" + upsOf(it) + " of " + n + " real " + (n === 1 ? "vote" : "votes") + ")."));
   }
   right.append(vbox);
   d.append(left, right);
@@ -634,7 +677,7 @@ function renderNews() {
   const hero = el("section", "chero"), w = el("div", "wrap");
   const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › News");
   const sub = el("p", "sub"); sub.style.margin = "0"; sub.style.color = "var(--muted)";
-  sub.append("Tips, mechanics discoveries, and launch updates synced daily at 5:52 PM Central. Last sync " + fmtDate(DATA.meta.newsSynced) + ".");
+  sub.append("Breaking headlines, tips, and launch updates from the Command Center, synced daily at 5:52 PM Central. Last sync " + fmtDate(DATA.meta.newsSynced) + ".");
   w.append(crumbs, el("h1", "", "GTA 6 news and finds"), sub); hero.append(w); v.append(hero);
   const body = el("div", "wrap");
   const chips = el("div", "chips"); chips.style.marginBottom = "14px";
@@ -884,14 +927,15 @@ function renderAbout() {
     ["How the site updates", ["Our tracking system monitors high-engagement creator test videos, cross-references published guide rankings, updates scores and news at 5:52 PM Central daily, and publishes multi-source feature guides every 3 days."]]
   ]);
   const sched = el("div", "sched");
-  [["Rankings", "Daily, 5:52 PM Central", "Tracks high-engagement creator video tests and guide-site rankings to recalculate critic scores and add new items."], ["News", "Daily, 5:52 PM Central", "Logs new community finds and patch notes with Confirmed, Reported, or Disputed verification badges."], ["Articles", "Every 3 days", "Publishes an original, cited breakdown when at least 3 verified sources cover a new meta topic."]].forEach(([h, when, what]) => {
+  [["Rankings", "Daily, 5:52 PM Central", "Tracks high-engagement creator video tests and guide-site rankings to recalculate critic scores and add new items."], ["News", "Daily, 5:52 PM Central", "Logs breaking Command Center headlines, community finds, and patch notes with Confirmed, Reported, or Disputed badges."], ["Articles", "Every 3 days", "Publishes an original, cited breakdown when at least 3 verified sources cover a new meta topic."]].forEach(([h, when, what]) => {
     const b = el("div", "box"); b.append(el("h3", "", h), el("p", "", when), el("p", "", what)); sched.append(b);
   });
   body.append(sched); setLD([]);
 }
 
-/* ---------- 100% Real Votes (No Dummy Seed Votes) ---------- */
+/* ---------- 100% Real Votes (LocalStorage + Optional Global Supabase Sync) ---------- */
 function rebuildTallyFromMyVotes() {
+  if (sharedVotesActive) return;
   const t = {};
   for (const [k, val] of Object.entries(myVotes)) {
     if (val === 1 || val === -1) {
@@ -899,6 +943,29 @@ function rebuildTallyFromMyVotes() {
     }
   }
   tally = t;
+}
+
+async function fetchGlobalSupabaseVotes() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return;
+  try {
+    const r = await fetch(SUPABASE_URL + "/rest/v1/item_votes?select=voter_id,item_id,vote", {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+    });
+    if (r.ok) {
+      const rows = await r.json();
+      const t = {};
+      rows.forEach(row => {
+        if (row.vote !== 1 && row.vote !== -1) return;
+        t[row.item_id] = t[row.item_id] || { up: 0, n: 0 };
+        t[row.item_id].n++;
+        if (row.vote === 1) t[row.item_id].up++;
+        if (row.voter_id === uid) myVotes[row.item_id] = row.vote;
+      });
+      tally = t;
+      sharedVotesActive = true;
+      if (DATA) render();
+    }
+  } catch (e) {}
 }
 
 async function startVotes() {
@@ -914,46 +981,45 @@ async function startVotes() {
     votesOn = true;
   } catch (e) { votesOn = true; }
 
-  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-    try {
-      const r = await fetch(SUPABASE_URL + "/rest/v1/item_votes?select=voter_id,item_id,vote", {
-        headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
-      });
-      if (r.ok) {
-        const rows = await r.json();
-        const t = {};
-        rows.forEach(row => {
-          if (row.vote !== 1 && row.vote !== -1) return;
-          t[row.item_id] = t[row.item_id] || { up: 0, n: 0 };
-          t[row.item_id].n++;
-          if (row.vote === 1) t[row.item_id].up++;
-          if (row.voter_id === uid) myVotes[row.item_id] = row.vote;
-        });
-        tally = t;
-        if (DATA) render();
-      }
-    } catch (e) {}
-  }
+  await fetchGlobalSupabaseVotes();
 }
 
 function castVote(id, val) {
+  const prev = myVotes[id] || 0;
   const next = Object.assign({}, myVotes);
   if (next[id] === val) delete next[id]; else next[id] = val;
+  const current = next[id] || 0;
   myVotes = next;
-  rebuildTallyFromMyVotes();
+
+  if (sharedVotesActive) {
+    tally[id] = tally[id] || { up: 0, n: 0 };
+    if (prev !== 0) { tally[id].n = Math.max(0, tally[id].n - 1); if (prev === 1) tally[id].up = Math.max(0, tally[id].up - 1); }
+    if (current !== 0) { tally[id].n++; if (current === 1) tally[id].up++; }
+  } else {
+    rebuildTallyFromMyVotes();
+  }
+
   try { localStorage.setItem("metacenter_real_votes_v2", JSON.stringify(myVotes)); } catch (e) {}
   render();
+
   if (SUPABASE_URL && SUPABASE_ANON_KEY && uid) {
-    fetch(SUPABASE_URL + "/rest/v1/item_votes", {
-      method: "POST",
-      headers: {
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: "Bearer " + SUPABASE_ANON_KEY,
-        "Content-Type": "application/json",
-        Prefer: "resolution=merge-duplicates"
-      },
-      body: JSON.stringify({ voter_id: uid, item_id: id, vote: next[id] || 0 })
-    }).catch(() => {});
+    if (current === 0) {
+      fetch(SUPABASE_URL + "/rest/v1/item_votes?voter_id=eq." + encodeURIComponent(uid) + "&item_id=eq." + encodeURIComponent(id), {
+        method: "DELETE",
+        headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+      }).then(() => fetchGlobalSupabaseVotes()).catch(() => {});
+    } else {
+      fetch(SUPABASE_URL + "/rest/v1/item_votes", {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: "Bearer " + SUPABASE_ANON_KEY,
+          "Content-Type": "application/json",
+          Prefer: "resolution=merge-duplicates"
+        },
+        body: JSON.stringify({ voter_id: uid, item_id: id, vote: current })
+      }).then(() => fetchGlobalSupabaseVotes()).catch(() => {});
+    }
   }
 }
 
