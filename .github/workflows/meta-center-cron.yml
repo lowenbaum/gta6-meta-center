@@ -2,50 +2,33 @@ name: Meta Center 5:52 PM Central Daily Refresh
 
 on:
   schedule:
-    # 5:52 PM America/Chicago (23:52 UTC in standard time)
-    - cron: "52 23 * * *"
+    - cron: '52 22 * * *'
   workflow_dispatch:
 
-jobs:
-  refresh-rankings-and-news:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+permissions:
+  contents: write
 
-      - name: Setup Node.js 20
+jobs:
+  refresh-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
-      - name: Run 5:52 PM Autonomous YouTube Discovery & Refresh
-        continue-on-error: true
+      - name: Run Beat Six Daily Refresh
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: |
-          if [ -f "scripts/daily-refresh.mjs" ]; then
-            node scripts/daily-refresh.mjs || true
-          else
-            echo "Warning: scripts/daily-refresh.mjs not found at expected path."
-          fi
+        run: node scripts/daily-refresh.mjs
 
-      - name: Commit updated data.json
+      - name: Commit and push updated data.json
         run: |
-          git config user.name "Meta Center Editorial"
-          git config user.email "editorial@metacenter.local"
-          if [ -f "data.json" ]; then
-            git add data.json
-            if ! git diff --staged --quiet; then
-              git commit -m "chore: daily 5:52 PM CST rankings & news refresh" || true
-              git pull --rebase origin main || true
-              git push origin HEAD:main || true
-            else
-              echo "No changes to data.json on this run."
-            fi
-          fi
+          git config user.name "Beat Six Bot"
+          git config user.email "bot@beatsix.local"
+          git add data.json
+          git diff --staged --quiet || (git commit -m "chore: daily content & news refresh" && git push)
