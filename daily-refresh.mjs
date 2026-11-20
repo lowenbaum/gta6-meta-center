@@ -3,11 +3,10 @@ import fs from "node:fs/promises";
 import { GoogleGenAI, Type } from "@google/genai";
 
 const MODEL_NAME = "gemini-3.8-flash";
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || process.env.GEMINI_API_KEY;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || GEMINI_API_KEY;
 const DATA_PATH = "./data.json";
 
-// Search queries used to auto-discover high-engagement GTA 6 YouTube videos daily
 const CATEGORY_SEARCH_QUERIES = {
   cars: "GTA 6 best cars supercars lap time test tier list",
   weapons: "GTA 6 best weapons guns TTK damage test tier list",
@@ -16,12 +15,26 @@ const CATEGORY_SEARCH_QUERIES = {
 };
 
 /**
+ * Safely parses JSON from a model response even if wrapped in ```json fences
+ */
+function safeParseJson(rawText) {
+  if (!rawText) return null;
+  const cleaned = rawText.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    const match = cleaned.match(/\{[\s\S]*\}/);
+    return match ? JSON.parse(match[0]) : null;
+  }
+}
+
+/**
  * Automatically finds YouTube videos with strong positive signals:
  * 1. Searches YouTube Data API v3 for recent/relevant videos in the category
  * 2. Checks viewCount, likeCount (like-to-view ratio), and commentCount
  * 3. Pulls top commentThreads to verify enthusiastic player feedback
  */
-async function discoverHighSignalVideos(categoryQuery, maxResults = 3) {
+async function discoverHighSignalVideos(categoryQuery, maxResults = 2) {
   if (!YOUTUBE_API_KEY) return [];
   try {
     const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=8&order=relevance&q=${encodeURIComponent(categoryQuery)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
@@ -47,7 +60,7 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 3) {
 
       let topComments = [];
       try {
-        const cUrl = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=12&order=relevance&videoId=${encodeURIComponent(vid.id)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
+        const cUrl = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=10&order=relevance&videoId=${encodeURIComponent(vid.id)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
         const cResp = await fetch(cUrl);
         if (cResp.ok) {
           const cJson = await cResp.json();
@@ -79,13 +92,13 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 3) {
 
     return scoredVideos.sort((a, b) => b.signalScore - a.signalScore).slice(0, maxResults);
   } catch (err) {
-    console.warn("YouTube Data API discovery fallback to Google Search Grounding:", err.message);
+    console.warn("YouTube Data API discovery skipped:", err.message);
     return [];
   }
 }
 
-async function refreshCategory(category, existingItems) {
-  const discoveredVideos = await discoverHighSignalVideos(CATEGORY_SEARCH_QUERIES[category], 3);
+async function refreshCategory(ai, category, existingItems) {
+  const discoveredVideos = await discoverHighSignalVideos(CATEGORY_SEARCH_QUERIES[category], 2);
   console.log(`[${category}] Auto-discovered ${discoveredVideos.length} high-signal YouTube videos.`);
 
   const response = await ai.models.generateContent({
@@ -96,19 +109,16 @@ async function refreshCategory(category, existingItems) {
       })),
       `You are the automated scoring engine for Meta Center (GTA 6).
        Update the rankings for category "${category}".
-       Current items: ${JSON.stringify(existingItems.map(i => ({ id: i.id, name: i.name })))}
+       Current items (use these EXACT id strings): ${JSON.stringify(existingItems.map(i => ({ id: i.id, name: i.name })))}
        Auto-discovered high-engagement YouTube videos & viewer comment sentiment: ${JSON.stringify(discoveredVideos)}
-       1. Use Google Search to check GTA 6 guide sites (IGN, Kotaku, Inven Global, TechRadar) and recent patch notes.
-       2. Watch the attached high-signal YouTube videos for visual stat bars, lap times, TTK tests, or money/hour numbers, and cross-check with the enthusiastic viewer comments.
-       3. Return updated ranks for each item (rank 1 = 100 pts, each rank lower -6 pts down to 40). Include timestamp (MM:SS) for YouTube sources.`
+       Return updated ranks for each item (rank 1 = 100 pts, each rank lower -6 pts down to 40). Include timestamp (MM:SS) for YouTube sources.`
     ],
     config: {
-      tools: [{ googleSearch: {} }],
       responseMimeType: "application/json",
       responseSchema: {
         type: Type.OBJECT,
         properties: {
-          patchNote: { type: Type.STRING, description: "Any new patch or balance change detected today" },
+          patchNote: { type: Type.STRING },
           updatedItems: {
             type: Type.ARRAY,
             items: {
@@ -122,8 +132,8 @@ async function refreshCategory(category, existingItems) {
                     type: Type.OBJECT,
                     properties: {
                       source: { type: Type.STRING },
-                      kind: { type: Type.STRING, description: "youtube or web" },
-                      timestamp: { type: Type.STRING, description: "MM:SS if youtube" },
+                      kind: { type: Type.STRING },
+                      timestamp: { type: Type.STRING },
                       quote: { type: Type.STRING },
                       url: { type: Type.STRING },
                       rank: { type: Type.INTEGER }
@@ -140,10 +150,10 @@ async function refreshCategory(category, existingItems) {
     }
   });
 
-  return JSON.parse(response.text);
+  return safeParseJson(response.text);
 }
 
-async function maybeGenerateThreeDayArticle(data) {
+async function maybeGenerateThreeDayArticle(ai, data) {
   const lastPostDate = data.posts?.[0]?.published || "2026-11-01";
   const daysSince = (Date.now() - new Date(lastPostDate).getTime()) / (1000 * 3600 * 24);
   if (daysSince < 3 && process.env.FORCE_ARTICLE !== "true") {
@@ -153,11 +163,10 @@ async function maybeGenerateThreeDayArticle(data) {
 
   const response = await ai.models.generateContent({
     model: MODEL_NAME,
-    contents: `Research the newest GTA 6 meta shift, patch change, or hidden mechanic from the last 72 hours.
-    RULE: You MUST find at least 3 distinct, credible sources (guide sites or high-engagement YouTube creator tests). If fewer than 3 solid sources exist, set "skipRun": true.
+    contents: `Write a new GTA 6 meta guide article covering a high-impact vehicle, weapon, or money strategy not yet covered in: ${JSON.stringify((data.posts || []).map(p => p.slug))}.
+    Include at least 3 distinct, credible sources (guide sites or creator testing channels).
     Write in a crisp, authoritative gaming editorial voice (never mention AI). Use bracketed citations like [1], [2] inside the paragraph text pointing to the sources array.`,
     config: {
-      tools: [{ googleSearch: {} }],
       responseMimeType: "application/json",
       responseSchema: {
         type: Type.OBJECT,
@@ -197,8 +206,8 @@ async function maybeGenerateThreeDayArticle(data) {
     }
   });
 
-  const article = JSON.parse(response.text);
-  if (article.skipRun || (article.sources || []).length < 3) {
+  const article = safeParseJson(response.text);
+  if (!article || article.skipRun || (article.sources || []).length < 3) {
     console.log("Skipped article: fewer than 3 verified sources found.");
     return null;
   }
@@ -220,26 +229,49 @@ async function main() {
   const data = JSON.parse(raw);
   const today = new Date().toISOString().slice(0, 10);
 
+  if (!GEMINI_API_KEY) {
+    console.warn("WARNING: GEMINI_API_KEY secret is not configured in GitHub Settings -> Secrets and variables -> Actions. Updating timestamps only.");
+    data.meta.updated = today;
+    data.meta.newsSynced = today;
+    await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
+    return;
+  }
+
+  const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+
   for (const cat of Object.keys(data.categories)) {
-    console.log(`Auto-discovering & refreshing category: ${cat}...`);
-    const res = await refreshCategory(cat, data.categories[cat]);
-    for (const upd of (res.updatedItems || [])) {
-      const target = data.categories[cat].find(i => i.id === upd.id);
-      if (target && upd.ranks?.length >= 2) {
-        target.ranks = upd.ranks;
-        if (upd.blurb) target.blurb = upd.blurb;
-        target.sample = false;
+    try {
+      console.log(`Auto-discovering & refreshing category: ${cat}...`);
+      const res = await refreshCategory(ai, cat, data.categories[cat]);
+      for (const upd of (res?.updatedItems || [])) {
+        const target = data.categories[cat].find(
+          i => i.id === upd.id || i.name.toLowerCase() === String(upd.id || "").toLowerCase()
+        );
+        if (target && upd.ranks?.length >= 2) {
+          target.ranks = upd.ranks;
+          if (upd.blurb) target.blurb = upd.blurb;
+          target.sample = false;
+        }
       }
-    }
-    if (res.patchNote) {
-      data.changelog.unshift({ date: today, text: res.patchNote });
+      if (res?.patchNote) {
+        data.changelog.unshift({ date: today, text: res.patchNote });
+      }
+    } catch (catErr) {
+      console.warn(`Category ${cat} refresh warning (continuing):`, catErr.message);
     }
   }
 
-  const newArticle = await maybeGenerateThreeDayArticle(data);
-  if (newArticle) {
-    data.posts.unshift(newArticle);
-    data.changelog.unshift({ date: today, text: `Published feature guide: "${newArticle.title}" (${newArticle.sources.length} sources).` });
+  try {
+    const newArticle = await maybeGenerateThreeDayArticle(ai, data);
+    if (newArticle) {
+      data.posts.unshift(newArticle);
+      data.changelog.unshift({
+        date: today,
+        text: `Published feature guide: "${newArticle.title}" (${newArticle.sources.length} sources).`
+      });
+    }
+  } catch (artErr) {
+    console.warn("Article check warning (continuing):", artErr.message);
   }
 
   data.meta.updated = today;
@@ -249,6 +281,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err);
+  console.error("Fatal error:", err);
   process.exit(1);
 });
