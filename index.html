@@ -1,18 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100a1b">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Meta Center Editorial Staff">
 <title>Meta Center — GTA 6 Rankings, Creator Scores & News</title>
 <meta name="description" id="metadesc" content="The best cars, weapons, money methods and gear in GTA 6, ranked by critic scores from guide sites, creator tests, and player votes. Plus daily GTA 6 news and sourced articles.">
+
+<!-- Open Graph / Social Discovery Metadata -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Meta Center">
+<meta property="og:title" content="Meta Center — GTA 6 Rankings, Creator Scores & News">
+<meta property="og:description" content="Side-by-side Critic & Creator scores vs. Live Player Votes for every top car, weapon, money method, and upgrade in Grand Theft Auto VI.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meta Center — GTA 6 Meta Aggregator">
+<meta name="twitter:description" content="Track the best cars, weapons, money methods, and gear in GTA 6 with verified creator lap times, TTK tests, and community ratings.">
+
+<!-- Typography Preconnects & Stylesheets -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap">
 <style>
-/* Leonida sunset, single dark look by choice. Home: search, latest news, top 5 per category, latest articles. Category pages: quick answer, ranked rows (critic coral, player teal), side rail. News and Articles are their own routes. */
+/*
+ * ==========================================================================
+ * META CENTER — LEONIDA SUNSET DESIGN SYSTEM & ARCHITECTURE
+ * ==========================================================================
+ * Visual Identity: Single dark-mode editorial interface inspired by Vice City
+ * and Leonida twilight palettes.
+ *
+ * Route Architecture:
+ * - Home (#): Instant search, Command Center news strip, Top 5 per category,
+ *   featured multi-source articles, and methodology FAQ.
+ * - Category Pages (#cars, #weapons, #money, #gear): Multi-source consensus
+ *   Quick Answer box, sortable ranked rows (Critic Coral vs. Player Teal),
+ *   expandable per-source breakdowns with video timestamps, and side rail.
+ * - News (#news) & Articles (#articles / #a-slug): Dedicated editorial routes.
+ * - Unlisted Importer (#sync): Internal source discovery & JSON export tool.
+ */
 :root {
   color-scheme: dark;
-  --bg: #100a1b; --panel: #1a1229; --panel-2: #241838; --line: #33264a; --text: #fff4f8; --muted: #a898bb; --soft: #e0d5ea;
-  --orange: #ffa645; --coral: #ff6a5c; --pink: #ff3f8e; --violet: #a43dff; --teal: #26d6c6;
+  /* Core Surface & Elevation Tokens */
+  --bg: #100a1b;
+  --panel: #1a1229;
+  --panel-2: #241838;
+  --line: #33264a;
+  /* Typography Hierarchy Tokens */
+  --text: #fff4f8;
+  --muted: #a898bb;
+  --soft: #e0d5ea;
+  /* Brand Accent & Gradient Tokens */
+  --orange: #ffa645;
+  --coral: #ff6a5c; --pink: #ff3f8e; --violet: #a43dff; --teal: #26d6c6;
   --sunset: linear-gradient(95deg, var(--orange) 0%, var(--coral) 30%, var(--pink) 62%, var(--violet) 100%);
   --critic: #ff7a59; --player: #26d6c6;
   --tier-s: #ffc94a; --tier-a: #ff7a59; --tier-b: #26d6c6; --tier-c: #a898bb;
