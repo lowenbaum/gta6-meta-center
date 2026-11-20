@@ -82,7 +82,6 @@ p { margin: 0 0 1em; }
 .hsearch input:focus { border-color: var(--aqua); outline: none; box-shadow: 0 0 0 3px rgba(34, 228, 211, .25); }
 .hsearch .ico { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--haze-2); pointer-events: none; }
 .hsearch kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font: 500 .75rem var(--body); color: var(--haze-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
-body.at-home .hsearch { visibility: hidden; }
 .pillars { display: flex; gap: 4px; margin-left: auto; }
 .pillars a { display: flex; align-items: center; gap: 8px; color: var(--haze); text-decoration: none; font-weight: 500; padding: 8px 14px; border-radius: 999px; }
 .pillars a:hover { color: var(--foam); background: var(--night-2); }
@@ -90,51 +89,43 @@ body.at-home .hsearch { visibility: hidden; }
 .pillars a i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 .pillars svg { display: none; }
 
-/* ---------- Hero: the sunset search ---------- */
-.hero { position: relative; overflow: hidden; padding: 64px 0 150px; isolation: isolate; }
-.hero::before { /* sky */
-  content: ""; position: absolute; inset: 0; z-index: -2;
-  background: linear-gradient(180deg, var(--night) 0%, #2b0f52 55%, #4a1569 100%);
+/* ---------- Home ---------- */
+.intro { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 36px 0 26px; margin-bottom: 30px; }
+.intro::after { /* the one sunset stripe on the page */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--flamingo), var(--sunset) 50%, var(--aqua));
 }
-.sun {
-  position: absolute; z-index: -1; left: 50%; bottom: calc(min(640px, 150vw) * -0.62); width: min(640px, 150vw); aspect-ratio: 1; transform: translateX(-50%);
-  border-radius: 50%;
-  background: linear-gradient(180deg, var(--sun-top) 2%, var(--sunset) 16%, var(--flamingo) 40%);
-  -webkit-mask: linear-gradient(180deg, #000 0 21%, transparent 21% 22.5%, #000 22.5% 26%, transparent 26% 28.2%, #000 28.2% 31%, transparent 31% 34%, #000 34% 36%, transparent 36% 40%, #000 40% 41.5%, transparent 41.5%);
-          mask: linear-gradient(180deg, #000 0 21%, transparent 21% 22.5%, #000 22.5% 26%, transparent 26% 28.2%, #000 28.2% 31%, transparent 31% 34%, #000 34% 36%, transparent 36% 40%, #000 40% 41.5%, transparent 41.5%);
-  opacity: .9; animation: rise 1.4s cubic-bezier(.2, .7, .2, 1) both;
-}
-.hero::after { /* horizon */
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; z-index: -1;
-  background: linear-gradient(90deg, transparent, var(--aqua) 20%, var(--aqua) 80%, transparent);
-  box-shadow: 0 0 18px 2px rgba(34, 228, 211, .6);
-}
-@keyframes rise { from { transform: translate(-50%, 90px); opacity: 0; } }
-.hero .wrap { text-align: center; }
-.hero h1 { max-width: 14ch; margin: 0 auto 16px; text-shadow: 0 2px 0 rgba(26, 11, 54, .5); }
-.hero .lede { max-width: 56ch; margin: 0 auto 32px; color: var(--foam); opacity: .85; font-size: 1.08rem; }
-.bigsearch { position: relative; max-width: 700px; margin: 0 auto; display: flex; background: var(--foam); border-radius: 999px; padding: 6px; box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .6), 0 0 0 6px rgba(255, 61, 139, .25); }
-.bigsearch input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--night); padding: 0 22px; font-size: 1.15rem; height: 56px; }
-.bigsearch input::placeholder { color: #7a6a9a; }
-.bigsearch input:focus { outline: none; }
-.bigsearch button { border: 0; background: var(--night); color: var(--foam); border-radius: 999px; padding: 0 28px; font-weight: 700; cursor: pointer; }
-.bigsearch button:hover { background: var(--flamingo); }
-.asks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 22px auto 0; max-width: 760px; }
-.ask { background: rgba(26, 11, 54, .55); border: 1px solid rgba(251, 243, 255, .2); color: var(--foam); border-radius: 999px; padding: 7px 15px; font-size: .92rem; text-decoration: none; }
-.ask:hover { border-color: var(--aqua); color: var(--foam); background: rgba(26, 11, 54, .85); }
-
-/* ---------- Three doors ---------- */
-.doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 56px auto 0; }
-.door { padding: 4px 28px 8px; border-left: 3px solid var(--c); }
-.door h2 a { color: var(--foam); text-decoration: none; }
-.door h2 a:hover { color: var(--c); }
-.door > p { color: var(--haze); margin: 6px 0 16px; font-size: .96rem; }
-.door ul { list-style: none; margin: 0; padding: 0; }
-.door li + li { border-top: 1px solid var(--line); }
-.door li a { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; color: var(--foam); text-decoration: none; }
-.door li a:hover { color: var(--c); }
-.door li b { font-weight: 400; }
-.door li span { color: var(--haze-2); font-size: .88rem; flex: none; }
+.intro h1 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
+.intro p { color: var(--haze); margin: 8px 0 0; max-width: 60ch; }
+.intro .stamp { color: var(--haze-2); font-size: .9rem; white-space: nowrap; }
+.home-top { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: start; }
+.cats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cat { background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px 20px 8px; }
+.cat-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.cat-h h2 { font-size: 1.3rem; }
+.cat-h h2 a { color: var(--foam); text-decoration: none; }
+.cat-h h2 a:hover { color: var(--flamingo); }
+.cat-h > a { font-size: .9rem; }
+.mrows { list-style: none; margin: 0; padding: 0; }
+.mrows a { display: grid; grid-template-columns: 16px 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); color: var(--foam); text-decoration: none; }
+.mrows li:first-child a { border-top: 0; }
+.mrows .n { color: var(--haze-2); font-size: .85rem; text-align: right; }
+.mrows b { display: block; font-weight: 500; line-height: 1.25; }
+.mrows small { color: var(--haze-2); font-size: .82rem; }
+.mrows .sc { font: italic 800 1.15rem/1 var(--display); color: var(--t); }
+.mrows .sc.thin { color: var(--haze-2); font-size: .9rem; font-style: normal; font-weight: 400; }
+.mrows a:hover b { color: var(--flamingo); }
+.rail { position: sticky; top: 92px; }
+.rail .cat-h { margin-bottom: 4px; }
+.feed { list-style: none; padding: 0; margin: 0; }
+.feed li { padding: 12px 0; border-top: 1px solid var(--line); }
+.feed li:first-child { border-top: 0; padding-top: 6px; }
+.feed .nk { display: flex; gap: 10px; font-size: .8rem; color: var(--haze-2); margin-bottom: 3px; }
+.feed a { color: var(--foam); text-decoration: none; font-weight: 500; line-height: 1.35; }
+.feed a:hover { color: var(--aqua); }
+.feed .src { font-size: .82rem; color: var(--haze-2); margin-top: 3px; }
+.lists.three { grid-template-columns: repeat(3, 1fr); }
+.lists.three .lcard { grid-column: auto; }
 
 /* ---------- Sections ---------- */
 .block { padding: 56px 0 8px; }
@@ -265,15 +256,6 @@ dl.facts dd { margin: 0; }
 .srcs q { display: block; color: var(--haze); margin-top: 4px; }
 .vid { display: inline-block; font-size: .78rem; padding: 1px 8px; border-radius: 99px; background: rgba(255, 61, 139, .18); color: #ff8fbb; margin-left: 6px; vertical-align: 1px; }
 
-/* Home meta snapshot */
-.snap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.snap section { border-top: 3px solid var(--flamingo); padding-top: 14px; }
-.snap h3 a { color: var(--foam); text-decoration: none; }
-.snap h3 a:hover { color: var(--flamingo); }
-.snap ol { list-style: none; margin: 12px 0 0; padding: 0; }
-.snap li a { display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; align-items: center; padding: 7px 0; color: var(--foam); text-decoration: none; }
-.snap li a:hover b { color: var(--flamingo); }
-.snap li small { color: var(--haze-2); }
 
 /* ---------- News + articles ---------- */
 .news { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 36px; }
@@ -322,7 +304,9 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
 @media (max-width: 1020px) {
   .meta-lay, .sres { grid-template-columns: 1fr; }
   .detail, .side { position: static; }
-  .snap { grid-template-columns: repeat(2, 1fr); }
+  .home-top { grid-template-columns: 1fr; }
+  .rail { position: static; }
+  .lists.three { grid-template-columns: 1fr 1fr; }
   .lists { grid-template-columns: repeat(2, 1fr); }
   .lcard, .lcard.big { grid-column: span 1; grid-row: auto; }
   .lcard.big { grid-column: span 2; }
@@ -335,19 +319,14 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
   .top .wrap { height: 60px; gap: 12px; }
   .logo svg { height: 38px; }
   .hsearch kbd { display: none; }
-  body.at-home .hsearch { display: none; }
   .pillars { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 30; background: rgba(26, 11, 54, .97); border-top: 1px solid var(--line); padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); justify-content: space-around; }
   .pillars a { flex-direction: column; gap: 2px; padding: 6px 10px; font-size: .76rem; border-radius: 12px; }
   .pillars a i { display: none; }
   .pillars svg { display: block; width: 22px; height: 22px; color: var(--c); }
   .pillars a[aria-current="page"] { background: var(--dusk); }
-  .hero { padding: 44px 0 48px; }
-  .bigsearch input { font-size: 1rem; height: 50px; padding: 0 14px; }
-  .bigsearch button { padding: 0 18px; }
-  .asks .ask:nth-child(n+5) { display: none; }
-  .doors { grid-template-columns: 1fr; gap: 28px; margin-top: 40px; }
-  .door { padding: 0 0 0 18px; }
-  .snap, .news, .tips, .posts, .lists, .sync-grid { grid-template-columns: 1fr; }
+  .mrows li:nth-child(n+4) { display: none; } /* top 3 on phones keeps news within reach */
+  .intro { flex-direction: column; align-items: flex-start; gap: 6px; padding-top: 24px; }
+  .cats, .lists.three, .news, .tips, .posts, .lists, .sync-grid { grid-template-columns: 1fr; }
   .lcard.big { grid-column: auto; }
   .trow { grid-template-columns: 54px 1fr; min-height: 76px; }
   .tl { font-size: 1.7rem; }
@@ -715,74 +694,61 @@ function postCard(p) {
 
 /* ---------- Home ---------- */
 function renderHome() {
-  setMeta("Beat Six: search every GTA 6 guide, tip and tier list in one place", "Beat Six collects the best GTA 6 guides, creator tests and tips from across the web. Search any question, find what to do next, and see the current meta.");
+  setMeta("Beat Six: the GTA 6 meta, guides and news in one place", "The best GTA 6 cars, weapons, money methods and gear, ranked by guide sites, creator tests and player votes, plus checklists, guides and daily news.");
   const v = view();
-  const hero = el("section", "hero"), w = el("div", "wrap");
-  hero.append(el("div", "sun"));
-  const [form] = searchForm("bigsearch", "");
-  const b = el("button", "", "Search"); b.type = "submit"; form.append(b);
-  const asks = el("div", "asks");
-  ASKS.forEach(q => { const a = link("#search?q=" + encodeURIComponent(q), "ask", q); asks.append(a); });
-  w.append(el("h1", "", "Ask anything about GTA 6."),
-    el("p", "lede", "Beat Six pulls the best guides, creator tests and tips from across the web into one searchable place, so you get the answer without opening twenty tabs."),
-    form, asks);
-  hero.append(w); v.append(hero);
+  const iw = el("div", "wrap"), intro = el("section", "intro"), it = el("div");
+  it.append(el("h1", "", "The GTA 6 meta, sorted."),
+    el("p", "", "The best cars, weapons, money methods and gear, ranked by guide sites, creator tests and player votes. Plus what to do next and today's news."));
+  intro.append(it, el("span", "stamp", "Updated " + fmtDate(DATA.meta.updated)));
+  iw.append(intro); v.append(iw);
 
-  // Three doors: one per need
-  const doors = el("div", "wrap doors");
-  const door = (pillar, href, title, line, rows) => {
-    const d = el("section", "door"); d.style.setProperty("--c", "var(--p-" + pillar + ")");
-    const h = el("h2"); h.append(link(href, "", title)); d.append(h, el("p", "", line));
-    const ul = el("ul"); rows.forEach(([t, h2, side]) => { const li = el("li"), a = link(h2, "", ""); a.append(el("b", "", t)); if (side) a.append(el("span", "", side)); li.append(a); ul.append(li); });
-    d.append(ul); return d;
-  };
-  doors.append(
-    door("search", "#search", "Search", "Type a question, get the answer and the source it came from.",
-      ASKS.slice(0, 4).map(q => [q, "#search?q=" + encodeURIComponent(q), ""])),
-    door("discover", "#discover", "Discover", "Lists of what to do next, from your first hour to your first heist.",
-      LISTS.slice(0, 4).map(l => [l.title, "#list/" + l.id, l.entries.length + (l.kind === "checklist" ? " steps" : " picks")])),
-    door("meta", "#meta", "Meta", "Tier lists for every car, weapon, money method and upgrade.",
-      Object.keys(CATS).map(c => { const t = ranked(c)[0]; return [CATS[c].tab, "#meta/" + c, t ? "#1 " + t.name : ""]; }))
-  );
-  v.append(doors);
-
-  // Featured list
-  const feat = LISTS.find(l => l.id === "early-game") || LISTS[0];
-  if (feat) {
-    const [s, sw] = sectionBlock("New to Leonida? Start here", ["#discover", "All lists"]);
-    const grid = el("div", "lists");
-    grid.append(listCard(feat, true));
-    LISTS.filter(l => l !== feat).slice(0, 2).forEach(l => grid.append(listCard(l)));
-    sw.append(grid); v.append(s);
-  }
-
-  // Meta snapshot
-  const [sm, wm] = sectionBlock("Top of the meta right now", ["#meta", "Full tier lists"]);
-  const snap = el("div", "snap");
+  // Above the fold: the meta on the left, news on the right
+  const top = el("div", "wrap home-top"), cats = el("div", "cats");
   for (const c of Object.keys(CATS)) {
-    const sec = el("section"), h = el("h3"); h.append(link("#meta/" + c, "", CATS[c].tab));
-    const ol = el("ol");
-    ranked(c).slice(0, 3).forEach(it => {
-      const li = el("li"), a = link("#meta/" + c + "/" + it.id, "", "");
-      const nm = el("span"); nm.append(el("b", "", it.name), el("br"), el("small", "", it.type || ""));
-      const sc = combined(it);
-      a.append(tierBox(tierOf(sc), "xs"), nm, el("small", "", sc == null ? "" : String(sc)));
+    const box = el("section", "cat"), h = el("div", "cat-h"), h2 = el("h2");
+    h2.append(link("#meta/" + c, "", CATS[c].tab));
+    h.append(h2, link("#meta/" + c, "", "All " + items(c).length));
+    const ol = el("ol", "mrows");
+    ranked(c).slice(0, 5).forEach((x, n) => {
+      const sc = combined(x), t = tierOf(sc), li = el("li"), a = link("#meta/" + c + "/" + x.id);
+      a.style.setProperty("--t", tierVar(t));
+      const nm = el("span"); nm.append(el("b", "", x.name), el("small", "", x.type || ""));
+      a.append(el("span", "n", String(n + 1)), tierBox(t, "xs"), nm, el("span", "sc" + (sc == null ? " thin" : ""), sc == null ? "New" : String(sc)));
       li.append(a); ol.append(li);
     });
-    sec.append(h, ol); snap.append(sec);
+    box.append(h, ol); cats.append(box);
   }
-  wm.append(snap); v.append(sm);
+  const rail = el("aside", "rail"), rh = el("div", "cat-h");
+  rh.append(el("h2", "", "Latest news"), link("#news", "", "All " + news().length));
+  const feed = el("ul", "feed");
+  news().slice(0, 7).forEach(n => {
+    const li = el("li"), k = el("div", "nk");
+    k.append(el("span", "", shortDate(n.added)));
+    if (n.status) k.append(el("span", "status " + n.status, n.status[0].toUpperCase() + n.status.slice(1)));
+    const u = safeUrl(n.url);
+    li.append(k, u ? ext(u, n.title) : el("span", "", n.title));
+    if (n.source) li.append(el("div", "src", n.source));
+    feed.append(li);
+  });
+  rail.append(rh, feed);
+  top.append(cats, rail); v.append(top);
 
-  // News
-  const nl = news().slice(0, 4);
-  if (nl.length) {
-    const [sn, wn] = sectionBlock("Latest news and tips", ["#news", "All " + news().length + " stories"]);
-    const g = el("div", "news"); nl.forEach(n => g.append(newsCard(n))); wn.append(g); v.append(sn);
+  if (LISTS.length) {
+    const [s, w] = sectionBlock("What to do next", ["#discover", "All lists"]);
+    const g = el("div", "lists three");
+    LISTS.slice(0, 3).forEach(l => g.append(listCard(l)));
+    w.append(g); v.append(s);
+  }
+  const pl = posts().slice(0, 3);
+  if (pl.length) {
+    const [s, w] = sectionBlock("Latest articles", ["#articles", "All articles"]);
+    const g = el("div", "posts"); pl.forEach(p => g.append(postCard(p))); w.append(g); v.append(s);
   }
   const ad = el("div", "wrap"); ad.append(renderAdSlot("wide")); v.append(ad);
   const [sf, wf] = sectionBlock("About Beat Six"); wf.append(faqNode(HOME_FAQ)); v.append(sf);
   setLD([
     { "@type": "WebSite", name: SITE, potentialAction: { "@type": "SearchAction", target: location.origin + location.pathname + "#search?q={query}", "query-input": "required name=query" } },
+    ...Object.keys(CATS).map(c => ({ "@type": "ItemList", name: CATS[c].title, itemListElement: ranked(c).slice(0, 5).map((x, n) => ({ "@type": "ListItem", position: n + 1, name: x.name })) })),
     faqLD(HOME_FAQ)
   ]);
 }
@@ -1271,7 +1237,6 @@ function render() {
   const { parts, q } = parseRoute(), [p0, p1, p2] = parts;
   const pillar = ({ search: "search", guide: "search", discover: "discover", list: "discover", meta: "meta", methodology: "meta", news: "news", articles: "news" })[p0] || (p0 && p0.startsWith("a-") ? "news" : CATS[p0] ? "meta" : "");
   document.querySelectorAll("#pillars a").forEach(a => a.dataset.p === pillar ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-  document.body.classList.toggle("at-home", !p0);
   if (CATS[p0]) return renderMeta(p0, p1);            // old #cars style links
   switch (p0) {
     case undefined: return renderHome();
@@ -1300,7 +1265,7 @@ $("hsearch").addEventListener("submit", (e) => { e.preventDefault(); const q = $
 document.addEventListener("keydown", (e) => {
   if (e.key !== "/" || e.metaKey || e.ctrlKey || /input|textarea|select/i.test(document.activeElement.tagName)) return;
   e.preventDefault();
-  const big = document.querySelector(".bigsearch input, .sbar input");
+  const big = document.querySelector(".sbar input");
   (big || $("hq")).focus();
 });
 
