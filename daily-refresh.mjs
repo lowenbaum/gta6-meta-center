@@ -62,7 +62,7 @@ const HIGH_PRIORITY_BASELINE_NEWS = [
     source: "TGG & GameSpot Economy Guide",
     url: "https://www.gamespot.com",
     title: "Stripping GPS Trackers Before Visiting Port Gellhorn Chop Shops Boosts Payouts by 65%",
-    body: "Using a signal jammer or parking stolen luxury cars in covered alleys for 90 seconds before delivery prevents fence deductions and pushes solo payouts to \$40,000 per vehicle.",
+    body: "Using a signal jammer or parking stolen luxury cars in covered alleys for 90 seconds before delivery prevents fence deductions and pushes solo payouts to $40,000 per vehicle.",
     relevanceScore: 10,
     heroPriorityScore: 95,
     isTimelyHeroLead: true
@@ -87,8 +87,8 @@ const HIGH_PRIORITY_BASELINE_NEWS = [
     tag: "Heist Strategy",
     source: "IGN GTA 6 Wiki",
     url: "https://www.ign.com/wikis/gta-6",
-    title: "Swapping Stolen Cash Into Vehicle Trunks Bypasses the \$20,000 On-Foot Wallet Cap",
-    body: "While characters can only hold \$20,000 in pocket cash before needing an ATM, stashing duffel bags in a registered SUV trunk lets you chain three store robberies in a single night.",
+    title: "Swapping Stolen Cash Into Vehicle Trunks Bypasses the $20,000 On-Foot Wallet Cap",
+    body: "While characters can only hold $20,000 in pocket cash before needing an ATM, stashing duffel bags in a registered SUV trunk lets you chain three store robberies in a single night.",
     relevanceScore: 9,
     heroPriorityScore: 90,
     isTimelyHeroLead: true
@@ -140,7 +140,7 @@ const HIGH_PRIORITY_BASELINE_NEWS = [
     source: "Eurogamer",
     url: "https://www.eurogamer.net",
     title: "Sunken Smuggler Planes in the Grassrivers Respawn High-Tier Weapon Attachments Every 48 Hours",
-    body: "Diving near the southern mangrove markers yields free suppressors, thermal scopes, and \$8,500 in sealed contraband cases.",
+    body: "Diving near the southern mangrove markers yields free suppressors, thermal scopes, and $8,500 in sealed contraband cases.",
     relevanceScore: 8,
     heroPriorityScore: 84,
     isTimelyHeroLead: false
@@ -166,7 +166,7 @@ const HIGH_PRIORITY_BASELINE_NEWS = [
     source: "Inven Global",
     url: "https://www.invenglobal.com",
     title: "Reaching Trust Level 3 With Pawn Shop Fences Unlocks Bulk Jewelry Laundering",
-    body: "Selling \$50,000 worth of clean stolen watches and necklaces removes the daily fence cooldown and increases payout rates by 25%.",
+    body: "Selling $50,000 worth of clean stolen watches and necklaces removes the daily fence cooldown and increases payout rates by 25%.",
     relevanceScore: 8,
     heroPriorityScore: 82,
     isTimelyHeroLead: false
@@ -275,7 +275,7 @@ const HIGH_PRIORITY_BASELINE_POSTS = [
       {
         h: "How the 3-Tier Theft System Impacts Vehicle Value",
         p: [
-          "Before dropping \$1.1M online, remember that any stolen sports car can be permanently insured by registering its plates at a Pay 'n' Spray once you unlock the Key Cloner tool [3]."
+          "Before dropping $1.1M online, remember that any stolen sports car can be permanently insured by registering its plates at a Pay 'n' Spray once you unlock the Key Cloner tool [3]."
         ]
       }
     ],
@@ -295,13 +295,13 @@ const HIGH_PRIORITY_BASELINE_POSTS = [
       {
         h: "Why Early Cash Caps Force Smarter Laundering",
         p: [
-          "Inven Global and TGG's solo economy breakdowns confirm that carrying more than \$20,000 in unbanked pocket cash exposes you to heavy losses if arrested or wasted [1][2]. Chaining clean back-door store robberies with a suppressor and stashing extra cash in your SUV trunk lets you bank \$24,000 every 20 minutes with zero police dispatch [1].",
-          "Once mid-game chop shops open in Port Gellhorn, flipping high-end sports cars becomes the top solo earner at \$120,000+ per hour—provided you strip the GPS tracker before pulling into the bay [2][3]."
+          "Inven Global and TGG's solo economy breakdowns confirm that carrying more than $20,000 in unbanked pocket cash exposes you to heavy losses if arrested or wasted [1][2]. Chaining clean back-door store robberies with a suppressor and stashing extra cash in your SUV trunk lets you bank $24,000 every 20 minutes with zero police dispatch [1].",
+          "Once mid-game chop shops open in Port Gellhorn, flipping high-end sports cars becomes the top solo earner at $120,000+ per hour—provided you strip the GPS tracker before pulling into the bay [2][3]."
         ],
         list: [
-          "Clean Store Robbery Loop: ~\$72,000/hr (Early Game, Low Risk with Suppressor).",
-          "Port Gellhorn Chop Shop Flipping: ~\$125,000/hr (Mid Game, Requires Key Cloner).",
-          "Story Heist Setups & Finales: \$500,000+ per run (Late Game, High Risk)."
+          "Clean Store Robbery Loop: ~$72,000/hr (Early Game, Low Risk with Suppressor).",
+          "Port Gellhorn Chop Shop Flipping: ~$125,000/hr (Mid Game, Requires Key Cloner).",
+          "Story Heist Setups & Finales: $500,000+ per run (Late Game, High Risk)."
         ]
       }
     ],
@@ -322,7 +322,7 @@ const HIGH_PRIORITY_BASELINE_POSTS = [
         h: "Why the Carbine Rifle Rules All-Around Combat",
         p: [
           "Creative Bloq and GhillieMaster's combat testing demonstrate that GTA 6 rewards precision bursts over spray-and-pray fire [1][2]. The Carbine Rifle's tight first-three-shot grouping makes it effortless to land elbow disarm shots or instant headshots at 40 meters [1].",
-          "Crucially, while weapon unlocks are shared between Jason and Lucia, attachments and ammo stay with the character who purchased them—meaning your first \$5,000 should always go toward dual suppressors to delay police dispatch timers during robberies [3]."
+          "Crucially, while weapon unlocks are shared between Jason and Lucia, attachments and ammo stay with the character who purchased them—meaning your first $5,000 should always go toward dual suppressors to delay police dispatch timers during robberies [3]."
         ]
       }
     ],
@@ -469,7 +469,10 @@ const NEGATIVE_COMMENT_TERMS = /\b(fake|clickbait|patched|cap|lie|lying|speculat
 
 function safeParseJson(rawText) {
   if (!rawText || typeof rawText !== "string") return null;
-  const cleaned = rawText.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  const cleaned = rawText
+    .replace(new RegExp("^\\x60{3}(?:json)?\\s*", "i"), "")
+    .replace(new RegExp("\\s*\\x60{3}$", "i"), "")
+    .trim();
   try {
     return JSON.parse(cleaned);
   } catch {
@@ -727,7 +730,7 @@ async function refreshCommandCenterNews(existingNews, today) {
         [
           {
             text: `Context: Editor-in-Chief for Meta Center (Grand Theft Auto VI).
-Beat: \${beat.name} (preferred categories: \${beat.cats.join(", ")}).
+Beat: ${beat.name} (preferred categories: ${beat.cats.join(", ")}).
 Date: ${today}.
 Extract up to ${beat.targetCount} distinct, factual, high-signal GTA 6 news items, meta breakthroughs, or tested gameplay findings.
 Strict Quality & Hero Curation Rules:
@@ -798,10 +801,10 @@ async function refreshCategory(category, existingItems, today) {
   const expansionNeeded = Math.max(2, cfg.targetCatalogSize - existingItems.length);
 
   const liveWebResearch = await callGeminiGroundedSearch(
-    `As of \${today}, search the web and YouTube for the latest Grand Theft Auto VI (GTA 6) rankings, tier lists, creator testing, and guide site consensus for category: "\${category}".
+    `As of ${today}, search the web and YouTube for the latest Grand Theft Auto VI (GTA 6) rankings, tier lists, creator testing, and guide site consensus for category: "${category}".
     Evaluation criteria: ${cfg.searchFocus}.
-    Existing tracked items (\${existingItems.length}): \${JSON.stringify(itemList)}.
-    Identify at least \${Math.min(4, expansionNeeded)} additional high-interest GTA 6 \${category} items tested by guide sites and YouTube creators that are not yet in the list above, along with real source names and verified URLs.`
+    Existing tracked items (${existingItems.length}): ${JSON.stringify(itemList)}.
+    Identify at least ${Math.min(4, expansionNeeded)} additional high-interest GTA 6 ${category} items tested by guide sites and YouTube creators that are not yet in the list above, along with real source names and verified URLs.`
   );
 
   const schema = {
@@ -855,7 +858,7 @@ async function refreshCategory(category, existingItems, today) {
     [
       {
         text: `Context: Benign software analysis of fictional video game item rankings for Meta Center (Grand Theft Auto VI).
-Update the rankings for category "\${category}" AND expand the catalog with at least \${Math.min(4, expansionNeeded)} newly discovered items from the research below.
+Update the rankings for category "${category}" AND expand the catalog with at least ${Math.min(4, expansionNeeded)} newly discovered items from the research below.
 Evaluation focus: ${cfg.searchFocus}.
 Preferred fact labels for each item: ${JSON.stringify(cfg.factKeys)}.
 Existing items: ${JSON.stringify(itemList)}
@@ -926,7 +929,7 @@ async function generateBatchCitedArticles(data, today) {
     try {
       console.log(`  [Article Desk] Researching "${desk.tag}" feature...`);
       const research = await callGeminiGroundedSearch(
-        `As of \${today}, research a fresh, specific, high-value Grand Theft Auto VI (GTA 6) analysis feature for our "\${desk.tag}" desk.
+        `As of ${today}, research a fresh, specific, high-value Grand Theft Auto VI (GTA 6) analysis feature for our "${desk.tag}" desk.
         Focus: ${desk.topicPrompt}
         Recent site headlines: ${JSON.stringify(recentHeadlines)}.
         Do NOT repeat any of these existing article titles: ${JSON.stringify([...existingTitles, ...generatedPosts.map((p) => p.title)])}.
