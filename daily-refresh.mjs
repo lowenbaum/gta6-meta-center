@@ -9,12 +9,11 @@ const DATA_PATH = "./data.json";
 
 const CATEGORY_SEARCH_QUERIES = {
   cars: "GTA 6 best cars supercars lap time test tier list",
-  weapons: "GTA 6 best weapons guns tier list guide",
+  weapons: "GTA 6 best weapons guns tier list combat guide",
   money: "GTA 6 best money methods solo guide per hour",
   gear: "GTA 6 best gear upgrades tools key cloner guide"
 };
 
-// Explicit safety override so fictional GTA 6 gameplay (weapons, robberies, carjacking) isn't blocked
 const GAMING_SAFETY_SETTINGS = [
   { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
   { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
@@ -38,6 +37,39 @@ function safeParseJson(rawText) {
   }
 }
 
+// Pass 1: Live Web + YouTube Search Grounding (Plain text + grounding metadata so it never conflicts with JSON mode)
+async function callGeminiGroundedSearch(promptText) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+  try {
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: promptText }] }],
+        tools: [{ googleSearch: {} }],
+        safetySettings: GAMING_SAFETY_SETTINGS
+      })
+    });
+    const json = await resp.json();
+    if (!resp.ok || json.error) {
+      console.warn("Grounded search fallback note:", json.error?.message || resp.status);
+      return "";
+    }
+    const candidate = json.candidates?.[0];
+    const text = (candidate?.content?.parts || []).map(p => p.text || "").join("\n");
+    const chunks = candidate?.groundingMetadata?.groundingChunks || [];
+    const urls = chunks
+      .map(c => c.web ? `${c.web.title}: ${c.web.uri}` : null)
+      .filter(Boolean)
+      .join("\n");
+    return `${text}\n\nVerified Grounding URLs:\n${urls}`;
+  } catch (err) {
+    console.warn("Grounded search warning:", err.message);
+    return "";
+  }
+}
+
+// Pass 2: Strict JSON Schema Formatter
 async function callGeminiJson(parts, responseSchema) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
   const resp = await fetch(url, {
@@ -135,10 +167,9 @@ async function refreshCategory(category, existingItems) {
   const discoveredVideos = await discoverHighSignalVideos(CATEGORY_SEARCH_QUERIES[category], 2);
   console.log(`[${category}] Auto-discovered ${discoveredVideos.length} high-signal YouTube videos.`);
 
-  const itemList = existingItems.map(i => ({ id: i.id, name: i.name }));
+  const itemList = existingItems.map(i => ({ id: i.id, name: i.name, type: i.type }));
   const videoInsights = [];
 
-  // Process ONE video per request (API limit) with automatic fallback if age-restricted or blocked
   for (const vid of discoveredVideos) {
     const singleVideoSchema = {
       type: "OBJECT",
@@ -148,12 +179,12 @@ async function refreshCategory(category, existingItems) {
           items: {
             type: "OBJECT",
             properties: {
-              id: { type: "STRING" },
+              name: { type: "STRING" },
               rank: { type: "INTEGER" },
               timestamp: { type: "STRING" },
               quote: { type: "STRING" }
             },
-            required: ["id", "rank", "quote"]
+            required: ["name", "rank", "quote"]
           }
         }
       }
@@ -161,7 +192,7 @@ async function refreshCategory(category, existingItems) {
 
     const promptText = `Context: Benign software analysis of fictional in-game statistics and tier lists from the video game Grand Theft Auto VI.
     Category: "${category}".
-    Database items (use these EXACT id strings): ${JSON.stringify(itemList)}
+    Known database items: ${JSON.stringify(itemList)}
     Video: "${vid.title}" by ${vid.channel} (${vid.views} views, ${vid.likeRatio} likes).
     Extract the creator's item rankings (1 = best), MM:SS timestamps, and a 1-sentence testing quote.`;
 
@@ -173,7 +204,7 @@ async function refreshCategory(category, existingItems) {
           { text: promptText }
         ], singleVideoSchema);
       } catch (streamErr) {
-        console.log(`[${category}] Direct stream blocked for "${vid.title}" (${streamErr.message}) — falling back to chapters/description/comments.`);
+        console.log(`[${category}] Direct stream blocked for "${vid.title}" — using chapters/description/comments fallback.`);
       }
     }
 
@@ -187,7 +218,7 @@ async function refreshCategory(category, existingItems) {
           }
         ], singleVideoSchema);
       } catch (fbErr) {
-        console.warn(`[${category}] Fallback warning for "${vid.title}":`, fbErr.message);
+        console.warn(`[${category}] Fallback warning:`, fbErr.message);
       }
     }
 
@@ -200,17 +231,27 @@ async function refreshCategory(category, existingItems) {
     }
   }
 
-  // Final synthesis for the category combining discovered video insights + guide site consensus
+  // Pass 1: Live Google Search Grounding for the category
+  const liveWebResearch = await callGeminiGroundedSearch(
+    `Search the web and YouTube for the latest Grand Theft Auto VI (GTA 6) rankings, tier lists, creator testing, and guide site consensus for category: "${category}" (${CATEGORY_SEARCH_QUERIES[category]}).
+    Existing tracked items: ${JSON.stringify(itemList)}.
+    Identify updated rankings for existing items AND any top-tier newly discovered ${category} items worth adding, along with source names and URLs.`
+  );
+
+  // Pass 2: Synthesize into strict JSON (supports both updating existing items AND adding new items)
   const schema = {
     type: "OBJECT",
     properties: {
       patchNote: { type: "STRING" },
-      updatedItems: {
+      items: {
         type: "ARRAY",
         items: {
           type: "OBJECT",
           properties: {
-            id: { type: "STRING" },
+            id: { type: "STRING", description: "Existing id if matching, or new slug like cars-item-name" },
+            name: { type: "STRING" },
+            type: { type: "STRING" },
+            get: { type: "STRING" },
             blurb: { type: "STRING" },
             ranks: {
               type: "ARRAY",
@@ -218,7 +259,7 @@ async function refreshCategory(category, existingItems) {
                 type: "OBJECT",
                 properties: {
                   source: { type: "STRING" },
-                  kind: { type: "STRING" },
+                  kind: { type: "STRING", description: "youtube or web" },
                   timestamp: { type: "STRING" },
                   quote: { type: "STRING" },
                   url: { type: "STRING" },
@@ -228,7 +269,7 @@ async function refreshCategory(category, existingItems) {
               }
             }
           },
-          required: ["id", "ranks"]
+          required: ["id", "name", "ranks"]
         }
       }
     }
@@ -238,11 +279,65 @@ async function refreshCategory(category, existingItems) {
     {
       text: `Context: Benign software analysis of fictional video game item rankings for Meta Center (Grand Theft Auto VI).
       Update the rankings for category "${category}".
-      Current items (use these EXACT id strings): ${JSON.stringify(itemList)}
-      Extracted YouTube creator testing data: ${JSON.stringify(videoInsights)}
-      Return updated ranks for each item (rank 1 = 100 pts, each rank lower -6 pts down to 40, minimum 3 sources per item combining YouTube creators and guide sites).`
+      Existing items: ${JSON.stringify(itemList)}
+      Live Web Search Research: ${liveWebResearch}
+      Extracted YouTube Creator Data: ${JSON.stringify(videoInsights)}
+      Return updated ranks for each existing item AND include up to 2 newly discovered high-ranking items if supported by sources (minimum 3 sources per item combining YouTube creators and guide sites).`
     }
   ], schema);
+}
+
+async function refreshNewsAndSources(data) {
+  const existingTitles = (data.news || []).slice(0, 15).map(n => n.title);
+  const liveNewsSearch = await callGeminiGroundedSearch(
+    `Search for the latest GTA 6 (Grand Theft Auto VI) news, patch notes, beginner tips, vehicle/weapon discoveries, and community finds from the last 7 days.
+    Avoid duplicating these existing headlines: ${JSON.stringify(existingTitles)}.
+    Include source publication names and URLs.`
+  );
+
+  const newsSchema = {
+    type: "OBJECT",
+    properties: {
+      newFinds: {
+        type: "ARRAY",
+        items: {
+          type: "OBJECT",
+          properties: {
+            id: { type: "STRING" },
+            cat: { type: "STRING", description: "launch, tips, eggs, weapons, vehicles, items, or world" },
+            status: { type: "STRING", description: "confirmed, reported, or disputed" },
+            tag: { type: "STRING" },
+            source: { type: "STRING" },
+            url: { type: "STRING" },
+            title: { type: "STRING" },
+            body: { type: "STRING" }
+          },
+          required: ["id", "cat", "status", "source", "title", "body"]
+        }
+      },
+      newSourcesTracked: {
+        type: "ARRAY",
+        items: {
+          type: "OBJECT",
+          properties: {
+            name: { type: "STRING" },
+            url: { type: "STRING" },
+            kind: { type: "STRING", description: "youtube or web" }
+          },
+          required: ["name", "url", "kind"]
+        }
+      }
+    }
+  };
+
+  return await callGeminiJson([
+    {
+      text: `Context: Benign video game journalism news aggregation for Grand Theft Auto VI.
+      Based on this live search research:
+      ${liveNewsSearch}
+      Extract up to 3 new, non-duplicate GTA 6 news/tips finds (not already in ${JSON.stringify(existingTitles)}) and any new reputable guide or YouTube testing sources.`
+    }
+  ], newsSchema);
 }
 
 async function maybeGenerateThreeDayArticle(data) {
@@ -253,14 +348,9 @@ async function maybeGenerateThreeDayArticle(data) {
     return null;
   }
 
-  const parts = [
-    {
-      text: `Context: Benign video game journalism and strategy guide writing for Grand Theft Auto VI.
-      Write a new GTA 6 meta guide article covering a high-impact vehicle, weapon, or money strategy not yet covered in: ${JSON.stringify((data.posts || []).map(p => p.slug))}.
-      Include at least 3 distinct, credible sources (guide sites or creator testing channels).
-      Write in a crisp, authoritative gaming editorial voice (never mention AI). Use bracketed citations like [1], [2] inside the paragraph text pointing to the sources array.`
-    }
-  ];
+  const liveTopicSearch = await callGeminiGroundedSearch(
+    `Search for a high-impact GTA 6 strategy topic, vehicle/weapon meta comparison, or money-making breakdown with at least 3 distinct guide or creator sources not yet covered in: ${JSON.stringify((data.posts || []).map(p => p.slug))}.`
+  );
 
   const schema = {
     type: "OBJECT",
@@ -298,7 +388,15 @@ async function maybeGenerateThreeDayArticle(data) {
     required: ["skipRun"]
   };
 
-  const article = await callGeminiJson(parts, schema);
+  const article = await callGeminiJson([
+    {
+      text: `Context: Benign video game journalism and strategy guide writing for Grand Theft Auto VI.
+      Live Research: ${liveTopicSearch}
+      Write a new GTA 6 meta guide article not yet covered in: ${JSON.stringify((data.posts || []).map(p => p.slug))}.
+      Include at least 3 distinct, credible sources. Write in a crisp editorial voice (never mention AI) with bracketed citations [1], [2].`
+    }
+  ], schema);
+
   if (!article || article.skipRun || (article.sources || []).length < 3) {
     console.log("Skipped article: fewer than 3 verified sources found.");
     return null;
@@ -330,12 +428,13 @@ async function main() {
   }
 
   if (!data || typeof data !== "object") {
-    console.warn("Initializing clean data.json structure...");
     data = { meta: {}, categories: { cars: [], weapons: [], money: [], gear: [] }, news: [], posts: [], changelog: [] };
   }
 
   data.meta = data.meta || {};
-  data.categories = data.categories || {};
+  data.meta.sourcesTracked = data.meta.sourcesTracked || [];
+  data.categories = data.categories || { cars: [], weapons: [], money: [], gear: [] };
+  data.news = data.news || [];
   data.posts = data.posts || [];
   data.changelog = data.changelog || [];
 
@@ -347,18 +446,36 @@ async function main() {
     return;
   }
 
+  // 1. Refresh all 4 Categories (updates existing items AND adds newly discovered items)
   for (const cat of Object.keys(data.categories)) {
     try {
-      console.log(`Auto-discovering & refreshing category: ${cat}...`);
+      console.log(`Refreshing category: ${cat}...`);
       const res = await refreshCategory(cat, data.categories[cat]);
-      for (const upd of (res?.updatedItems || [])) {
+      for (const upd of (res?.items || [])) {
         const target = data.categories[cat].find(
-          i => i.id === upd.id || i.name.toLowerCase() === String(upd.id || "").toLowerCase()
+          i => i.id === upd.id || i.name.toLowerCase() === String(upd.name || "").toLowerCase()
         );
         if (target && upd.ranks?.length >= 2) {
           target.ranks = upd.ranks;
           if (upd.blurb) target.blurb = upd.blurb;
+          if (upd.get) target.get = upd.get;
           target.sample = false;
+        } else if (!target && upd.name && upd.ranks?.length >= 2) {
+          const slug = upd.id || `${cat}-${upd.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+          data.categories[cat].push({
+            id: slug,
+            name: upd.name,
+            type: upd.type || "Meta Pick",
+            get: upd.get || "In-game unlock",
+            facts: {},
+            blurb: upd.blurb || upd.ranks[0]?.quote || "",
+            ranks: upd.ranks,
+            sample: false,
+            seedUp: 44,
+            seedVotes: 52,
+            added: today
+          });
+          console.log(`[${cat}] Added newly discovered item: ${upd.name}`);
         }
       }
       if (res?.patchNote) {
@@ -369,6 +486,42 @@ async function main() {
     }
   }
 
+  // 2. Refresh News & Tracked Sources
+  try {
+    console.log("Refreshing News & Command Center finds...");
+    const newsRes = await refreshNewsAndSources(data);
+    let addedNews = 0;
+    for (const nf of (newsRes?.newFinds || [])) {
+      const exists = data.news.some(n => n.id === nf.id || n.title.toLowerCase() === nf.title.toLowerCase());
+      if (!exists && nf.title && nf.body) {
+        data.news.unshift({
+          id: nf.id || `news-${Date.now()}-${addedNews}`,
+          added: today,
+          cat: nf.cat || "tips",
+          status: nf.status || "reported",
+          tag: nf.tag || "Update",
+          source: nf.source,
+          url: nf.url || "https://www.rockstargames.com",
+          title: nf.title,
+          body: nf.body
+        });
+        addedNews++;
+      }
+    }
+    for (const ns of (newsRes?.newSourcesTracked || [])) {
+      const exists = data.meta.sourcesTracked.some(s => s.name.toLowerCase() === ns.name.toLowerCase());
+      if (!exists && ns.name) {
+        data.meta.sourcesTracked.push(ns);
+      }
+    }
+    if (addedNews > 0) {
+      data.changelog.unshift({ date: today, text: `Synced ${addedNews} new Command Center news & tips entries.` });
+    }
+  } catch (newsErr) {
+    console.warn("News refresh warning (continuing):", newsErr.message);
+  }
+
+  // 3. Check 3-Day Cited Article Schedule
   try {
     const newArticle = await maybeGenerateThreeDayArticle(data);
     if (newArticle) {
