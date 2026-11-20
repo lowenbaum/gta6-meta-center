@@ -1,0 +1,39 @@
+name: Meta Center 5:52 PM Central Daily Refresh
+
+on:
+  schedule:
+    # 5:52 PM America/Chicago (23:52 UTC in standard time)
+    - cron: "52 23 * * *"
+  workflow_dispatch: # Lets you click "Run workflow" to trigger immediately
+
+jobs:
+  refresh-rankings-and-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install SDK
+        run: npm install @google/genai
+
+      - name: Run 5:52 PM Autonomous YouTube Discovery & Refresh
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: node scripts/daily-refresh.mjs
+
+      - name: Commit updated data.json
+        run: |
+          git config user.name "Meta Center Editorial"
+          git config user.email "editorial@metacenter.local"
+          git add data.json
+          git diff --staged --quiet || git commit -m "chore: daily 5:52 PM CST rankings & news refresh"
+          git push
