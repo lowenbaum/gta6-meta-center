@@ -102,33 +102,34 @@ p { margin: 0 0 1em; }
 .pillars svg { display: none; }
 
 /* ---------- Home ---------- */
-.status-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; padding-top: 22px; padding-bottom: 18px; font-size: .88rem; color: var(--haze-2); }
-.home-top { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: start; }
-.cats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.cat { background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px 20px 8px; }
+.status-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; padding-top: 22px; padding-bottom: 0; font-size: .88rem; color: var(--haze-2); }
+.hnews { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0 32px; }
+.lead { grid-row: span 3; padding: 22px 24px; border-radius: var(--r-lg); background: linear-gradient(160deg, #3a1462, var(--night-2) 70%); border: 1px solid var(--line); display: flex; flex-direction: column; }
+.lead .src { margin-top: auto; }
+.lead h3 { font-size: 1.55rem; font-style: italic; font-weight: 800; margin: 6px 0 10px; line-height: 1.15; }
+.lead h3 a, .feed a { color: var(--foam); text-decoration: none; }
+.lead h3 a:hover, .feed a:hover { color: var(--aqua); }
+.lead p { color: var(--haze); margin: 0 0 10px; }
+.nk { display: flex; gap: 10px; font-size: .8rem; color: var(--haze-2); }
+.feed { padding: 14px 0; border-top: 1px solid var(--line); }
+.hnews > .feed:nth-child(2), .hnews > .feed:nth-child(3) { border-top: 0; padding-top: 4px; }
+.feed a { display: block; font-weight: 500; line-height: 1.35; margin-top: 3px; }
+.src { font-size: .82rem; color: var(--haze-2); margin-top: 4px; }
+.cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.cat { background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px 18px 8px; }
 .cat-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
-.cat-h h2 { font-size: 1.3rem; }
-.cat-h h2 a { color: var(--foam); text-decoration: none; }
-.cat-h h2 a:hover { color: var(--flamingo); }
+.cat-h h3 { font: italic 800 1.25rem/1.1 var(--display); }
+.cat-h h3 a { color: var(--foam); text-decoration: none; }
+.cat-h h3 a:hover { color: var(--flamingo); }
 .cat-h > a { font-size: .9rem; }
 .mrows { list-style: none; margin: 0; padding: 0; }
-.mrows a { display: grid; grid-template-columns: 16px 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); color: var(--foam); text-decoration: none; }
+.mrows a { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); color: var(--foam); text-decoration: none; }
 .mrows li:first-child a { border-top: 0; }
-.mrows .n { color: var(--haze-2); font-size: .85rem; text-align: right; }
 .mrows b { display: block; font-weight: 500; line-height: 1.25; }
 .mrows small { color: var(--haze-2); font-size: .82rem; }
-.mrows .sc { font: italic 800 1.15rem/1 var(--display); color: var(--t); }
+.mrows .sc { font: italic 800 1.1rem/1 var(--display); color: var(--t); }
 .mrows .sc.thin { color: var(--haze-2); font-size: .9rem; font-style: normal; font-weight: 400; }
 .mrows a:hover b { color: var(--flamingo); }
-.rail { position: sticky; top: 92px; }
-.rail .cat-h { margin-bottom: 4px; }
-.feed { list-style: none; padding: 0; margin: 0; }
-.feed li { padding: 12px 0; border-top: 1px solid var(--line); }
-.feed li:first-child { border-top: 0; padding-top: 6px; }
-.feed .nk { display: flex; gap: 10px; font-size: .8rem; color: var(--haze-2); margin-bottom: 3px; }
-.feed a { color: var(--foam); text-decoration: none; font-weight: 500; line-height: 1.35; }
-.feed a:hover { color: var(--aqua); }
-.feed .src { font-size: .82rem; color: var(--haze-2); margin-top: 3px; }
 .lists.three { grid-template-columns: repeat(3, 1fr); }
 .lists.three .lcard { grid-column: auto; }
 
@@ -309,8 +310,10 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
 @media (max-width: 1020px) {
   .meta-lay, .sres { grid-template-columns: 1fr; }
   .detail, .side { position: static; }
-  .home-top { grid-template-columns: 1fr; }
-  .rail { position: static; }
+  .hnews { grid-template-columns: 1fr 1fr; }
+  .lead { grid-column: span 2; grid-row: auto; margin-bottom: 8px; }
+  .hnews > .feed:nth-child(3) { border-top: 1px solid var(--line); padding-top: 14px; }
+  .cats { grid-template-columns: 1fr 1fr; }
   .lists.three { grid-template-columns: 1fr 1fr; }
   .lists { grid-template-columns: repeat(2, 1fr); }
   .lcard, .lcard.big { grid-column: span 1; grid-row: auto; }
@@ -328,11 +331,15 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
   .pillars a i { display: none; }
   .pillars svg { display: block; width: 22px; height: 22px; color: var(--c); }
   .pillars a[aria-current="page"] { background: var(--dusk); }
-  .mrows li:nth-child(n+4) { display: none; } /* top 3 on phones keeps news within reach */
+  .mrows li:nth-child(n+4) { display: none; }
   .wordmark { font-size: 1.45rem; }
   .status-row { padding-top: 14px; padding-bottom: 12px; font-size: .8rem; }
   .hsearch input { padding-left: 40px; padding-right: 14px; }
   .hsearch .ico { left: 14px; }
+  .hnews { grid-template-columns: 1fr; }
+  .lead { grid-column: auto; }
+  .hnews > .feed:nth-child(n+6) { display: none; }
+  .hnews > .feed:nth-child(2) { border-top: 0; }
   .cats, .lists.three, .news, .tips, .posts, .lists, .sync-grid { grid-template-columns: 1fr; }
   .lcard.big { grid-column: auto; }
   .trow { grid-template-columns: 54px 1fr; min-height: 76px; }
@@ -692,36 +699,42 @@ function renderHome() {
   status.append(el("span", "", DATA.meta.patch || ""), el("span", "", "Rankings updated " + fmtDate(DATA.meta.updated)));
   v.append(status);
 
-  // Above the fold: the meta on the left, news on the right
-  const top = el("div", "wrap home-top"), cats = el("div", "cats");
+  // News first
+  const nl = news();
+  if (nl.length) {
+    const [sn, wn] = sectionBlock("Latest news", ["#news", "All " + nl.length + " stories"]);
+    sn.style.paddingTop = "28px";
+    const g = el("div", "hnews");
+    const kick = (n) => { const k = el("div", "nk"); k.append(el("span", "", shortDate(n.added)), el("span", "", NEWS_CATS[n.cat] || "")); if (n.status) k.append(el("span", "status " + n.status, n.status[0].toUpperCase() + n.status.slice(1))); return k; };
+    const title = (n) => { const u = safeUrl(n.url); return u ? ext(u, n.title) : el("span", "", n.title); };
+    const [first, ...rest] = nl;
+    const lead = el("article", "lead"), h = el("h3");
+    h.append(title(first)); lead.append(kick(first), h);
+    if (first.body) lead.append(el("p", "", first.body));
+    if (first.source) lead.append(el("div", "src", "Source: " + first.source));
+    g.append(lead);
+    rest.slice(0, 6).forEach(n => { const f = el("article", "feed"); f.append(kick(n), title(n)); if (n.source) f.append(el("div", "src", n.source)); g.append(f); });
+    wn.append(g); v.append(sn);
+  }
+
+  // Then the meta
+  const [sm, wm] = sectionBlock("Top of the meta", ["#meta", "Full tier lists"]);
+  const cats = el("div", "cats");
   for (const c of Object.keys(CATS)) {
-    const box = el("section", "cat"), h = el("div", "cat-h"), h2 = el("h2");
-    h2.append(link("#meta/" + c, "", CATS[c].tab));
-    h.append(h2, link("#meta/" + c, "", "All " + items(c).length));
+    const box = el("section", "cat"), hh = el("div", "cat-h"), h3 = el("h3");
+    h3.append(link("#meta/" + c, "", CATS[c].tab));
+    hh.append(h3, link("#meta/" + c, "", "All " + items(c).length));
     const ol = el("ol", "mrows");
-    ranked(c).slice(0, 5).forEach((x, n) => {
+    ranked(c).slice(0, 5).forEach(x => {
       const sc = combined(x), t = tierOf(sc), li = el("li"), a = link("#meta/" + c + "/" + x.id);
       a.style.setProperty("--t", tierVar(t));
       const nm = el("span"); nm.append(el("b", "", x.name), el("small", "", x.type || ""));
-      a.append(el("span", "n", String(n + 1)), tierBox(t, "xs"), nm, el("span", "sc" + (sc == null ? " thin" : ""), sc == null ? "New" : String(sc)));
+      a.append(tierBox(t, "xs"), nm, el("span", "sc" + (sc == null ? " thin" : ""), sc == null ? "New" : String(sc)));
       li.append(a); ol.append(li);
     });
-    box.append(h, ol); cats.append(box);
+    box.append(hh, ol); cats.append(box);
   }
-  const rail = el("aside", "rail"), rh = el("div", "cat-h");
-  rh.append(el("h2", "", "Latest news"), link("#news", "", "All " + news().length));
-  const feed = el("ul", "feed");
-  news().slice(0, 7).forEach(n => {
-    const li = el("li"), k = el("div", "nk");
-    k.append(el("span", "", shortDate(n.added)));
-    if (n.status) k.append(el("span", "status " + n.status, n.status[0].toUpperCase() + n.status.slice(1)));
-    const u = safeUrl(n.url);
-    li.append(k, u ? ext(u, n.title) : el("span", "", n.title));
-    if (n.source) li.append(el("div", "src", n.source));
-    feed.append(li);
-  });
-  rail.append(rh, feed);
-  top.append(cats, rail); v.append(top);
+  wm.append(cats); v.append(sm);
 
   if (LISTS.length) {
     const [s, w] = sectionBlock("What to do next", ["#discover", "All lists"]);
