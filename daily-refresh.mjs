@@ -2,7 +2,6 @@
 // Zero external npm dependencies required! Uses native Node 20 fetch + fs.
 import fs from "node:fs/promises";
 
-// Automatically tries each model ID in order so a deprecated/unavailable model never stops the refresh
 const MODEL_CANDIDATES = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
 const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim();
 const YOUTUBE_API_KEY = (process.env.YOUTUBE_API_KEY || GEMINI_API_KEY).trim();
@@ -105,6 +104,7 @@ async function callGeminiJson(parts, responseSchema) {
 async function discoverHighSignalVideos(categoryQuery, maxResults = 2) {
   if (!YOUTUBE_API_KEY) return [];
   try {
+    // Filter for videos published recently or with highest relevance
     const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=8&order=relevance&q=${encodeURIComponent(categoryQuery)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`;
     const sResp = await fetch(searchUrl);
     if (!sResp.ok) return [];
@@ -143,11 +143,58 @@ async function discoverHighSignalVideos(categoryQuery, maxResults = 2) {
   }
 }
 
-async function refreshCategory(category, existingItems) {
+/* NEW: Pulls the freshest breaking GTA 6 headlines for "Latest from the Command Center" on every run */
+async function refreshCommandCenterNews(existingNews, today) {
+  const existingTitles = existingNews.slice(0, 15).map(n => n.title);
+  const recentYoutubeFinds = await discoverHighSignalVideos("GTA 6 news patch update secret tips discovery today", 3);
+
+  const liveNewsResearch = await callGeminiGroundedSearch(
+    `Today is ${today}. Search Google News, gaming press (IGN, Kotaku, TechRadar, Eurogamer, GameSpot, PC Gamer, VGC, Rockstar Intel), and YouTube for the most recent and relevant Grand Theft Auto VI (GTA 6) news headlines, gameplay discoveries, hidden mechanics, patch updates, vehicle/weapon tips, or community finds from the last 72 hours.
+    Do NOT repeat these existing headlines: ${JSON.stringify(existingTitles)}.
+    Provide 5 brand-new, ultra-current headlines with exact publication names and source URLs.`
+  );
+
+  const newsSchema = {
+    type: "OBJECT",
+    properties: {
+      headlines: {
+        type: "ARRAY",
+        items: {
+          type: "OBJECT",
+          properties: {
+            id: { type: "STRING", description: "kebab-case unique slug" },
+            cat: { type: "STRING", description: "launch, tips, eggs, weapons, vehicles, items, or world" },
+            status: { type: "STRING", description: "confirmed, reported, or disputed" },
+            tag: { type: "STRING", description: "Short tag like Patch Note, Player find, Money, Combat" },
+            source: { type: "STRING", description: "Publisher or YouTube Creator name" },
+            url: { type: "STRING", description: "https:// link to the article or video" },
+            title: { type: "STRING", description: "Punchy, specific headline under 85 chars" },
+            body: { type: "STRING", description: "1-2 sentence factual summary" }
+          },
+          required: ["id", "cat", "status", "source", "url", "title", "body"]
+        }
+      }
+    }
+  };
+
+  const parsed = await callGeminiJson([
+    {
+      text: `Context: Benign journalism aggregator for the video game Grand Theft Auto VI (Meta Center Command Center).
+      Extract the 5 most current, high-signal GTA 6 news finds, tips, or updates as of ${today}.
+      Live Web Research: ${liveNewsResearch}
+      Recent High-Engagement YouTube Videos: ${JSON.stringify(recentYoutubeFinds)}
+      Avoid duplicating existing headlines: ${JSON.stringify(existingTitles)}.`
+    }
+  ], newsSchema);
+
+  return parsed?.headlines || [];
+}
+
+async function refreshCategory(category, existingItems, today) {
   const discoveredVideos = await discoverHighSignalVideos(CATEGORY_SEARCH_QUERIES[category], 2);
   const itemList = existingItems.map(i => ({ id: i.id, name: i.name, type: i.type }));
   const liveWebResearch = await callGeminiGroundedSearch(
-    `Search the web and YouTube for the latest Grand Theft Auto VI (GTA 6) rankings, tier lists, creator testing, and guide site consensus for category: "${category}" (${CATEGORY_SEARCH_QUERIES[category]}).
+    `As of ${today}, search the web and YouTube for the latest Grand Theft Auto VI (GTA 6) rankings, tier lists, creator testing, and guide site consensus for category: "${category}" (${CATEGORY_SEARCH_QUERIES[category]}).
     Existing tracked items: ${JSON.stringify(itemList)}.
     Identify updated rankings for existing items AND any top-tier newly discovered ${category} items worth adding, along with real source names (such as IGN, Kotaku, Inven Global, TechRadar, Broughy1322, GhillieMaster, TGG) and URLs.`
   );
@@ -207,9 +254,10 @@ async function main() {
 
   data.meta = data.meta || {};
   data.categories = data.categories || { cars: [], weapons: [], money: [], gear: [] };
+  data.news = data.news || [];
   data.changelog = data.changelog || [];
 
-  // Always strip dummy seedVotes / seedUp and Sample flags from data.json
+  // Strip dummy seedVotes / seedUp and Sample flags from data.json
   for (const cat of Object.keys(data.categories)) {
     for (const item of (data.categories[cat] || [])) {
       item.sample = false;
@@ -219,10 +267,39 @@ async function main() {
   }
 
   if (GEMINI_API_KEY) {
+    // 1. Refresh "Latest from the Command Center" with breaking headlines
+    try {
+      console.log("Fetching latest Command Center headlines...");
+      const freshHeadlines = await refreshCommandCenterNews(data.news, today);
+      let addedNewsCount = 0;
+      for (const h of freshHeadlines.reverse()) {
+        const exists = data.news.some(n => n.id === h.id || n.title.toLowerCase() === h.title.toLowerCase());
+        if (!exists && h.title && h.body) {
+          data.news.unshift({
+            id: h.id || ("news-" + Date.now() + "-" + addedNewsCount),
+            added: today,
+            cat: ["launch", "tips", "eggs", "weapons", "vehicles", "items", "world"].includes(h.cat) ? h.cat : "tips",
+            status: ["confirmed", "reported", "disputed"].includes(h.status) ? h.status : "reported",
+            tag: h.tag || "Update",
+            source: h.source,
+            url: /^https:\/\//.test(h.url || "") ? h.url : "https://www.ign.com/wikis/gta-6",
+            title: h.title,
+            body: h.body
+          });
+          addedNewsCount++;
+        }
+      }
+      data.news = data.news.slice(0, 30); // Keep top 30 freshest stories
+      console.log(`Added ${addedNewsCount} new Command Center headlines.`);
+    } catch (err) {
+      console.warn("Command Center news refresh warning:", err.message);
+    }
+
+    // 2. Refresh Category Rankings (Cars, Weapons, Money, Gear)
     for (const cat of Object.keys(data.categories)) {
       try {
         console.log(`Refreshing category: ${cat}...`);
-        const res = await refreshCategory(cat, data.categories[cat]);
+        const res = await refreshCategory(cat, data.categories[cat], today);
         for (const upd of (res?.items || [])) {
           const target = data.categories[cat].find(
             i => i.id === upd.id || i.name.toLowerCase() === String(upd.name || "").toLowerCase()
@@ -231,6 +308,19 @@ async function main() {
             target.ranks = upd.ranks;
             if (upd.blurb) target.blurb = upd.blurb;
             target.sample = false;
+          } else if (!target && upd.name && upd.ranks?.length >= 2) {
+            // Also allow brand-new discovered meta items to be added automatically
+            data.categories[cat].push({
+              id: upd.id || `${cat}-${upd.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+              name: upd.name,
+              type: upd.type || "Meta Pick",
+              get: upd.get || "In-game unlock",
+              facts: {},
+              blurb: upd.blurb || "",
+              ranks: upd.ranks,
+              sample: false,
+              added: today
+            });
           }
         }
       } catch (err) {
@@ -241,7 +331,8 @@ async function main() {
 
   data.meta.updated = today;
   data.meta.newsSynced = today;
-  data.changelog.unshift({ date: today, text: "Automated multi-source refresh completed; removed sample flags and dummy vote seeds." });
+  data.changelog.unshift({ date: today, text: "Synced breaking Command Center headlines and updated multi-source rankings." });
+  data.changelog = data.changelog.slice(0, 40);
   await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2));
   console.log("Saved updated data.json successfully.");
 }
