@@ -3,1108 +3,1297 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#100a1b">
+<meta name="theme-color" content="#1a0b36">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="author" content="Meta Center Editorial Staff">
-<title>Meta Center — GTA 6 Rankings, Creator Scores & News</title>
-<meta name="description" id="metadesc" content="The best cars, weapons, money methods and gear in GTA 6, ranked by critic scores from guide sites, creator tests, and real player votes. Plus daily GTA 6 news and sourced articles.">
-
-<!-- Open Graph / Social Discovery Metadata -->
+<title>Beat Six: search every GTA 6 guide, tip and tier list in one place</title>
+<meta name="description" id="metadesc" content="Beat Six collects the best GTA 6 guides, creator tests and tips from across the web. Search any question, find what to do next, and see the current meta for cars, weapons, money and gear.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Meta Center">
-<meta property="og:title" content="Meta Center — GTA 6 Rankings, Creator Scores & News">
-<meta property="og:description" content="Side-by-side Critic & Creator scores vs. Live Player Votes for every top car, weapon, money method, and upgrade in Grand Theft Auto VI.">
+<meta property="og:site_name" content="Beat Six">
+<meta property="og:title" content="Beat Six: the GTA 6 answer engine">
+<meta property="og:description" content="Search every GTA 6 guide, tip and tier list in one place.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Meta Center — GTA 6 Meta Aggregator">
-<meta name="twitter:description" content="Track the best cars, weapons, money methods, and gear in GTA 6 with verified creator lap times, TTK tests, and community ratings.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23ffc65c'/%3E%3Cstop offset='1' stop-color='%23ff3d8b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%231a0b36'/%3E%3Ccircle cx='32' cy='34' r='22' fill='url(%23g)'/%3E%3Cg fill='%231a0b36'%3E%3Crect x='6' y='36' width='52' height='3'/%3E%3Crect x='6' y='43' width='52' height='4'/%3E%3Crect x='6' y='51' width='52' height='6'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preload" href="data.json" as="fetch" crossorigin>
+<link rel="preload" href="fonts/kanit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/kanit-latin-800-italic.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face { font-family: "Kanit"; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/kanit-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Kanit"; font-style: normal; font-weight: 500; font-display: swap; src: url(fonts/kanit-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Kanit"; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/kanit-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Kanit"; font-style: italic; font-weight: 800; font-display: swap; src: url(fonts/kanit-latin-800-italic.woff2) format("woff2"); }
+@font-face { font-family: "Yellowtail"; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/yellowtail-latin-400-normal.woff2) format("woff2"); }
 :root {
   color-scheme: dark;
-  --bg: #100a1b;
-  --panel: #1a1229;
-  --panel-2: #241838;
-  --line: #33264a;
-  --text: #fff4f8;
-  --muted: #a898bb;
-  --soft: #e0d5ea;
-  --orange: #ffa645;
-  --coral: #ff6a5c; --pink: #ff3f8e; --violet: #a43dff; --teal: #26d6c6;
-  --sunset: linear-gradient(95deg, var(--orange) 0%, var(--coral) 30%, var(--pink) 62%, var(--violet) 100%);
-  --critic: #ff7a59; --player: #26d6c6;
-  --tier-s: #ffc94a; --tier-a: #ff7a59; --tier-b: #26d6c6; --tier-c: #a898bb;
-  --ok: #4fd18b; --warn: #ffc94a; --bad: #ff6a5c;
-  --display: "Unbounded", "Arial Black", sans-serif;
-  --body: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  /* Night sky over Vice Beach */
+  --night: #1a0b36;
+  --night-2: #221045;
+  --dusk: #2e1660;
+  --line: #43257f;
+  --foam: #fbf3ff;
+  --haze: #c3b0e6;
+  --haze-2: #9581bf;
+  /* Neon */
+  --flamingo: #ff3d8b;
+  --aqua: #22e4d3;
+  --sunset: #ffb447;
+  --sun-top: #ffc65c;
+  /* Pillars: each section of the site keeps its own color */
+  --p-search: var(--aqua);
+  --p-discover: var(--sunset);
+  --p-meta: var(--flamingo);
+  --tier-s: #ff3d8b; --tier-a: #22e4d3; --tier-b: #ffb447; --tier-c: #8f7cc0;
+  --r-lg: 18px; --r-md: 12px; --r-sm: 8px;
+  --display: "Kanit", system-ui, sans-serif;
+  --body: "Kanit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --script: "Yellowtail", "Brush Script MT", cursive;
+  --wrap: 1180px;
 }
-* { box-sizing: border-box }
-html, body { margin: 0; padding: 0 }
-body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 15px; line-height: 1.5 }
-button, input, textarea, select { font: inherit; color: inherit }
-a { color: var(--orange) }
-:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px }
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important } }
-.wrap { max-width: 1120px; margin: 0 auto; padding-left: 16px; padding-right: 16px }
-
-.proto { background: repeating-linear-gradient(135deg, #1b2822 0 10px, #15201b 10px 20px); color: var(--teal); font: 700 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; text-align: center; border-bottom: 1px solid rgba(38,214,198,.2) }
-.proto .wrap { padding-block: 7px }
-
-header.top { position: sticky; top: 0; z-index: 10; background: rgba(16, 10, 27, .92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line) }
-.top .wrap { display: flex; align-items: center; gap: 18px; padding-block: 12px }
-.logo { display: flex; align-items: center; gap: 10px; font: 800 18px/1 var(--display); letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; color: var(--text); text-decoration: none }
-.logo .mark { width: 30px; height: 30px; position: relative; flex: none }
-.logo .mark i { position: absolute; width: 18px; height: 18px; border-radius: 4px; transform: rotate(45deg); top: 6px }
-.logo .mark i:first-child { background: var(--sunset); left: 0 }
-.logo .mark i:last-child { background: var(--teal); left: 10px; mix-blend-mode: screen }
-.tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0 }
-.tabs::-webkit-scrollbar { display: none }
-.tabs a { flex: none; padding: 8px 12px; border-radius: 8px; font-weight: 700; color: var(--muted); text-decoration: none }
-.tabs a:hover { color: var(--text); background: var(--panel) }
-.tabs a[aria-current="page"] { color: var(--text); background: var(--panel-2); box-shadow: inset 0 -2px 0 var(--pink) }
-.tabs a.newsy::after { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); margin-left: 6px; vertical-align: middle }
-@media (max-width: 560px) {
-  .top .wrap { gap: 10px }
-  .logo { font-size: 12px; gap: 6px; letter-spacing: 0 }
-  .logo .mark { width: 20px; height: 20px }
-  .logo .mark i { width: 12px; height: 12px; top: 4px; border-radius: 3px }
-  .logo .mark i:last-child { left: 7px }
-  .tabs a { padding: 7px 8px; font-size: 14px }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
+body {
+  margin: 0; background: var(--night); color: var(--foam);
+  font: 400 17px/1.6 var(--body); font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
+a { color: var(--aqua); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--foam); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--aqua); outline-offset: 2px; border-radius: 6px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--aqua); color: var(--night); padding: 8px 14px; border-radius: 8px; z-index: 99; }
+.skip:focus { left: 12px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.2rem, 5.4vw, 4rem); font-weight: 800; font-style: italic; }
+h2 { font-size: clamp(1.45rem, 2.6vw, 1.9rem); font-weight: 800; font-style: italic; }
+h3 { font-size: 1.12rem; font-weight: 700; }
+p { margin: 0 0 1em; }
+.muted { color: var(--haze); }
+.small { font-size: .88rem; }
 
-.grad { background: var(--sunset); -webkit-background-clip: text; background-clip: text; color: transparent }
-.search { position: relative; max-width: 640px }
-.search input { width: 100%; padding: 15px 16px; border-radius: 12px; border: 1px solid var(--line); background: rgba(26, 18, 41, .85); font-size: 16px }
-.search input::placeholder { color: var(--muted) }
-.results { margin-top: 8px; display: grid; gap: 6px }
-.res { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 10px; background: var(--panel); border: 1px solid var(--line); text-decoration: none; color: var(--text) }
-.res:hover { border-color: var(--pink) }
-.res small { display: block; color: var(--muted); font-size: 12px }
-.res .mini { font: 700 13px var(--mono); display: flex; gap: 10px }
-.up { color: var(--player) } .down { color: var(--critic) }
-
-section.block .wrap { padding-block: 34px 0 }
-.sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap }
-.sec-h h2 { margin: 0; font: 800 18px var(--body) }
-.sec-h p, .sec-h a { margin: 0; color: var(--muted); font-size: 14px }
-.sec-h a { color: var(--orange); font-weight: 700; text-decoration: none }
-
-.htop .wrap { padding-block: 28px 4px; display: grid; gap: 12px }
-.htop h1 { margin: 0; font: 800 clamp(24px, 4vw, 34px)/1.15 var(--display); letter-spacing: -.01em; text-wrap: balance }
-.htop .sub { margin: 0; color: var(--muted); max-width: 70ch }
-
-/* News strip and cards */
-.strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px }
-@media (max-width: 980px) { .strip { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
-@media (max-width: 520px) { .strip { grid-template-columns: minmax(0, 1fr) } }
-.ncard { position: relative; display: grid; gap: 6px; align-content: start; padding: 14px 16px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line); min-width: 0 }
-.ncard::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 0 3px 3px 0; background: var(--sunset) }
-.ncard .kick { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font: 700 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
-.ncard h3 { margin: 0; font: 800 16px/1.3 var(--body); overflow-wrap: anywhere; text-wrap: balance }
-.ncard p { margin: 0; color: var(--soft); font-size: 14px }
-.ncard .src { font-size: 13px; color: var(--muted) }
-.pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font: 700 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; border: 1px solid currentColor }
-.pill.confirmed { color: var(--ok) } .pill.reported { color: var(--warn) } .pill.disputed { color: var(--bad) }
-.pill.yt { color: #ff5c7c; background: rgba(255,63,142,.12); border-color: rgba(255,63,142,.4) }
-.pill.web { color: var(--teal); background: rgba(38,214,198,.1); border-color: rgba(38,214,198,.35) }
-.newslist { display: grid; gap: 10px; max-width: 820px }
-
-.cats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px }
-@media (max-width: 760px) { .cats { grid-template-columns: minmax(0, 1fr) } }
-.cat { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding-bottom: 4px; min-width: 0 }
-.cat-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 14px 16px 6px }
-.cat-h h2 { margin: 0; font: 800 18px var(--body) }
-.cat-h a { font-weight: 700; font-size: 14px; color: var(--orange); text-decoration: none; white-space: nowrap }
-.mhead, .mrow { display: grid; grid-template-columns: 20px 26px minmax(0, 1fr) 48px 58px; gap: 10px; align-items: center; padding: 9px 16px }
-.mhead { font: 700 10px var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-block: 2px 6px }
-.mhead span:nth-child(n+4) { text-align: right }
-.mini-list { list-style: none; margin: 0; padding: 0 }
-.mrow { color: var(--text); text-decoration: none; border-top: 1px solid var(--line) }
-.mrow:hover { background: var(--panel-2) }
-.mrank { font: 700 14px var(--mono); color: var(--muted); text-align: center }
-.mtier { width: 26px; height: 26px; border-radius: 6px; display: grid; place-items: center; font: 800 12px var(--display); color: #170d22; background: var(--t) }
-.mname { min-width: 0 }
-.mname b { display: block; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere }
-.mname small { color: var(--muted); font-size: 12px }
-.mc, .mp { font: 700 14px var(--mono); text-align: right; font-variant-numeric: tabular-nums }
-.mc { color: var(--critic) } .mp { color: var(--player) } .thin { color: var(--muted) !important; font-size: 12px !important }
-
-.posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
-@media (max-width: 860px) { .posts { grid-template-columns: minmax(0, 1fr) } }
-.pcard { display: grid; gap: 8px; align-content: start; padding: 18px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); text-decoration: none; color: var(--text); position: relative; overflow: hidden }
-.pcard::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--sunset) }
-.pcard:hover { border-color: var(--pink) }
-.pcard .lab { font: 700 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-.pcard h3 { margin: 0; font: 800 18px/1.25 var(--body); text-wrap: balance }
-.pcard p { margin: 0; color: var(--soft); font-size: 14px }
-.empty { border: 1px dashed #4a3866; border-radius: 14px; padding: 22px; color: var(--muted); text-align: center }
-
-.faq { display: grid; gap: 8px; max-width: 820px }
-.faq details { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 0 16px }
-.faq summary { cursor: pointer; padding: 14px 0; font-weight: 700; font-size: 16px }
-.faq details p { margin: 0 0 14px; color: var(--soft) }
-
-/* Category page */
-.chero .wrap { padding-block: 26px 18px; display: grid; gap: 14px }
-.crumbs { font-size: 13px; color: var(--muted) }
-.crumbs a { color: var(--muted) }
-.chero h1 { margin: 0; font: 800 clamp(24px, 4vw, 34px)/1.15 var(--display); letter-spacing: -.01em; text-wrap: balance }
-.answer { border-radius: 14px; padding: 16px 18px; background: linear-gradient(var(--panel), var(--panel)) padding-box, var(--sunset) border-box; border: 1px solid transparent; display: grid; gap: 8px; max-width: 820px }
-.answer .lab { font: 700 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--orange) }
-.answer p { margin: 0; font-size: 16px; color: #efe6f5 }
-.answer ul { margin: 0; padding-left: 18px; color: var(--soft); display: grid; gap: 2px }
-.answer small { color: var(--muted) }
-
-.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; padding-block: 8px 20px }
-@media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr) } }
-.controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 14px }
-.ctl-label { font: 600 12px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em }
-.seg { display: inline-flex; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 3px }
-.seg button { background: none; border: 0; padding: 7px 12px; border-radius: 7px; font-weight: 700; font-size: 14px; color: var(--muted); cursor: pointer }
-.seg button[aria-pressed="true"] { background: var(--panel-2); color: var(--text) }
-.seg button[data-sort="critic"][aria-pressed="true"] { color: var(--critic) }
-.seg button[data-sort="player"][aria-pressed="true"] { color: var(--player) }
-.chips { display: flex; gap: 6px; flex-wrap: wrap }
-.chips button { background: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer }
-.chips button[aria-pressed="true"] { border-color: var(--text); color: var(--text) }
-
-ol.list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none }
-.row { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; min-width: 0 }
-.row.open { border-color: #4a3866 }
-.row > button.head { width: 100%; background: none; border: 0; text-align: left; cursor: pointer; display: grid; grid-template-columns: 44px 34px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 16px }
-.rank { font: 700 22px var(--mono); color: var(--muted); text-align: center; font-variant-numeric: tabular-nums }
-.row.first .rank { color: var(--tier-s) }
-.tier { width: 34px; height: 34px; display: grid; place-items: center; font: 800 16px var(--display); border-radius: 8px; color: #170d22; background: var(--t) }
-.name { min-width: 0 }
-.name h3 { margin: 0; font-size: 17px; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere }
-.name small { color: var(--muted); font-size: 13px; font-weight: 600 }
-.scores { display: flex; gap: 10px }
-.score { width: 72px; text-align: center; display: grid; gap: 1px }
-.score b { font: 700 22px/1.1 var(--mono); font-variant-numeric: tabular-nums }
-.score span { font: 700 10px var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-.score.critic b { color: var(--critic) } .score.player b { color: var(--player) }
-.score.thin b { color: var(--muted); font-size: 14px; line-height: 1.5 }
-@media (max-width: 560px) {
-  .row > button.head { grid-template-columns: 30px 30px minmax(0, 1fr); gap: 10px; padding: 12px }
-  .rank { font-size: 17px } .tier { width: 30px; height: 30px; font-size: 14px }
-  .scores { grid-column: 3; justify-content: flex-start }
-  .score { width: auto; display: flex; gap: 6px; align-items: baseline }
-  .score b { font-size: 17px }
+/* ---------- Header ---------- */
+.top { position: sticky; top: 0; z-index: 20; background: rgba(26, 11, 54, .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 20px; height: 68px; }
+.logo { display: flex; align-items: center; flex: none; text-decoration: none; }
+.wordmark { /* sunset-filled type, cut by horizon stripes */
+  font: italic 800 2.1rem/1 var(--display); letter-spacing: .03em; padding: 4px .14em 4px 0; white-space: nowrap;
+  background:
+    linear-gradient(180deg, transparent 0 57%, var(--night) 57% 62%, transparent 62% 70%, var(--night) 70% 74%, transparent 74%),
+    linear-gradient(180deg, var(--sun-top) 18%, var(--sunset) 42%, var(--flamingo) 78%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.detail { border-top: 1px solid var(--line); padding: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px }
-@media (max-width: 640px) { .detail { grid-template-columns: minmax(0, 1fr) } }
-.detail h4 { margin: 0 0 8px; font: 700 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
-.detail p { margin: 0 0 10px; color: var(--soft) }
-.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 14px; margin: 0 }
-.facts dt { color: var(--muted) } .facts dd { margin: 0; font-weight: 600 }
-.srcs { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none }
-.srcs li { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; font-size: 14px; align-items: center; background: rgba(36,24,56,.45); padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(51,38,74,.7) }
-.srcs .src-head { display: flex; align-items: center; gap: 6px; flex-wrap: wrap }
-.srcs .src-quote { grid-column: 1 / -1; font-size: 12.5px; color: var(--soft); font-style: italic }
-.srcs .bar { grid-column: 1 / -1; height: 4px; border-radius: 4px; background: var(--panel-2); overflow: hidden }
-.srcs .bar i { display: block; height: 100%; background: var(--sunset) }
-.srcs b { font: 700 13px var(--mono) }
-.gapline { font-size: 14px; color: var(--muted); margin-top: 10px }
-.gapline b { color: var(--text) }
-.vote { margin-top: 14px; padding: 12px; border-radius: 10px; background: var(--panel-2); display: grid; gap: 10px; border: 1px solid rgba(38,214,198,.25) }
-.vote .q { font-weight: 700 }
-.vote .btns { display: flex; gap: 8px; flex-wrap: wrap }
-.vote button { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 7px 14px; font-weight: 700; cursor: pointer }
-.vote button:hover:not(:disabled) { border-color: var(--player) }
-.vote button:disabled { opacity: .5; cursor: not-allowed }
-.vote button[aria-pressed="true"] { background: var(--player); color: #04221f; border-color: var(--player) }
-.vote small { color: var(--muted) }
+.logo:hover .wordmark { opacity: .85; }
+.hsearch { flex: 1; max-width: 540px; position: relative; }
+.hsearch input {
+  width: 100%; height: 44px; border-radius: 999px; padding: 0 48px 0 46px; font-size: .97rem;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--night-2), var(--night-2)) padding-box, linear-gradient(90deg, var(--flamingo), var(--sunset) 50%, var(--aqua)) border-box;
+  transition: box-shadow .2s;
+}
+.hsearch input::placeholder { color: var(--haze); }
+.hsearch input:focus { outline: none; box-shadow: 0 0 0 4px rgba(255, 61, 139, .18), 0 0 28px rgba(34, 228, 211, .28); }
+.hsearch .ico { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 19px; height: 19px; color: var(--aqua); pointer-events: none; }
+.hsearch kbd { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font: 500 .75rem var(--body); color: var(--haze); background: var(--dusk); border-radius: 6px; padding: 2px 8px; }
+.pillars { display: flex; gap: 4px; margin-left: auto; }
+.pillars a { display: flex; align-items: center; gap: 8px; color: var(--haze); text-decoration: none; font-weight: 500; padding: 8px 14px; border-radius: 999px; }
+.pillars a:hover { color: var(--foam); background: var(--night-2); }
+.pillars a[aria-current="page"] { color: var(--foam); background: var(--dusk); }
+.pillars a i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.pillars svg { display: none; }
 
-aside { display: grid; gap: 16px; align-content: start }
-.box { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px }
-.box h3 { margin: 0 0 10px; font: 800 14px var(--display); text-transform: uppercase }
-.box li, .box p { color: var(--soft); font-size: 14px }
-.box p { margin: 0 0 8px }
-.box ol, .box ul { margin: 0; padding-left: 18px; display: grid; gap: 6px }
-.ad { border: 1px dashed #4a3866; border-radius: 14px; color: var(--muted); display: grid; place-items: center; text-align: center; font: 600 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 18px; overflow: hidden; text-decoration: none }
-.ad.inline { min-height: 90px } .ad.rail { min-height: 250px } .ad.wide { min-height: 90px; margin-top: 34px }
-.ad.promo { border-style: solid; border-color: var(--line); background: linear-gradient(135deg, rgba(26,18,41,.95), rgba(36,24,56,.95)); text-transform: none; font-family: var(--body) }
-.ad.promo strong { color: var(--orange); font-size: 15px; display: block; margin-bottom: 4px }
-.ad.promo span { color: var(--soft); font-size: 13px }
+/* ---------- Home ---------- */
+.status-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; padding-top: 22px; padding-bottom: 0; font-size: .88rem; color: var(--haze-2); }
+.hnews { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0 32px; }
+.lead { grid-row: span 3; padding: 22px 24px; border-radius: var(--r-lg); background: linear-gradient(160deg, #3a1462, var(--night-2) 70%); border: 1px solid var(--line); display: flex; flex-direction: column; }
+.lead .src { margin-top: auto; }
+.lead h3 { font-size: 1.55rem; font-style: italic; font-weight: 800; margin: 6px 0 10px; line-height: 1.15; }
+.lead h3 a, .feed a { color: var(--foam); text-decoration: none; }
+.lead h3 a:hover, .feed a:hover { color: var(--aqua); }
+.lead p { color: var(--haze); margin: 0 0 10px; }
+.nk { display: flex; gap: 10px; font-size: .8rem; color: var(--haze-2); }
+.feed { padding: 14px 0; border-top: 1px solid var(--line); }
+.hnews > .feed:nth-child(2), .hnews > .feed:nth-child(3) { border-top: 0; padding-top: 4px; }
+.feed a { display: block; font-weight: 500; line-height: 1.35; margin-top: 3px; }
+.src { font-size: .82rem; color: var(--haze-2); margin-top: 4px; }
+.cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.cat { background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px 18px 8px; }
+.cat-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.cat-h h3 { font: italic 800 1.25rem/1.1 var(--display); }
+.cat-h h3 a { color: var(--foam); text-decoration: none; }
+.cat-h h3 a:hover { color: var(--flamingo); }
+.cat-h > a { font-size: .9rem; }
+.mrows { list-style: none; margin: 0; padding: 0; }
+.mrows a { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); color: var(--foam); text-decoration: none; }
+.mrows li:first-child a { border-top: 0; }
+.mrows b { display: block; font-weight: 500; line-height: 1.25; }
+.mrows small { color: var(--haze-2); font-size: .82rem; }
+.mrows .sc { font: italic 800 1.1rem/1 var(--display); color: var(--t); }
+.mrows .sc.thin { color: var(--haze-2); font-size: .9rem; font-style: normal; font-weight: 400; }
+.mrows a:hover b { color: var(--flamingo); }
+.lists.three { grid-template-columns: repeat(3, 1fr); }
+.lists.three .lcard { grid-column: auto; }
 
-.prose { max-width: 70ch; padding-block: 8px 10px }
-.prose h2 { font: 800 21px/1.3 var(--body); margin: 30px 0 8px; text-wrap: balance }
-.prose p, .prose li { color: var(--soft); font-size: 16.5px; line-height: 1.7 }
-.prose p { margin: 0 0 14px }
-.prose ul, .prose ol { padding-left: 20px; display: grid; gap: 6px; margin: 0 0 14px }
-.byline { font-size: 14px; color: var(--muted) }
-.dek { font-size: 18px; color: #efe6f5; margin: 0; max-width: 62ch }
-.sources { margin-top: 30px; padding: 18px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line) }
-.sources h2 { margin-top: 0 }
-.sources li { font-size: 14px }
-.disclose { font-size: 13px; color: var(--muted); border-left: 2px solid var(--line); padding-left: 12px; margin-top: 18px }
-.sched { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 900px }
-@media (max-width: 760px) { .sched { grid-template-columns: minmax(0, 1fr) } }
-.sched .box h3 { font-size: 13px }
-.loading { padding: 60px 16px; text-align: center; color: var(--muted) }
+/* ---------- Sections ---------- */
+.block { padding: 56px 0 8px; }
+.sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.sec-h p { color: var(--haze); margin: 0; }
+.sec-h a { white-space: nowrap; }
+.page-h { padding: 44px 0 24px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+.page-h h1 { font-size: clamp(2rem, 4.4vw, 3rem); }
+.page-h .lede { color: var(--haze); max-width: 62ch; margin: 12px 0 0; }
+.page-h.p-search h1 { color: var(--p-search); }
+.page-h.p-discover h1 { color: var(--p-discover); }
+.page-h.p-meta h1 { color: var(--p-meta); }
+.crumbs { font-size: .9rem; color: var(--haze-2); margin-bottom: 10px; }
+.crumbs a { color: var(--haze); }
 
-.sync-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 14px }
-@media (max-width: 820px) { .sync-grid { grid-template-columns: 1fr } }
-.field { display: grid; gap: 6px; margin-bottom: 12px }
-.field label { font: 700 12px var(--mono); text-transform: uppercase; color: var(--muted) }
-.field input, .field select, .field textarea { padding: 11px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text) }
-.btn-primary { background: var(--sunset); color: #140a20; font-weight: 800; border: 0; border-radius: 10px; padding: 11px 18px; cursor: pointer }
-.btn-secondary { background: var(--panel-2); color: var(--text); font-weight: 700; border: 1px solid var(--line); border-radius: 10px; padding: 10px 16px; cursor: pointer }
-pre.codeout { background: #0b0713; border: 1px solid var(--line); border-radius: 12px; padding: 14px; overflow-x: auto; font: 600 12.5px/1.5 var(--mono); color: var(--teal); max-height: 440px }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); background: transparent; color: var(--haze); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: .92rem; }
+.chip:hover { color: var(--foam); border-color: var(--haze-2); }
+.chip[aria-pressed="true"] { background: var(--foam); color: var(--night); border-color: var(--foam); font-weight: 500; }
+.chip .n { opacity: .65; margin-left: 4px; }
 
-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; margin-top: 54px }
-footer .wrap { padding-block: 24px; display: grid; gap: 8px }
-footer p { margin: 0; max-width: 80ch }
-footer nav { display: flex; gap: 16px; flex-wrap: wrap }
-footer nav a { color: var(--muted); font-weight: 700 }
+/* ---------- Search page ---------- */
+.sbar { position: relative; margin-top: 18px; max-width: 760px; }
+.sbar input { width: 100%; height: 60px; border-radius: var(--r-md); border: 2px solid var(--line); background: var(--night-2); padding: 0 20px 0 52px; font-size: 1.2rem; }
+.sbar input:focus { outline: none; border-color: var(--aqua); }
+.sbar .ico { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; color: var(--aqua); }
+.sres { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; align-items: start; }
+.hits { list-style: none; margin: 0; padding: 0; }
+.hit { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.hit:first-child { padding-top: 4px; }
+.hit .kind { font-size: .82rem; font-weight: 500; color: var(--k); display: inline-flex; align-items: center; gap: 6px; }
+.hit .kind::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--k); }
+.hit h3 { margin: 4px 0 6px; font-size: 1.2rem; }
+.hit h3 a { color: var(--foam); text-decoration: none; }
+.hit h3 a:hover { color: var(--k); }
+.hit p { color: var(--haze); margin: 0 0 6px; max-width: 72ch; }
+.hit .where { font-size: .86rem; color: var(--haze-2); }
+mark { background: rgba(34, 228, 211, .22); color: var(--foam); border-radius: 3px; padding: 0 2px; }
+.k-guide { --k: var(--aqua); } .k-list { --k: var(--sunset); } .k-meta { --k: var(--flamingo); } .k-news { --k: #b9a2ff; } .k-article { --k: #8ff0a4; }
+.side { position: sticky; top: 92px; background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; }
+.side h3 { font-size: 1rem; margin-bottom: 10px; }
+.side .outs a { display: block; padding: 9px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.side .outs a:first-child { border-top: 0; }
+.answer-tile { background: linear-gradient(135deg, rgba(255, 61, 139, .16), rgba(255, 180, 71, .1)); border: 1px solid rgba(255, 61, 139, .45); border-radius: var(--r-lg); padding: 18px 20px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: center; }
+.answer-tile .tl { grid-row: span 2; }
+.answer-tile h3 a { color: var(--foam); }
+.answer-tile p { margin: 0; color: var(--haze); font-size: .94rem; }
+.empty { padding: 28px; border: 1px dashed var(--line); border-radius: var(--r-lg); color: var(--haze); }
+.empty h3 { color: var(--foam); margin-bottom: 8px; }
+
+/* ---------- Discover ---------- */
+.lists { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.lcard { grid-column: span 2; display: flex; flex-direction: column; background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px; color: var(--foam); text-decoration: none; position: relative; overflow: hidden; }
+.lcard:hover { border-color: var(--sunset); color: var(--foam); }
+.lcard.big { grid-column: span 4; grid-row: span 2; background: linear-gradient(160deg, #3a1462 0%, var(--night-2) 60%); }
+.lcard.big h3 { font-size: 1.7rem; font-style: italic; font-weight: 800; }
+.lcard .lk { color: var(--sunset); font-size: .86rem; font-weight: 500; margin-bottom: 8px; }
+.lcard h3 { margin-bottom: 8px; }
+.lcard p { color: var(--haze); font-size: .95rem; }
+.lcard ol { margin: 4px 0 0; padding-left: 22px; color: var(--haze); }
+.lcard ol li { padding: 3px 0; }
+.lcard ol li::marker { color: var(--sunset); font-weight: 700; }
+.lcard .more { margin-top: auto; padding-top: 12px; color: var(--sunset); font-weight: 500; }
+.entries { list-style: none; margin: 0; padding: 0; counter-reset: e; max-width: 820px; }
+.entry { display: grid; grid-template-columns: 52px 1fr; gap: 4px 16px; padding: 20px 0; border-bottom: 1px solid var(--line); counter-increment: e; }
+.entry .num { grid-row: span 3; font: italic 800 2rem/1 var(--display); color: var(--sunset); }
+.entry .num::before { content: counter(e); }
+.entry h3 { font-size: 1.2rem; }
+.entry p { margin: 4px 0; color: var(--haze); }
+.entry .where { font-size: .86rem; color: var(--haze-2); }
+.entry .facts { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .9rem; color: var(--foam); margin-top: 4px; }
+.entry .facts b { color: var(--haze-2); font-weight: 400; margin-right: 4px; }
+.check { width: 30px; height: 30px; border-radius: 8px; border: 2px solid var(--sunset); background: transparent; cursor: pointer; grid-row: span 3; display: grid; place-items: center; margin-top: 2px; }
+.check svg { width: 18px; height: 18px; opacity: 0; color: var(--night); }
+.entry.done .check { background: var(--sunset); }
+.entry.done .check svg { opacity: 1; }
+.entry.done h3 { text-decoration: line-through; text-decoration-color: var(--sunset); color: var(--haze); }
+.progress { display: flex; align-items: center; gap: 14px; margin: 0 0 8px; max-width: 820px; }
+.progress .bar { flex: 1; height: 8px; border-radius: 99px; background: var(--dusk); overflow: hidden; }
+.progress .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--sunset), var(--flamingo)); transition: width .3s; }
+.tips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; }
+.tip { padding: 16px 0; border-top: 1px solid var(--line); }
+.tip h3 { font-size: 1.02rem; margin-bottom: 6px; }
+.tip p { color: var(--haze); font-size: .94rem; margin: 0 0 6px; }
+
+/* ---------- Meta: tier board ---------- */
+.mtabs { display: flex; gap: 6px; margin-top: 20px; flex-wrap: wrap; }
+.mtabs a { text-decoration: none; color: var(--haze); padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line); font-weight: 500; }
+.mtabs a:hover { color: var(--foam); border-color: var(--haze-2); }
+.mtabs a[aria-current="page"] { background: var(--flamingo); border-color: var(--flamingo); color: var(--night); }
+.meta-lay { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 32px; align-items: start; }
+.board { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); }
+.trow { display: grid; grid-template-columns: 78px 1fr; min-height: 92px; border-top: 1px solid var(--line); }
+.trow:first-child { border-top: 0; }
+.tl { display: grid; place-items: center; font: italic 800 2.2rem/1 var(--display); color: var(--night); background: var(--t); }
+.tl.sm { width: 52px; height: 52px; border-radius: 12px; font-size: 1.6rem; }
+.tl.xs { width: 30px; height: 30px; border-radius: 8px; font-size: 1rem; display: inline-grid; }
+.tl.none { background: var(--dusk); color: var(--haze); }
+.titems { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; background: var(--night-2); align-content: center; }
+.tile { display: flex; flex-direction: column; justify-content: center; min-width: 150px; max-width: 220px; padding: 10px 14px; border-radius: var(--r-md); background: var(--dusk); border: 2px solid transparent; color: var(--foam); text-decoration: none; }
+.tile:hover { border-color: var(--t); color: var(--foam); }
+.tile[aria-current="true"] { border-color: var(--t); background: #3b1d73; }
+.tile b { font-weight: 700; line-height: 1.25; }
+.tile small { color: var(--haze); font-size: .82rem; }
+.tile .sc { font-weight: 700; color: var(--t); }
+.trow .none-msg { color: var(--haze-2); font-size: .9rem; align-self: center; padding-left: 4px; }
+.detail { position: sticky; top: 92px; background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; }
+.detail .dh { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
+.detail h2 { font-size: 1.6rem; }
+.detail .sub { color: var(--haze); font-size: .92rem; }
+.scores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border-radius: var(--r-md); overflow: hidden; margin: 16px 0; }
+.scores div { background: var(--dusk); padding: 10px 12px; }
+.scores b { display: block; font: italic 800 1.5rem/1.1 var(--display); }
+.scores span { color: var(--haze); font-size: .82rem; }
+.scores .thin b { color: var(--haze-2); }
+.vote { display: flex; gap: 8px; margin: 0 0 18px; }
+.vote button { flex: 1; padding: 10px; border-radius: var(--r-md); border: 1px solid var(--line); background: transparent; cursor: pointer; font-weight: 500; }
+.vote button:hover { border-color: var(--haze-2); }
+.vote button[aria-pressed="true"].up { background: var(--aqua); border-color: var(--aqua); color: var(--night); }
+.vote button[aria-pressed="true"].down { background: var(--flamingo); border-color: var(--flamingo); color: var(--night); }
+dl.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0 0 16px; font-size: .95rem; }
+dl.facts dt { color: var(--haze-2); }
+dl.facts dd { margin: 0; }
+.srcs { list-style: none; padding: 0; margin: 8px 0 0; }
+.srcs li { padding: 12px 0; border-top: 1px solid var(--line); font-size: .93rem; }
+.srcs .who { display: flex; justify-content: space-between; gap: 10px; }
+.srcs .rk { color: var(--flamingo); font-weight: 700; white-space: nowrap; }
+.srcs q { display: block; color: var(--haze); margin-top: 4px; }
+.vid { display: inline-block; font-size: .78rem; padding: 1px 8px; border-radius: 99px; background: rgba(255, 61, 139, .18); color: #ff8fbb; margin-left: 6px; vertical-align: 1px; }
+
+
+/* ---------- News + articles ---------- */
+.news { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 36px; }
+.ncard { padding: 18px 0; border-top: 1px solid var(--line); }
+.ncard .nk { display: flex; gap: 12px; flex-wrap: wrap; font-size: .84rem; color: var(--haze-2); margin-bottom: 4px; }
+.status { font-weight: 500; }
+.status.confirmed { color: var(--aqua); } .status.reported { color: var(--sunset); } .status.disputed { color: var(--flamingo); }
+.ncard h3 { margin-bottom: 6px; }
+.ncard p { color: var(--haze); font-size: .95rem; margin-bottom: 6px; }
+.ncard .src { font-size: .88rem; color: var(--haze-2); }
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pcard { display: block; padding: 22px; border-radius: var(--r-lg); background: var(--night-2); border: 1px solid var(--line); color: var(--foam); text-decoration: none; }
+.pcard:hover { border-color: #8ff0a4; color: var(--foam); }
+.pcard .pk { color: #8ff0a4; font-size: .86rem; margin-bottom: 8px; display: block; }
+.pcard p { color: var(--haze); font-size: .94rem; margin: 8px 0 0; }
+.prose { max-width: 72ch; }
+.prose h2 { margin: 36px 0 12px; font-size: 1.5rem; }
+.prose p, .prose li { color: #e6dbf5; }
+.prose ol.steps { padding-left: 0; list-style: none; counter-reset: s; }
+.prose ol.steps li { counter-increment: s; position: relative; padding: 0 0 14px 48px; }
+.prose ol.steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; font: italic 800 1.6rem/1 var(--display); color: var(--aqua); }
+.cites { font-size: .92rem; }
+.faq details { border-top: 1px solid var(--line); padding: 14px 0; max-width: 820px; }
+.faq summary { cursor: pointer; font-weight: 500; }
+.faq details p { color: var(--haze); margin: 8px 0 0; }
+
+/* ---------- Admin + misc ---------- */
+.box { background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px; }
+.sync-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.field { margin: 0 0 14px; } .field label { display: block; font-size: .9rem; color: var(--haze); margin-bottom: 6px; }
+.field input, .field select { width: 100%; height: 44px; border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--night); padding: 0 12px; }
+.btn { border: 0; border-radius: 999px; padding: 10px 18px; font-weight: 700; cursor: pointer; background: var(--flamingo); color: var(--night); }
+.btn.ghost { background: transparent; color: var(--foam); border: 1px solid var(--line); }
+pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-height: 420px; overflow: auto; margin: 0; }
+.ad { margin: 40px auto 0; display: flex; justify-content: center; }
+.ad.promo { padding: 16px 22px; border: 1px solid var(--line); border-radius: var(--r-md); text-decoration: none; color: var(--foam); gap: 4px; flex-direction: column; text-align: center; }
+.ad.promo span { color: var(--haze-2); font-size: .85rem; }
+.loading { padding: 120px 24px; text-align: center; color: var(--haze); }
+.foot { margin-top: 80px; border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--haze-2); font-size: .9rem; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 20px 40px; justify-content: space-between; align-items: center; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 20px; }
+.foot nav a { color: var(--haze); }
+.foot p { margin: 0; max-width: 52ch; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1020px) {
+  .meta-lay, .sres { grid-template-columns: 1fr; }
+  .detail, .side { position: static; }
+  .hnews { grid-template-columns: 1fr 1fr; }
+  .lead { grid-column: span 2; grid-row: auto; margin-bottom: 8px; }
+  .hnews > .feed:nth-child(3) { border-top: 1px solid var(--line); padding-top: 14px; }
+  .cats { grid-template-columns: 1fr 1fr; }
+  .lists.three { grid-template-columns: 1fr 1fr; }
+  .lists { grid-template-columns: repeat(2, 1fr); }
+  .lcard, .lcard.big { grid-column: span 1; grid-row: auto; }
+  .lcard.big { grid-column: span 2; }
+  .tips, .posts { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  body { font-size: 16px; padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+  .wrap { padding: 0 18px; }
+  .top { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--night); } /* a backdrop filter would trap the fixed tab bar inside the header */
+  .top .wrap { height: 60px; gap: 12px; }
+  .hsearch kbd { display: none; }
+  .pillars { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 30; background: rgba(26, 11, 54, .97); border-top: 1px solid var(--line); padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); justify-content: space-around; }
+  .pillars a { flex-direction: column; gap: 2px; padding: 6px 10px; font-size: .76rem; border-radius: 12px; }
+  .pillars a i { display: none; }
+  .pillars svg { display: block; width: 22px; height: 22px; color: var(--c); }
+  .pillars a[aria-current="page"] { background: var(--dusk); }
+  .mrows li:nth-child(n+4) { display: none; }
+  .wordmark { font-size: 1.45rem; }
+  .status-row { padding-top: 14px; padding-bottom: 12px; font-size: .8rem; }
+  .hsearch input { padding-left: 40px; padding-right: 14px; }
+  .hsearch .ico { left: 14px; }
+  .hnews { grid-template-columns: 1fr; }
+  .lead { grid-column: auto; }
+  .hnews > .feed:nth-child(n+6) { display: none; }
+  .hnews > .feed:nth-child(2) { border-top: 0; }
+  .cats, .lists.three, .news, .tips, .posts, .lists, .sync-grid { grid-template-columns: 1fr; }
+  .lcard.big { grid-column: auto; }
+  .trow { grid-template-columns: 54px 1fr; min-height: 76px; }
+  .tl { font-size: 1.7rem; }
+  .tile { min-width: 0; flex: 1 1 140px; }
+  .entry { grid-template-columns: 40px 1fr; }
+  .entry .num { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
 <body>
-<div class="proto"><div class="wrap" id="proto">Updated Daily · Guide Sites + Creator Testing · Daily Refresh 5:52 PM CST</div></div>
+<a class="skip" href="#view" onclick="event.preventDefault();document.getElementById('view').focus()">Skip to content</a>
 
 <header class="top"><div class="wrap">
-  <a class="logo" href="#"><span class="mark" aria-hidden="true"><i></i><i></i></span>Meta Center</a>
-  <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+  <a class="logo" href="#"><span class="wordmark">BEAT SIX</span></a>
+  <form class="hsearch" role="search" id="hsearch">
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="hq" type="search" placeholder="Search guides, cars, tips" aria-label="Search Beat Six" autocomplete="off">
+    <kbd>/</kbd>
+  </form>
+  <nav class="pillars" id="pillars" aria-label="Main">
+    <a href="#search" data-p="search" style="--c: var(--p-search)"><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search</a>
+    <a href="#discover" data-p="discover" style="--c: var(--p-discover)"><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg>Discover</a>
+    <a href="#meta" data-p="meta" style="--c: var(--p-meta)"><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h11M4 18h6"/></svg>Meta</a>
+    <a href="#news" data-p="news" style="--c: #b9a2ff"><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg>News</a>
+  </nav>
 </div></header>
 
-<div id="view"><div class="loading">Loading rankings…</div></div>
+<main id="view" tabindex="-1"><div class="loading">Loading Beat Six…</div></main>
 
-<footer><div class="wrap">
-  <nav aria-label="Site"><a href="#methodology">How rankings work</a><a href="#news">News</a><a href="#articles">Articles</a><a href="#about">About and disclosures</a></nav>
-  <p><b style="color:var(--text)">Meta Center</b> ranks the best cars, weapons, money methods and gear in Grand Theft Auto VI. Critic scores combine the rankings published by GTA 6 guide sites and video creators, with a link and timestamp to each source. Player scores come strictly from real votes cast by people playing the game.</p>
-  <p>Meta Center is an independent fan publication, not affiliated with or endorsed by Rockstar Games or Take-Two Interactive.</p>
+<footer class="foot"><div class="wrap">
+  <p>Beat Six is an independent fan site. It is not affiliated with or endorsed by Rockstar Games or Take-Two Interactive. Every answer links back to the creator or site it came from.</p>
+  <nav aria-label="Site"><a href="#articles">Articles</a><a href="#methodology">How rankings work</a><a href="#about">About and disclosures</a></nav>
 </div></footer>
+
 <script type="application/ld+json" id="ld">{}</script>
+<noscript><p style="padding:24px">Beat Six needs JavaScript to search and rank content.</p></noscript>
 
 <script>
-const SITE = "Meta Center", MIN_VOTES = 1;
+"use strict";
+const SITE = "Beat Six", MIN_VOTES = 1;
 const MODEL_CANDIDATES = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
 
-/* ---------- 1. Global Multi-User Voting (Paste Free Supabase URL & Key Here) ---------- */
-const SUPABASE_URL = "https://qbixagsroeexcnpgdsax.supabase.co/rest/v1/";
+/* ---------- Shared votes (Supabase). Base URL only; the path is added below. ---------- */
+const SUPABASE_URL = "https://qbixagsroeexcnpgdsax.supabase.co".replace(/\/(rest\/v1\/?)?$/, "");
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFiaXhhZ3Nyb2VleGNucGdkc2F4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNDgwODYsImV4cCI6MjExMDcyNDA4Nn0.HYEkYxt2uuGx829AWzNIx6VcQhc9IpaL6HiVtcpsgtM";
 
-/* ---------- 2. Ad Monetization Config (AdSense or Custom Affiliate Banners) ---------- */
+/* ---------- Ads. Slots stay hidden until one of these is filled in. ---------- */
 const AD_CONFIG = {
-  adsenseClient: "", // e.g., "ca-pub-1234567890123456"
-  wideSlotId: "",    // e.g., "1122334455" (728x90 Leaderboard)
-  railSlotId: "",    // e.g., "5566778899" (300x250 Sidebar Rectangle)
-  customBanners: {
-    wide: { title: "", subtitle: "", url: "" }, // Fill to show a live clickable affiliate banner!
-    rail: { title: "", subtitle: "", url: "" }
-  }
+  adsenseClient: "", wideSlotId: "", railSlotId: "",
+  customBanners: { wide: { title: "", subtitle: "", url: "" }, rail: { title: "", subtitle: "", url: "" } }
 };
 
 const CATS = {
-  cars: { tab: "Cars", title: "Best Cars in GTA 6", one: "car", query: "GTA 6 best cars supercars lap time test tier list" },
-  weapons: { tab: "Weapons", title: "Best Weapons in GTA 6", one: "weapon", query: "GTA 6 best weapons guns tier list guide" },
-  money: { tab: "Money", title: "Best Ways to Make Money in GTA 6", one: "money method", query: "GTA 6 best money methods solo guide per hour" },
-  gear: { tab: "Gear", title: "Best Gear and Upgrades in GTA 6", one: "upgrade", query: "GTA 6 best gear tools upgrades key cloner guide" }
+  cars: { tab: "Cars", title: "Best cars in GTA 6", one: "car" },
+  weapons: { tab: "Weapons", title: "Best weapons in GTA 6", one: "weapon" },
+  money: { tab: "Money", title: "Best money methods in GTA 6", one: "money method" },
+  gear: { tab: "Gear", title: "Best gear and upgrades in GTA 6", one: "upgrade" }
 };
-const NEWS_CATS = { launch: "Launch & PS5", tips: "Tips", eggs: "Easter eggs", weapons: "Weapons", vehicles: "Vehicles", items: "Money & items", world: "World" };
+const NEWS_CATS = { launch: "Launch and setup", tips: "Tips", eggs: "Easter eggs", weapons: "Weapons", vehicles: "Vehicles", items: "Money and items", world: "World" };
+const KINDS = { guide: "Guide", list: "List", meta: "Meta ranking", news: "News and tips", article: "Article" };
+const ASKS = ["How do I level up stamina?", "Best way to make money early", "Fastest car", "How to steal supercars", "Aiming without auto-aim", "Where is Bigfoot?"];
 const HOME_FAQ = [
-  ["What is Meta Center?", "Meta Center ranks the best cars, weapons, money methods and gear in GTA 6. Every item gets two scores: a critic score from guide sites and creator testing videos, and a live player score from real community votes."],
-  ["How is the critic score calculated?", "Each day we track the rankings published by GTA 6 guide sites and high-engagement creator testing videos (lap times, recoil tests, and money/hour breakdowns). A #1 spot is worth 100 points and each spot lower is worth 6 fewer, down to 40. The critic score is the average across sources."],
-  ["How is the player score calculated?", "Players vote on whether each item is worth getting (👍 Worth it or 👎 Skip it). There are zero dummy or pre-seeded votes—the player score shows as soon as the first real vote is cast and updates live."],
-  ["How often does the site update?", "Rankings, breaking Command Center news finds, and new item discoveries refresh every evening at 5:52 PM Central. New cited articles publish every three days."]
+  ["What is Beat Six?", "Beat Six collects the best GTA 6 guides, creator tests and tips from across the web and makes them searchable in one place. Every answer links to the creator or site it came from."],
+  ["How are items ranked?", "Each item gets a critic score from guide sites and creator test videos, and a player score from Beat Six visitors who vote. The overall score sets its tier: S is 90 and up, A is 80 to 89, B is 70 to 79, and C is below 70."],
+  ["How often does Beat Six update?", "News, tips and rankings refresh every evening at 5:52 PM Central. New sourced articles publish every three days."]
 ];
 
-const GAMING_SAFETY_SETTINGS = [
-  { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
-  { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-  { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-  { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" }
-];
-
-const UPGRADED_SOURCES_FALLBACK = {
-  "cars-95-gotti-cheetah": [
-    { source: "Broughy1322 (YouTube Track Test)", kind: "youtube", timestamp: "04:12", quote: "Fastest lap time around Vice International Circuit by 1.4 seconds.", url: "https://www.youtube.com/@Broughy1322", rank: 1 },
-    { source: "Digital Car Addict (YouTube Dyno)", kind: "youtube", timestamp: "02:38", quote: "Top speed hits 164 mph on the Leonida Causeway.", url: "https://www.youtube.com/@DigitalCarAddict", rank: 1 },
-    { source: "IGN GTA 6 Vehicle Guide", kind: "web", quote: "Unmatched grip and acceleration in the Super class.", url: "https://www.ign.com/wikis/gta-6", rank: 1 }
-  ],
-  "cars-pegassi-torero-xo": [
-    { source: "Broughy1322 (YouTube Track Test)", kind: "youtube", timestamp: "07:45", quote: "Blistering straight-line speed, requires throttle control in rain.", url: "https://www.youtube.com/@Broughy1322", rank: 2 },
-    { source: "IGN GTA 6 Vehicle Guide", kind: "web", quote: "Best free-roam supercar you can steal in Vice Beach.", url: "https://www.ign.com/wikis/gta-6", rank: 2 },
-    { source: "Kotaku Vehicle Breakdown", kind: "web", quote: "Key cloner required at Vice Beach valet lots.", url: "https://kotaku.com", rank: 1 }
-  ],
-  "cars-grotti-itali-rsx": [
-    { source: "Digital Car Addict (YouTube Test)", kind: "youtube", timestamp: "05:19", quote: "Best handling sports car for weaving downtown traffic.", url: "https://www.youtube.com/@DigitalCarAddict", rank: 2 },
-    { source: "Broughy1322 (YouTube Track Test)", kind: "youtube", timestamp: "09:10", quote: "Most planted AWD cornering in the Sports class.", url: "https://www.youtube.com/@Broughy1322", rank: 3 },
-    { source: "TechRadar GTA 6 Guide", kind: "web", quote: "Only needs a Slim Jim to steal before you unlock the Key Cloner.", url: "https://www.techradar.com", rank: 3 }
-  ],
-  "weapons-carbine-rifle": [
-    { source: "GhillieMaster (YouTube TTK Test)", kind: "youtube", timestamp: "03:22", quote: "Fastest mid-range TTK (0.48s) with controllable vertical recoil.", url: "https://www.youtube.com/@GhillieMaster", rank: 1 },
-    { source: "Inven Global Combat Guide", kind: "web", quote: "Essential all-rounder now that hard lock-on auto-aim is gone.", url: "https://www.invenglobal.com", rank: 1 },
-    { source: "IGN Weapons Tier List", kind: "web", quote: "Pair with a suppressor to delay Leonida police response.", url: "https://www.ign.com/wikis/gta-6", rank: 1 }
-  ],
-  "money-clean-store-robberies": [
-    { source: "TGG (YouTube Solo Money Guide)", kind: "youtube", timestamp: "01:55", quote: "Mask + back-office camera wipe nets $6K in under 4 minutes heat-free.", url: "https://www.youtube.com/@TGG", rank: 1 },
-    { source: "Inven Global Money Guide", kind: "web", quote: "Best Chapter 1 cash method before chop shop fences open.", url: "https://www.invenglobal.com", rank: 1 }
-  ],
-  "gear-key-cloner": [
-    { source: "TGG (YouTube Gear Breakdown)", kind: "youtube", timestamp: "06:04", quote: "Unlocks high-end valet thefts and $40K chop shop flips.", url: "https://www.youtube.com/@TGG", rank: 1 },
-    { source: "Kotaku Mechanics Review", kind: "web", quote: "Single highest-ROI tool unlock in the campaign.", url: "https://kotaku.com", rank: 1 }
-  ]
-};
-
+/* ---------- Helpers ---------- */
 const $ = (id) => document.getElementById(id);
 const el = (t, c, txt) => { const n = document.createElement(t); if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
 function link(href, cls, text) { const a = el("a", cls, text); a.href = href; return a; }
-function ext(href, text) { const a = link(href, "", text); a.rel = "noopener"; a.target = "_blank"; return a; }
+function ext(href, text, cls) { const a = link(href, cls || "", text); a.rel = "noopener"; a.target = "_blank"; return a; }
 const safeUrl = (u) => typeof u === "string" && /^https:\/\//.test(u) ? u : "";
 const fmtDate = (d) => { if (!d) return ""; const x = new Date(d + "T12:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }); };
 const shortDate = (d) => { if (!d) return ""; const x = new Date(d + "T12:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-US", { month: "short", day: "numeric" }); };
+const brand = (s) => typeof s === "string" ? s.replace(/Meta Center/g, SITE) : s;
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
 
-let DATA = null, route = "", sort = "combined", filter = "All", newsFilter = "all", open = null, query = "";
-let tally = {}, myVotes = {}, uid = null, votesOn = true, sharedVotesActive = false;
+let DATA = null, INDEX = [], LISTS = [];
+let tally = {}, myVotes = {}, uid = null, sharedVotesActive = false;
+let newsFilter = "all", searchKind = "all";
 
-/* ---------- Ad Slot Renderer ---------- */
-function renderAdSlot(kind, tag = "div") {
-  const isRail = kind === "rail";
-  const banner = isRail ? AD_CONFIG.customBanners.rail : AD_CONFIG.customBanners.wide;
+/* ---------- Ads ---------- */
+function renderAdSlot(kind) {
+  const banner = AD_CONFIG.customBanners[kind];
   if (banner && banner.url && banner.title) {
-    const a = ext(banner.url, "");
-    a.className = "ad promo " + kind;
-    const inner = el("div");
-    inner.append(el("strong", "", banner.title), el("span", "", banner.subtitle || "Sponsored Partner"));
-    a.append(inner);
+    const a = ext(banner.url, "", "ad promo " + kind);
+    a.append(el("strong", "", banner.title), el("span", "", banner.subtitle || "Sponsored"));
     return a;
   }
-  const slotId = isRail ? AD_CONFIG.railSlotId : AD_CONFIG.wideSlotId;
+  const slotId = kind === "rail" ? AD_CONFIG.railSlotId : AD_CONFIG.wideSlotId;
   if (AD_CONFIG.adsenseClient && slotId) {
-    const wrap = el(tag, "ad " + kind);
-    const ins = document.createElement("ins");
-    ins.className = "adsbygoogle";
-    ins.style.display = "block";
-    ins.setAttribute("data-ad-client", AD_CONFIG.adsenseClient);
-    ins.setAttribute("data-ad-slot", slotId);
-    ins.setAttribute("data-ad-format", "auto");
-    ins.setAttribute("data-full-width-responsive", "true");
+    const wrap = el("div", "ad " + kind), ins = document.createElement("ins");
+    ins.className = "adsbygoogle"; ins.style.display = "block";
+    ins.setAttribute("data-ad-client", AD_CONFIG.adsenseClient); ins.setAttribute("data-ad-slot", slotId);
+    ins.setAttribute("data-ad-format", "auto"); ins.setAttribute("data-full-width-responsive", "true");
     wrap.append(ins);
     setTimeout(() => { try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {} }, 50);
     return wrap;
   }
-  return el(tag, "ad " + kind, isRail ? "Ad · 300 × 250" : "Ad · 728 × 90");
+  return document.createComment("ad slot");
 }
 
-/* ---------- Scoring (100% Real User Votes — Zero Dummy Seed Votes) ---------- */
+/* ---------- Scoring ---------- */
 const items = (c) => (DATA.categories[c] || []);
 const points = (r) => Math.max(40, 100 - 6 * (r - 1));
 function critic(it) {
   const rs = (it.ranks || []).filter(r => Number.isFinite(r.rank) && r.rank >= 1);
-  if (rs.length < 1) return null;
+  if (!rs.length) return null;
   return Math.round(rs.reduce((s, r) => s + points(r.rank), 0) / rs.length);
 }
 const votesOf = (it) => (tally[it.id] || {}).n || 0;
 const upsOf = (it) => (tally[it.id] || {}).up || 0;
-function player(it) {
-  const n = votesOf(it);
-  return n >= MIN_VOTES ? Math.min(100, Math.max(0, Math.round((upsOf(it) / n) * 100))) : null;
-}
+function player(it) { const n = votesOf(it); return n >= MIN_VOTES ? Math.round((upsOf(it) / n) * 100) : null; }
 function combined(it) {
   const c = critic(it), p = player(it);
   if (c == null && p == null) return null;
-  if (c == null) return p;
-  if (p == null) return c;
+  if (c == null) return p; if (p == null) return c;
   return Math.round((c + p) / 2);
 }
 const tierOf = (n) => n == null ? "–" : n >= 90 ? "S" : n >= 80 ? "A" : n >= 70 ? "B" : "C";
-const tierVar = (t) => t === "–" ? "var(--panel-2)" : "var(--tier-" + t.toLowerCase() + ")";
+const tierVar = (t) => t === "–" ? "var(--dusk)" : "var(--tier-" + t.toLowerCase() + ")";
 const byScore = (f) => (a, b) => (f(b) ?? -1) - (f(a) ?? -1);
 const ranked = (c) => items(c).slice().sort(byScore(combined));
-const keyOf = (c, it) => c + "|" + it.id;
-const allItems = () => Object.keys(CATS).flatMap(c => items(c).map(i => ({ c, i })));
 const news = () => (DATA.news || []).slice().sort((a, b) => (b.added || "").localeCompare(a.added || ""));
 const posts = () => (DATA.posts || []).slice().sort((a, b) => (b.published || "").localeCompare(a.published || ""));
+const guides = () => (DATA.guides || []).filter(g => g && g.id && g.title);
+function tierBox(t, size) {
+  const b = el("span", "tl" + (size ? " " + size : "") + (t === "–" ? " none" : ""), t);
+  b.style.setProperty("--t", tierVar(t)); b.title = t === "–" ? "Not enough data for a tier yet" : t + " tier";
+  return b;
+}
+const isVideo = (r) => r.kind === "youtube" || /youtube/i.test(r.source || "");
+function payoutMax(it) {
+  const s = (it.facts || {}).Payout || "";
+  let max = 0;
+  for (const m of s.matchAll(/\$\s?([\d,.]+)\s*([KkMm])?/g)) {
+    let v = parseFloat(m[1].replace(/,/g, "")); if (m[2]) v *= /m/i.test(m[2]) ? 1e6 : 1e3;
+    if (v > max) max = v;
+  }
+  return max;
+}
 
-/* ---------- Shared bits ---------- */
+/* ---------- Discover lists ----------
+   data.lists (written by the content job) comes first. Until it has enough,
+   these lists are assembled from items and news already in data.json. */
+function entryFromItem(c, it) {
+  return { title: it.name, body: it.blurb || "", where: it.get || "", facts: it.facts || {}, href: "#meta/" + c + "/" + it.id };
+}
+function entryFromNews(n) {
+  return { title: n.title, body: n.body || "", source: { name: n.source, url: n.url } };
+}
+function buildLists() {
+  const out = [];
+  for (const l of (DATA.lists || [])) {
+    if (!l || !l.id || !l.title || !(l.entries || []).length) continue;
+    out.push({
+      id: l.id, title: l.title, dek: l.dek || "", kind: l.kind === "checklist" ? "checklist" : "ranked", stage: l.stage || "",
+      updated: l.updated || "",
+      entries: l.entries.map(e => ({
+        title: e.title, body: e.body || "", where: e.where || "",
+        href: e.ref && /^[a-z]+\/[\w-]+$/.test(e.ref) ? "#meta/" + e.ref : "",
+        source: e.source || null
+      })),
+      sources: l.sources || []
+    });
+  }
+  const have = (id) => out.some(l => l.id === id);
+  const ns = news();
+  const derived = [
+    {
+      id: "early-game", kind: "checklist", stage: "Early game", title: "Your first hours: an early-game checklist",
+      dek: "Settings, saves and money habits worth getting right before the story picks up.",
+      entries: [
+        ...ns.filter(n => ["Required", "Settings"].includes(n.tag)).map(entryFromNews),
+        ...ns.filter(n => n.cat === "tips").map(entryFromNews),
+        ...ns.filter(n => n.cat === "items").map(entryFromNews),
+        ...items("money").filter(i => /early/i.test(i.type || "")).sort(byScore(combined)).slice(0, 2).map(i => entryFromItem("money", i))
+      ]
+    },
+    {
+      id: "money-makers", kind: "ranked", stage: "Money", title: "The most lucrative money methods",
+      dek: "Every tracked money method, sorted by its best reported payout.",
+      entries: items("money").slice().sort((a, b) => payoutMax(b) - payoutMax(a)).map(i => entryFromItem("money", i))
+    },
+    {
+      id: "car-theft", kind: "checklist", stage: "Vehicles", title: "Car theft, from hotwire to supercar",
+      dek: "The tools to unlock in order, and how to keep what you steal.",
+      entries: [
+        ...items("gear").filter(i => /tool/i.test(i.type || "")).sort((a, b) => (/slim/i.test(a.name) ? -1 : 1)).map(i => entryFromItem("gear", i)),
+        ...ns.filter(n => n.cat === "vehicles").map(entryFromNews)
+      ]
+    },
+    {
+      id: "combat-basics", kind: "checklist", stage: "Combat", title: "Combat without auto-aim",
+      dek: "What changed about gunfights, and the loadout that handles it.",
+      entries: [
+        ...ns.filter(n => n.cat === "weapons").map(entryFromNews),
+        ...items("gear").filter(i => /attach|protect/i.test(i.type || "")).map(i => entryFromItem("gear", i)),
+        ...ranked("weapons").slice(0, 2).map(i => entryFromItem("weapons", i))
+      ]
+    },
+    {
+      id: "fastest-rides", kind: "ranked", stage: "Vehicles", title: "Fastest rides by top speed",
+      dek: "Tracked cars and bikes, sorted by their tested top speed.",
+      entries: items("cars").slice().sort((a, b) => (parseFloat((b.facts || {})["Top speed"]) || 0) - (parseFloat((a.facts || {})["Top speed"]) || 0)).map(i => entryFromItem("cars", i))
+    },
+    {
+      id: "secrets", kind: "ranked", stage: "Secrets", title: "Secrets and easter eggs",
+      dek: "Confirmed and reported finds from players around Leonida.",
+      entries: ns.filter(n => n.cat === "eggs").map(entryFromNews)
+    }
+  ];
+  for (const l of derived) if (!have(l.id) && l.entries.length >= 2) out.push(l);
+  return out;
+}
+
+/* ---------- Search index ---------- */
+const STOP = new Set("a an and are best can do does for get gta gta6 6 vi how i in is it me my of on or the to up way what where which who why with you your make good".split(" "));
+const SYN = {
+  stamina: ["sprint", "swim", "gym", "train"], level: ["train", "upgrade", "stat"], train: ["stamina", "gym", "stat"],
+  money: ["cash", "payout", "earn"], cash: ["money"], earn: ["money", "payout"], rich: ["money"],
+  car: ["vehicle", "cars"], cars: ["vehicle"], vehicle: ["car"], ride: ["car", "vehicle", "motorcycle"],
+  fast: ["speed", "top"], fastest: ["speed", "top"], quick: ["speed"],
+  gun: ["weapon", "rifle", "pistol"], guns: ["weapon"], weapon: ["gun"], aim: ["aiming", "focus"], aiming: ["aim"],
+  steal: ["theft", "cloner", "hotwire"], stealing: ["theft"], heist: ["vault", "robbery"], rob: ["robbery", "heist"],
+  secret: ["easter", "egg"], secrets: ["easter", "egg"], easter: ["egg", "secret"]
+};
+const stem = (w) => w.length > 4 ? w.replace(/(ing|ed|es|s)$/, "") : w;
+const tokens = (s) => (s || "").toLowerCase().normalize("NFKD").replace(/[^\w\s$']/g, " ").split(/\s+/).filter(Boolean);
+function addDoc(d) {
+  d.tt = tokens(d.title).map(stem);
+  d.gt = tokens((d.tags || []).join(" ")).map(stem);
+  d.bt = tokens(d.text).map(stem);
+  INDEX.push(d);
+}
+function buildIndex() {
+  INDEX = [];
+  for (const g of guides()) addDoc({
+    kind: "guide", title: g.title, href: "#guide/" + g.id, tags: g.tags || [],
+    text: [g.summary, ...(g.steps || [])].join(" "), snippet: g.summary || "", where: (g.sources || []).map(s => s.publisher || s.title).filter(Boolean).slice(0, 2).join(", ")
+  });
+  for (const l of LISTS) addDoc({
+    kind: "list", title: l.title, href: "#list/" + l.id, tags: [l.stage],
+    text: [l.dek, ...l.entries.map(e => e.title + " " + e.body)].join(" "), snippet: l.dek, where: l.entries.length + " entries"
+  });
+  for (const c of Object.keys(CATS)) for (const it of items(c)) addDoc({
+    kind: "meta", title: it.name, href: "#meta/" + c + "/" + it.id, tags: [CATS[c].tab, CATS[c].one, it.type],
+    text: [it.blurb, it.get, ...Object.entries(it.facts || {}).map(([k, v]) => k + " " + v)].join(" "),
+    snippet: it.blurb || "", where: CATS[c].tab + ", " + (it.type || ""), cat: c, item: it
+  });
+  for (const n of news()) addDoc({
+    kind: "news", title: n.title, href: safeUrl(n.url), external: true, tags: [NEWS_CATS[n.cat], n.tag],
+    text: n.body, snippet: n.body || "", where: [n.source, shortDate(n.added)].filter(Boolean).join(", ")
+  });
+  for (const p of posts()) addDoc({
+    kind: "article", title: p.title, href: "#a-" + p.slug, tags: p.tags || [],
+    text: [p.dek, ...(p.sections || []).flatMap(s => [s.h, ...(s.p || [])])].join(" "), snippet: p.dek || "", where: fmtDate(p.published)
+  });
+}
+function queryTerms(q) {
+  const raw = tokens(q);
+  let core = raw.filter(t => !STOP.has(t));
+  if (!core.length) core = raw;
+  return core.map(t => ({ t: stem(t), alts: (SYN[t] || []).map(stem) }));
+}
+function hitIn(arr, term) { let n = 0; for (const w of arr) if (w === term || (term.length >= 3 && w.startsWith(term))) n++; return n; }
+function search(q) {
+  const terms = queryTerms(q);
+  if (!terms.length) return { terms, hits: [] };
+  const hits = [];
+  for (const d of INDEX) {
+    let score = 0, matched = 0;
+    for (const { t, alts } of terms) {
+      let s = hitIn(d.tt, t) * 8 + hitIn(d.gt, t) * 5 + Math.min(3, hitIn(d.bt, t)) * 1.5;
+      if (!s) for (const a of alts) s = Math.max(s, (hitIn(d.tt, a) * 8 + hitIn(d.gt, a) * 5 + Math.min(3, hitIn(d.bt, a)) * 1.5) * 0.6);
+      if (s) { matched++; score += s; }
+    }
+    if (!matched) continue;
+    score *= matched / terms.length;           // reward matching more of the question
+    if (matched === terms.length) score *= 1.4;
+    score *= { guide: 1.25, list: 1.1, meta: 1, article: 1, news: .9 }[d.kind];
+    hits.push({ d, score });
+  }
+  hits.sort((a, b) => b.score - a.score);
+  const floor = hits.length ? hits[0].score * 0.18 : 0;   // drop weak, incidental matches
+  return { terms, hits: hits.filter(h => h.score >= floor) };
+}
+function highlight(text, terms) {
+  const frag = document.createDocumentFragment();
+  const words = terms.flatMap(x => [x.t, ...x.alts]).filter(w => w.length >= 3).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  if (!words.length || !text) { frag.append(text || ""); return frag; }
+  const re = new RegExp("\\b(" + words.join("|") + ")\\w*", "gi");
+  let last = 0;
+  for (const m of text.matchAll(re)) { frag.append(text.slice(last, m.index), el("mark", "", m[0])); last = m.index + m[0].length; }
+  frag.append(text.slice(last));
+  return frag;
+}
+function clip(s, n) { s = s || ""; return s.length > n ? s.slice(0, s.lastIndexOf(" ", n)) + "…" : s; }
+
+/* ---------- Page scaffolding ---------- */
 function setLD(graph) { $("ld").textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }); }
 function setMeta(title, desc) { document.title = title; if (desc) $("metadesc").setAttribute("content", desc); }
 function faqLD(list) { return { "@type": "FAQPage", mainEntity: list.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }; }
 function faqNode(list) { const f = el("div", "faq"); for (const [q, a] of list) { const d = el("details"); d.append(el("summary", "", q), el("p", "", a)); f.append(d); } return f; }
-function section(title, sub, more) {
+function view() { const v = $("view"); v.textContent = ""; return v; }
+function pageHead(pillar, crumbs, title, lede) {
+  const s = el("section", "page-h p-" + pillar), w = el("div", "wrap");
+  if (crumbs) { const c = el("nav", "crumbs"); c.setAttribute("aria-label", "Breadcrumb"); crumbs.forEach((x, i) => { if (i) c.append(" / "); c.append(Array.isArray(x) ? link(x[0], "", x[1]) : x); }); w.append(c); }
+  w.append(el("h1", "", title));
+  if (lede) w.append(el("p", "lede", lede));
+  s.append(w); return [s, w];
+}
+function sectionBlock(title, more) {
   const s = el("section", "block"), w = el("div", "wrap"), h = el("div", "sec-h");
-  h.append(el("h2", "", title)); if (more) h.append(link(more[0], "", more[1])); else if (sub) h.append(el("p", "", sub));
+  h.append(el("h2", "", title)); if (more) h.append(link(more[0], "", more[1]));
   w.append(h); s.append(w); return [s, w];
 }
-function tierBox(cls, t) { const b = el("span", cls, t); b.style.setProperty("--t", tierVar(t)); b.title = t === "–" ? "Not enough data for a tier" : t + " tier"; return b; }
-function scoreNode(kind, it) {
-  if (kind === "critic") {
-    const c = critic(it);
-    const s = el("div", "score critic" + (c == null ? " thin" : "")); s.append(el("b", "", c == null ? "—" : String(c)), el("span", "", c == null ? (it.ranks || []).length + " src" : "Critics")); return s;
-  }
-  const p = player(it);
-  if (p == null) { const s = el("div", "score player thin"); s.append(el("b", "", "Vote"), el("span", "", "0 votes")); return s; }
-  const s = el("div", "score player"); s.append(el("b", "", p + "%"), el("span", "", votesOf(it) + (votesOf(it) === 1 ? " vote" : " votes"))); return s;
+function searchForm(cls, value, onInput) {
+  const f = el("form", cls); f.setAttribute("role", "search");
+  const inp = el("input"); inp.type = "search"; inp.value = value || ""; inp.autocomplete = "off";
+  inp.setAttribute("aria-label", "Search Beat Six"); inp.placeholder = "How do I level up stamina?";
+  f.append(inp);
+  f.onsubmit = (e) => { e.preventDefault(); go("search", inp.value); };
+  if (onInput) inp.oninput = () => onInput(inp.value);
+  return [f, inp];
 }
-function newsCard(n, withBody) {
-  const d = el("article", "ncard");
-  const k = el("div", "kick");
+function go(where, q) { location.hash = where + (q && q.trim() ? "?q=" + encodeURIComponent(q.trim()) : ""); }
+function newsCard(n) {
+  const d = el("article", "ncard"), k = el("div", "nk");
   k.append(el("span", "", shortDate(n.added)), el("span", "", NEWS_CATS[n.cat] || n.cat || ""));
-  if (n.status) k.append(el("span", "pill " + n.status, n.status));
+  if (n.status) k.append(el("span", "status " + n.status, n.status[0].toUpperCase() + n.status.slice(1)));
   d.append(k, el("h3", "", n.title || ""));
-  if (withBody && n.body) d.append(el("p", "", n.body));
+  if (n.body) d.append(el("p", "", n.body));
   const src = el("div", "src"); src.append("Source: ");
   const u = safeUrl(n.url); src.append(u ? ext(u, n.source || "link") : (n.source || "unknown"));
   d.append(src); return d;
 }
 function postCard(p) {
   const a = link("#a-" + p.slug, "pcard");
-  a.append(el("span", "lab", (p.tags || [])[0] ? p.tags[0] + " · " + shortDate(p.published) : shortDate(p.published)), el("h3", "", p.title), el("p", "", p.dek || ""));
+  a.append(el("span", "pk", [(p.tags || [])[0], shortDate(p.published)].filter(Boolean).join(", ")), el("h3", "", p.title), el("p", "", p.dek || ""));
   return a;
 }
 
-function renderTabs() {
-  const t = $("tabs"); t.textContent = "";
-  for (const [id, c] of Object.entries(CATS)) { const a = link("#" + id, "", c.tab); if (route === id) a.setAttribute("aria-current", "page"); t.append(a); }
-  const latest = news()[0];
-  const n = link("#news", latest && latest.added === (DATA.meta || {}).newsSynced ? "newsy" : "", "News"); if (route === "news") n.setAttribute("aria-current", "page"); t.append(n);
-  const a = link("#articles", "", "Articles"); if (route === "articles" || route.startsWith("a-")) a.setAttribute("aria-current", "page"); t.append(a);
-}
-
 /* ---------- Home ---------- */
-function miniRow(id, i, n) {
-  const li = el("li"), a = link("#" + id, "mrow");
-  a.onclick = () => { open = keyOf(id, i); };
-  const ytCount = (i.ranks || []).filter(r => r.kind === "youtube" || /youtube/i.test(r.source || "")).length;
-  const srcCount = (i.ranks || []).length;
-  const nm = el("span", "mname"); nm.append(el("b", "", i.name), el("small", "", i.type + (ytCount ? " · " + ytCount + " video tests" : " · " + srcCount + " sources")));
-  const c = critic(i), p = player(i);
-  a.append(el("span", "mrank", String(n + 1)), tierBox("mtier", tierOf(combined(i))), nm, el("span", "mc" + (c == null ? " thin" : ""), c == null ? "—" : String(c)), el("span", "mp" + (p == null ? " thin" : ""), p == null ? "Vote" : p + "%"));
-  li.append(a); return li;
-}
 function renderHome() {
-  setMeta("Best Items in GTA 6: Cars, Weapons, Money and Gear Rankings | " + SITE, "The best cars, weapons, money methods and gear in GTA 6, ranked by critic scores from guide sites, creator tests, and real player votes. Updated daily.");
-  const v = $("view"); v.textContent = "";
-  const top = el("section", "htop"), w = el("div", "wrap");
-  const sub = el("p", "sub");
-  sub.append("Ranked by ", el("span", "down", "critic score"), " (guide sites + creator video tests) and ", el("span", "up", "player score"), " (100% real user votes — click any item to vote). Updated " + fmtDate(DATA.meta.updated) + ".");
-  const search = el("div", "search");
-  const inp = el("input"); inp.id = "search"; inp.type = "search"; inp.placeholder = "Search an item, like \"Carbine Rifle\" or \"Key Cloner\""; inp.value = query; inp.setAttribute("aria-label", "Search items");
-  const res = el("div", "results"); res.id = "results";
-  inp.oninput = (e) => { query = e.target.value; drawResults(); };
-  search.append(inp, res);
-  w.append(el("h1", "", "Best items in GTA 6"), sub, search); top.append(w); v.append(top);
-  drawResults();
+  setMeta("Beat Six: the GTA 6 meta, guides and news in one place", "The best GTA 6 cars, weapons, money methods and gear, ranked by guide sites, creator tests and player votes, plus checklists, guides and daily news.");
+  const v = view();
+  const status = el("div", "wrap status-row");
+  status.append(el("span", "", DATA.meta.patch || ""), el("span", "", "Rankings updated " + fmtDate(DATA.meta.updated)));
+  v.append(status);
 
-  const nl = news().slice(0, 4);
-  if (nl.length) { const [s, sw] = section("Latest from the Command Center", null, ["#news", "All " + news().length + " news finds →"]); const g = el("div", "strip"); nl.forEach(n => g.append(newsCard(n, false))); sw.append(g); v.append(s); }
-
-  const [sc, wc] = section("Rankings", "Top 5 in each category (Click any item to view creator tests & cast your vote)");
-  const grid = el("div", "cats");
-  for (const [id, c] of Object.entries(CATS)) {
-    const box = el("section", "cat"), h = el("div", "cat-h");
-    const h2 = el("h2", "", c.title.replace(" in GTA 6", ""));
-    h.append(h2, link("#" + id, "", "All " + items(id).length + " →"));
-    const head = el("div", "mhead"); head.setAttribute("aria-hidden", "true");
-    head.append(el("span", "", "#"), el("span", "", "Tier"), el("span", "", "Item"), el("span", "", "Critics"), el("span", "", "Players"));
-    const ol = el("ol", "mini-list"); ranked(id).slice(0, 5).forEach((i, n) => ol.append(miniRow(id, i, n)));
-    box.append(h, head, ol); grid.append(box);
+  // News first
+  const nl = news();
+  if (nl.length) {
+    const [sn, wn] = sectionBlock("Latest news", ["#news", "All " + nl.length + " stories"]);
+    sn.style.paddingTop = "28px";
+    const g = el("div", "hnews");
+    const kick = (n) => { const k = el("div", "nk"); k.append(el("span", "", shortDate(n.added)), el("span", "", NEWS_CATS[n.cat] || "")); if (n.status) k.append(el("span", "status " + n.status, n.status[0].toUpperCase() + n.status.slice(1))); return k; };
+    const title = (n) => { const u = safeUrl(n.url); return u ? ext(u, n.title) : el("span", "", n.title); };
+    const [first, ...rest] = nl;
+    const lead = el("article", "lead"), h = el("h3");
+    h.append(title(first)); lead.append(kick(first), h);
+    if (first.body) lead.append(el("p", "", first.body));
+    if (first.source) lead.append(el("div", "src", "Source: " + first.source));
+    g.append(lead);
+    rest.slice(0, 6).forEach(n => { const f = el("article", "feed"); f.append(kick(n), title(n)); if (n.source) f.append(el("div", "src", n.source)); g.append(f); });
+    wn.append(g); v.append(sn);
   }
-  wc.append(grid); v.append(sc);
 
-  const [sp, wp] = section("Latest articles", null, ["#articles", "All articles →"]);
+  // Then the meta
+  const [sm, wm] = sectionBlock("Current Meta", ["#meta", "Full tier lists"]);
+  const cats = el("div", "cats");
+  for (const c of Object.keys(CATS)) {
+    const box = el("section", "cat"), hh = el("div", "cat-h"), h3 = el("h3");
+    h3.append(link("#meta/" + c, "", CATS[c].tab));
+    hh.append(h3, link("#meta/" + c, "", "All " + items(c).length));
+    const ol = el("ol", "mrows");
+    ranked(c).slice(0, 5).forEach(x => {
+      const sc = combined(x), t = tierOf(sc), li = el("li"), a = link("#meta/" + c + "/" + x.id);
+      a.style.setProperty("--t", tierVar(t));
+      const nm = el("span"); nm.append(el("b", "", x.name), el("small", "", x.type || ""));
+      a.append(tierBox(t, "xs"), nm, el("span", "sc" + (sc == null ? " thin" : ""), sc == null ? "New" : String(sc)));
+      li.append(a); ol.append(li);
+    });
+    box.append(hh, ol); cats.append(box);
+  }
+  wm.append(cats); v.append(sm);
+
+  if (LISTS.length) {
+    const [s, w] = sectionBlock("What to do next", ["#discover", "All lists"]);
+    const g = el("div", "lists three");
+    LISTS.slice(0, 3).forEach(l => g.append(listCard(l)));
+    w.append(g); v.append(s);
+  }
   const pl = posts().slice(0, 3);
-  if (pl.length) { const g = el("div", "posts"); pl.forEach(p => g.append(postCard(p))); wp.append(g); }
-  else wp.append(el("div", "empty", "New articles publish every three days."));
-  v.append(sp);
-
-  const adw = el("div", "wrap"); adw.append(renderAdSlot("wide")); v.append(adw);
-  const [s3, w3] = section("About the rankings"); w3.append(faqNode(HOME_FAQ)); v.append(s3);
-
+  if (pl.length) {
+    const [s, w] = sectionBlock("Latest articles", ["#articles", "All articles"]);
+    const g = el("div", "posts"); pl.forEach(p => g.append(postCard(p))); w.append(g); v.append(s);
+  }
+  const ad = el("div", "wrap"); ad.append(renderAdSlot("wide")); v.append(ad);
+  const [sf, wf] = sectionBlock("About Beat Six"); wf.append(faqNode(HOME_FAQ)); v.append(sf);
   setLD([
-    { "@type": "WebSite", name: SITE, description: "Rankings of the best items in GTA 6 with critic and player scores." },
-    ...Object.entries(CATS).map(([id, c]) => ({ "@type": "ItemList", name: c.title, itemListElement: ranked(id).slice(0, 5).map((i, n) => ({ "@type": "ListItem", position: n + 1, name: i.name })) })),
+    { "@type": "WebSite", name: SITE, potentialAction: { "@type": "SearchAction", target: location.origin + location.pathname + "#search?q={query}", "query-input": "required name=query" } },
+    ...Object.keys(CATS).map(c => ({ "@type": "ItemList", name: CATS[c].title, itemListElement: ranked(c).slice(0, 5).map((x, n) => ({ "@type": "ListItem", position: n + 1, name: x.name })) })),
     faqLD(HOME_FAQ)
   ]);
 }
-function drawResults() {
-  const r = $("results"); if (!r) return; r.textContent = "";
-  const q = query.trim().toLowerCase(); if (!q) return;
-  const hits = allItems().filter(({ i }) => [i.name, i.type, i.get, i.blurb].join(" ").toLowerCase().includes(q)).slice(0, 6);
-  if (!hits.length) { r.append(el("div", "res", "No matches yet")); return; }
-  for (const { c, i } of hits) {
-    const a = link("#" + c, "res"); a.onclick = () => { open = keyOf(c, i); query = ""; };
-    const nm = el("div"); nm.append(el("span", "", i.name), el("small", "", CATS[c].tab + " · " + i.type));
-    const cc = critic(i), p = player(i);
-    const mini = el("div", "mini"); mini.append(el("span", "down", cc == null ? "—" : String(cc)), el("span", "up", p == null ? "Vote" : p + "%"));
-    a.append(nm, mini); r.append(a);
-  }
-}
 
-/* ---------- Category ---------- */
-function catFaq(id) {
-  const c = CATS[id], r = ranked(id), top = r[0]; if (!top) return [];
-  const fav = r.filter(i => player(i) != null).sort(byScore(player))[0];
-  const critTop = r.filter(i => critic(i) != null).sort(byScore(critic))[0];
-  const tc = critic(top), tp = player(top);
-  const list = [["What is the best " + c.one + " in GTA 6?", "Right now the best " + c.one + " in GTA 6 is the " + top.name + (tc != null ? ", with a critic score of " + tc : "") + (tp != null ? " and a player score of " + tp + "%" : "") + ". " + (top.blurb || "")]];
-  if (fav && fav !== top) list.push(["Which " + c.one + " do players like most?", "Players rate the " + fav.name + " highest, at " + player(fav) + "%."]);
-  if (critTop && critTop !== top) list.push(["Which " + c.one + " do guide sites and creators rank highest?", "Critics and video testers rank the " + critTop.name + " highest, with a critic score of " + critic(critTop) + "."]);
-  list.push(["How often is this list updated?", "Critic scores refresh daily at 5:52 PM Central from GTA 6 guide sites and creator testing videos. Player scores update live as real votes come in."]);
-  return list;
-}
-function renderCategory(id) {
-  const c = CATS[id], r = ranked(id), top = r[0];
-  setMeta(c.title + " (Critic + Player Scores) | " + SITE, c.title + ", ranked by critic scores from guide sites, creators, and player votes. Updated " + fmtDate(DATA.meta.updated) + ".");
-  const v = $("view"); v.textContent = "";
-  const hero = el("section", "chero"), w = el("div", "wrap");
-  const crumbs = el("nav", "crumbs"); crumbs.setAttribute("aria-label", "Breadcrumb"); crumbs.append(link("#", "", "Home"), " › " + c.tab);
-  const h1 = el("h1", "", c.title);
-  w.append(crumbs, h1);
-  if (top) {
-    const ans = el("div", "answer"); ans.append(el("span", "lab", "Quick answer · Multi-Source Consensus"));
-    const tc = critic(top), tp = player(top);
-    ans.append(el("p", "", "The best " + c.one + " in GTA 6 right now is the " + top.name + " (" + [tc != null ? "critics " + tc : null, tp != null ? "players " + tp + "%" : "awaiting first player votes"].filter(Boolean).join(", ") + "). " + (top.blurb || "")));
-    const ul = el("ul");
-    const fav = r.filter(i => player(i) != null).sort(byScore(player))[0];
-    if (fav && fav !== top) ul.append(el("li", "", "Players' favorite: " + fav.name + " (" + player(fav) + "%)"));
-    r.slice(1, 3).forEach((i, n) => ul.append(el("li", "", "#" + (n + 2) + ": " + i.name + (critic(i) != null ? " (critics " + critic(i) + ")" : ""))));
-    const srcCount = new Set(items(id).flatMap(i => (i.ranks || []).map(x => x.source))).size;
-    const totalRealVotes = items(id).reduce((s, i) => s + votesOf(i), 0);
-    ans.append(ul, el("small", "", "Updated " + fmtDate(DATA.meta.updated) + " from " + srcCount + " guide & creator sources and " + totalRealVotes.toLocaleString() + " real user votes."));
-    w.append(ans);
-  }
-  hero.append(w); v.append(hero);
-
-  const lay = el("div", "wrap layout"), main = el("main"), aside = el("aside");
-  const ctl = el("div", "controls");
-  ctl.append(el("span", "ctl-label", "Rank by"));
-  const seg = el("div", "seg"); seg.setAttribute("role", "group"); seg.setAttribute("aria-label", "Rank by");
-  for (const [k, label] of [["combined", "Overall"], ["critic", "Critics"], ["player", "Players"]]) {
-    const b = el("button", "", label); b.type = "button"; b.dataset.sort = k; b.setAttribute("aria-pressed", String(sort === k));
-    b.onclick = () => { sort = k; render(); }; seg.append(b);
-  }
-  const types = ["All", ...new Set(items(id).map(i => i.type).filter(Boolean))];
-  const chips = el("div", "chips");
-  for (const f of types) { const b = el("button", "", f); b.type = "button"; b.setAttribute("aria-pressed", String(filter === f)); b.onclick = () => { filter = f; render(); }; chips.append(b); }
-  ctl.append(seg, chips); main.append(ctl);
-
-  const list = el("ol", "list");
-  const val = sort === "critic" ? critic : sort === "player" ? player : combined;
-  const shown = items(id).filter(i => filter === "All" || i.type === filter).sort(byScore(val));
-  if (!shown.length) list.append(el("li", "empty", "Nothing ranked in this type yet"));
-  shown.forEach((it, idx) => {
-    const k = keyOf(id, it), isOpen = open === k;
-    const row = el("li", "row" + (isOpen ? " open" : "") + (idx === 0 ? " first" : ""));
-    const head = el("button", "head"); head.type = "button"; head.setAttribute("aria-expanded", String(isOpen));
-    const name = el("div", "name"); const h3 = el("h3", "", it.name);
-    name.append(h3, el("small", "", [it.type, it.get].filter(Boolean).join(" · ")));
-    const sc = el("div", "scores"); sc.append(scoreNode("critic", it), scoreNode("player", it));
-    head.append(el("div", "rank", String(idx + 1)), tierBox("tier", tierOf(combined(it))), name, sc);
-    head.onclick = () => { open = isOpen ? null : k; render(); };
-    row.append(head);
-    if (isOpen) row.append(detailNode(id, it));
-    list.append(row);
-    if (idx === 2 && shown.length > 3) list.append(renderAdSlot("inline", "li"));
+/* ---------- Search ---------- */
+function renderSearch(q) {
+  setMeta((q ? q + " | " : "Search | ") + SITE, "Search GTA 6 guides, lists, tier rankings, news and articles on Beat Six.");
+  const v = view();
+  const [s, w] = pageHead("search", null, "Search", null);
+  const bar = el("div", "sbar");
+  bar.innerHTML = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+  let t = null;
+  const [form, inp] = searchForm("", q, (val) => {
+    clearTimeout(t);
+    t = setTimeout(() => { history.replaceState(null, "", "#search" + (val.trim() ? "?q=" + encodeURIComponent(val.trim()) : "")); drawHits(val); }, 120);
   });
-  main.append(list);
+  bar.append(form); w.append(bar);
+  const chips = el("div", "chips"); chips.style.marginTop = "16px"; w.append(chips);
+  v.append(s);
+  const body = el("div", "wrap sres"), main = el("div"), side = el("aside", "side");
+  body.append(main, side); v.append(body);
 
-  const box1 = el("div", "box"); box1.append(el("h3", "", "How scores work"));
-  const ol = el("ol");
-  ["Each day we compile rankings from GTA 6 guide sites and creator testing videos (lap times, TTK, and $/hr).", "A #1 spot is worth 100 points, and each spot lower is worth 6 fewer, down to 40. The critic score is the average across sources.", "Players vote on each item (Worth it vs. Skip it) with zero dummy votes.", "Overall averages the Critic and Player scores when both exist."].forEach(t => ol.append(el("li", "", t)));
-  box1.append(ol); box1.append(link("#methodology", "", "Full methodology →"));
-  aside.append(box1, renderAdSlot("rail"));
-  lay.append(main, aside); v.append(lay);
+  function drawHits(val) {
+    main.textContent = ""; chips.textContent = ""; side.textContent = "";
+    const query = (val || "").trim();
+    if (!query) {
+      const e = el("div");
+      e.append(el("h2", "", "Popular questions"));
+      const ul = el("ul", "hits");
+      ASKS.forEach(a => { const li = el("li", "hit"), h = el("h3"); h.append(link("#search?q=" + encodeURIComponent(a), "", a)); li.append(h); ul.append(li); });
+      e.append(ul); main.append(e);
+      side.append(el("h3", "", "Browse instead"));
+      const outs = el("div", "outs");
+      outs.append(link("#discover", "", "Lists of what to do next"), link("#meta", "", "Tier lists"), link("#news", "", "Latest news and tips"), link("#articles", "", "Articles"));
+      side.append(outs);
+      return;
+    }
+    const { terms, hits } = search(query);
+    const counts = {}; hits.forEach(h => counts[h.d.kind] = (counts[h.d.kind] || 0) + 1);
+    const mk = (k, label, n) => { const b = el("button", "chip", label); b.type = "button"; if (n != null) b.append(el("span", "n", String(n))); b.setAttribute("aria-pressed", String(searchKind === k)); b.onclick = () => { searchKind = k; drawHits(inp.value); }; return b; };
+    if (hits.length) { chips.append(mk("all", "All", hits.length)); for (const k of Object.keys(KINDS)) if (counts[k]) chips.append(mk(k, KINDS[k], counts[k])); }
+    if (searchKind !== "all" && !counts[searchKind]) searchKind = "all";
+    const shown = hits.filter(h => searchKind === "all" || h.d.kind === searchKind).slice(0, 40);
 
-  const fq = catFaq(id);
-  const [s3, w3] = section(c.title + ": questions"); w3.append(faqNode(fq)); v.append(s3);
-  setLD([
-    { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: SITE }, { "@type": "ListItem", position: 2, name: c.title }] },
-    { "@type": "ItemList", name: c.title, numberOfItems: items(id).length, itemListElement: r.map((i, n) => ({ "@type": "ListItem", position: n + 1, name: i.name, description: i.blurb || "" })) },
-    faqLD(fq)
-  ]);
+    // Direct answer: a strong meta-item match shows its tier up top
+    const top = hits[0];
+    if (top && top.d.kind === "meta" && searchKind === "all") {
+      const it = top.d.item, sc = combined(it), tile = el("div", "answer-tile");
+      tile.append(tierBox(tierOf(sc), "sm"));
+      const h = el("h3"); h.append(link(top.d.href, "", it.name)); tile.append(h);
+      tile.append(el("p", "", [CATS[top.d.cat].tab, it.type, sc != null ? "score " + sc : null, it.get ? "get it: " + it.get : null].filter(Boolean).join(", ")));
+      main.append(tile);
+    }
+    if (!shown.length) {
+      const e = el("div", "empty");
+      e.append(el("h3", "", "No Beat Six results for “" + query + "” yet"),
+        el("p", "", "Try fewer words, or search the sources we pull from using the links on the right. New guides are added every evening."));
+      main.append(e);
+    } else {
+      const ul = el("ul", "hits");
+      for (const { d } of shown) {
+        const li = el("li", "hit k-" + d.kind);
+        li.append(el("span", "kind", KINDS[d.kind]));
+        const h = el("h3"), a = d.external ? ext(d.href || "#", "") : link(d.href, "", "");
+        a.append(highlight(d.title, terms)); h.append(a); li.append(h);
+        if (d.snippet) { const p = el("p"); p.append(highlight(clip(d.snippet, 220), terms)); li.append(p); }
+        if (d.where) li.append(el("div", "where", d.where));
+        ul.append(li);
+      }
+      main.append(ul);
+    }
+    side.append(el("h3", "", "Search the sources directly"));
+    const outs = el("div", "outs"), qq = encodeURIComponent("GTA 6 " + query);
+    outs.append(
+      ext("https://www.youtube.com/results?search_query=" + qq, "YouTube guides for “" + query + "”"),
+      ext("https://www.reddit.com/r/GTA6/search/?q=" + encodeURIComponent(query), "Reddit r/GTA6 threads"),
+      ext("https://www.google.com/search?q=" + qq, "Web results")
+    );
+    side.append(outs, renderAdSlot("rail"));
+  }
+  drawHits(q);
+  if (!q) inp.focus();
+  setLD([]);
 }
-function detailNode(id, it) {
-  const d = el("div", "detail"), left = el("div");
-  left.append(el("h4", "", "Why it ranks here"), el("p", "", it.blurb || ""));
-  const dl = el("dl", "facts");
-  if (it.get) dl.append(el("dt", "", "Where to get"), el("dd", "", it.get));
-  for (const [k, val] of Object.entries(it.facts || {})) dl.append(el("dt", "", k), el("dd", "", String(val)));
-  left.append(dl);
-  const right = el("div");
-  right.append(el("h4", "", "Critic & Creator Breakdown"));
-  const ul = el("ul", "srcs");
-  (it.ranks || []).forEach((r) => {
-    const li = el("li"); const u = safeUrl(r.url);
-    const sh = el("div", "src-head");
-    const isYt = r.kind === "youtube" || /youtube/i.test(r.source || "");
-    sh.append(el("span", "pill " + (isYt ? "yt" : "web"), isYt ? (r.timestamp ? "▶ Video " + r.timestamp : "▶ Video") : "Guide"));
-    sh.append(u ? ext(u, r.source) : el("span", "", r.source));
-    li.append(sh, el("b", "", "#" + r.rank + " (" + points(r.rank) + " pts)"));
-    if (r.quote) li.append(el("div", "src-quote", "“" + r.quote + "”"));
-    const bar = el("div", "bar"), fill = el("i"); fill.style.width = points(r.rank) + "%"; bar.append(fill); li.append(bar);
-    ul.append(li);
-  });
-  if (!(it.ranks || []).length) ul.append(el("li", "", "No source ranks this yet."));
-  right.append(ul);
-  const c = critic(it), p = player(it);
-  if (c != null && p != null) {
-    const g = p - c, line = el("div", "gapline");
-    if (Math.abs(g) < 5) line.append("Critics and players agree.");
-    else line.append(g > 0 ? "Players rate it " : "Critics rate it ", el("b", "", Math.abs(g) + " points"), " higher.");
-    right.append(line);
+
+/* ---------- Discover ---------- */
+function listCard(l, big) {
+  const a = link("#list/" + l.id, "lcard" + (big ? " big" : ""));
+  a.append(el("span", "lk", [l.stage, l.entries.length + (l.kind === "checklist" ? " steps" : " picks")].filter(Boolean).join(", ")), el("h3", "", l.title));
+  if (l.dek) a.append(el("p", "", l.dek));
+  const ol = el("ol"); l.entries.slice(0, big ? 8 : 3).forEach(e => ol.append(el("li", "", clip(e.title, 70)))); a.append(ol);
+  a.append(el("span", "more", big ? "Open the checklist" : "See the full list"));
+  return a;
+}
+function renderDiscover() {
+  setMeta("Discover: what to do next in GTA 6 | " + SITE, "Checklists and ranked lists for GTA 6: early-game steps, the most lucrative money methods, car theft progression and more.");
+  const v = view();
+  const [s] = pageHead("discover", null, "Discover", "Lists of what to do next, built from the guides and creator tests Beat Six tracks. Checklists remember your progress on this device.");
+  v.append(s);
+  const w = el("div", "wrap"), grid = el("div", "lists");
+  LISTS.forEach((l, i) => grid.append(listCard(l, i === 0)));
+  if (!LISTS.length) grid.append(el("div", "empty", "Lists appear here after the next evening refresh."));
+  w.append(grid); v.append(w);
+  const tips = news().filter(n => ["tips", "items", "weapons", "vehicles"].includes(n.cat)).slice(0, 6);
+  if (tips.length) {
+    const [st, wt] = sectionBlock("Quick tips players wish they knew sooner", ["#news", "All news and tips"]);
+    const g = el("div", "tips");
+    tips.forEach(n => { const t = el("div", "tip"); t.append(el("h3", "", n.title), el("p", "", n.body || "")); const u = safeUrl(n.url); const src = el("div", "small muted"); src.append(u ? ext(u, n.source || "Source") : (n.source || "")); t.append(src); g.append(t); });
+    wt.append(g); v.append(st);
   }
-  const vbox = el("div", "vote");
-  vbox.append(el("div", "q", "Played with it? Cast your real player vote:"));
-  const btns = el("div", "btns");
-  for (const [val, label] of [[1, "👍 Worth it"], [-1, "👎 Skip it"]]) {
-    const b = el("button", "", label); b.type = "button"; b.disabled = !votesOn; b.setAttribute("aria-pressed", String(myVotes[it.id] === val));
-    b.onclick = (e) => { e.stopPropagation(); castVote(it.id, val); };
-    btns.append(b);
+  setLD([...LISTS.map(l => ({ "@type": "ItemList", name: l.title, itemListElement: l.entries.map((e, n) => ({ "@type": "ListItem", position: n + 1, name: e.title })) }))]);
+}
+function renderList(id) {
+  const l = LISTS.find(x => x.id === id);
+  if (!l) return renderDiscover();
+  setMeta(l.title + " (GTA 6) | " + SITE, l.dek || l.title);
+  const v = view();
+  const [s] = pageHead("discover", [["#discover", "Discover"], l.stage || "List"], l.title, l.dek);
+  v.append(s);
+  const w = el("div", "wrap");
+  const checks = store.get("beatsix_checks", {}), mine = checks[l.id] || {};
+  let prog = null;
+  const updateProg = () => {
+    if (!prog) return;
+    const done = l.entries.filter(e => mine[e.title]).length;
+    prog.querySelector("i").style.width = (100 * done / l.entries.length) + "%";
+    prog.querySelector("span").textContent = done + " of " + l.entries.length + " done";
+  };
+  if (l.kind === "checklist") {
+    prog = el("div", "progress"); const bar = el("div", "bar"); bar.append(el("i")); prog.append(bar, el("span", "small muted")); w.append(prog);
   }
-  const n = votesOf(it);
-  vbox.append(btns);
-  const modeLabel = sharedVotesActive ? "Global Community Pool" : "Browser Vote";
-  if (n === 0) {
-    vbox.append(el("small", "", "0 user votes cast yet — be the first to vote and unlock the Player Score!"));
-  } else {
-    vbox.append(el("small", "", "Live Player Score (" + modeLabel + "): " + player(it) + "% positive (" + upsOf(it) + " of " + n + " real " + (n === 1 ? "vote" : "votes") + ")."));
+  const ol = el("ol", "entries");
+  for (const e of l.entries) {
+    const li = el("li", "entry");
+    if (l.kind === "checklist") {
+      const b = el("button", "check"); b.type = "button";
+      b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+      const set = (on) => { li.classList.toggle("done", on); b.setAttribute("aria-pressed", String(on)); b.setAttribute("aria-label", (on ? "Mark not done: " : "Mark done: ") + e.title); };
+      set(!!mine[e.title]);
+      b.onclick = () => { if (mine[e.title]) delete mine[e.title]; else mine[e.title] = 1; checks[l.id] = mine; store.set("beatsix_checks", checks); set(!!mine[e.title]); updateProg(); };
+      li.append(b);
+    } else li.append(el("span", "num"));
+    const h = el("h3"); h.append(e.href ? link(e.href, "", e.title) : e.title); li.append(h);
+    if (e.body) li.append(el("p", "", e.body));
+    const meta = el("div", "where");
+    const facts = Object.entries(e.facts || {});
+    if (facts.length) { const f = el("div", "facts"); facts.forEach(([k, val]) => { const s2 = el("span"); s2.append(el("b", "", k), String(val)); f.append(s2); }); li.append(f); }
+    if (e.where) meta.append("Where: " + e.where);
+    if (e.source && e.source.name) { if (e.where) meta.append(". "); meta.append("Source: "); const u = safeUrl(e.source.url); meta.append(u ? ext(u, e.source.name) : e.source.name); }
+    if (meta.childNodes.length) li.append(meta);
+    ol.append(li);
   }
-  right.append(vbox);
-  d.append(left, right);
+  w.append(ol); v.append(w); updateProg();
+  setLD([{ "@type": "ItemList", name: l.title, itemListElement: l.entries.map((e, n) => ({ "@type": "ListItem", position: n + 1, name: e.title })) }]);
+}
+
+/* ---------- Meta: tier board ---------- */
+function renderMeta(cat, itemId) {
+  if (!CATS[cat]) cat = "cars";
+  const c = CATS[cat], list = ranked(cat);
+  const sel = list.find(i => i.id === itemId) || list[0];
+  setMeta(c.title + ": tier list | " + SITE, c.title + ", ranked by guide sites, creator tests and player votes. Updated " + fmtDate(DATA.meta.updated) + ".");
+  const v = view();
+  const [s, w] = pageHead("meta", null, "Meta", "Tier lists built from guide-site rankings and creator test videos, plus votes from Beat Six players. Pick any item to see who ranked it and why.");
+  const tabs = el("nav", "mtabs"); tabs.setAttribute("aria-label", "Categories");
+  for (const [k, cc] of Object.entries(CATS)) { const a = link("#meta/" + k, "", cc.tab); if (k === cat) a.setAttribute("aria-current", "page"); tabs.append(a); }
+  w.append(tabs); v.append(s);
+
+  const lay = el("div", "wrap meta-lay"), board = el("div", "board");
+  board.setAttribute("aria-label", c.title + " tier list");
+  for (const t of ["S", "A", "B", "C", "–"]) {
+    const inTier = list.filter(i => tierOf(combined(i)) === t);
+    if (t === "–" && !inTier.length) continue;
+    const row = el("div", "trow"); row.style.setProperty("--t", tierVar(t));
+    row.append(tierBox(t));
+    const box = el("div", "titems");
+    if (!inTier.length) box.append(el("span", "none-msg", "Nothing in " + t + " tier right now"));
+    inTier.forEach(it => {
+      const a = link("#meta/" + cat + "/" + it.id, "tile"); a.style.setProperty("--t", tierVar(t));
+      if (it === sel) a.setAttribute("aria-current", "true");
+      const sc = combined(it);
+      a.append(el("b", "", it.name));
+      const sm = el("small"); sm.append(it.type || ""); if (sc != null) { sm.append(", "); sm.append(el("span", "sc", String(sc))); } a.append(sm);
+      a.onclick = (e) => { e.preventDefault(); history.replaceState(null, "", a.getAttribute("href")); renderMeta(cat, it.id); if (matchMedia("(max-width: 1020px)").matches) $("detail").scrollIntoView({ behavior: "smooth", block: "start" }); };
+      box.append(a);
+    });
+    row.append(box); board.append(row);
+  }
+  lay.append(board);
+  if (sel) lay.append(detailNode(cat, sel));
+  v.append(lay);
+  const ad = el("div", "wrap"); ad.append(renderAdSlot("wide")); v.append(ad);
+  setLD([{ "@type": "ItemList", name: c.title, itemListElement: list.map((i, n) => ({ "@type": "ListItem", position: n + 1, name: i.name })) }]);
+}
+function detailNode(cat, it) {
+  const d = el("aside", "detail"); d.id = "detail";
+  const sc = combined(it), t = tierOf(sc);
+  const dh = el("div", "dh"); const nm = el("div");
+  nm.append(el("h2", "", it.name), el("div", "sub", [it.type, CATS[cat].tab].filter(Boolean).join(", ")));
+  dh.append(tierBox(t, "sm"), nm); d.append(dh);
+  if (it.blurb) d.append(el("p", "", it.blurb));
+  const cs = critic(it), ps = player(it), nRanks = (it.ranks || []).length;
+  const scores = el("div", "scores");
+  const cell = (val, lab) => { const x = el("div", val == null ? "thin" : ""); x.append(el("b", "", val == null ? "–" : String(val)), el("span", "", lab)); return x; };
+  scores.append(cell(cs, "Critics (" + nRanks + ")"), cell(ps == null ? null : ps + "%", "Players (" + votesOf(it) + ")"), cell(sc, "Overall"));
+  d.append(scores);
+  const vote = el("div", "vote"); vote.setAttribute("role", "group"); vote.setAttribute("aria-label", "Is the " + it.name + " worth getting?");
+  for (const [val, lab, cls] of [[1, "Worth it", "up"], [-1, "Skip it", "down"]]) {
+    const b = el("button", cls, lab); b.type = "button"; b.setAttribute("aria-pressed", String(myVotes[it.id] === val));
+    b.onclick = () => castVote(it.id, val, () => renderMeta(cat, it.id));
+    vote.append(b);
+  }
+  d.append(vote);
+  const facts = Object.entries(it.facts || {});
+  if (it.get || facts.length) {
+    const dl = el("dl", "facts");
+    if (it.get) dl.append(el("dt", "", "Where to get it"), el("dd", "", it.get));
+    facts.forEach(([k, val]) => dl.append(el("dt", "", k), el("dd", "", String(val))));
+    d.append(dl);
+  }
+  if (nRanks) {
+    d.append(el("h3", "", "Who ranked it"));
+    const ul = el("ul", "srcs");
+    (it.ranks || []).slice().sort((a, b) => a.rank - b.rank).forEach(r => {
+      const li = el("li"), who = el("div", "who"), nmx = el("span");
+      const u = safeUrl(r.url); nmx.append(u ? ext(u, brand(r.source)) : brand(r.source));
+      if (isVideo(r)) nmx.append(el("span", "vid", r.timestamp ? "Video at " + r.timestamp : "Video"));
+      who.append(nmx, el("span", "rk", "#" + r.rank));
+      li.append(who); if (r.quote) li.append(el("q", "", r.quote));
+      ul.append(li);
+    });
+    d.append(ul);
+  }
   return d;
 }
 
-/* ---------- News ---------- */
-function renderNews() {
-  setMeta("GTA 6 News, Tips and Finds | " + SITE, "Daily GTA 6 news, tips, easter eggs and item finds, each with its source.");
-  const v = $("view"); v.textContent = "";
-  const hero = el("section", "chero"), w = el("div", "wrap");
-  const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › News");
-  const sub = el("p", "sub"); sub.style.margin = "0"; sub.style.color = "var(--muted)";
-  sub.append("Breaking headlines, tips, and launch updates from the Command Center, synced daily at 5:52 PM Central. Last sync " + fmtDate(DATA.meta.newsSynced) + ".");
-  w.append(crumbs, el("h1", "", "GTA 6 news and finds"), sub); hero.append(w); v.append(hero);
-  const body = el("div", "wrap");
-  const chips = el("div", "chips"); chips.style.marginBottom = "14px";
-  for (const [k, label] of [["all", "All"], ...Object.entries(NEWS_CATS)]) {
-    const b = el("button", "", label); b.type = "button"; b.setAttribute("aria-pressed", String(newsFilter === k)); b.onclick = () => { newsFilter = k; render(); }; chips.append(b);
+/* ---------- Guides (data.guides) ---------- */
+function renderGuide(id) {
+  const g = guides().find(x => x.id === id);
+  if (!g) return renderSearch("");
+  setMeta(g.title + " | " + SITE, g.summary || g.title);
+  const v = view();
+  const [s] = pageHead("search", [["#search", "Search"], (g.tags || [])[0] || "Guide"], g.title, g.summary);
+  v.append(s);
+  const w = el("div", "wrap"), art = el("article", "prose");
+  if ((g.steps || []).length) { const ol = el("ol", "steps"); g.steps.forEach(t => ol.append(el("li", "", t))); art.append(ol); }
+  if ((g.sources || []).length) {
+    art.append(el("h2", "", "Sources"));
+    const ol = el("ol", "cites");
+    g.sources.forEach(src => { const li = el("li"), u = safeUrl(src.url); li.append(u ? ext(u, src.title || src.publisher) : (src.title || src.publisher || "")); const extra = [src.publisher, src.timestamp ? "at " + src.timestamp : null, src.date].filter(Boolean).join(", "); if (extra) li.append(", " + extra); ol.append(li); });
+    art.append(ol);
   }
-  const list = el("div", "newslist");
-  const shown = news().filter(n => newsFilter === "all" || n.cat === newsFilter);
-  if (!shown.length) list.append(el("div", "empty", "Nothing in this section yet."));
-  shown.forEach(n => list.append(newsCard(n, true)));
-  const lab = el("p", "byline"); lab.textContent = "Confirmed: stated by Rockstar or PlayStation. Reported: press or player finds. Disputed: sources disagree.";
-  body.append(chips, lab, list); v.append(body);
-  setLD([{ "@type": "ItemList", name: "GTA 6 news and finds", itemListElement: shown.slice(0, 20).map((n, i) => ({ "@type": "ListItem", position: i + 1, name: n.title, url: safeUrl(n.url) || undefined })) }]);
+  if (g.updated) art.append(el("p", "small muted", "Updated " + fmtDate(g.updated)));
+  w.append(art); v.append(w);
+  setLD([{ "@type": "HowTo", name: g.title, description: g.summary || "", step: (g.steps || []).map((t, n) => ({ "@type": "HowToStep", position: n + 1, text: t })) }]);
 }
 
-/* ---------- Articles ---------- */
+/* ---------- News and articles ---------- */
+function renderNews() {
+  setMeta("GTA 6 news and tips | " + SITE, "The latest GTA 6 news, patches, player finds and tips, each linked to its source.");
+  const v = view();
+  const [s, w] = pageHead("news", null, "News and tips", "Patches, player finds and tips from across the web, refreshed every evening. Each story is marked confirmed, reported or disputed.");
+  const chips = el("div", "chips"); chips.style.marginTop = "18px";
+  const all = news();
+  const draw = () => {
+    chips.textContent = "";
+    for (const [k, lab] of [["all", "All"], ...Object.entries(NEWS_CATS)]) {
+      const n = k === "all" ? all.length : all.filter(x => x.cat === k).length;
+      if (!n) continue;
+      const b = el("button", "chip", lab); b.type = "button"; b.append(el("span", "n", String(n)));
+      b.setAttribute("aria-pressed", String(newsFilter === k)); b.onclick = () => { newsFilter = k; draw(); }; chips.append(b);
+    }
+    g.textContent = "";
+    all.filter(n => newsFilter === "all" || n.cat === newsFilter).forEach(n => g.append(newsCard(n)));
+  };
+  const body = el("div", "wrap"), g = el("div", "news");
+  w.append(chips); v.append(s); body.append(g); v.append(body); draw();
+  setLD([]);
+}
 function renderArticles() {
-  setMeta("GTA 6 Articles and Analysis | " + SITE, "Original GTA 6 analysis, guides and patch explainers, with every source linked.");
-  const v = $("view"); v.textContent = "";
-  const hero = el("section", "chero"), w = el("div", "wrap");
-  const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › Articles");
-  const sub = el("p", "sub"); sub.style.margin = "0"; sub.style.color = "var(--muted)"; sub.textContent = "In-depth analysis and guides drawn from hands-on testing, guide sites, and creators. Every article cites its sources.";
-  w.append(crumbs, el("h1", "", "Articles"), sub); hero.append(w); v.append(hero);
-  const body = el("div", "wrap"); const pl = posts();
-  if (pl.length) { const g = el("div", "posts"); pl.forEach(p => g.append(postCard(p))); body.append(g); }
-  else body.append(el("div", "empty", "New articles publish every three days."));
-  v.append(body);
-  setLD([{ "@type": "Blog", name: SITE + " articles", blogPost: pl.map(p => ({ "@type": "BlogPosting", headline: p.title, datePublished: p.published })) }]);
+  setMeta("GTA 6 articles | " + SITE, "Original GTA 6 breakdowns, each built from at least three cited sources.");
+  const v = view();
+  const [s] = pageHead("news", null, "Articles", "Original breakdowns built from at least three cited sources, published every three days.");
+  v.append(s);
+  const w = el("div", "wrap"), g = el("div", "posts");
+  posts().forEach(p => g.append(postCard(p)));
+  if (!posts().length) g.append(el("div", "empty", "The first article publishes after the next scheduled run."));
+  w.append(g); v.append(w); setLD([]);
 }
 function renderPost(slug) {
   const p = posts().find(x => x.slug === slug);
-  if (!p) { location.hash = "#articles"; return; }
-  setMeta(p.title + " | " + SITE, p.dek || p.title);
-  const v = $("view"); v.textContent = "";
-  const hero = el("section", "chero"), w = el("div", "wrap");
-  const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › ", link("#articles", "", "Articles"));
-  const by = el("p", "byline"); by.style.margin = "0";
-  by.textContent = "By " + (p.author || "Meta Center Staff") + " · Published " + fmtDate(p.published) + (p.updated && p.updated !== p.published ? " · Updated " + fmtDate(p.updated) : "");
-  w.append(crumbs, el("h1", "", p.title)); if (p.dek) w.append(el("p", "dek", p.dek)); w.append(by);
-  hero.append(w); v.append(hero);
-  const body = el("div", "wrap"), art = el("article", "prose");
-  for (const s of (p.sections || [])) {
-    if (s.h) art.append(el("h2", "", s.h));
-    for (const para of (s.p || [])) art.append(el("p", "", para));
-    if ((s.list || []).length) { const ul = el("ul"); s.list.forEach(t => ul.append(el("li", "", t))); art.append(ul); }
-  }
+  if (!p) return renderArticles();
+  setMeta(p.title + " | " + SITE, p.dek || "");
+  const v = view();
+  const [s] = pageHead("news", [["#articles", "Articles"], (p.tags || [])[0] || "Article"], p.title, p.dek);
+  v.append(s);
+  const w = el("div", "wrap"), art = el("article", "prose");
+  art.append(el("p", "small muted", "By " + brand(p.author || SITE + " staff") + ". Published " + fmtDate(p.published) + (p.updated && p.updated !== p.published ? ", updated " + fmtDate(p.updated) : "") + "."));
+  for (const sec of (p.sections || [])) { if (sec.h) art.append(el("h2", "", sec.h)); (sec.p || []).forEach(t => art.append(el("p", "", t))); }
   if ((p.sources || []).length) {
-    const sb = el("div", "sources"); sb.append(el("h2", "", "Sources"));
-    const ol = el("ol");
-    p.sources.forEach(s => { const li = el("li"); const u = safeUrl(s.url); li.append(u ? ext(u, s.title || u) : (s.title || "")); li.append(" · " + [s.publisher, s.date].filter(Boolean).join(", ")); ol.append(li); });
-    sb.append(ol); art.append(sb);
+    art.append(el("h2", "", "Sources"));
+    const ol = el("ol", "cites");
+    p.sources.forEach(src => { const li = el("li"), u = safeUrl(src.url); li.append(u ? ext(u, src.title) : src.title); li.append(", " + [src.publisher, src.date].filter(Boolean).join(", ")); ol.append(li); });
+    art.append(ol);
   }
-  art.append(el("p", "disclose", "Every claim in this guide is cross-referenced against the sources listed above. Bracketed numbers [1], [2] correspond to the numbered source list."));
-  body.append(art); v.append(body);
-  setLD([{ "@type": "Article", headline: p.title, description: p.dek || "", datePublished: p.published, dateModified: p.updated || p.published, author: { "@type": "Organization", name: SITE }, citation: (p.sources || []).map(s => safeUrl(s.url)).filter(Boolean) }]);
+  w.append(art); v.append(w);
+  setLD([{ "@type": "Article", headline: p.title, description: p.dek || "", datePublished: p.published, dateModified: p.updated || p.published, author: { "@type": "Organization", name: SITE }, citation: (p.sources || []).map(x => safeUrl(x.url)).filter(Boolean) }]);
 }
 
-/* ---------- Unlisted Admin Source Importer (#sync) ---------- */
+/* ---------- Methodology and about ---------- */
+function prose(pillar, title, crumb, blocks) {
+  const v = view();
+  const [s] = pageHead(pillar, [["#", "Home"], crumb], title, null); v.append(s);
+  const w = el("div", "wrap"), art = el("article", "prose");
+  for (const [h, paras] of blocks) { if (h) art.append(el("h2", "", h)); (paras || []).forEach(t => art.append(el("p", "", t))); }
+  w.append(art); v.append(w); return art;
+}
+function renderMethod() {
+  setMeta("How Beat Six ranks GTA 6 items | " + SITE, "How critic scores, player scores and tiers work on Beat Six.");
+  const art = prose("meta", "How rankings work", "Methodology", [
+    [null, ["Every item gets two scores so you can see where guide sites, video testers and players agree or disagree."]],
+    ["Critic score", ["Every evening at 5:52 PM Central, Beat Six collects the latest GTA 6 rankings from guide sites and creator test videos. A #1 spot is worth 100 points and each spot lower is worth 6 fewer, down to 40. The critic score is the average across every source that ranks the item."]],
+    ["Player score", ["Visitors vote on whether an item is worth getting. The player score is the share of Worth it votes. There are no pre-filled votes."]],
+    ["Overall score and tiers", ["Overall is the average of the critic and player scores, or whichever one exists. S is 90 and up, A is 80 to 89, B is 70 to 79, and C is below 70."]]
+  ]);
+  const tracked = DATA.meta.sourcesTracked || [];
+  if (tracked.length) {
+    art.append(el("h2", "", "Sources tracked (" + tracked.length + ")"));
+    const ol = el("ol"); tracked.forEach(x => { const li = el("li"), u = safeUrl(x.url); li.append(u ? ext(u, x.name) : x.name); if (x.kind === "youtube") li.append(el("span", "vid", "Video")); ol.append(li); }); art.append(ol);
+  }
+  if ((DATA.changelog || []).length) {
+    art.append(el("h2", "", "Change log"));
+    const ul = el("ul"); DATA.changelog.slice(0, 30).forEach(x => ul.append(el("li", "", fmtDate(x.date) + ": " + brand(x.text)))); art.append(ul);
+  }
+  setLD([]);
+}
+function renderAbout() {
+  setMeta("About Beat Six | " + SITE, "About Beat Six, how it updates, and disclosures.");
+  prose("news", "About and disclosures", "About", [
+    [null, ["Beat Six is an independent GTA 6 fan site. It collects guides, creator tests, tips and rankings from across the web, makes them searchable, and links every answer back to where it came from. It is not affiliated with, endorsed by or sponsored by Rockstar Games or Take-Two Interactive."]],
+    ["How it updates", ["News, tips and rankings refresh every evening at 5:52 PM Central. Original articles publish every three days when at least three sources cover a topic."]],
+    ["Ads and affiliate links", ["Beat Six may show ads or affiliate links. They never change a ranking or a search result."]]
+  ]);
+  setLD([]);
+}
+
+/* ---------- Unlisted admin source importer (#sync) ---------- */
+const GAMING_SAFETY_SETTINGS = [
+  { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
+  { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+  { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+  { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" }
+];
 async function callModelWithFallback(apiKey, parts, responseSchema) {
   let lastError = null;
   for (const modelId of MODEL_CANDIDATES) {
     try {
       const resp = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + modelId + ":generateContent?key=" + encodeURIComponent(apiKey), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts }],
-          safetySettings: GAMING_SAFETY_SETTINGS,
-          generationConfig: {
-            responseMimeType: "application/json",
-            responseSchema
-          }
-        })
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ parts }], safetySettings: GAMING_SAFETY_SETTINGS, generationConfig: { responseMimeType: "application/json", responseSchema } })
       });
       const json = await resp.json();
       if (json.error) { lastError = new Error(json.error.message); continue; }
-      const candidate = json.candidates && json.candidates[0];
-      if (!candidate || !candidate.content || !candidate.content.parts || !candidate.content.parts[0]) {
-        lastError = new Error("Empty response from " + modelId);
-        continue;
-      }
-      return JSON.parse(candidate.content.parts[0].text);
-    } catch (e) {
-      lastError = e;
-    }
+      const cand = json.candidates && json.candidates[0];
+      if (!cand || !cand.content || !cand.content.parts || !cand.content.parts[0]) { lastError = new Error("Empty response from " + modelId); continue; }
+      return JSON.parse(cand.content.parts[0].text);
+    } catch (e) { lastError = e; }
   }
   throw lastError || new Error("All candidate models failed");
 }
-
 function renderSync() {
-  setMeta("Editorial Source Importer | " + SITE, "Internal automated source discovery utility.");
-  const v = $("view"); v.textContent = "";
-  const hero = el("section", "chero"), w = el("div", "wrap");
-  const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › Editorial Source Importer (Unlisted)");
-  const sub = el("p", "sub"); sub.style.margin = "0"; sub.style.color = "var(--muted)";
-  sub.textContent = "Internal admin utility: automatically discovers high-engagement GTA 6 YouTube videos and guide rankings, updates existing items or adds new ones, and exports data.json.";
-  w.append(crumbs, el("h1", "", "Automated YouTube Discovery & Data Importer"), sub); hero.append(w); v.append(hero);
-
-  const body = el("div", "wrap sync-grid");
-  const left = el("div", "box");
-  left.append(el("h3", "", "1. Auto-Discover High-Signal YouTube Videos"));
-
-  const fKey = el("div", "field");
-  fKey.append(el("label", "", "Google AI Studio Key"), Object.assign(el("input"), { id: "gkey", type: "password", placeholder: "AIzaSy..." }));
-
-  const fCat = el("div", "field");
-  const sel = el("select"); sel.id = "gcat";
-  const allOpt = el("option", "", "⚡ All 4 Categories (Full Site Auto-Sync)"); allOpt.value = "all"; sel.append(allOpt);
+  setMeta("Source importer | " + SITE, "Internal tool.");
+  const v = view();
+  const [s] = pageHead("news", [["#", "Home"], "Source importer"], "Source importer", "Internal tool. Pulls creator and guide rankings with Gemini, merges them into the page, and exports data.json.");
+  v.append(s);
+  const body = el("div", "wrap sync-grid"), left = el("div", "box"), right = el("div", "box");
+  left.append(el("h3", "", "Discover and merge rankings"));
+  const fKey = el("div", "field"); const key = el("input"); key.type = "password"; key.placeholder = "AIzaSy…"; key.id = "gkey";
+  fKey.append(el("label", "", "Google AI Studio key"), key);
+  const fCat = el("div", "field"), sel = el("select"); sel.id = "gcat";
+  const allOpt = el("option", "", "All four categories"); allOpt.value = "all"; sel.append(allOpt);
   for (const [k, c] of Object.entries(CATS)) { const o = el("option", "", c.title); o.value = k; sel.append(o); }
-  fCat.append(el("label", "", "Target Scope"), sel);
-
-  const autoBtnRow = el("div", "chips");
-  const autoBtn = el("button", "btn-primary", "⚡ Auto-Discover & Ingest Top YouTube Videos");
-  const dlBtn = el("button", "btn-secondary", "⬇ Download Updated data.json");
-  autoBtnRow.append(autoBtn, dlBtn);
-
-  left.append(fKey, fCat, autoBtnRow);
-
-  const right = el("div", "box");
-  right.append(el("h3", "", "2. Live Discovery & Ingestion Log"));
-  const out = el("pre", "codeout", "// Ready.\n// Automatically falls back across gemini-2.5-flash -> gemini-2.0-flash.");
-  out.id = "syncout";
-  right.append(out);
-
-  const itemRankSchema = {
-    type: "OBJECT",
-    properties: {
-      items: {
-        type: "ARRAY",
-        items: {
-          type: "OBJECT",
-          properties: {
-            itemName: { type: "STRING" },
-            itemType: { type: "STRING" },
-            whereToGet: { type: "STRING" },
-            blurb: { type: "STRING" },
-            sourceName: { type: "STRING" },
-            sourceUrl: { type: "STRING" },
-            kind: { type: "STRING" },
-            rank: { type: "INTEGER" },
-            timestamp: { type: "STRING" },
-            quote: { type: "STRING" }
-          },
-          required: ["itemName", "sourceName", "rank", "quote"]
-        }
-      }
-    }
-  };
-
+  fCat.append(el("label", "", "Scope"), sel);
+  const row = el("div", "chips"), autoBtn = el("button", "btn", "Discover and merge"), dlBtn = el("button", "btn ghost", "Download data.json");
+  row.append(autoBtn, dlBtn); left.append(fKey, fCat, row);
+  right.append(el("h3", "", "Log"));
+  const out = el("pre", "codeout", "Ready."); right.append(out);
+  const itemRankSchema = { type: "OBJECT", properties: { items: { type: "ARRAY", items: { type: "OBJECT", properties: { itemName: { type: "STRING" }, itemType: { type: "STRING" }, whereToGet: { type: "STRING" }, blurb: { type: "STRING" }, sourceName: { type: "STRING" }, sourceUrl: { type: "STRING" }, kind: { type: "STRING" }, rank: { type: "INTEGER" }, timestamp: { type: "STRING" }, quote: { type: "STRING" } }, required: ["itemName", "sourceName", "rank", "quote"] } } } };
   autoBtn.onclick = async () => {
-    const key = $("gkey").value.trim(), scope = $("gcat").value;
-    if (!key) { out.textContent = "Please enter your API Key first."; return; }
-    const targetCats = scope === "all" ? Object.keys(CATS) : [scope];
-    out.textContent = "Starting Automated Discovery...";
+    const k = key.value.trim(), scope = sel.value;
+    if (!k) { out.textContent = "Enter an API key first."; return; }
+    const targets = scope === "all" ? Object.keys(CATS) : [scope];
+    out.textContent = "Starting…";
     try {
-      let totalMerged = 0;
-      for (const cKey of targetCats) {
-        const catCfg = CATS[cKey];
-        const currentItems = (DATA.categories[cKey] || []).map(i => ({ id: i.id, name: i.name }));
-        out.textContent += "\n[" + catCfg.tab + "] Fetching creator & guide consensus...";
-        const parsed = await callModelWithFallback(key, [
-          { text: `Context: Benign software analysis of fictional video game item rankings in Grand Theft Auto VI for category "${cKey}". Known items: ${JSON.stringify(currentItems)}. Return top ranked items, sourceName (real YouTube creators like Broughy1322, GhillieMaster, TGG or guide sites like IGN, Kotaku), kind (youtube or web), rank, timestamp, and 1-sentence testing quote.` }
-        ], itemRankSchema);
+      let merged = 0;
+      for (const cKey of targets) {
+        const current = (DATA.categories[cKey] || []).map(i => ({ id: i.id, name: i.name }));
+        out.textContent += "\n[" + CATS[cKey].tab + "] fetching creator and guide consensus…";
+        const parsed = await callModelWithFallback(k, [{ text: `Context: Benign software analysis of fictional video game item rankings in Grand Theft Auto VI for category "${cKey}". Known items: ${JSON.stringify(current)}. Return top ranked items, sourceName (real YouTube creators or guide sites), kind (youtube or web), rank, timestamp, and 1-sentence testing quote.` }], itemRankSchema);
         for (const hit of (parsed.items || [])) {
-          const list = DATA.categories[cKey] || [];
-          const match = list.find(i => i.name.toLowerCase().includes(hit.itemName.toLowerCase()) || hit.itemName.toLowerCase().includes(i.name.toLowerCase()));
-          if (match) {
-            match.ranks = (match.ranks || []).filter(r => !/^Sample site/i.test(r.source || ""));
-            match.ranks.unshift({
-              source: hit.sourceName,
-              kind: hit.kind || "youtube",
-              timestamp: hit.timestamp || "02:15",
-              quote: hit.quote,
-              url: safeUrl(hit.sourceUrl) || "https://www.youtube.com",
-              rank: hit.rank
-            });
-            match.sample = false;
-            totalMerged++;
-          }
+          const match = (DATA.categories[cKey] || []).find(i => i.name.toLowerCase().includes(hit.itemName.toLowerCase()) || hit.itemName.toLowerCase().includes(i.name.toLowerCase()));
+          if (!match) continue;
+          match.ranks = (match.ranks || []).filter(r => !/^Sample site/i.test(r.source || ""));
+          match.ranks.unshift({ source: hit.sourceName, kind: hit.kind || "youtube", timestamp: hit.timestamp || "", quote: hit.quote, url: safeUrl(hit.sourceUrl), rank: hit.rank });
+          merged++;
         }
       }
       DATA.meta.updated = new Date().toISOString().slice(0, 10);
-      render();
-      out.textContent += "\n\n✅ Complete! Updated " + totalMerged + " rankings live on screen.";
-    } catch (err) {
-      out.textContent += "\n\nError: " + err.message;
-    }
+      rebuild();
+      out.textContent += "\n\nDone. Merged " + merged + " rankings.";
+    } catch (err) { out.textContent += "\n\nError: " + err.message; }
   };
-
-  dlBtn.onclick = () => {
-    const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "data.json";
-    a.click();
-  };
-
-  body.append(left, right);
-  v.append(body);
+  dlBtn.onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(DATA, null, 2)], { type: "application/json" })); a.download = "data.json"; a.click(); };
+  body.append(left, right); v.append(body);
 }
 
-/* ---------- Methodology and About ---------- */
-function prosePage(title, crumb, blocks) {
-  const v = $("view"); v.textContent = "";
-  const hero = el("section", "chero"), w = el("div", "wrap");
-  const crumbs = el("nav", "crumbs"); crumbs.append(link("#", "", "Home"), " › " + crumb);
-  w.append(crumbs, el("h1", "", title)); hero.append(w); v.append(hero);
-  const body = el("div", "wrap"), art = el("article", "prose");
-  for (const [h, paras, list] of blocks) {
-    if (h) art.append(el("h2", "", h));
-    (paras || []).forEach(t => art.append(el("p", "", t)));
-    if (list) { const ol = el("ol"); list.forEach(t => ol.append(el("li", "", t))); art.append(ol); }
-  }
-  body.append(art); v.append(body); return body;
-}
-function renderMethod() {
-  setMeta("How Meta Center Ranks GTA 6 Items | " + SITE, "How critic scores, creator video tests, player scores, tiers and updates work on Meta Center.");
-  const tracked = (DATA.meta.sourcesTracked || []);
-  const body = prosePage("How rankings work", "Methodology", [
-    [null, ["Every item gets two scores, shown side by side so you can see where guide sites, video testers, and players agree or disagree."]],
-    ["Critic score (Guide Sites + High-Engagement Creator Testing)", ["Each day at 5:52 PM Central, we compile the latest GTA 6 rankings published by specialist guide sites and high-engagement creator testing videos. A #1 spot is worth 100 points and each spot lower is worth 6 fewer, down to a floor of 40. The critic score is the average of those points across every source that ranks the item."]],
-    ["Player score (100% Real User Voting — No Pre-Seeded Dummy Votes)", ["Visitors vote on whether an item is worth getting (Worth it vs. Skip it). Unlike sites that pad ratings with placeholder numbers, every item starts at 0 votes and displays its real percentage the moment the first user vote is cast."]],
-    ["Overall score and tiers", ["Overall is the average of the critic and player scores when both exist, or whichever one exists. Tiers come from the overall score: S is 90 and above, A is 80 to 89, B is 70 to 79, and C is below 70."]]
-  ]);
-  const art = body.querySelector("article");
-  art.append(el("h2", "", "Sources tracked right now (" + tracked.length + ")"));
-  if (tracked.length) {
-    const ol = el("ol");
-    tracked.forEach(s => {
-      const li = el("li"); const u = safeUrl(s.url);
-      li.append(el("span", "pill " + (s.kind === "youtube" ? "yt" : "web"), s.kind === "youtube" ? "▶ Video" : "Guide"), " ");
-      li.append(u ? ext(u, s.name) : s.name);
-      ol.append(li);
-    });
-    art.append(ol);
-  }
-  if ((DATA.changelog || []).length) {
-    art.append(el("h2", "", "Change log"));
-    const ul = el("ul"); DATA.changelog.slice(0, 30).forEach(c => ul.append(el("li", "", fmtDate(c.date) + ": " + c.text))); art.append(ul);
-  }
-  setLD([]);
-}
-function renderAbout() {
-  setMeta("About Meta Center | " + SITE, "About Meta Center, how it updates, and editorial disclosures.");
-  const body = prosePage("About and disclosures", "About", [
-    [null, ["Meta Center is an independent fan site and meta-aggregator that tracks the best items in GTA 6. It is not affiliated with, endorsed by or sponsored by Rockstar Games or Take-Two Interactive."]],
-    ["How the site updates", ["Our tracking system monitors high-engagement creator test videos, cross-references published guide rankings, updates scores and news at 5:52 PM Central daily, and publishes multi-source feature guides every 3 days."]]
-  ]);
-  const sched = el("div", "sched");
-  [["Rankings", "Daily, 5:52 PM Central", "Tracks high-engagement creator video tests and guide-site rankings to recalculate critic scores and add new items."], ["News", "Daily, 5:52 PM Central", "Logs breaking Command Center headlines, community finds, and patch notes with Confirmed, Reported, or Disputed badges."], ["Articles", "Every 3 days", "Publishes an original, cited breakdown when at least 3 verified sources cover a new meta topic."]].forEach(([h, when, what]) => {
-    const b = el("div", "box"); b.append(el("h3", "", h), el("p", "", when), el("p", "", what)); sched.append(b);
-  });
-  body.append(sched); setLD([]);
-}
-
-/* ---------- 100% Real Votes (LocalStorage + Optional Global Supabase Sync) ---------- */
+/* ---------- Votes: this device, plus shared Supabase tally when reachable ---------- */
 function rebuildTallyFromMyVotes() {
   if (sharedVotesActive) return;
   const t = {};
-  for (const [k, val] of Object.entries(myVotes)) {
-    if (val === 1 || val === -1) {
-      t[k] = { up: val === 1 ? 1 : 0, n: 1 };
-    }
-  }
+  for (const [k, val] of Object.entries(myVotes)) if (val === 1 || val === -1) t[k] = { up: val === 1 ? 1 : 0, n: 1 };
   tally = t;
 }
-
-async function fetchGlobalSupabaseVotes() {
+async function fetchSharedVotes() {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return;
   try {
-    const r = await fetch(SUPABASE_URL + "/rest/v1/item_votes?select=voter_id,item_id,vote", {
-      headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+    const r = await fetch(SUPABASE_URL + "/rest/v1/item_votes?select=voter_id,item_id,vote", { headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY } });
+    if (!r.ok) return;
+    const rows = await r.json(), t = {};
+    rows.forEach(row => {
+      if (row.vote !== 1 && row.vote !== -1) return;
+      t[row.item_id] = t[row.item_id] || { up: 0, n: 0 };
+      t[row.item_id].n++; if (row.vote === 1) t[row.item_id].up++;
+      if (row.voter_id === uid) myVotes[row.item_id] = row.vote;
     });
-    if (r.ok) {
-      const rows = await r.json();
-      const t = {};
-      rows.forEach(row => {
-        if (row.vote !== 1 && row.vote !== -1) return;
-        t[row.item_id] = t[row.item_id] || { up: 0, n: 0 };
-        t[row.item_id].n++;
-        if (row.vote === 1) t[row.item_id].up++;
-        if (row.voter_id === uid) myVotes[row.item_id] = row.vote;
-      });
-      tally = t;
-      sharedVotesActive = true;
-      if (DATA) render();
-    }
+    tally = t; sharedVotesActive = true;
+    if (DATA && /^meta|^$/.test(parseRoute().parts.join("/"))) render();
   } catch (e) {}
 }
-
-async function startVotes() {
-  try {
-    let voterId = localStorage.getItem("metacenter_voter_id");
-    if (!voterId) {
-      voterId = "v_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
-      localStorage.setItem("metacenter_voter_id", voterId);
-    }
-    uid = voterId;
-    myVotes = JSON.parse(localStorage.getItem("metacenter_real_votes_v2") || "{}");
-    rebuildTallyFromMyVotes();
-    votesOn = true;
-  } catch (e) { votesOn = true; }
-
-  await fetchGlobalSupabaseVotes();
+function startVotes() {
+  uid = store.get("metacenter_voter_id", null);
+  if (!uid) { uid = "v_" + Math.random().toString(36).slice(2) + Date.now().toString(36); store.set("metacenter_voter_id", uid); }
+  myVotes = store.get("metacenter_real_votes_v2", {});
+  rebuildTallyFromMyVotes();
+  fetchSharedVotes();
 }
-
-function castVote(id, val) {
+function castVote(id, val, redraw) {
   const prev = myVotes[id] || 0;
-  const next = Object.assign({}, myVotes);
-  if (next[id] === val) delete next[id]; else next[id] = val;
-  const current = next[id] || 0;
-  myVotes = next;
-
+  if (myVotes[id] === val) delete myVotes[id]; else myVotes[id] = val;
+  const cur = myVotes[id] || 0;
   if (sharedVotesActive) {
     tally[id] = tally[id] || { up: 0, n: 0 };
-    if (prev !== 0) { tally[id].n = Math.max(0, tally[id].n - 1); if (prev === 1) tally[id].up = Math.max(0, tally[id].up - 1); }
-    if (current !== 0) { tally[id].n++; if (current === 1) tally[id].up++; }
-  } else {
-    rebuildTallyFromMyVotes();
-  }
-
-  try { localStorage.setItem("metacenter_real_votes_v2", JSON.stringify(myVotes)); } catch (e) {}
-  render();
-
-  if (SUPABASE_URL && SUPABASE_ANON_KEY && uid) {
-    if (current === 0) {
-      fetch(SUPABASE_URL + "/rest/v1/item_votes?voter_id=eq." + encodeURIComponent(uid) + "&item_id=eq." + encodeURIComponent(id), {
-        method: "DELETE",
-        headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
-      }).then(() => fetchGlobalSupabaseVotes()).catch(() => {});
-    } else {
-      fetch(SUPABASE_URL + "/rest/v1/item_votes", {
-        method: "POST",
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: "Bearer " + SUPABASE_ANON_KEY,
-          "Content-Type": "application/json",
-          Prefer: "resolution=merge-duplicates"
-        },
-        body: JSON.stringify({ voter_id: uid, item_id: id, vote: current })
-      }).then(() => fetchGlobalSupabaseVotes()).catch(() => {});
-    }
-  }
+    if (prev) { tally[id].n = Math.max(0, tally[id].n - 1); if (prev === 1) tally[id].up = Math.max(0, tally[id].up - 1); }
+    if (cur) { tally[id].n++; if (cur === 1) tally[id].up++; }
+  } else rebuildTallyFromMyVotes();
+  store.set("metacenter_real_votes_v2", myVotes);
+  redraw();
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !uid) return;
+  const h = { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY };
+  const req = cur === 0
+    ? fetch(SUPABASE_URL + "/rest/v1/item_votes?voter_id=eq." + encodeURIComponent(uid) + "&item_id=eq." + encodeURIComponent(id), { method: "DELETE", headers: h })
+    : fetch(SUPABASE_URL + "/rest/v1/item_votes", { method: "POST", headers: { ...h, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" }, body: JSON.stringify({ voter_id: uid, item_id: id, vote: cur }) });
+  req.catch(() => {});
 }
 
-/* ---------- Upgrade any leftover Sample site A-E rows in data.json ---------- */
-function sanitizeSamplePlaceholders(d) {
-  for (const cat of Object.keys(d.categories || {})) {
-    for (const it of (d.categories[cat] || [])) {
-      it.sample = false;
-      delete it.seedUp;
-      delete it.seedVotes;
-      const hasFakeSources = (it.ranks || []).some(r => /^Sample site/i.test(r.source || ""));
-      if (hasFakeSources) {
-        if (UPGRADED_SOURCES_FALLBACK[it.id]) {
-          it.ranks = UPGRADED_SOURCES_FALLBACK[it.id];
-        } else {
-          const defaultSources = [
-            { source: "IGN GTA 6 Wiki & Guide", kind: "web", quote: "Ranked in top tier for " + cat + " progression.", url: "https://www.ign.com/wikis/gta-6" },
-            { source: "TGG (YouTube Meta Breakdown)", kind: "youtube", timestamp: "03:40", quote: "Tested in launch patch free-roam and missions.", url: "https://www.youtube.com/@TGG" },
-            { source: "Inven Global GTA 6 Guide", kind: "web", quote: "Strong value pick in its class.", url: "https://www.invenglobal.com" },
-            { source: "Kotaku GTA 6 Review", kind: "web", quote: "Reliable performer across story and side jobs.", url: "https://kotaku.com" },
-            { source: "TechRadar Launch Guide", kind: "web", quote: "Recommended early-to-mid game pickup.", url: "https://www.techradar.com" }
-          ];
-          it.ranks = (it.ranks || []).map((r, idx) => ({
-            ...defaultSources[idx % defaultSources.length],
-            rank: r.rank
-          }));
-        }
-      }
-    }
-  }
-  if (!d.meta.sourcesTracked || !d.meta.sourcesTracked.length) {
-    d.meta.sourcesTracked = [
-      { name: "Broughy1322 (YouTube Track Lap Tests)", url: "https://www.youtube.com/@Broughy1322", kind: "youtube" },
-      { name: "Digital Car Addict (YouTube Customization & Dyno)", url: "https://www.youtube.com/@DigitalCarAddict", kind: "youtube" },
-      { name: "GhillieMaster (YouTube Weapon TTK & Combat Meta)", url: "https://www.youtube.com/@GhillieMaster", kind: "youtube" },
-      { name: "TGG (YouTube Solo Money & Business Guides)", url: "https://www.youtube.com/@TGG", kind: "youtube" },
-      { name: "IGN GTA 6 Wiki & Interactive Map", url: "https://www.ign.com/wikis/gta-6", kind: "web" },
-      { name: "Inven Global GTA 6 Guides", url: "https://www.invenglobal.com", kind: "web" },
-      { name: "TechRadar GTA 6 Launch Coverage", url: "https://www.techradar.com", kind: "web" },
-      { name: "Kotaku GTA 6 Review & Mechanics", url: "https://kotaku.com", kind: "web" }
-    ];
+/* ---------- Data cleanup ---------- */
+// House style for pulled headlines: no semicolons or em/en dashes.
+const headline = (t) => typeof t !== "string" ? t : t
+  .replace(/\s*;\s*/g, ", ")
+  .replace(/\s*[\u2014\u2013]\s*/g, ", ")
+  .replace(/\s+--\s+/g, ", ")
+  .replace(/,\s*,/g, ",").trim();
+function clean(d) {
+  for (const n of (d.news || [])) n.title = headline(n.title);
+  for (const p of (d.posts || [])) { p.title = headline(p.title); p.dek = headline(p.dek); }
+  for (const g of (d.guides || [])) { if (g) { g.title = headline(g.title); g.summary = headline(g.summary); } }
+  for (const l of (d.lists || [])) { if (l) { l.title = headline(l.title); l.dek = headline(l.dek); (l.entries || []).forEach(e => { if (e) e.title = headline(e.title); }); } }
+  // Drop placeholder sources instead of inventing new ones
+  d.meta = d.meta || {}; d.categories = d.categories || {};
+  for (const c of Object.keys(CATS)) d.categories[c] = d.categories[c] || [];
+  for (const c of Object.keys(d.categories)) for (const it of d.categories[c]) {
+    it.ranks = (it.ranks || []).filter(r => r && r.source && !/^Sample site/i.test(r.source));
+    delete it.seedUp; delete it.seedVotes;
   }
   return d;
 }
 
 /* ---------- Routing ---------- */
+function parseRoute() {
+  const raw = location.hash.replace(/^#/, "");
+  const [path, qs] = raw.split("?");
+  return { parts: path.split("/").filter(Boolean).map(decodeURIComponent), q: new URLSearchParams(qs || "").get("q") || "" };
+}
+let lastPath = null;
 function render() {
   if (!DATA) return;
-  renderTabs();
-  if (CATS[route]) renderCategory(route);
-  else if (route === "news") renderNews();
-  else if (route === "articles") renderArticles();
-  else if (route.startsWith("a-")) renderPost(route.slice(2));
-  else if (route === "methodology") renderMethod();
-  else if (route === "about") renderAbout();
-  else if (route === "sync") renderSync();
-  else renderHome();
+  const { parts, q } = parseRoute(), [p0, p1, p2] = parts;
+  const pillar = ({ search: "search", guide: "search", discover: "discover", list: "discover", meta: "meta", methodology: "meta", news: "news", articles: "news" })[p0] || (p0 && p0.startsWith("a-") ? "news" : CATS[p0] ? "meta" : "");
+  document.querySelectorAll("#pillars a").forEach(a => a.dataset.p === pillar ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  if (CATS[p0]) return renderMeta(p0, p1);            // old #cars style links
+  switch (p0) {
+    case undefined: return renderHome();
+    case "search": return renderSearch(q);
+    case "discover": return renderDiscover();
+    case "list": return renderList(p1);
+    case "meta": return renderMeta(p1, p2);
+    case "guide": return renderGuide(p1);
+    case "news": return renderNews();
+    case "articles": return renderArticles();
+    case "methodology": return renderMethod();
+    case "about": return renderAbout();
+    case "sync": return renderSync();
+    default: return p0.startsWith("a-") ? renderPost(p0.slice(2)) : renderHome();
+  }
 }
 function onRoute() {
-  if (!DATA) return;
-  const r = location.hash.replace("#", "");
-  const known = CATS[r] || ["news", "articles", "methodology", "about", "sync"].includes(r) || r.startsWith("a-");
-  const next = known ? r : "";
-  if (next !== route) {
-    route = next; filter = "All"; sort = "combined";
-    if (CATS[next] && (!open || !open.startsWith(next + "|"))) { const t = ranked(next)[0]; open = t ? keyOf(next, t) : null; }
-    window.scrollTo(0, 0);
-  }
+  const { parts } = parseRoute(), path = parts.slice(0, 2).join("/");
   render();
+  if (path !== lastPath) { window.scrollTo(0, 0); lastPath = path; }
 }
 window.addEventListener("hashchange", onRoute);
 
+/* Header search + "/" shortcut */
+$("hsearch").addEventListener("submit", (e) => { e.preventDefault(); const q = $("hq").value; $("hq").value = ""; $("hq").blur(); go("search", q); });
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "/" || e.metaKey || e.ctrlKey || /input|textarea|select/i.test(document.activeElement.tagName)) return;
+  e.preventDefault();
+  const big = document.querySelector(".sbar input");
+  (big || $("hq")).focus();
+});
+
+function rebuild() { LISTS = buildLists(); buildIndex(); render(); }
 function boot(d) {
-  DATA = sanitizeSamplePlaceholders(d);
-  DATA.meta = DATA.meta || {}; DATA.categories = DATA.categories || {};
-  $("proto").textContent = "Updated Daily · Guide Sites + Creator Testing · Last Sync " + (DATA.meta.updated || "Live");
-  route = null; onRoute();
+  DATA = clean(d);
+  LISTS = buildLists(); buildIndex();
+  onRoute();
 }
-
-fetch("data.json?t=" + Date.now(), { cache: "no-store" })
-  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(d => boot(d))
-  .catch(() => boot({ meta: { updated: "2026-11-20" }, categories: { cars: [], weapons: [], money: [], gear: [] }, news: [], posts: [], changelog: [] }));
-
 startVotes();
+fetch("data.json", { credentials: "same-origin" })
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(boot)
+  .catch(() => boot({ meta: {}, categories: {}, news: [], posts: [], changelog: [] }));
 </script>
 </body>
 </html>
