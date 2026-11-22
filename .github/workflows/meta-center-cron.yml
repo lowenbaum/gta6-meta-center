@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Verify refresh script exists & passes syntax check
+      - name: Verify refresh script exists and passes syntax check
         run: |
           if [ ! -f scripts/daily-refresh.mjs ]; then
             echo "ERROR: scripts/daily-refresh.mjs not found."
