@@ -1,18 +1,100 @@
 {
   "meta": {
-    "updated": "2026-11-20",
-    "newsSynced": "2026-11-20",
+    "updated": "2026-11-22",
+    "newsSynced": "2026-11-22",
     "patch": "Patch 1.02 (Launch Week)",
     "summary": "Live rankings compiled from creator testing and guide site aggregation.",
     "sourcesTracked": [
-      { "name": "Broughy1322 (YouTube Track Lap Tests)", "url": "https://www.youtube.com/@Broughy1322", "kind": "youtube" },
-      { "name": "Digital Car Addict (YouTube Customization & Dyno)", "url": "https://www.youtube.com/@DigitalCarAddict", "kind": "youtube" },
-      { "name": "GhillieMaster (YouTube Weapon TTK & Combat Meta)", "url": "https://www.youtube.com/@GhillieMaster", "kind": "youtube" },
-      { "name": "TGG (YouTube Solo Money & Business Guides)", "url": "https://www.youtube.com/@TGG", "kind": "youtube" },
-      { "name": "IGN GTA 6 Wiki & Interactive Map", "url": "https://www.ign.com/wikis/gta-6", "kind": "web" },
-      { "name": "Inven Global GTA 6 Guides", "url": "https://www.invenglobal.com", "kind": "web" },
-      { "name": "TechRadar GTA 6 Launch Coverage", "url": "https://www.techradar.com", "kind": "web" },
-      { "name": "Kotaku GTA 6 Review & Mechanics", "url": "https://kotaku.com", "kind": "web" }
+      {
+        "name": "Broughy1322 (YouTube Track Lap Tests)",
+        "url": "https://www.youtube.com/@Broughy1322",
+        "kind": "youtube"
+      },
+      {
+        "name": "Digital Car Addict (YouTube Customization & Dyno)",
+        "url": "https://www.youtube.com/@DigitalCarAddict",
+        "kind": "youtube"
+      },
+      {
+        "name": "GhillieMaster (YouTube Weapon TTK & Combat Meta)",
+        "url": "https://www.youtube.com/@GhillieMaster",
+        "kind": "youtube"
+      },
+      {
+        "name": "TGG (YouTube Solo Money & Business Guides)",
+        "url": "https://www.youtube.com/@TGG",
+        "kind": "youtube"
+      },
+      {
+        "name": "Digital Foundry (Technical & Frame-Rate Analysis)",
+        "url": "https://www.youtube.com/@DigitalFoundry",
+        "kind": "youtube"
+      },
+      {
+        "name": "TheProfessional (YouTube Heist & Money Grinding)",
+        "url": "https://www.youtube.com/@TheProfessional1994",
+        "kind": "youtube"
+      },
+      {
+        "name": "HarmNone (YouTube Vehicle & Gear Reviews)",
+        "url": "https://www.youtube.com/@HarmNone",
+        "kind": "youtube"
+      },
+      {
+        "name": "Pyrerealm Gaming (YouTube Mythbusting & Comparisons)",
+        "url": "https://www.youtube.com/@PyrerealmGaming",
+        "kind": "youtube"
+      },
+      {
+        "name": "DarkViperAU (YouTube Speedrun & Mechanics Science)",
+        "url": "https://www.youtube.com/@DarkViperAU",
+        "kind": "youtube"
+      },
+      {
+        "name": "IGN GTA 6 Wiki & Interactive Map",
+        "url": "https://www.ign.com/wikis/gta-6",
+        "kind": "web"
+      },
+      {
+        "name": "Kotaku GTA 6 Coverage",
+        "url": "https://kotaku.com",
+        "kind": "web"
+      },
+      {
+        "name": "Eurogamer GTA 6 Guides",
+        "url": "https://www.eurogamer.net",
+        "kind": "web"
+      },
+      {
+        "name": "TechRadar GTA 6 Coverage",
+        "url": "https://www.techradar.com",
+        "kind": "web"
+      },
+      {
+        "name": "Inven Global GTA 6 Guides",
+        "url": "https://www.invenglobal.com",
+        "kind": "web"
+      },
+      {
+        "name": "PC Gamer GTA 6 Coverage",
+        "url": "https://www.pcgamer.com",
+        "kind": "web"
+      },
+      {
+        "name": "GameSpot GTA 6 Guides",
+        "url": "https://www.gamespot.com",
+        "kind": "web"
+      },
+      {
+        "name": "GamesRadar+ GTA 6 Guides",
+        "url": "https://www.gamesradar.com",
+        "kind": "web"
+      },
+      {
+        "name": "Video Games Chronicle (VGC)",
+        "url": "https://www.videogameschronicle.com",
+        "kind": "web"
+      }
     ]
   },
   "categories": {
@@ -29,14 +111,38 @@
         },
         "blurb": "The undisputed #1 pick for Vice City street races and I-95 highway runs. Holds apex speed without spinning out on wet asphalt.",
         "ranks": [
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "04:18", "quote": "1:00.428 around the Vice Airport circuit—nothing else touches its corner exit traction.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Digital Car Addict (YouTube)", "kind": "youtube", "timestamp": "08:52", "quote": "AWD conversion makes it essential for rainy Leonida police escapes.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Best overall supercar at launch, though locked behind the Ultimate Edition early on.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Top-tier highway cruiser with forgiving brake bias.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 }
+          {
+            "source": "Broughy1322 (YouTube)",
+            "kind": "youtube",
+            "timestamp": "04:18",
+            "quote": "1:00.428 around the Vice Airport circuit—nothing else touches its corner exit traction.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 1
+          },
+          {
+            "source": "Digital Car Addict (YouTube)",
+            "kind": "youtube",
+            "timestamp": "08:52",
+            "quote": "AWD conversion makes it essential for rainy Leonida police escapes.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 1
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Best overall supercar at launch, though locked behind the Ultimate Edition early on.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 2
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Top-tier highway cruiser with forgiving brake bias.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 1
+          }
         ],
         "sample": false,
-        "seedUp": 1112,
-        "seedVotes": 1240,
         "added": "2026-11-18"
       },
       {
@@ -51,14 +157,38 @@
         },
         "blurb": "The most forgiving fast car for threading downtown traffic—and only requires a Slim Jim instead of a Key Cloner.",
         "ranks": [
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "06:11", "quote": "Dominates the Sports class and beats half the Supers on tight city tracks.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "03:40", "quote": "Steal one with a Slim Jim in Chapter 2 and register it at Pay 'n' Spray immediately.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Best non-Ultimate Edition getaway car.", "url": "https://www.ign.com/wikis/gta-6", "rank": 3 },
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Mid-tier security lock makes it the smartest high-speed steal in Leonida.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 2 }
+          {
+            "source": "Broughy1322 (YouTube)",
+            "kind": "youtube",
+            "timestamp": "06:11",
+            "quote": "Dominates the Sports class and beats half the Supers on tight city tracks.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 2
+          },
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "03:40",
+            "quote": "Steal one with a Slim Jim in Chapter 2 and register it at Pay 'n' Spray immediately.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 1
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Best non-Ultimate Edition getaway car.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 3
+          },
+          {
+            "source": "Kotaku Guide",
+            "kind": "web",
+            "quote": "Mid-tier security lock makes it the smartest high-speed steal in Leonida.",
+            "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
+            "rank": 2
+          }
         ],
         "sample": false,
-        "seedUp": 690,
-        "seedVotes": 760,
         "added": "2026-11-18"
       },
       {
@@ -73,14 +203,38 @@
         },
         "blurb": "Guide sites love its explosive 0-60 launch, but YouTube track tests and players warn it snap-oversteers in Leonida rainstorms.",
         "ranks": [
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Easy to locate at Ocean Drive valet stands once you unlock the Key Cloner.", "url": "https://www.ign.com/wikis/gta-6", "rank": 1 },
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "09:05", "quote": "Blistering straight-line speed, but loses 1.8 seconds per lap in wet weather.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 },
-          { "source": "Digital Car Addict (YouTube)", "kind": "youtube", "timestamp": "11:20", "quote": "Requires throttle discipline—keep traction control mods equipped.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "TechRadar", "kind": "web", "quote": "Fastest free supercar spawn in Vice Beach.", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19", "rank": 2 }
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Easy to locate at Ocean Drive valet stands once you unlock the Key Cloner.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 1
+          },
+          {
+            "source": "Broughy1322 (YouTube)",
+            "kind": "youtube",
+            "timestamp": "09:05",
+            "quote": "Blistering straight-line speed, but loses 1.8 seconds per lap in wet weather.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 3
+          },
+          {
+            "source": "Digital Car Addict (YouTube)",
+            "kind": "youtube",
+            "timestamp": "11:20",
+            "quote": "Requires throttle discipline—keep traction control mods equipped.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 2
+          },
+          {
+            "source": "TechRadar",
+            "kind": "web",
+            "quote": "Fastest free supercar spawn in Vice Beach.",
+            "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
+            "rank": 2
+          }
         ],
         "sample": false,
-        "seedUp": 744,
-        "seedVotes": 980,
         "added": "2026-11-18"
       },
       {
@@ -95,13 +249,31 @@
         },
         "blurb": "No tools required—just hotwire and go. Heavy chassis shrugs off police PIT maneuvers in early chapters.",
         "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "01:55", "quote": "Best Chapter 1 car by far because you can hotwire it in 4 seconds.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "14:12", "quote": "Top of the Muscle class for highway durability.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "Inven Global", "kind": "web", "quote": "Reliable Port Gellhorn workhorse before you buy a Slim Jim.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 5 }
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "01:55",
+            "quote": "Best Chapter 1 car by far because you can hotwire it in 4 seconds.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 4
+          },
+          {
+            "source": "Broughy1322 (YouTube)",
+            "kind": "youtube",
+            "timestamp": "14:12",
+            "quote": "Top of the Muscle class for highway durability.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 4
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Reliable Port Gellhorn workhorse before you buy a Slim Jim.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 5
+          }
         ],
         "sample": false,
-        "seedUp": 512,
-        "seedVotes": 590,
         "added": "2026-11-18"
       },
       {
@@ -116,13 +288,31 @@
         },
         "blurb": "Fastest two wheels for time trials and splitting Venetian Causeway traffic, but one clip sends you flying.",
         "ranks": [
-          { "source": "Broughy1322 (YouTube)", "kind": "youtube", "timestamp": "12:03", "quote": "Unbeatable for straight-line time trials across the Keys bridges.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "High risk, highest speed per dollar.", "url": "https://www.ign.com/wikis/gta-6", "rank": 5 },
-          { "source": "Digital Car Addict (YouTube)", "kind": "youtube", "timestamp": "15:40", "quote": "Extended swingarm hurts tight alleyway turns.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 5 }
+          {
+            "source": "Broughy1322 (YouTube)",
+            "kind": "youtube",
+            "timestamp": "12:03",
+            "quote": "Unbeatable for straight-line time trials across the Keys bridges.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 3
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "High risk, highest speed per dollar.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 5
+          },
+          {
+            "source": "Digital Car Addict (YouTube)",
+            "kind": "youtube",
+            "timestamp": "15:40",
+            "quote": "Extended swingarm hurts tight alleyway turns.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 5
+          }
         ],
         "sample": false,
-        "seedUp": 220,
-        "seedVotes": 260,
         "added": "2026-11-18"
       },
       {
@@ -137,13 +327,31 @@
         },
         "blurb": "Reinforced ballistic glass makes it a heist setup favorite. Needs 19 more community votes to unlock its Player Score.",
         "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "07:22", "quote": "Ballistic panels tank 18 rifle rounds before shattering—still the PVE king.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "09:10", "quote": "Makes solo warehouse clearouts effortless.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 5 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Slower than before, but unmatched protection.", "url": "https://www.ign.com/wikis/gta-6", "rank": 6 }
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "07:22",
+            "quote": "Ballistic panels tank 18 rifle rounds before shattering—still the PVE king.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 4
+          },
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "09:10",
+            "quote": "Makes solo warehouse clearouts effortless.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 5
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Slower than before, but unmatched protection.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 6
+          }
         ],
         "sample": false,
-        "seedUp": 26,
-        "seedVotes": 31,
         "added": "2026-11-18"
       }
     ],
@@ -160,14 +368,37 @@
         },
         "blurb": "With GTA 6 removing hard lock-on auto-aim, the Carbine Rifle's tight spread and suppressor compatibility make it the #1 mandatory weapon.",
         "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "02:14", "quote": "0.38s time-to-kill at mid-range and almost zero horizontal bounce in free-aim.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Inven Global", "kind": "web", "quote": "Pair with a suppressor immediately to delay police response.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Shared across Jason and Lucia as soon as one buys it.", "url": "https://www.ign.com/wikis/gta-6", "rank": 1 },
-          { "source": "Creative Bloq", "kind": "web", "quote": "Pinpoint limb accuracy for disarming guards without raising your murder heat.", "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good", "rank": 2 }
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "02:14",
+            "quote": "0.38s time-to-kill at mid-range and almost zero horizontal bounce in free-aim.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 1
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Pair with a suppressor immediately to delay police response.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 1
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Shared across Jason and Lucia as soon as one buys it.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 1
+          },
+          {
+            "source": "Creative Bloq",
+            "kind": "web",
+            "quote": "Pinpoint limb accuracy for disarming guards without raising your murder heat.",
+            "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good",
+            "rank": 2
+          }
         ],
         "sample": false,
-        "seedUp": 1310,
-        "seedVotes": 1450,
         "added": "2026-11-18"
       },
       {
@@ -182,13 +413,31 @@
         },
         "blurb": "Dominates store robberies, pawn shop backrooms, and tight motel corridors without needing precision aim.",
         "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "05:45", "quote": "Forgiving spread compensates for the 30fps console aiming feel indoors.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "04:12", "quote": "Best $3,500 you can spend in your first hour.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Intimidates store clerks faster than pistols during clean robberies.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 3 }
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "05:45",
+            "quote": "Forgiving spread compensates for the 30fps console aiming feel indoors.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 2
+          },
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "04:12",
+            "quote": "Best $3,500 you can spend in your first hour.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 2
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Intimidates store clerks faster than pistols during clean robberies.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 3
+          }
         ],
         "sample": false,
-        "seedUp": 640,
-        "seedVotes": 700,
         "added": "2026-11-18"
       },
       {
@@ -203,13 +452,30 @@
         },
         "blurb": "Concealable sidearm that hits like a rifle. Disarms or drops armored guards in two shots, though cylinder reload is slow.",
         "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "08:30", "quote": "Highest single-shot damage of any concealable weapon you can carry into clubs.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Devastating in focus mode for elbow disarms.", "url": "https://www.ign.com/wikis/gta-6", "rank": 3 },
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Punishing reload if you miss, but unbeatable stopping power.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 4 }
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "08:30",
+            "quote": "Highest single-shot damage of any concealable weapon you can carry into clubs.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 3
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Devastating in focus mode for elbow disarms.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 3
+          },
+          {
+            "source": "Kotaku Guide",
+            "kind": "web",
+            "quote": "Punishing reload if you miss, but unbeatable stopping power.",
+            "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
+            "rank": 4
+          }
         ],
         "sample": false,
-        "seedUp": 880,
-        "seedVotes": 1020,
         "added": "2026-11-18"
       },
       {
@@ -224,13 +490,30 @@
         },
         "blurb": "Critics rank it high for disabling police helicopters and boat engines, but players find it too bulky for everyday street chaos.",
         "ranks": [
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Two shots to the rotor hub drops any pursuit chopper.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 },
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "10:15", "quote": "Situational because it takes a primary trunk slot, but mandatory for heist overwatch.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 },
-          { "source": "TechRadar", "kind": "web", "quote": "Essential for Lake Cottonmouth hunting and long-range setups.", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19", "rank": 3 }
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Two shots to the rotor hub drops any pursuit chopper.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 2
+          },
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "10:15",
+            "quote": "Situational because it takes a primary trunk slot, but mandatory for heist overwatch.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 4
+          },
+          {
+            "source": "TechRadar",
+            "kind": "web",
+            "quote": "Essential for Lake Cottonmouth hunting and long-range setups.",
+            "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
+            "rank": 3
+          }
         ],
         "sample": false,
-        "seedUp": 300,
-        "seedVotes": 420,
         "added": "2026-11-18"
       },
       {
@@ -245,12 +528,23 @@
         },
         "blurb": "The go-to one-handed automatic for shooting out tires from a car or motorcycle.",
         "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "11:50", "quote": "Tap-fire in 4-round bursts while driving to pop cruiser tires cleanly.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 5 },
-          { "source": "Inven Global", "kind": "web", "quote": "Burns through unshared character ammo quickly, so watch your reserves.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 4 }
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "11:50",
+            "quote": "Tap-fire in 4-round bursts while driving to pop cruiser tires cleanly.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 5
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Burns through unshared character ammo quickly, so watch your reserves.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 4
+          }
         ],
         "sample": false,
-        "seedUp": 590,
-        "seedVotes": 660,
         "added": "2026-11-18"
       }
     ],
@@ -267,13 +561,30 @@
         },
         "blurb": "Put on a mask, enter via the back door, wipe the DVR camera tape, and crack the safe. Bank at an ATM before hitting the $20,000 cash cap.",
         "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "02:30", "quote": "Chain 3 stores along US-1 and deposit at the ATM right outside to clear $45K/hour in Chapter 1.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Inven Global", "kind": "web", "quote": "Best early cash flow before fences unlock, just remember the $20K wallet cap.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Zero bounty if you disable the backroom security terminal first.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 }
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "02:30",
+            "quote": "Chain 3 stores along US-1 and deposit at the ATM right outside to clear $45K/hour in Chapter 1.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 1
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Best early cash flow before fences unlock, just remember the $20K wallet cap.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 1
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Zero bounty if you disable the backroom security terminal first.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 2
+          }
         ],
         "sample": false,
-        "seedUp": 1180,
-        "seedVotes": 1300,
         "added": "2026-11-18"
       },
       {
@@ -288,13 +599,30 @@
         },
         "blurb": "Once you unlock the Slim Jim and Key Cloner, stripping luxury cars at Port Gellhorn chop shops is the best solo mid-game grind.",
         "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "06:45", "quote": "Build fence rep early—Rank 3 fences pay 40% more and strip GPS trackers in 60 seconds.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Why you shouldn't grind low-paying jobs early; fence relationships scale fast.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Three-tier car security makes the Key Cloner pay for itself in one Vice Beach run.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 2 }
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "06:45",
+            "quote": "Build fence rep early—Rank 3 fences pay 40% more and strip GPS trackers in 60 seconds.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 2
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Why you shouldn't grind low-paying jobs early; fence relationships scale fast.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 1
+          },
+          {
+            "source": "Kotaku Guide",
+            "kind": "web",
+            "quote": "Three-tier car security makes the Key Cloner pay for itself in one Vice Beach run.",
+            "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
+            "rank": 2
+          }
         ],
         "sample": false,
-        "seedUp": 700,
-        "seedVotes": 830,
         "added": "2026-11-18"
       },
       {
@@ -309,12 +637,23 @@
         },
         "blurb": "Massive payouts that wire straight to your bank account (bypassing the $20K cash cap). Bring an SUV for loot bags or a heavy truck for ATM rigs.",
         "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "11:10", "quote": "Always stage a registered SUV as your secondary getaway vehicle so you don't leave loot crates behind.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Biggest payouts in the game, though long missions require PS5 rest mode if you need a break.", "url": "https://www.ign.com/wikis/gta-6", "rank": 1 }
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "11:10",
+            "quote": "Always stage a registered SUV as your secondary getaway vehicle so you don't leave loot crates behind.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 1
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Biggest payouts in the game, though long missions require PS5 rest mode if you need a break.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 1
+          }
         ],
         "sample": false,
-        "seedUp": 210,
-        "seedVotes": 260,
         "added": "2026-11-18"
       },
       {
@@ -329,12 +668,23 @@
         },
         "blurb": "Zero police heat and doubles as exploration around Lake Cottonmouth (where Bigfoot sightings are reported).",
         "ranks": [
-          { "source": "Inven Global", "kind": "web", "quote": "Load pelts into a pickup truck bed to sell 5 at once.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 3 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "14:02", "quote": "Chill zero-heat money when your wanted level is hot in the city.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 4 }
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Load pelts into a pickup truck bed to sell 5 at once.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 3
+          },
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "14:02",
+            "quote": "Chill zero-heat money when your wanted level is hot in the city.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 4
+          }
         ],
         "sample": false,
-        "seedUp": 610,
-        "seedVotes": 640,
         "added": "2026-11-18"
       },
       {
@@ -349,12 +699,23 @@
         },
         "blurb": "Low pay, but uncovers map fog and occasionally triggers high-paying VIP stranger encounters.",
         "ranks": [
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "16:20", "quote": "Skip it for pure cash, only do 5 rides to trigger the secret VIP contact.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 7 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Good way to learn Vice City shortcuts without GPS.", "url": "https://www.ign.com/wikis/gta-6", "rank": 8 }
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "16:20",
+            "quote": "Skip it for pure cash, only do 5 rides to trigger the secret VIP contact.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 7
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Good way to learn Vice City shortcuts without GPS.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 8
+          }
         ],
         "sample": false,
-        "seedUp": 390,
-        "seedVotes": 520,
         "added": "2026-11-18"
       }
     ],
@@ -370,13 +731,30 @@
         },
         "blurb": "The single most important progression item in GTA 6. Required to steal exotic cars that cannot be hotwired or slim-jimmed.",
         "ranks": [
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Unlocks Tier 3 car theft—without it, Vice Beach supercars are off-limits.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 1 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "01:12", "quote": "Rush the main story until you get the Key Cloner before doing any free-roam grinding.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 1 },
-          { "source": "Inven Global", "kind": "web", "quote": "Turns every valet lot into a $30K chop-shop payday.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 2 }
+          {
+            "source": "Kotaku Guide",
+            "kind": "web",
+            "quote": "Unlocks Tier 3 car theft—without it, Vice Beach supercars are off-limits.",
+            "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
+            "rank": 1
+          },
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "01:12",
+            "quote": "Rush the main story until you get the Key Cloner before doing any free-roam grinding.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 1
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Turns every valet lot into a $30K chop-shop payday.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 2
+          }
         ],
         "sample": false,
-        "seedUp": 900,
-        "seedVotes": 980,
         "added": "2026-11-18"
       },
       {
@@ -390,13 +768,30 @@
         },
         "blurb": "Gunfire volume directly controls how fast Leonida police respond. Remember: attachments do NOT transfer between Jason and Lucia.",
         "ranks": [
-          { "source": "Inven Global", "kind": "web", "quote": "The louder a fight gets, the faster cops arrive—buy two suppressors so both characters have one.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 1 },
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "03:08", "quote": "Adds 45 seconds of extra looting time before sirens show up, with zero damage penalty.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "Essential stealth attachment for both protagonists.", "url": "https://www.ign.com/wikis/gta-6", "rank": 2 }
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "The louder a fight gets, the faster cops arrive—buy two suppressors so both characters have one.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 1
+          },
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "03:08",
+            "quote": "Adds 45 seconds of extra looting time before sirens show up, with zero damage penalty.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 2
+          },
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "Essential stealth attachment for both protagonists.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 2
+          }
         ],
         "sample": false,
-        "seedUp": 410,
-        "seedVotes": 450,
         "added": "2026-11-18"
       },
       {
@@ -410,12 +805,23 @@
         },
         "blurb": "Firefights are lethal without lock-on aim. Always keep spares on both Jason and Lucia since healing and armor are not shared.",
         "ranks": [
-          { "source": "GhillieMaster (YouTube)", "kind": "youtube", "timestamp": "06:50", "quote": "Prevents one-shot shotgun downs during interior breaches.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 2 },
-          { "source": "Inven Global", "kind": "web", "quote": "Stock up before switching characters—armor stays with the buyer.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 3 }
+          {
+            "source": "GhillieMaster (YouTube)",
+            "kind": "youtube",
+            "timestamp": "06:50",
+            "quote": "Prevents one-shot shotgun downs during interior breaches.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 2
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Stock up before switching characters—armor stays with the buyer.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 3
+          }
         ],
         "sample": false,
-        "seedUp": 760,
-        "seedVotes": 800,
         "added": "2026-11-18"
       },
       {
@@ -429,12 +835,23 @@
         },
         "blurb": "Buy this at any hardware store in your first 20 minutes to steal mid-range Sports cars and loot-hauling SUVs without smashing windows.",
         "ranks": [
-          { "source": "Kotaku Guide", "kind": "web", "quote": "Silent entry on mid-tier vehicles without triggering car alarms.", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842", "rank": 3 },
-          { "source": "TGG (YouTube)", "kind": "youtube", "timestamp": "02:05", "quote": "Lets you steal the Grotti Itali RSX way before you unlock the Key Cloner.", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "rank": 3 }
+          {
+            "source": "Kotaku Guide",
+            "kind": "web",
+            "quote": "Silent entry on mid-tier vehicles without triggering car alarms.",
+            "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
+            "rank": 3
+          },
+          {
+            "source": "TGG (YouTube)",
+            "kind": "youtube",
+            "timestamp": "02:05",
+            "quote": "Lets you steal the Grotti Itali RSX way before you unlock the Key Cloner.",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "rank": 3
+          }
         ],
         "sample": false,
-        "seedUp": 310,
-        "seedVotes": 330,
         "added": "2026-11-18"
       },
       {
@@ -448,39 +865,27 @@
         },
         "blurb": "Permanent stat boost that helps you outrun K-9 units and swim across Vice City canals.",
         "ranks": [
-          { "source": "IGN GTA 6 Wiki", "kind": "web", "quote": "15 minutes of workouts maxes out sprint duration for the rest of the story.", "url": "https://www.ign.com/wikis/gta-6", "rank": 4 },
-          { "source": "Inven Global", "kind": "web", "quote": "Free permanent upgrade worth doing early.", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start", "rank": 5 }
+          {
+            "source": "IGN GTA 6 Wiki",
+            "kind": "web",
+            "quote": "15 minutes of workouts maxes out sprint duration for the rest of the story.",
+            "url": "https://www.ign.com/wikis/gta-6",
+            "rank": 4
+          },
+          {
+            "source": "Inven Global",
+            "kind": "web",
+            "quote": "Free permanent upgrade worth doing early.",
+            "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
+            "rank": 5
+          }
         ],
         "sample": false,
-        "seedUp": 520,
-        "seedVotes": 600,
         "added": "2026-11-18"
       }
     ]
   },
   "news": [
-    {
-      "id": "ps5-system-update",
-      "added": "2026-11-19",
-      "cat": "launch",
-      "status": "confirmed",
-      "tag": "Required",
-      "source": "TweakTown",
-      "url": "https://www.tweaktown.com/news/114767/gamers-cant-play-gta-6-on-ps5-without-updating-system-firmware-sony-and-rockstar-confirm/index.html",
-      "title": "Required: PS5 system update 26.07-14.23.00",
-      "body": "Sony and Rockstar confirmed GTA 6 won't run until you install this 1.27GB PS5 update."
-    },
-    {
-      "id": "fps-30",
-      "added": "2026-11-19",
-      "cat": "launch",
-      "status": "reported",
-      "tag": "Performance",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Locked at 30fps on PS5, PS5 Pro included",
-      "body": "Reviewers report a 30fps cap on both PS5 models with no performance mode, with dips during heavy action on base PS5."
-    },
     {
       "id": "cash-cap",
       "added": "2026-11-19",
@@ -548,26 +953,26 @@
       "body": "SUVs are tougher and hold more stolen goods. Some jobs need a truck."
     },
     {
-      "id": "saving",
-      "added": "2026-11-19",
-      "cat": "tips",
-      "status": "reported",
-      "tag": "Saving",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Save manually: autosave only runs after missions and big events",
-      "body": "You can't save during a mission, so use PS5 rest mode to pause a long one."
-    },
-    {
-      "id": "settings-deadzone",
+      "id": "fps-30",
       "added": "2026-11-19",
       "cat": "launch",
       "status": "reported",
-      "tag": "Settings",
+      "tag": "Performance",
       "source": "TechRadar launch live blog",
       "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Driving and aiming feel sluggish? Lower the stick dead zone",
-      "body": "Players say the default controller dead zone is too large."
+      "title": "Locked at 30fps on PS5, PS5 Pro included",
+      "body": "Reviewers report a 30fps cap on both PS5 models with no performance mode, with dips during heavy action on base PS5."
+    },
+    {
+      "id": "metacritic-99",
+      "added": "2026-11-18",
+      "cat": "launch",
+      "status": "confirmed",
+      "tag": "Reviews",
+      "source": "Metacritic",
+      "url": "https://www.metacritic.com/game/grand-theft-auto-vi/",
+      "title": "Reviews are in: 99 on Metacritic",
+      "body": "The PS5 version scores 99 from 148 critic reviews."
     },
     {
       "id": "car-security",
@@ -603,15 +1008,43 @@
       "body": "Listen for a loud roar in the swamplands, then use tracking to follow it."
     },
     {
-      "id": "metacritic-99",
-      "added": "2026-11-18",
+      "id": "ps5-system-update",
+      "added": "2025-01-01",
       "cat": "launch",
       "status": "confirmed",
-      "tag": "Reviews",
-      "source": "Metacritic",
-      "url": "https://www.metacritic.com/game/grand-theft-auto-vi/",
-      "title": "Reviews are in: 99 on Metacritic",
-      "body": "The PS5 version scores 99 from 148 critic reviews."
+      "tag": "Required",
+      "source": "TweakTown",
+      "url": "https://www.tweaktown.com/news/114767/gamers-cant-play-gta-6-on-ps5-without-updating-system-firmware-sony-and-rockstar-confirm/index.html",
+      "title": "Required: PS5 system update 26.07-14.23.00",
+      "body": "Sony and Rockstar confirmed GTA 6 won't run until you install this 1.27GB PS5 update.",
+      "heroPriorityScore": 10,
+      "isTimelyHeroLead": false
+    },
+    {
+      "id": "saving",
+      "added": "2025-01-01",
+      "cat": "tips",
+      "status": "reported",
+      "tag": "Saving",
+      "source": "TechRadar launch live blog",
+      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
+      "title": "Save manually: autosave only runs after missions and big events",
+      "body": "You can't save during a mission, so use PS5 rest mode to pause a long one.",
+      "heroPriorityScore": 10,
+      "isTimelyHeroLead": false
+    },
+    {
+      "id": "settings-deadzone",
+      "added": "2025-01-01",
+      "cat": "launch",
+      "status": "reported",
+      "tag": "Settings",
+      "source": "TechRadar launch live blog",
+      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
+      "title": "Driving and aiming feel sluggish? Lower the stick dead zone",
+      "body": "Players say the default controller dead zone is too large.",
+      "heroPriorityScore": 10,
+      "isTimelyHeroLead": false
     }
   ],
   "posts": [
@@ -622,7 +1055,10 @@
       "author": "Meta Center Staff",
       "published": "2026-11-20",
       "updated": "2026-11-20",
-      "tags": ["Vehicles", "Guides"],
+      "tags": [
+        "Vehicles",
+        "Guides"
+      ],
       "sections": [
         {
           "h": "The Three Security Tiers: Hotwire, Slim Jim, and Key Cloner",
@@ -645,9 +1081,24 @@
         }
       ],
       "sources": [
-        { "title": "Grand Theft Auto 6: The Kotaku Review (Car Theft Tiers)", "publisher": "Kotaku", "date": "Nov 18, 2026", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842" },
-        { "title": "GTA 6 Launch Day Live Blog: Pay 'n' Spray & Scooter Bros Delivery", "publisher": "TechRadar", "date": "Nov 19, 2026", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19" },
-        { "title": "13 Beginner Tips for GTA 6 I Wish I Knew From the Start", "publisher": "Inven Global", "date": "Nov 19, 2026", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start" }
+        {
+          "title": "Grand Theft Auto 6: The Kotaku Review (Car Theft Tiers)",
+          "publisher": "Kotaku",
+          "date": "Nov 18, 2026",
+          "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842"
+        },
+        {
+          "title": "GTA 6 Launch Day Live Blog: Pay 'n' Spray & Scooter Bros Delivery",
+          "publisher": "TechRadar",
+          "date": "Nov 19, 2026",
+          "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19"
+        },
+        {
+          "title": "13 Beginner Tips for GTA 6 I Wish I Knew From the Start",
+          "publisher": "Inven Global",
+          "date": "Nov 19, 2026",
+          "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start"
+        }
       ]
     },
     {
@@ -657,7 +1108,10 @@
       "author": "Meta Center Staff",
       "published": "2026-11-20",
       "updated": "2026-11-20",
-      "tags": ["Weapons", "Combat"],
+      "tags": [
+        "Weapons",
+        "Combat"
+      ],
       "sections": [
         {
           "h": "Why Aiming Feels Different (And the 10-Second Dead Zone Fix)",
@@ -681,9 +1135,24 @@
         }
       ],
       "sources": [
-        { "title": "GTA 6 Launch Day Live Blog: 30fps Cap & Stick Dead Zone Fix", "publisher": "TechRadar", "date": "Nov 19, 2026", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19" },
-        { "title": "GTA 6 Review: Focus Aiming & Limb Disarm Mechanics", "publisher": "Creative Bloq", "date": "Nov 18, 2026", "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good" },
-        { "title": "13 Beginner Tips for GTA 6: Shared Weapons vs. Split Attachments", "publisher": "Inven Global", "date": "Nov 19, 2026", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start" }
+        {
+          "title": "GTA 6 Launch Day Live Blog: 30fps Cap & Stick Dead Zone Fix",
+          "publisher": "TechRadar",
+          "date": "Nov 19, 2026",
+          "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19"
+        },
+        {
+          "title": "GTA 6 Review: Focus Aiming & Limb Disarm Mechanics",
+          "publisher": "Creative Bloq",
+          "date": "Nov 18, 2026",
+          "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good"
+        },
+        {
+          "title": "13 Beginner Tips for GTA 6: Shared Weapons vs. Split Attachments",
+          "publisher": "Inven Global",
+          "date": "Nov 19, 2026",
+          "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start"
+        }
       ]
     },
     {
@@ -693,7 +1162,10 @@
       "author": "Meta Center Staff",
       "published": "2026-11-20",
       "updated": "2026-11-20",
-      "tags": ["Money", "Economy"],
+      "tags": [
+        "Money",
+        "Economy"
+      ],
       "sections": [
         {
           "h": "The $20,000 Wallet Rule",
@@ -710,13 +1182,32 @@
         }
       ],
       "sources": [
-        { "title": "13 Beginner Tips for GTA 6: $20,000 Cash Cap & Fence Progression", "publisher": "Inven Global", "date": "Nov 19, 2026", "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start" },
-        { "title": "GTA 6 Manual Saving & Rest Mode Tips", "publisher": "TechRadar", "date": "Nov 19, 2026", "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19" },
-        { "title": "Grand Theft Auto 6 Review: Chop Shops & Tracker Mechanics", "publisher": "Kotaku", "date": "Nov 18, 2026", "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842" }
+        {
+          "title": "13 Beginner Tips for GTA 6: $20,000 Cash Cap & Fence Progression",
+          "publisher": "Inven Global",
+          "date": "Nov 19, 2026",
+          "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start"
+        },
+        {
+          "title": "GTA 6 Manual Saving & Rest Mode Tips",
+          "publisher": "TechRadar",
+          "date": "Nov 19, 2026",
+          "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19"
+        },
+        {
+          "title": "Grand Theft Auto 6 Review: Chop Shops & Tracker Mechanics",
+          "publisher": "Kotaku",
+          "date": "Nov 18, 2026",
+          "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842"
+        }
       ]
     }
   ],
   "changelog": [
+    {
+      "date": "2026-11-22",
+      "text": "Live refresh: +0 verified headlines (14 total), +0 cited articles (3 total), and +0 newly ranked items."
+    },
     {
       "date": "2026-11-20",
       "text": "Added creator track and combat test breakdowns (Broughy1322, GhillieMaster, Digital Car Addict, TGG) across Cars, Weapons, Money, and Gear. Published 3 launch guides and opened community voting."
