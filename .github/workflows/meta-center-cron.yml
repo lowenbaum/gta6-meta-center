@@ -15,10 +15,19 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node 20
+      - name: Setup Node 22
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+
+      - name: Verify script exists and syntax is valid
+        run: |
+          if [ ! -f scripts/daily-refresh.mjs ]; then
+            echo "ERROR: scripts/daily-refresh.mjs not found. Files in repo:"
+            ls -la
+            exit 1
+          fi
+          node -c scripts/daily-refresh.mjs
 
       - name: Run Beat Six Daily Refresh
         env:
@@ -31,4 +40,10 @@ jobs:
           git config user.name "Beat Six Bot"
           git config user.email "bot@beatsix.local"
           git add data.json
-          git diff --staged --quiet || (git commit -m "chore: daily content & news refresh" && git push)
+          if git diff --staged --quiet; then
+            echo "No changes to data.json."
+          else
+            git commit -m "chore: daily content & news refresh"
+            git pull --rebase origin main
+            git push origin main
+          fi
