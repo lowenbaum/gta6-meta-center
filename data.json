@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated": "2026-11-23",
+    "updated": "2026-11-24",
     "newsSynced": "2026-11-22",
     "patch": "Patch 1.02 (Launch Week)",
     "summary": "Live rankings compiled from creator testing and guide site aggregation.",
@@ -984,7 +984,7 @@
       "status": "reported",
       "source": "PCMag",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxORzVfXzNodnc2Q0RxdGZxOVdKbEY4OVA1bm9BTEltX0hfZ1JmYklZNXpFRlhYSlBsdUpZSnZsLXYtaVdNaTcwM0plZm9WMldXYWZ6aFF6aUZrbmF0OWxtTWVUTmRPZ3pwcFRNUDRBdTFFZVJRUmFJZXkxRWhWTmZIbzg5YVZTREFzVzZ5bGF4eXRQYU1UYUs4V0Y4WmhxWWZBWktuYWZ2NA?oc=5",
-      "added": "2026-11-23"
+      "added": "2026-11-24"
     },
     {
       "id": "the-fastest-way-to-increase-focus-levels-in-gta-6",
@@ -1549,7 +1549,7 @@
     },
     {
       "id": "saving",
-      "added": "2026-11-09",
+      "added": "2026-11-10",
       "cat": "tips",
       "status": "reported",
       "tag": "Saving",
@@ -1562,7 +1562,7 @@
     },
     {
       "id": "settings-deadzone",
-      "added": "2026-11-09",
+      "added": "2026-11-10",
       "cat": "launch",
       "status": "reported",
       "tag": "Settings",
@@ -1575,7 +1575,7 @@
     },
     {
       "id": "ps5-system-update",
-      "added": "2026-11-09",
+      "added": "2026-11-10",
       "cat": "launch",
       "status": "confirmed",
       "tag": "Required",
