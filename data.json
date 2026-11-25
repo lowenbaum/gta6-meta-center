@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated": "2026-11-24",
+    "updated": "2026-11-25",
     "newsSynced": "2026-11-22",
     "patch": "Patch 1.02 (Launch Week)",
     "summary": "Live rankings compiled from creator testing and guide site aggregation.",
@@ -984,7 +984,7 @@
       "status": "reported",
       "source": "PCMag",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxORzVfXzNodnc2Q0RxdGZxOVdKbEY4OVA1bm9BTEltX0hfZ1JmYklZNXpFRlhYSlBsdUpZSnZsLXYtaVdNaTcwM0plZm9WMldXYWZ6aFF6aUZrbmF0OWxtTWVUTmRPZ3pwcFRNUDRBdTFFZVJRUmFJZXkxRWhWTmZIbzg5YVZTREFzVzZ5bGF4eXRQYU1UYUs4V0Y4WmhxWWZBWktuYWZ2NA?oc=5",
-      "added": "2026-11-24"
+      "added": "2026-11-25"
     },
     {
       "id": "the-fastest-way-to-increase-focus-levels-in-gta-6",
@@ -1528,6 +1528,45 @@
       "added": "2026-11-12"
     },
     {
+      "id": "saving",
+      "added": "2026-11-11",
+      "cat": "tips",
+      "status": "reported",
+      "tag": "Saving",
+      "source": "TechRadar launch live blog",
+      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
+      "title": "Save manually: autosave only runs after missions and big events",
+      "body": "You can't save during a mission, so use PS5 rest mode to pause a long one.",
+      "heroPriorityScore": 10,
+      "isTimelyHeroLead": false
+    },
+    {
+      "id": "settings-deadzone",
+      "added": "2026-11-11",
+      "cat": "launch",
+      "status": "reported",
+      "tag": "Settings",
+      "source": "TechRadar launch live blog",
+      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
+      "title": "Driving and aiming feel sluggish? Lower the stick dead zone",
+      "body": "Players say the default controller dead zone is too large.",
+      "heroPriorityScore": 10,
+      "isTimelyHeroLead": false
+    },
+    {
+      "id": "ps5-system-update",
+      "added": "2026-11-11",
+      "cat": "launch",
+      "status": "confirmed",
+      "tag": "Required",
+      "source": "TweakTown",
+      "url": "https://www.tweaktown.com/news/114767/gamers-cant-play-gta-6-on-ps5-without-updating-system-firmware-sony-and-rockstar-confirm/index.html",
+      "title": "Required: PS5 system update 26.07-14.23.00",
+      "body": "Sony and Rockstar confirmed GTA 6 won't run until you install this 1.27GB PS5 update.",
+      "heroPriorityScore": 10,
+      "isTimelyHeroLead": false
+    },
+    {
       "id": "pre-load-grand-theft-auto-vi-on-ps5-starting-today",
       "title": "Pre-load Grand Theft Auto VI on PS5 starting today",
       "body": "",
@@ -1546,45 +1585,6 @@
       "source": "XBOX Wire",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPcHNkQ3h6dFZOTXM1Wk04SzN6dUtuTEZWZ3VRc1AzaHhWcUgybUR4TmZ0a2Q3TktGajhoSUZLZm9nVUwxQjQyeXQ1SGVDQ3hqaXB4Q1FaaFVBanpYTXZPSWFLNFRRR25fVmhFU3JOYWRVUzVBQlZxRE9kSGtQR2ZRSzVZb1NDN0pneUEzWEh3OEdjMkUweTdVRFlIUFBqQdIBowFBVV95cUxPcEoyQ19NMjF5Mkpra0NRVWg5SUUwWDE1QXh0Tllfbm8tU2RoeklfaE9jOFhOeU13VUNVcHJfckVpSVpfUzR2SUdJMWlGaGdlUEVXakNlUDVjMUtHT1FZMlA2T1NDYWt5QWJDVlZhTHhzd3E5VXNnV3dzUnNMcDVjYjE0WW1WNlY3bHdkSVVZWG5wQlBZSEVtWU83SVNhTFltbFhZ?oc=5",
       "added": "2026-11-10"
-    },
-    {
-      "id": "saving",
-      "added": "2026-11-10",
-      "cat": "tips",
-      "status": "reported",
-      "tag": "Saving",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Save manually: autosave only runs after missions and big events",
-      "body": "You can't save during a mission, so use PS5 rest mode to pause a long one.",
-      "heroPriorityScore": 10,
-      "isTimelyHeroLead": false
-    },
-    {
-      "id": "settings-deadzone",
-      "added": "2026-11-10",
-      "cat": "launch",
-      "status": "reported",
-      "tag": "Settings",
-      "source": "TechRadar launch live blog",
-      "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
-      "title": "Driving and aiming feel sluggish? Lower the stick dead zone",
-      "body": "Players say the default controller dead zone is too large.",
-      "heroPriorityScore": 10,
-      "isTimelyHeroLead": false
-    },
-    {
-      "id": "ps5-system-update",
-      "added": "2026-11-10",
-      "cat": "launch",
-      "status": "confirmed",
-      "tag": "Required",
-      "source": "TweakTown",
-      "url": "https://www.tweaktown.com/news/114767/gamers-cant-play-gta-6-on-ps5-without-updating-system-firmware-sony-and-rockstar-confirm/index.html",
-      "title": "Required: PS5 system update 26.07-14.23.00",
-      "body": "Sony and Rockstar confirmed GTA 6 won't run until you install this 1.27GB PS5 update.",
-      "heroPriorityScore": 10,
-      "isTimelyHeroLead": false
     }
   ],
   "posts": [
