@@ -300,6 +300,13 @@
             "quote": "Top-tier highway cruiser with forgiving brake bias.",
             "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
             "rank": 1
+          },
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 2,
+            "quote": "A timeless classic that still holds its own against newer hypercars.",
+            "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdmVneDM0dlVTQm1OWVlncEJybEIxb1d3am1MQ1huUWlIdTNISVNHTkJGTEpnTDd6MzVrUzJjR1k0ck1IOERTUkxjMTlvdUlnV2FoZ043MmgzVUhPMDJwb1lRWFpQWlROVXBMTEQ5bm5fSkhfU2VHWGNkUEw5UWkyeWlKR1pxSEhNeDNpMWxYRjVWV2o3UnJvaTVxSQ?oc=5"
           }
         ],
         "sample": false,
@@ -346,6 +353,13 @@
             "quote": "Mid-tier security lock makes it the smartest high-speed steal in Leonida.",
             "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
             "rank": 2
+          },
+          {
+            "source": "Everything Edinburgh",
+            "kind": "web",
+            "rank": 1,
+            "quote": "The Itali RSX remains the gold standard for luxury sports performance.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yU3JYZHRDeVNINjNNMGlGcWFrOHdGWk1KUXlIOTFBNThNSk03cE1ITlhEYklHMWtXMXpyckFfczdoWU1ZcjEwZ19jdWQ4T3RwcEhjQWhBS2JDdVpiX0lCZWQyellKTmZVbWplTkNn?oc=5"
           }
         ],
         "sample": false,
@@ -392,6 +406,13 @@
             "quote": "Fastest free supercar spawn in Vice Beach.",
             "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
             "rank": 2
+          },
+          {
+            "source": "ScreenRant",
+            "kind": "web",
+            "rank": 2,
+            "quote": "Scorching speed and jaw-dropping wedge styling.",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8tQmdOelhlSjU1U3FYV1pTRnFQRWdfVWdKTVVQZEVZYWwzS3FCRlZuUC12X2ZvS0hfY3pUQm1xM2o1SXBMTUZXZVFYZG1JZUNHRUpJMXlxallFMWNXVFFzZHFn?oc=5"
           }
         ],
         "sample": false,
@@ -509,10 +530,543 @@
             "quote": "Slower than before, but unmatched protection.",
             "url": "https://www.ign.com/wikis/gta-6",
             "rank": 6
+          },
+          {
+            "source": "GameSpot",
+            "kind": "web",
+            "rank": 3,
+            "quote": "The ultimate bulletproof vehicle for grinding missions safely.",
+            "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5zRXdTdFNMdjZLamlwaE54Wk1KWmNhaW95M3JCTTJFUGxXS2JqYzVfOVFKcFUyWWJ3SkNZQUE0ako4YXVlb19fVmFKcEdvRHZPdXo1dTl3TGtCVGtFQll4ZHFMY0pZbmxxS3J1ZnpNWXpWM1Rh?oc=5"
           }
         ],
         "sample": false,
         "added": "2026-11-18"
+      },
+      {
+        "id": "bravado-banshee-900r",
+        "name": "Bravado Banshee 900R",
+        "type": "Super",
+        "blurb": "A legendary fan-favorite supercar returning with blistering top-end speed and vastly overhauled customization options in Vice City.",
+        "get": "Purchased on Legendary Motorsport or found parked near downtown luxury hotels.",
+        "facts": {
+          "Top speed": "158 mph",
+          "Class": "Super"
+        },
+        "ranks": [
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 1,
+            "quote": "The iconic Banshee returns with brutal acceleration and handling.",
+            "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdmVneDM0dlVTQm1OWVlncEJybEIxb1d3am1MQ1huUWlIdTNISVNHTkJGTEpnTDd6MzVrUzJjR1k0ck1IOERTUkxjMTlvdUlnV2FoZ043MmgzVUhPMDJwb1lRWFpQWlROVXBMTEQ5bm5fSkhfU2VHWGNkUEw5UWkyeWlKR1pxSEhNeDNpMWxYRjVWV2o3UnJvaTVxSQ?oc=5"
+          },
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "One of the absolute must-have supercars in your garage.",
+            "url": "https://www.youtube.com/watch?v=0NIez05L0YE"
+          }
+        ]
+      },
+      {
+        "id": "pfister-neon-ev",
+        "name": "Pfister Neon EV",
+        "type": "Sports",
+        "blurb": "A sleek, fully electric four-door sports sedan showcasing the vibrant new EV wave taking over Vice City's streets.",
+        "get": "Available on Legendary Motorsport online vehicle store.",
+        "facts": {
+          "Top speed": "142 mph",
+          "Class": "Sports"
+        },
+        "ranks": [
+          {
+            "source": "Electrek",
+            "kind": "web",
+            "rank": 2,
+            "quote": "Electric cars are finally mainstream in GTA 6, and Vice City is full of them.",
+            "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQdlJCTzczUlZsdXU1Z0pzOHB0SElBcW1LMG9sM2g1YWFvbU5neUwzM3lrLVpYd3BJZ3ZYY3Y5LVNnQXJPNEJZbWRPNTRQcmZZR2x2eFhPT1RnUG56S01FbG1CZGMyTlJVRjFfT0IyanQ4OVJBcFdQVzN6Rmd1cGpFcXNR?oc=5"
+          },
+          {
+            "source": "Everything Edinburgh",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Instant torque makes the Neon EV a silent assassin in traffic.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yU3JYZHRDeVNINjNNMGlGcWFrOHdGWk1KUXlIOTFBNThNSk03cE1ITlhEYklHMWtXMXpyckFfczdoWU1ZcjEwZ19jdWQ4T3RwcEhjQWhBS2JDdVpiX0lCZWQyellKTmZVbWplTkNn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "imponte-ruiner-zz-8",
+        "name": "Imponte Ruiner ZZ-8",
+        "type": "Muscle",
+        "blurb": "A classic American muscle car with a roaring V8 engine and nostalgic styling that feels right at home on the highway.",
+        "get": "Found occasionally cruising residential suburbs or via Southern San Andreas Autos.",
+        "facts": {
+          "Top speed": "136 mph",
+          "Class": "Muscle"
+        },
+        "ranks": [
+          {
+            "source": "HotCars",
+            "kind": "web",
+            "rank": 3,
+            "quote": "The first car you drive in GTA 6 is a legendary American muscle car.",
+            "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE04QlpGbEFLNUhUQVFsb09SX1BpUmsyUk42aHVfMXFOdWF3aFoxd0lGbmdyTDI4T0NSNHItY2xBU1Z1ZVJoOUc3a082YjRRa2JIX21SeU5iOFR3ODhTcjVEQ3FHZ1A4WlFGZUU1aQ?oc=5"
+          },
+          {
+            "source": "ScreenRant",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Pure horsepower that dominates straight-line drag strips.",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8tQmdOelhlSjU1U3FYV1pTRnFQRWdfVWdKTVVQZEVZYWwzS3FCRlZuUC12X2ZvS0hfY3pUQm1xM2o1SXBMTUZXZVFYZG1JZUNHRUpJMXlxallFMWNXVFFzZHFn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "pegassi-bati-801",
+        "name": "Pegassi Bati 801",
+        "type": "Motorcycle",
+        "blurb": "A high-performance sport bike capable of weaving seamlessly through dense highway traffic and tight alleyways.",
+        "get": "Available for purchase on Southern San Andreas Super Autos.",
+        "facts": {
+          "Top speed": "150 mph",
+          "Class": "Motorcycle"
+        },
+        "ranks": [
+          {
+            "source": "HotCars",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Motorcycle handling details are genuinely impressing riders across the board.",
+            "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPU0Z5akduR0hSODRVenZWVEo1NXlSQzI2WElza251OWdyR0pEVHBRTFZ5MGVmX29ZV2hXVGxNLVJvZ1VGOEFxTzBLZnl6Zl9qNTFzbUhNQWxwZFYyNmxkeVNIZGhvdGQ3UGlheU9XZl9RTWdhMVpUWkVLNTJaVWVlMkhLM3k0cEVFT1RTUkNFZTl3QS1DNk45RHpxNjBIQ3ExRGYwR2FxZkpSbGVzX25r?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "declasse-vigero-zx",
+        "name": "Declasse Vigero ZX",
+        "type": "Muscle",
+        "blurb": "A ferocious modern muscle machine featuring aggressive styling and smoke-generating rear tire power.",
+        "get": "Bought from Southern San Andreas Super Autos.",
+        "facts": {
+          "Top speed": "145 mph",
+          "Class": "Muscle"
+        },
+        "ranks": [
+          {
+            "source": "HotCars",
+            "kind": "web",
+            "rank": 2,
+            "quote": "GTA 6 hides a supercharged beast near your safehouse if you know where to look.",
+            "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9vYzl0WjlxcDdJaWdCNUNXb25iMmV1bXY2MTIxMFhhTjI1eXh1Y2pqZEdJbVV0QWtjQ0ZOT2s1LVdjU2tGMndneGZVTUxQMl9GZTUxaHBJTFktSUFNRTNrM1VtbTJ2Um5ONTBUT0swSQ?oc=5"
+          },
+          {
+            "source": "Everything Edinburgh",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Raw muscle performance with incredible straight-line speed.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yU3JYZHRDeVNINjNNMGlGcWFrOHdGWk1KUXlIOTFBNThNSk03cE1ITlhEYklHMWtXMXpyckFfczdoWU1ZcjEwZ19jdWQ4T3RwcEhjQWhBS2JDdVpiX0lCZWQyellKTmZVbWplTkNn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "progen-emerus",
+        "name": "Progen Emerus",
+        "type": "Super",
+        "blurb": "An ultra-responsive track monster designed for elite drivers who demand razor-sharp cornering grip.",
+        "get": "Legendary Motorsport online dealership.",
+        "facts": {
+          "Top speed": "162 mph",
+          "Class": "Super"
+        },
+        "ranks": [
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 1,
+            "quote": "A top-tier hypercar contender that dominates every supercar ranking.",
+            "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdmVneDM0dlVTQm1OWVlncEJybEIxb1d3am1MQ1huUWlIdTNISVNHTkJGTEpnTDd6MzVrUzJjR1k0ck1IOERTUkxjMTlvdUlnV2FoZ043MmgzVUhPMDJwb1lRWFpQWlROVXBMTEQ5bm5fSkhfU2VHWGNkUEw5UWkyeWlKR1pxSEhNeDNpMWxYRjVWV2o3UnJvaTVxSQ?oc=5"
+          },
+          {
+            "source": "ScreenRant",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Unmatched downforce makes high-speed cornering effortless.",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8tQmdOelhlSjU1U3FYV1pTRnFQRWdfVWdKTVVQZEVZYWwzS3FCRlZuUC12X2ZvS0hfY3pUQm1xM2o1SXBMTUZXZVFYZG1JZUNHRUpJMXlxallFMWNXVFFzZHFn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "annis-elegy-retro-custom",
+        "name": "Annis Elegy Retro Custom",
+        "type": "Sports",
+        "blurb": "The ultimate tuner culture icon offering deep customization and superior drift capabilities.",
+        "get": "Upgraded via Benny's Original Motor Works.",
+        "facts": {
+          "Top speed": "138 mph",
+          "Class": "Sports"
+        },
+        "ranks": [
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "A drift car lover's absolute dream vehicle early in the game.",
+            "url": "https://www.youtube.com/watch?v=0NIez05L0YE"
+          },
+          {
+            "source": "Digital Car Addict",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Extensive visual and performance upgrades set this tuner apart.",
+            "url": "https://www.youtube.com/watch?v=ie4vtIle3lU"
+          }
+        ]
+      },
+      {
+        "id": "obey-8f-drafter",
+        "name": "Obey 8F Drafter",
+        "type": "Sports",
+        "blurb": "A refined German sports coupe delivering balanced performance and a magnificent exhaust note.",
+        "get": "Found parked around upscale Vice City country clubs.",
+        "facts": {
+          "Top speed": "140 mph",
+          "Class": "Sports"
+        },
+        "ranks": [
+          {
+            "source": "Everything Edinburgh",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Balanced handling makes it one of the best daily drivers.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yU3JYZHRDeVNINjNNMGlGcWFrOHdGWk1KUXlIOTFBNThNSk03cE1ITlhEYklHMWtXMXpyckFfczdoWU1ZcjEwZ19jdWQ4T3RwcEhjQWhBS2JDdVpiX0lCZWQyellKTmZVbWplTkNn?oc=5"
+          },
+          {
+            "source": "ScreenRant",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Incredible engine sound and smooth power delivery.",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8tQmdOelhlSjU1U3FYV1pTRnFQRWdfVWdKTVVQZEVZYWwzS3FCRlZuUC12X2ZvS0hfY3pUQm1xM2o1SXBMTUZXZVFYZG1JZUNHRUpJMXlxallFMWNXVFFzZHFn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "benefactor-krieger",
+        "name": "Benefactor Krieger",
+        "type": "Super",
+        "blurb": "An all-wheel-drive hypercar engineered to provide supreme stability at extreme speeds.",
+        "get": "Available on Legendary Motorsport.",
+        "facts": {
+          "Top speed": "160 mph",
+          "Class": "Super"
+        },
+        "ranks": [
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 2,
+            "quote": "A formidable challenger for the fastest car crown in GTA 6.",
+            "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdmVneDM0dlVTQm1OWVlncEJybEIxb1d3am1MQ1huUWlIdTNISVNHTkJGTEpnTDd6MzVrUzJjR1k0ck1IOERTUkxjMTlvdUlnV2FoZ043MmgzVUhPMDJwb1lRWFpQWlROVXBMTEQ5bm5fSkhfU2VHWGNkUEw5UWkyeWlKR1pxSEhNeDNpMWxYRjVWV2o3UnJvaTVxSQ?oc=5"
+          },
+          {
+            "source": "ScreenRant",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Exceptional all-weather traction keeps you on the road.",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8tQmdOelhlSjU1U3FYV1pTRnFQRWdfVWdKTVVQZEVZYWwzS3FCRlZuUC12X2ZvS0hfY3pUQm1xM2o1SXBMTUZXZVFYZG1JZUNHRUpJMXlxallFMWNXVFFzZHFn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "karin-sultan-rs",
+        "name": "Karin Sultan RS",
+        "type": "Sports",
+        "blurb": "The legendary rally-bred classic offering incredible versatility across both asphalt and dirt roads.",
+        "get": "Found in industrial districts or upgraded via Benny's.",
+        "facts": {
+          "Top speed": "135 mph",
+          "Class": "Sports"
+        },
+        "ranks": [
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 5,
+            "quote": "An iconic rally machine that handles rough terrain with ease.",
+            "url": "https://www.youtube.com/watch?v=0NIez05L0YE"
+          },
+          {
+            "source": "GameSpot",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Great budget performance car for early game missions.",
+            "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5zRXdTdFNMdjZLamlwaE54Wk1KWmNhaW95M3JCTTJFUGxXS2JqYzVfOVFKcFUyWWJ3SkNZQUE0ako4YXVlb19fVmFKcEdvRHZPdXo1dTl3TGtCVGtFQll4ZHFMY0pZbmxxS3J1ZnpNWXpWM1Rh?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "bf-weevil-custom",
+        "name": "BF Weevil Custom",
+        "type": "Muscle",
+        "blurb": "A quirky hot-rod bug featuring surprisingly snappy acceleration and unique personality.",
+        "get": "Customized through specialized mechanics in the city.",
+        "facts": {
+          "Top speed": "125 mph",
+          "Class": "Muscle"
+        },
+        "ranks": [
+          {
+            "source": "HotCars",
+            "kind": "web",
+            "rank": 6,
+            "quote": "A fun easter egg vehicle with surprisingly punchy performance.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE02Y25FclBYbVJ6S3JZOXNIVkNSSldsT3ZkOEZjci04dkVzM0haNjRNNXJqaG9NNWRYTjF4d2ZfUlBzYU1QSjVlZGhtYWNMUGV1ZzA0TTA3R2VaSkR1Ml9fZGlLUGdKeHQ1QkJVT3JR?oc=5"
+          },
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Full of charm and surprisingly quick when fully upgraded.",
+            "url": "https://www.youtube.com/watch?v=0NIez05L0YE"
+          }
+        ]
+      },
+      {
+        "id": "maibatsu-penumbra-ff",
+        "name": "Maibatsu Penumbra FF",
+        "type": "Sports",
+        "blurb": "A stylish Japanese sports coupe paying homage to classic street racing culture.",
+        "get": "Purchased on Southern San Andreas Autos.",
+        "facts": {
+          "Top speed": "132 mph",
+          "Class": "Sports"
+        },
+        "ranks": [
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 5,
+            "quote": "A must-have tuner car for fans of classic import culture.",
+            "url": "https://www.youtube.com/watch?v=0NIez05L0YE"
+          },
+          {
+            "source": "Digital Car Addict",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Clean styling and smooth gear shifts.",
+            "url": "https://www.youtube.com/watch?v=ie4vtIle3lU"
+          }
+        ]
+      },
+      {
+        "id": "gallivanter-baller-st",
+        "name": "Gallivanter Baller ST",
+        "type": "Off-Road",
+        "blurb": "A luxury armored SUV providing heavy protection and steady off-road capability.",
+        "get": "Warstock Cache & Carry or luxury car dealerships.",
+        "facts": {
+          "Top speed": "120 mph",
+          "Class": "Off-Road"
+        },
+        "ranks": [
+          {
+            "source": "Hazardous",
+            "kind": "youtube",
+            "rank": 6,
+            "quote": "A sturdy vehicle for surviving intense gunfights in free roam.",
+            "url": "https://www.youtube.com/watch?v=GXdpFmHYL8c"
+          },
+          {
+            "source": "Everything Edinburgh",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Combines executive luxury with rugged durability.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yU3JYZHRDeVNINjNNMGlGcWFrOHdGWk1KUXlIOTFBNThNSk03cE1ITlhEYklHMWtXMXpyckFfczdoWU1ZcjEwZ19jdWQ4T3RwcEhjQWhBS2JDdVpiX0lCZWQyellKTmZVbWplTkNn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "lampadati-komoda",
+        "name": "Lampadati Komoda",
+        "type": "Sports",
+        "blurb": "An Italian sports sedan blending aggressive styling with practical four-door performance.",
+        "get": "Available on Legendary Motorsport.",
+        "facts": {
+          "Top speed": "137 mph",
+          "Class": "Sports"
+        },
+        "ranks": [
+          {
+            "source": "Everything Edinburgh",
+            "kind": "web",
+            "rank": 4,
+            "quote": "An underrated sedan with brilliant cornering agility.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yU3JYZHRDeVNINjNNMGlGcWFrOHdGWk1KUXlIOTFBNThNSk03cE1ITlhEYklHMWtXMXpyckFfczdoWU1ZcjEwZ19jdWQ4T3RwcEhjQWhBS2JDdVpiX0lCZWQyellKTmZVbWplTkNn?oc=5"
+          },
+          {
+            "source": "Digital Car Addict",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Sleek Italian design meets everyday usability.",
+            "url": "https://www.youtube.com/watch?v=ie4vtIle3lU"
+          }
+        ]
+      },
+      {
+        "id": "vapid-caracara-4x4",
+        "name": "Vapid Caracara 4x4",
+        "type": "Off-Road",
+        "blurb": "A monstrous off-road truck built to conquer swampy marshes and steep hills with ease.",
+        "get": "Southern San Andreas Super Autos.",
+        "facts": {
+          "Top speed": "118 mph",
+          "Class": "Off-Road"
+        },
+        "ranks": [
+          {
+            "source": "Hazardous",
+            "kind": "youtube",
+            "rank": 5,
+            "quote": "Unstoppable when exploring the wilderness outside Vice City.",
+            "url": "https://www.youtube.com/watch?v=GXdpFmHYL8c"
+          },
+          {
+            "source": "GameSpot",
+            "kind": "web",
+            "rank": 4,
+            "quote": "High ride height lets you cruise right over minor obstacles.",
+            "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5zRXdTdFNMdjZLamlwaE54Wk1KWmNhaW95M3JCTTJFUGxXS2JqYzVfOVFKcFUyWWJ3SkNZQUE0ako4YXVlb19fVmFKcEdvRHZPdXo1dTl3TGtCVGtFQll4ZHFMY0pZbmxxS3J1ZnpNWXpWM1Rh?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "pegassi-tezeract",
+        "name": "Pegassi Tezeract",
+        "type": "Super",
+        "blurb": "A futuristic electric hypercar boasting a sleek aerodynamic frame and instantaneous acceleration.",
+        "get": "Legendary Motorsport online store.",
+        "facts": {
+          "Top speed": "163 mph",
+          "Class": "Super"
+        },
+        "ranks": [
+          {
+            "source": "Electrek",
+            "kind": "web",
+            "rank": 3,
+            "quote": "Futuristic design and blazing electric speed.",
+            "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQdlJCTzczUlZsdXU1Z0pzOHB0SElBcW1LMG9sM2g1YWFvbU5neUwzM3lrLVpYd3BJZ3ZYY3Y5LVNnQXJPNEJZbWRPNTRQcmZZR2x2eFhPT1RnUG56S01FbG1CZGMyTlJVRjFfT0IyanQ4OVJBcFdQVzN6Rmd1cGpFcXNR?oc=5"
+          },
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Silent yet terrifyingly fast on the highway.",
+            "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdmVneDM0dlVTQm1OWVlncEJybEIxb1d3am1MQ1huUWlIdTNISVNHTkJGTEpnTDd6MzVrUzJjR1k0ck1IOERTUkxjMTlvdUlnV2FoZ043MmgzVUhPMDJwb1lRWFpQWlROVXBMTEQ5bm5fSkhfU2VHWGNkUEw5UWkyeWlKR1pxSEhNeDNpMWxYRjVWV2o3UnJvaTVxSQ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "grotti-x80-proto",
+        "name": "Grotti X80 Proto",
+        "type": "Super",
+        "blurb": "An eccentric concept hypercar designed for sheer velocity and futuristic aesthetic appeal.",
+        "get": "Purchased online via Legendary Motorsport.",
+        "facts": {
+          "Top speed": "161 mph",
+          "Class": "Super"
+        },
+        "ranks": [
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Unconventional looks backed by blistering top speed.",
+            "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdmVneDM0dlVTQm1OWVlncEJybEIxb1d3am1MQ1huUWlIdTNISVNHTkJGTEpnTDd6MzVrUzJjR1k0ck1IOERTUkxjMTlvdUlnV2FoZ043MmgzVUhPMDJwb1lRWFpQWlROVXBMTEQ5bm5fSkhfU2VHWGNkUEw5UWkyeWlKR1pxSEhNeDNpMWxYRjVWV2o3UnJvaTVxSQ?oc=5"
+          },
+          {
+            "source": "Everything Edinburgh",
+            "kind": "web",
+            "rank": 4,
+            "quote": "A true head-turner on any Vice City strip.",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1yU3JYZHRDeVNINjNNMGlGcWFrOHdGWk1KUXlIOTFBNThNSk03cE1ITlhEYklHMWtXMXpyckFfczdoWU1ZcjEwZ19jdWQ4T3RwcEhjQWhBS2JDdVpiX0lCZWQyellKTmZVbWplTkNn?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "overflod-autarch",
+        "name": "Overflod Autarch",
+        "type": "Super",
+        "blurb": "A lightweight endurance racer built to maintain high speeds through sweeping curves.",
+        "get": "Legendary Motorsport vehicle website.",
+        "facts": {
+          "Top speed": "159 mph",
+          "Class": "Super"
+        },
+        "ranks": [
+          {
+            "source": "ScreenRant",
+            "kind": "web",
+            "rank": 3,
+            "quote": "Exceptional stability during high-speed cornering.",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8tQmdOelhlSjU1U3FYV1pTRnFQRWdfVWdKTVVQZEVZYWwzS3FCRlZuUC12X2ZvS0hfY3pUQm1xM2o1SXBMTUZXZVFYZG1JZUNHRUpJMXlxallFMWNXVFFzZHFn?oc=5"
+          },
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 4,
+            "quote": "A reliable choice for competitive street racing.",
+            "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPdmVneDM0dlVTQm1OWVlncEJybEIxb1d3am1MQ1huUWlIdTNISVNHTkJGTEpnTDd6MzVrUzJjR1k0ck1IOERTUkxjMTlvdUlnV2FoZ043MmgzVUhPMDJwb1lRWFpQWlROVXBMTEQ5bm5fSkhfU2VHWGNkUEw5UWkyeWlKR1pxSEhNeDNpMWxYRjVWV2o3UnJvaTVxSQ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "nagasaki-shotaro",
+        "name": "Nagasaki Shotaro",
+        "type": "Motorcycle",
+        "blurb": "A neon-trimmed futuristic motorcycle offering lightning-fast agility and stunning visual presence.",
+        "get": "Legendary Motorsport.",
+        "facts": {
+          "Top speed": "155 mph",
+          "Class": "Motorcycle"
+        },
+        "ranks": [
+          {
+            "source": "HotCars",
+            "kind": "web",
+            "rank": 2,
+            "quote": "Unmatched agility when weaving through crowded city lanes.",
+            "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQWnowaUhtVENkaGp5U2xyNGY3MmNGSm1IVk1sbkJKZk45Y29oQmRPOUFsanNfSERZZDd4SXYxcUV1dW5HWFBSREJlMXFfUkRZbVJIQUQySTFJR0hrbmYwY3lKSy1jNy1weDlWbHZfVzRscURMbGJoelBzc19ZbDlHaDR2OUg3SzFXemVB?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "buckingham-maverick",
+        "name": "Buckingham Maverick",
+        "type": "Aircraft",
+        "blurb": "A versatile light utility helicopter perfect for quick aerial transit across the expansive map.",
+        "get": "Elitas Travel website.",
+        "facts": {
+          "Top speed": "145 mph",
+          "Class": "Aircraft"
+        },
+        "ranks": [
+          {
+            "source": "Runner Unknown",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "Essential for escaping police cordons from the skies.",
+            "url": "https://www.youtube.com/watch?v=27s0FD2hJEU"
+          },
+          {
+            "source": "Red Bull",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Reliable and easy to pilot for quick getaways.",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE15LVBoWEtoQXZCSmtPV1dPZXhMT2lpeGNyaXNCTnJkLUJhMUZPNUs3X3NhOHRBdEtpRU1sQlN2RWpyWW9tQllmV1ZQczR6Ry1zLTdGaG5wM0pqaWt2X1V2QW5R?oc=5"
+          }
+        ]
       }
     ],
     "weapons": [
@@ -556,6 +1110,13 @@
             "quote": "Pinpoint limb accuracy for disarming guards without raising your murder heat.",
             "url": "https://www.creativebloq.com/reviews/gta-6-review-holy-sh-t-its-good",
             "rank": 2
+          },
+          {
+            "source": "TheGigaDad",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "These are the BEST guns and attachments in GTA 6 for EVERY weapon class, budget, and stage!",
+            "url": "https://www.youtube.com/watch?v=avVECaWDoSQ"
           }
         ],
         "sample": false,
@@ -595,6 +1156,13 @@
             "quote": "Intimidates store clerks faster than pistols during clean robberies.",
             "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
             "rank": 3
+          },
+          {
+            "source": "AcezProduction",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "Every Weapon in GTA 6! Full Weapons Showcase across Leonida.",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
           }
         ],
         "sample": false,
@@ -671,6 +1239,13 @@
             "quote": "Essential for Lake Cottonmouth hunting and long-range setups.",
             "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
             "rank": 3
+          },
+          {
+            "source": "Caspahz",
+            "kind": "youtube",
+            "rank": 1,
+            "quote": "GTA 6 hides some of its best weapons off the map, and most players walk right past them.",
+            "url": "https://www.youtube.com/watch?v=bs6VF8ZnKb4"
           }
         ],
         "sample": false,
@@ -702,10 +1277,550 @@
             "quote": "Burns through unshared character ammo quickly, so watch your reserves.",
             "url": "https://www.invenglobal.com/articles/28810/13-beginner-tips-for-gta-6-i-wish-i-knew-from-the-start",
             "rank": 4
+          },
+          {
+            "source": "LEWIS⚡",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "You don't need to progress far to get GTA 6 unique weapons in Chapter 1.",
+            "url": "https://www.youtube.com/watch?v=AK-VF14WWyI"
           }
         ],
         "sample": false,
         "added": "2026-11-18"
+      },
+      {
+        "id": "gold-assault-rifle",
+        "name": "Gold Assault Rifle",
+        "type": "Assault Rifle",
+        "blurb": "A flashy custom-themed AR hidden off the beaten map path, combining high tier style with devastating mid-range power.",
+        "get": "Found hidden in a luxury safehouse location in Vice City.",
+        "facts": {
+          "Damage": "90/100",
+          "Best use": "Mid-range firefights"
+        },
+        "ranks": [
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 1,
+            "quote": "GTA 6 has some incredible secret weapons hidden around the world, including golden ARs.",
+            "url": "https://www.youtube.com/watch?v=NsJ4RIdL0x8"
+          },
+          {
+            "source": "Legacy Gaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Unique weapons are everything in GTA 6 and you'll want to start collecting them now!",
+            "url": "https://www.youtube.com/watch?v=XbSRUlQwW7A"
+          }
+        ]
+      },
+      {
+        "id": "tactical-combat-pistol",
+        "name": "Tactical Combat Pistol",
+        "type": "Handgun",
+        "blurb": "A reliable sidearm with fast reload speeds and exceptional handling for close quarters scuffles.",
+        "get": "Purchase at any Ammu-Nation store across Leonida counties.",
+        "facts": {
+          "Damage": "65/100",
+          "Best use": "Close quarters"
+        },
+        "ranks": [
+          {
+            "source": "KhrazeGaming",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "Grand Theft Auto VI features an extensive arsenal of real-world and fictionalized firearms.",
+            "url": "https://www.youtube.com/watch?v=XSuYYbxVGfI"
+          },
+          {
+            "source": "AcezProduction",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Here's the ultimate showcase of every weapon in GTA.",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        ]
+      },
+      {
+        "id": "silenced-ap-pistol",
+        "name": "Silenced AP Pistol",
+        "type": "Handgun",
+        "blurb": "Keeps your operations quiet while maintaining a high rate of fire for emergency drive-bys.",
+        "get": "Unlocked after completing early chapter heist missions.",
+        "facts": {
+          "Damage": "70/100",
+          "Best use": "Stealth"
+        },
+        "ranks": [
+          {
+            "source": "GameCraft",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "Most players are running around GTA 6 making noise and wondering why the cops show up.",
+            "url": "https://www.youtube.com/watch?v=QVT66Ule-qs"
+          },
+          {
+            "source": "LEWIS⚡",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "You don't need to progress far to get GTA 6 unique weapons.",
+            "url": "https://www.youtube.com/watch?v=AK-VF14WWyI"
+          }
+        ]
+      },
+      {
+        "id": "combat-shotgun",
+        "name": "Combat Shotgun",
+        "type": "Shotgun",
+        "blurb": "Clears rooms in seconds with a devastating semi-automatic spread pattern.",
+        "get": "Acquired from police department armories or advanced gun stores.",
+        "facts": {
+          "Damage": "95/100",
+          "Best use": "Close quarters"
+        },
+        "ranks": [
+          {
+            "source": "TheGigaDad",
+            "kind": "youtube",
+            "rank": 1,
+            "quote": "These are the BEST guns and attachments in GTA 6 for EVERY weapon class!",
+            "url": "https://www.youtube.com/watch?v=avVECaWDoSQ"
+          },
+          {
+            "source": "KhrazeGaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Grand Theft Auto VI features an extensive arsenal...",
+            "url": "https://www.youtube.com/watch?v=XSuYYbxVGfI"
+          }
+        ]
+      },
+      {
+        "id": "legendary-silenced-smg",
+        "name": "Legendary Silenced SMG",
+        "type": "Submachine Gun",
+        "blurb": "A rare suppressed submachine gun that lets you clear out gang hideouts without triggering a wanted level.",
+        "get": "Found inside an abandoned warehouse in the swamp region.",
+        "facts": {
+          "Damage": "78/100",
+          "Best use": "Stealth"
+        },
+        "ranks": [
+          {
+            "source": "GameCraft",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "11 Legendary Silenced Weapons You NEED to Get in GTA 6.",
+            "url": "https://www.youtube.com/watch?v=QVT66Ule-qs"
+          },
+          {
+            "source": "Caspahz",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "GTA 6 hides some of its best weapons off the map.",
+            "url": "https://www.youtube.com/watch?v=bs6VF8ZnKb4"
+          }
+        ]
+      },
+      {
+        "id": "marksman-rifle-mk-ii",
+        "name": "Marksman Rifle Mk II",
+        "type": "Sniper",
+        "blurb": "Delivers precise semi-automatic fire over long distances with minimal recoil adjustment.",
+        "get": "Available at high-end Ammu-Nation locations after Chapter 2.",
+        "facts": {
+          "Damage": "85/100",
+          "Best use": "Long-range sniping"
+        },
+        "ranks": [
+          {
+            "source": "AcezProduction",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "Here's the ultimate showcase of every weapon in GTA Leonida.",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          },
+          {
+            "source": "KhrazeGaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "The 10 FIRST Things YOU Should Do In GTA 6.",
+            "url": "https://www.youtube.com/watch?v=ZLKc1H917j8"
+          }
+        ]
+      },
+      {
+        "id": "compact-grenade-launcher",
+        "name": "Compact Grenade Launcher",
+        "type": "Heavy Ordnance",
+        "blurb": "Packs explosive devastation into a handheld frame, ideal for disabling fleeing vehicles.",
+        "get": "Stolen from a heavily guarded military checkpoint.",
+        "facts": {
+          "Damage": "98/100",
+          "Best use": "Anti-vehicle"
+        },
+        "ranks": [
+          {
+            "source": "KhrazeGaming",
+            "kind": "youtube",
+            "rank": 1,
+            "quote": "Grand Theft Auto VI features an extensive arsenal... and heavy ordnance.",
+            "url": "https://www.youtube.com/watch?v=XSuYYbxVGfI"
+          },
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "GTA 6 is massive, and there are plenty of useful things you can miss!",
+            "url": "https://www.youtube.com/watch?v=8xUEwCgqFMs"
+          }
+        ]
+      },
+      {
+        "id": "sawed-off-shotgun",
+        "name": "Sawed-Off Shotgun",
+        "type": "Shotgun",
+        "blurb": "A brutal weapon designed for devastating impact at point-blank range, usable from motorcycles.",
+        "get": "Discovered in a remote coastal shack.",
+        "facts": {
+          "Damage": "88/100",
+          "Best use": "Drive-by combat"
+        },
+        "ranks": [
+          {
+            "source": "Caspahz",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "GTA 6 hides some of its best weapons off the map, and most players walk right past them.",
+            "url": "https://www.youtube.com/watch?v=bs6VF8ZnKb4"
+          },
+          {
+            "source": "vAnother Level",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Every unique weapon variant found in GTA 6 so far, with its real name...",
+            "url": "https://www.youtube.com/watch?v=VPo_ZVih0e0"
+          }
+        ]
+      },
+      {
+        "id": "vintage-pistol",
+        "name": "Vintage Pistol",
+        "type": "Handgun",
+        "blurb": "A classic firearm favored by collectors for its distinctive historical styling and crisp sights.",
+        "get": "Found inside a safety deposit box during a side robbery.",
+        "facts": {
+          "Damage": "55/100",
+          "Best use": "Casual carry"
+        },
+        "ranks": [
+          {
+            "source": "Legacy Gaming",
+            "kind": "youtube",
+            "rank": 5,
+            "quote": "In this video we share some of the best secret items...",
+            "url": "https://www.youtube.com/watch?v=XbSRUlQwW7A"
+          },
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Every Ammu-Nation in GTA 6: 24 Gun Stores Mapped by County.",
+            "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPX28xY3BTcjZMd0xpMkJGRmdaSjJxUXFWVWlZYzFFNE11NHNQaXpkWTJ3Mm9aMDh1NnBvQ2otVnlsUjRaZDViZk9DVDBlNzNRWWhXdDQtdWpfdkhmODA4cEtZZkNzZGZpUFlCY1NFT1ZGRFBTbWJqUW9fLVVNOHphMkFZRHhZM2YwOVdyT3F1R2NKMkR0dTZZ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "mini-lmg",
+        "name": "Mini-LMG",
+        "type": "Light Machine Gun",
+        "blurb": "Suppresses entire squads with a high-capacity belt feed and formidable sustained fire.",
+        "get": "Purchased from elite weapon vendors in the northern districts.",
+        "facts": {
+          "Damage": "92/100",
+          "Best use": "Suppressive fire"
+        },
+        "ranks": [
+          {
+            "source": "TheGigaDad",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "These are the BEST guns and attachments in GTA 6 for EVERY weapon class!",
+            "url": "https://www.youtube.com/watch?v=avVECaWDoSQ"
+          },
+          {
+            "source": "AcezProduction",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Every Weapon in GTA 6! (Full Weapons Showcase)",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        ]
+      },
+      {
+        "id": "heavy-revolver",
+        "name": "Heavy Revolver",
+        "type": "Handgun",
+        "blurb": "Fires massive magnum rounds that can stagger targets with a single well-placed cylinder.",
+        "get": "Unlocked via gun store progression in Leonida.",
+        "facts": {
+          "Damage": "91/100",
+          "Best use": "High-impact stopping power"
+        },
+        "ranks": [
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "GTA 6 has some incredible secret weapons hidden around the world...",
+            "url": "https://www.youtube.com/watch?v=NsJ4RIdL0x8"
+          },
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Every Ammu-Nation in GTA 6: 24 Gun Stores Mapped by County and Stock Tier.",
+            "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPX28xY3BTcjZMd0xpMkJGRmdaSjJxUXFWVWlZYzFFNE11NHNQaXpkWTJ3Mm9aMDh1NnBvQ2otVnlsUjRaZDViZk9DVDBlNzNRWWhXdDQtdWpfdkhmODA4cEtZZkNzZGZpUFlCY1NFT1ZGRFBTbWJqUW9fLVVNOHphMkFZRHhZM2YwOVdyT3F1R2NKMkR0dTZZ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "bullpup-rifle",
+        "name": "Bullpup Rifle",
+        "type": "Assault Rifle",
+        "blurb": "A compact bullpup design providing high accuracy and maneuverability in tight city alleys.",
+        "get": "Found in a security van transport heist.",
+        "facts": {
+          "Damage": "84/100",
+          "Best use": "Urban firefights"
+        },
+        "ranks": [
+          {
+            "source": "Legacy Gaming",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "Unique weapons are everything in GTA 6 and you'll want to start collecting them now!",
+            "url": "https://www.youtube.com/watch?v=XbSRUlQwW7A"
+          },
+          {
+            "source": "AcezProduction",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Every Weapon in GTA 6! (Full Weapons Showcase)",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        ]
+      },
+      {
+        "id": "special-carbine",
+        "name": "Special Carbine",
+        "type": "Assault Rifle",
+        "blurb": "A versatile and reliable rifle customizable with numerous scopes and extended magazines.",
+        "get": "Available at standard Ammu-Nation branches across the map.",
+        "facts": {
+          "Damage": "82/100",
+          "Best use": "General combat"
+        },
+        "ranks": [
+          {
+            "source": "TheGigaDad",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "These are the BEST guns and attachments in GTA 6 for EVERY weapon class, budget, and stage!",
+            "url": "https://www.youtube.com/watch?v=avVECaWDoSQ"
+          },
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Every Ammu-Nation in GTA 6: 24 Gun Stores Mapped by County...",
+            "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPX28xY3BTcjZMd0xpMkJGRmdaSjJxUXFWVWlZYzFFNE11NHNQaXpkWTJ3Mm9aMDh1NnBvQ2otVnlsUjRaZDViZk9DVDBlNzNRWWhXdDQtdWpfdkhmODA4cEtZZkNzZGZpUFlCY1NFT1ZGRFBTbWJqUW9fLVVNOHphMkFZRHhZM2YwOVdyT3F1R2NKMkR0dTZZ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "double-action-revolver",
+        "name": "Double-Action Revolver",
+        "type": "Handgun",
+        "blurb": "A rapid-firing classic revolver suited for quick draws and old-school shootout scenarios.",
+        "get": "Complete the treasure hunt clue challenge across Leonida.",
+        "facts": {
+          "Damage": "74/100",
+          "Best use": "Quick-draw combat"
+        },
+        "ranks": [
+          {
+            "source": "Caspahz",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "GTA 6: 16 FREE Gold Weapons You Get to Keep (All Locations).",
+            "url": "https://www.youtube.com/watch?v=bs6VF8ZnKb4"
+          },
+          {
+            "source": "LEWIS⚡",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "12+ Secret Legendary Weapons In GTA 6 You Can Grab In Chapter 1!",
+            "url": "https://www.youtube.com/watch?v=AK-VF14WWyI"
+          }
+        ]
+      },
+      {
+        "id": "sweeper-shotgun",
+        "name": "Sweeper Shotgun",
+        "type": "Shotgun",
+        "blurb": "Drum-fed shotgun engineered for maximum chaos and rapid multi-target crowd control.",
+        "get": "Looted from gang leader headquarters.",
+        "facts": {
+          "Damage": "89/100",
+          "Best use": "Crowd control"
+        },
+        "ranks": [
+          {
+            "source": "KhrazeGaming",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "Grand Theft Auto VI features an extensive arsenal of real-world and fictionalized firearms.",
+            "url": "https://www.youtube.com/watch?v=XSuYYbxVGfI"
+          },
+          {
+            "source": "AcezProduction",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Every Weapon in GTA 6! (Full Weapons Showcase)",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        ]
+      },
+      {
+        "id": "railgun-prototype",
+        "name": "Railgun Prototype",
+        "type": "Heavy Ordnance",
+        "blurb": "An experimental electromagnetic weapon capable of vaporizing targets instantly.",
+        "get": "Secretly hidden inside a restricted military research laboratory.",
+        "facts": {
+          "Damage": "100/100",
+          "Best use": "Extreme damage"
+        },
+        "ranks": [
+          {
+            "source": "KhrazeGaming",
+            "kind": "youtube",
+            "rank": 1,
+            "quote": "GTA 6 - The Most Powerful Unlocks Early! (Do This Before Finishing Chapter 1)",
+            "url": "https://www.youtube.com/watch?v=ZLKc1H917j8"
+          },
+          {
+            "source": "Legacy Gaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Unique weapons are everything in GTA 6 and you'll want to start collecting them now!",
+            "url": "https://www.youtube.com/watch?v=XbSRUlQwW7A"
+          }
+        ]
+      },
+      {
+        "id": "advanced-rifle",
+        "name": "Advanced Rifle",
+        "type": "Assault Rifle",
+        "blurb": "Lightweight polymer rifle with superior rate of fire and excellent accuracy while moving.",
+        "get": "Purchased from high-tier gun vendors.",
+        "facts": {
+          "Damage": "86/100",
+          "Best use": "Mobile assault"
+        },
+        "ranks": [
+          {
+            "source": "TheGigaDad",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "These are the BEST guns and attachments in GTA 6 for EVERY weapon class!",
+            "url": "https://www.youtube.com/watch?v=avVECaWDoSQ"
+          },
+          {
+            "source": "eGamers.io",
+            "kind": "web",
+            "rank": 4,
+            "quote": "Every Ammu-Nation in GTA 6: 24 Gun Stores Mapped by County and Stock Tier.",
+            "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPX28xY3BTcjZMd0xpMkJGRmdaSjJxUXFWVWlZYzFFNE11NHNQaXpkWTJ3Mm9aMDh1NnBvQ2otVnlsUjRaZDViZk9DVDBlNzNRWWhXdDQtdWpfdkhmODA4cEtZZkNzZGZpUFlCY1NFT1ZGRFBTbWJqUW9fLVVNOHphMkFZRHhZM2YwOVdyT3F1R2NKMkR0dTZZ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "compact-rifle",
+        "name": "Compact Rifle",
+        "type": "Assault Rifle",
+        "blurb": "A rugged, high-capacity carbine that can be fired easily from inside vehicle interiors.",
+        "get": "Found in stash houses throughout the inland county.",
+        "facts": {
+          "Damage": "77/100",
+          "Best use": "Drive-by operations"
+        },
+        "ranks": [
+          {
+            "source": "Caspahz",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "GTA 6 hides some of its best weapons off the map, and most players walk right past them.",
+            "url": "https://www.youtube.com/watch?v=bs6VF8ZnKb4"
+          },
+          {
+            "source": "vAnother Level",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Every unique weapon variant found in GTA 6 so far...",
+            "url": "https://www.youtube.com/watch?v=VPo_ZVih0e0"
+          }
+        ]
+      },
+      {
+        "id": "firework-launcher",
+        "name": "Firework Launcher",
+        "type": "Heavy Ordnance",
+        "blurb": "Festive launcher that fires explosive pyrotechnics, great for celebrations or fiery ambushes.",
+        "get": "Found during seasonal event drops or hidden rooftops.",
+        "facts": {
+          "Damage": "72/100",
+          "Best use": "Area denial"
+        },
+        "ranks": [
+          {
+            "source": "Arekkz Gaming",
+            "kind": "youtube",
+            "rank": 5,
+            "quote": "GTA 6 is massive, and there are plenty of useful things you can miss during your first few hours!",
+            "url": "https://www.youtube.com/watch?v=8xUEwCgqFMs"
+          },
+          {
+            "source": "AcezProduction",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Every Weapon in GTA 6! (Full Weapons Showcase)",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        ]
+      },
+      {
+        "id": "stun-gun",
+        "name": "Stun Gun",
+        "type": "Non-Lethal",
+        "blurb": "Instantly incapacitates suspects without causing permanent injury or raising a high wanted level.",
+        "get": "Acquired from police supply lockers.",
+        "facts": {
+          "Damage": "50/100",
+          "Best use": "Non-lethal takedowns"
+        },
+        "ranks": [
+          {
+            "source": "KhrazeGaming",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "The 10 FIRST Things YOU Should Do In GTA 6 (Free Car, Weapons & Fighter Jet).",
+            "url": "https://www.youtube.com/watch?v=ZLKc1H917j8"
+          }
+        ]
       }
     ],
     "money": [
@@ -742,6 +1857,13 @@
             "quote": "Zero bounty if you disable the backroom security terminal first.",
             "url": "https://www.ign.com/wikis/gta-6",
             "rank": 2
+          },
+          {
+            "source": "Forbes",
+            "kind": "web",
+            "rank": 2,
+            "quote": "The Best Ways To Earn Money In 'GTA 6,' Early, Mid- And Late-Game",
+            "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQSDNXMHAyOGlyVVZSRlNCa1JjSEVsNnpKR3JjeEtadDNlT1RPRGpsSE5VZDVEMW1ITlY3UERoTE1aR1JHdTlzZzlDMWNoWC1hWnJFUnk4YnpzSkVPOHgzNjV5MG5NSUp5OUIzdGc1dWtDSlQxTFNOOHBVZnNRdHJseWs3VzJicjZ5b2FqUnZTa0ZBZE0yamhpeDA5TnRDWEFOUFFnd1ZOSjhkNGk1MjZUMQ?oc=5"
           }
         ],
         "sample": false,
@@ -780,6 +1902,13 @@
             "quote": "Three-tier car security makes the Key Cloner pay for itself in one Vice Beach run.",
             "url": "https://kotaku.com/grand-theft-auto-6-the-kotaku-review-2000757842",
             "rank": 2
+          },
+          {
+            "source": "VICE",
+            "kind": "web",
+            "rank": 3,
+            "quote": "How to Make Money Fast in GTA 6",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1NZEJkSFpaV3pUN1UxMW1EaVR2cWNnWHJ5UGVsZUdCVVVjd1BNelVoWWprVkd4dkpFaExjZUpIbVB6Vk9haDd4ajZNWDFJaHgybi1JTEZUakdTOU1Tdm9OQjhYZG1BN1g1OG5hWGpR?oc=5"
           }
         ],
         "sample": false,
@@ -811,6 +1940,13 @@
             "quote": "Biggest payouts in the game, though long missions require PS5 rest mode if you need a break.",
             "url": "https://www.ign.com/wikis/gta-6",
             "rank": 1
+          },
+          {
+            "source": "Eurogamer.net",
+            "kind": "web",
+            "rank": 1,
+            "quote": "Best ways to make money in GTA 6",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8ySnFoQnJEU21iaE5UTmxlc2RCcUVEdXFtc1dHU1ZkenN2eU1sVnBrbGdkR1paTTVkcFVHSnJlSHpwTG1KNnRfRnJKT0l6bzh1M20ybkk1cHdOeUJPN2ZxQUJn?oc=5"
           }
         ],
         "sample": false,
@@ -842,6 +1978,13 @@
             "quote": "Chill zero-heat money when your wanted level is hot in the city.",
             "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             "rank": 4
+          },
+          {
+            "source": "Red Bull",
+            "kind": "web",
+            "rank": 5,
+            "quote": "GTA 6 beginner’s guide: Essential tips and hidden mechanics",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1JVWEzQTB1RUsxeVp2YXpBVnNPQVNUOHdwTXcxb0xrUVJPMHpIQUxkZEk4YmlfV3pwdkJCSGFJc1J1MGQ1REs0WnZLVF81YXR2dVoxTVp3VTFWVWRTci14NTJn?oc=5"
           }
         ],
         "sample": false,
@@ -873,10 +2016,341 @@
             "quote": "Good way to learn Vice City shortcuts without GPS.",
             "url": "https://www.ign.com/wikis/gta-6",
             "rank": 8
+          },
+          {
+            "source": "Gamers Heroes",
+            "kind": "web",
+            "rank": 4,
+            "quote": "How to Make Money Fast in GTA 6",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFA3X19LRnNqZEI3VjJ3MF9lWGtCUG1QS1NMVWlZVU5DeUF0ZnJPRjNJdGJLSkRmaGhhcUh0TGtwOE5VUFNxYjhyTHR4VEhjV1lodzMwa3AwYlVsNGVoN203eUJnYndzOXpVNk9BNU5sNlhmTUk4aFVPaFVIWFFJdw?oc=5"
           }
         ],
         "sample": false,
         "added": "2026-11-18"
+      },
+      {
+        "id": "cartel-heist-vault-raids",
+        "name": "Cartel Heist & Vault Raids",
+        "type": "Heist Activity",
+        "blurb": "Execute the high-stakes cartel heist missions for massive multi-million dollar payouts across Leonida.",
+        "get": "Complete Chapter 2 setup operations and recruit an expert crew.",
+        "facts": {
+          "Payout": "$5,000,000 - $10,000,000",
+          "Time": "45-60 min run"
+        },
+        "ranks": [
+          {
+            "source": "PlayDayOne",
+            "kind": "web",
+            "rank": 1,
+            "quote": "How to Complete the Perfect Cartel Heist and Earn $10 Million",
+            "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBWOXA3dHZ3cm01dDdCZjV6X0hoaDc2Uy10N1N4cHQ1bjd3VjROXzdQb0pxVm0xWGRlNkNHX0ctNzUydDlfYXk0Rmtkd3B6SXFfbEsyOXZfdXR3RGlNOFRRZnBuTkxFNFQ3bVNQelRlMVJmSkcxaUJ0TjB6WQ?oc=5"
+          },
+          {
+            "source": "WantedGator",
+            "kind": "youtube",
+            "rank": 1,
+            "quote": "So I ran the big ones myself and ranked them for maximum profit.",
+            "url": "https://www.youtube.com/watch?v=9OsRCr6Zgdc"
+          }
+        ]
+      },
+      {
+        "id": "atm-robbery-chains",
+        "name": "ATM Robbery Chains",
+        "type": "Street Crime",
+        "blurb": "Quickly hold up pedestrians at outdoor ATMs throughout Vice City for rapid early-game cash injections.",
+        "get": "Equip a sidearm and target quiet streets to avoid immediate police response.",
+        "facts": {
+          "Payout": "$10,000 - $25,000",
+          "Time": "2-3 min per ATM"
+        },
+        "ranks": [
+          {
+            "source": "WantedGator",
+            "kind": "youtube",
+            "rank": 3,
+            "quote": "GTA 6 Money Methods RANKED: ATMs, Jewelry Stores & Banks",
+            "url": "https://www.youtube.com/watch?v=9OsRCr6Zgdc"
+          },
+          {
+            "source": "Diario AS",
+            "kind": "web",
+            "rank": 4,
+            "quote": "How to get cash fast at the start of the game.",
+            "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORzRsUGFQUml2OEdpNlNjMkJQay1PTE9rZUNQVE0wcnNYQkJBMjdBOFdjbHdoM1ltak1lN0FaVWlyMENabC00Y2g1TlNZZm85Nk5McHl6Yi16SmhwNi1vNFhMRmllTTl3UnZ3NDAtbUEtS0otUjFybmNzODJaY0NlaWRrTV9zY3J3cGwyRFVSNXlJd3ljVkcybEktNnQxeXhIdGc5TV9TZjF6RGZ2bi1yTFZVUdIBxwFBVV95cUxQY1NKcUZzWmRCd09VR1kyOGlFQXc1RzBrcVp3MFlTaHl6Tm85TkI4VGZnbXBFOU1KVU91dzFNZnByajRXTVNvMzdsNV9iZlZ3enFBemhtSzd0MFdnU3Y2TlNQblNVVnZncHhPM0RQaHIyUWk5MG9UVVE3S3dNNXFFdVBibjFRWk9IRko1QnM2VnlLR3lack5hT1pVT1dsS2NkOXl0NndROHVBWHhlMXFpOGxNUUlOZHFVYWk0Nng5NXk2MVRyTTFR?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "luxury-jewelry-store-heists",
+        "name": "Luxury Jewelry Store Heists",
+        "type": "Store Robbery",
+        "blurb": "Smash and grab high-end display cases in Vice City shopping districts before the authorities arrive.",
+        "get": "Secure a fast getaway vehicle and a crowd-control weapon.",
+        "facts": {
+          "Payout": "$75,000 - $150,000",
+          "Time": "5-8 min run"
+        },
+        "ranks": [
+          {
+            "source": "WantedGator",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "GTA 6 Money Methods RANKED: ATMs, Jewelry Stores & Banks",
+            "url": "https://www.youtube.com/watch?v=9OsRCr6Zgdc"
+          },
+          {
+            "source": "Forbes",
+            "kind": "web",
+            "rank": 2,
+            "quote": "How To Execute A Perfect 'GTA 6' Robbery For Maximum Money",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQQjgyamRVNFdkUm1hblA2Z1VQMm5ybl9Hblo0bTBfaVhIQTFVUzkyX0RFamxvR1NKSUU0S19Hb3dDUHpMUTd0N1NMUThmUkViU3Y0R2JtdG1iZnNyNmgtbGdscjRTc0VrWERCbkpIVGdFZGtubTViWWhOTG1sMTdGS01DVXRFWXpZQmRDNG1FZVNLRlZ1YkxwMG9TWnZOTDQwOGlLS091dDR5bVk?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "chapter-1-asset-preservation",
+        "name": "Chapter 1 Asset Preservation",
+        "type": "Missable Strategy",
+        "blurb": "Avoid wasting critical early-game resources and complete missable tutorial objectives for maximum initial funds.",
+        "get": "Follow chapter walkthroughs carefully before progressing past Chapter 1.",
+        "facts": {
+          "Payout": "$50,000 saved",
+          "Time": "One-time setup"
+        },
+        "ranks": [
+          {
+            "source": "BiggySweats",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "DON'T Finish Chapter 1 in GTA 6 Until You Do THIS!",
+            "url": "https://www.youtube.com/watch?v=CiHuzgwaWYw"
+          },
+          {
+            "source": "NorZZa",
+            "kind": "youtube",
+            "rank": 4,
+            "quote": "Do This Before It's TOO LATE In Chapter 1 Of Grand Theft Auto 6!",
+            "url": "https://www.youtube.com/watch?v=1ReyVNDmwS4"
+          }
+        ]
+      },
+      {
+        "id": "underground-money-glitch-exploits",
+        "name": "Underground Money Glitch Exploits",
+        "type": "Exploit",
+        "blurb": "Optimize repetitive game loops and transaction glitches discovered by the community to rapidly multiply funds.",
+        "get": "Replicate community-discovered patch-safe routing steps.",
+        "facts": {
+          "Payout": "$100,000 per 10 min",
+          "Time": "10 min loop"
+        },
+        "ranks": [
+          {
+            "source": "IGN",
+            "kind": "web",
+            "rank": 1,
+            "quote": "GTA 6 Players Are Optimizing the Money Glitch to Within an Inch of Its Life",
+            "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1uNEFzOHhMSmxLdzkxX2ZCR1VZUjlTelQ5OWhHcm14R1Bxd1BZWHUyV0htaXJxWDJRMVFpemExZE9tdnp6ejZDOUdGNlJqd2NPN3dhVGRHZXAzVnZGNUU4cU1WM3B2V2lCOTlxbVVoOA?oc=5"
+          },
+          {
+            "source": "DarkViperAU",
+            "kind": "youtube",
+            "rank": 2,
+            "quote": "The Unlimited Money Glitch In GTA 5 (Easiest Method) translated to Vice City",
+            "url": "https://www.youtube.com/watch?v=DwZdea18r7M"
+          }
+        ]
+      },
+      {
+        "id": "chapter-2-open-world-delivery",
+        "name": "Chapter 2 Open World Delivery",
+        "type": "Side Activity",
+        "blurb": "Fulfill specialized cargo and package runs across Leonida unlocked at the start of Chapter 2.",
+        "get": "Unlock the shipping depot contact in Vice City suburbs.",
+        "facts": {
+          "Payout": "$40,000 - $80,000",
+          "Time": "10-15 min run"
+        },
+        "ranks": [
+          {
+            "source": "Rock Paper Shotgun",
+            "kind": "web",
+            "rank": 5,
+            "quote": "GTA 6: How to make money fast in Chapter 2",
+            "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5WRHhudU1SSW1qbGdlM3VwNE9aSjd0Y09vQlgyaFF0RXk1enJ6Rmlhcmd2RVY4eGVQMXU0UmhHNE05Wl92Q2dId2F3RU1TSVlNc2RPX1huUy1EX0NHWXF4UTE5Q2xJTFNfcU5NdFJzdzV4aWxaX3Yxcg?oc=5"
+          },
+          {
+            "source": "AltChar",
+            "kind": "web",
+            "rank": 5,
+            "quote": "The Fastest Way to Make Money in Chapter 2",
+            "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQMDlOamFobnF2RmFYanh1NHRMM0pwUTZSblgzLW5qOHhSX3poRDJCTUdoVWVHdHotM0Y4RUJ6VHk5cThhRXUxeVN4SXJQVk41NHNtMGh6ZTJFdVZybXdLandOeFRDMDlVVWVadi1tUTJpcy1tS1lCaldzU1RiblZsd21jQ2FUd0dqWUgwYmdnRTdOZkt2ZEJuaUZlRktLa2pBb2k4YmVOb1k?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "pawn-shop-asset-flipping",
+        "name": "Pawn Shop Asset Flipping",
+        "type": "Trading",
+        "blurb": "Collect rare valuables from exploration and sell them at local Leonida pawn shops for steady margins.",
+        "get": "Loot residential properties and clean out safehouses during missions.",
+        "facts": {
+          "Payout": "$15,000 - $35,000",
+          "Time": "5 min drop-off"
+        },
+        "ranks": [
+          {
+            "source": "Polygon.com",
+            "kind": "web",
+            "rank": 6,
+            "quote": "GTA 6 Players Keep Discovering Ridiculous New Ways To Steal Money",
+            "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9aMTNqTFJqWmhiN0tVbHZ4Z1BTSEVkRU5CQ0NCWWJkdFo5YndoOTVCd25WZmhFaEExOVlZX281Rl94X0dQcVYwQTk4TDVHbS0zc3d1NTRmdUlrc2hJUF93X3g1RmFmVGNvallxb2w1YVQ2WFUtcExnZg?oc=5"
+          },
+          {
+            "source": "IGN",
+            "kind": "web",
+            "rank": 6,
+            "quote": "Best Ways to Make Money Early - GTA 6 Guide",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE8tQ2p5Yk5pdlpwWWNfSnF4ckx3U01PZk5LV1ZIQ1lPOXhaOTRXamM0Z3lKbTNOeTJpNUoxdkUxdk04SFRaVGhpS1djRjNIbERHMHM5U0s4Wms3aExiY1dJNWlROE1WTnd0TXlZZ3VR?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "vice-city-nightclub-management",
+        "name": "Vice City Nightclub Management",
+        "type": "Passive Income",
+        "blurb": "Take over local entertainment venues and manage daily operations to generate recurring safe revenue.",
+        "get": "Complete management takeover missions in central Vice City.",
+        "facts": {
+          "Payout": "$20,000 / hour",
+          "Time": "Passive hourly"
+        },
+        "ranks": [
+          {
+            "source": "space4games",
+            "kind": "web",
+            "rank": 3,
+            "quote": "GTA 6: How to Make Money Fast in Vice City",
+            "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOUmR3bDdlejJoc2hlZnN0U0dCWkhmOEt4ZXVRUGd0ajV5aFc0MzJWSmtVLWZZNHVwV2NGVTBaNUpyZ3MyRlRvMzV6OWdObzRldVBqZERQSTE3ZDlUYkx1RmtGLXlOVHJuWUNjOEtYMHlFSks2M0E2MTQ2Vnhxb2lObGt0UDNQZw?oc=5"
+          },
+          {
+            "source": "Forbes",
+            "kind": "web",
+            "rank": 3,
+            "quote": "The Best Ways To Earn Money In 'GTA 6,' Early, Mid- And Late-Game",
+            "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQSDNXMHAyOGlyVVZSRlNCa1JjSEVsNnpKR3JjeEtadDNlT1RPRGpsSE5VZDVEMW1ITlY3UERoTE1aR1JHdTlzZzlDMWNoWC1hWnJFUnk4YnpzSkVPOHgzNjV5MG5NSUp5OUIzdGc1dWtDSlQxTFNOOHBVZnNRdHJseWs3VzJicjZ5b2FqUnZTa0ZBZE0yamhpeDA5TnRDWEFOUFFnd1ZOSjhkNGk1MjZUMQ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "suburban-safehouse-burglary",
+        "name": "Suburban Safehouse Burglary",
+        "type": "Burglary",
+        "blurb": "Sneak into high-end residential homes across Leonida during the night to extract cash and electronics.",
+        "get": "Wait for night cycle and pick exterior sliding glass doors.",
+        "facts": {
+          "Payout": "$25,000 - $60,000",
+          "Time": "8-12 min run"
+        },
+        "ranks": [
+          {
+            "source": "VICE",
+            "kind": "web",
+            "rank": 5,
+            "quote": "How to Make Money Fast in GTA 6",
+            "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1NZEJkSFpaV3pUN1UxMW1EaVR2cWNnWHJ5UGVsZUdCVVVjd1BNelVoWWprVkd4dkpFaExjZUpIbVB6Vk9haDd4ajZNWDFJaHgybi1JTEZUakdTOU1Tdm9OQjhYZG1BN1g1OG5hWGpR?oc=5"
+          },
+          {
+            "source": "MMO Culture",
+            "kind": "web",
+            "rank": 4,
+            "quote": "GTA 6 Money Guide: Best Ways to Make Money Fast in Chapter 1 and 2",
+            "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1rMVpEcEFObk51RXVfWTc2RjBPWEh2QW15YkVCLVRWVk1OX0tjbGYxRk9zSlZwSXdWQXp6N3RRVmRtUXNPQklDMUxZcHBDZ0wxUVR2NWJIM01aNmNLYmRqczNsSQ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "contraband-air-drops",
+        "name": "Contraband Air Drops",
+        "type": "World Event",
+        "blurb": "Intercept low-flying smuggler aircraft drops across the Everglades for premium contraband payouts.",
+        "get": "Track plane smoke trails and secure drop sites before rivals arrive.",
+        "facts": {
+          "Payout": "$90,000 - $140,000",
+          "Time": "12 min event"
+        },
+        "ranks": [
+          {
+            "source": "Red Bull",
+            "kind": "web",
+            "rank": 2,
+            "quote": "GTA 6 beginner’s guide: Essential tips and hidden mechanics",
+            "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1JVWEzQTB1RUsxeVp2YXpBVnNPQVNUOHdwTXcxb0xrUVJPMHpIQUxkZEk4YmlfV3pwdkJCSGFJc1J1MGQ1REs0WnZLVF81YXR2dVoxTVp3VTFWVWRTci14NTJn?oc=5"
+          },
+          {
+            "source": "Polygon.com",
+            "kind": "web",
+            "rank": 3,
+            "quote": "The best ways to make money fast in GTA 6",
+            "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxObTc3d2xabGZScTZMNXBJSl9vQmhTeFM0SkIzblM0S0phZE93Wjd0TjMwMFo4UTE0MzAxUEZFUFFxaWhueHV2d2w0T28weEdjN05hbU5YVG1aU0ZidWlLZlFBUnZCVXNxYnFMWUhBbFlwSEhXUk11WlFLTGVJSExrRk9pU2FWb0lHSFE?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "underground-street-racing-circuits",
+        "name": "Underground Street Racing Circuits",
+        "type": "Racing",
+        "blurb": "Enter high-stakes midnight street races across the causeways of Vice City for winner-take-all pots.",
+        "get": "Win preliminary qualifier races hosted in industrial zones.",
+        "facts": {
+          "Payout": "$50,000 - $120,000",
+          "Time": "6-10 min race"
+        },
+        "ranks": [
+          {
+            "source": "Gamers Heroes",
+            "kind": "web",
+            "rank": 4,
+            "quote": "How to Make Money Fast in GTA 6",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFA3X19LRnNqZEI3VjJ3MF9lWGtCUG1QS1NMVWlZVU5DeUF0ZnJPRjNJdGJLSkRmaGhhcUh0TGtwOE5VUFNxYjhyTHR4VEhjV1lodzMwa3AwYlVsNGVoN203eUJnYndzOXpVNk9BNU5sNlhmTUk4aFVPaFVIWFFJdw?oc=5"
+          },
+          {
+            "source": "Insider Gaming",
+            "kind": "web",
+            "rank": 4,
+            "quote": "GTA 6 Money-Making Guide, Quickest Ways To Earn Money In GTA 6",
+            "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBTVEt4bDIyOHhuTEw2Zk1pVWwtWklPWFd0QThPbUNLcGY5OFU1NmEwblNmSXVnYjZKUXVadjRsOXpaclpWbjhwQURTVnlrN1d5LUM2WlN0RlpuUQ?oc=5"
+          }
+        ]
+      },
+      {
+        "id": "money-cheat-code-exploration",
+        "name": "Money Cheat Code Exploration",
+        "type": "Cheat Codes",
+        "blurb": "Discover secret command inputs and system codes referenced by gaming outlets to test economy variables.",
+        "get": "Input documented button combinations or phone codes.",
+        "facts": {
+          "Payout": "Variable funds",
+          "Time": "Instant"
+        },
+        "ranks": [
+          {
+            "source": "Radio Times",
+            "kind": "web",
+            "rank": 8,
+            "quote": "How to make money fast in GTA 6 explained: Is there a money cheat?",
+            "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE0teGMzYUlUYVRKQUJJTEFkMzZRcHIxU09EVTRPNEFBTFdWRG1YcVhVRXJuYm1wSEtwNWJnWFM1b1dCOURDWTZ0dkhKTHpvWURwa3Y2TWNveDl0cTh4bVQ5WHZaQWRId2UzWW5Jd29rWFU0a2p4R0E?oc=5"
+          },
+          {
+            "source": "Red Bull",
+            "kind": "web",
+            "rank": 9,
+            "quote": "GTA 6 cheats: All the codes and how to unlock them",
+            "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBCS3pZWnpXVFV3aEczOGg0WlJWZ3FleUMzTEJMb3ROLW9KMVlzbk1vcVlJYWJDa3F2eFBkdUJqMEZLeDVINHNHQnpYVlMwM01xZ0tfVE9hRVBDeTg?oc=5"
+          }
+        ]
       }
     ],
     "gear": [
@@ -1046,6 +2520,16 @@
     ]
   },
   "news": [
+    {
+      "id": "grand-theft-auto-vi-makes-history-with-3-8b-haul",
+      "title": "Grand Theft Auto VI Makes History With 3.8B Haul",
+      "body": "Axios reports that GTA 6 shattered previous entertainment records with a massive 3.8 billion dollar debut.",
+      "cat": "launch",
+      "status": "confirmed",
+      "source": "Axios",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1iamtSQzhNbkJDOEE2RmNjemNmaGNTbE15RmUxTzh4cDdZVWE3eTVXb3R3Vm9helREOVlRaklrMGN3ZEsxOHUxNFJMVW1QamlFNDFsVUFmY0N0NDRjQ2trdDNTQjJmR1dNdVdyOVk1NFRIQ1JXRVgw?oc=5",
+      "added": "2026-11-25"
+    },
     {
       "id": "gta-6-online-release-update-what-we-know-about-when-it-comes-out",
       "title": "'GTA 6' Online release update: What we know about when it comes out.",
@@ -1297,6 +2781,16 @@
       "added": "2026-11-23"
     },
     {
+      "id": "it-is-hard-to-be-a-pacifist-in-gta-6",
+      "title": "It Is Hard To Be A Pacifist In GTA 6",
+      "body": "Kotaku discusses the gameplay challenges of trying to maintain a peaceful playstyle in Vice City.",
+      "cat": "tips",
+      "status": "reported",
+      "source": "Kotaku",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5YOVhQUThiR0ctRHEzZFAzdzNseEdFWTFVSG5mRldOR2hZdDZxTGVxZEIzS01DS2dBd0lHdXBpamFvNEtDbElxckNscGE3OVpjc2N4YjdXX1AxSHE5SUM0Yk92Q1VPX0ZnVFZsdml2NFZJZw?oc=5",
+      "added": "2026-11-23"
+    },
+    {
       "id": "clearing-up-false-info-about-the-gta-6-criminal-profile-system",
       "title": "Clearing Up False Info About The ‘GTA 6’ Criminal Profile System",
       "body": "Latest GTA 6 coverage from Forbes.",
@@ -1377,6 +2871,16 @@
       "added": "2026-11-23"
     },
     {
+      "id": "gta-6-makes-it-nearly-impossible-to-play-without-killing",
+      "title": "GTA 6 Makes It Nearly Impossible to Play Without Killing",
+      "body": "Polygon discusses mission structures that force players into combat scenarios throughout the campaign.",
+      "cat": "tips",
+      "status": "reported",
+      "source": "Polygon.com",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBvY1hfc2M5ZzNDVzkxa1J1V1BzWE9CSzVvcXBVdDlDTlBwVE1TVkJLc0RqcWpwc0laZWlTZnkwSVlqN01CTGRZSEFrWVpiZkJqZVVfSHlkV2hSRllvUDhUbUVDX3FKZw?oc=5",
+      "added": "2026-11-22"
+    },
+    {
       "id": "i-m-playing-gta-6-like-it-s-the-sims-and-i-couldn-t-be-happier-w",
       "title": "I'm playing GTA 6 like it's The Sims and I couldn't be happier with that",
       "body": "Latest GTA 6 coverage from GAMINGbible.",
@@ -1385,6 +2889,16 @@
       "source": "GAMINGbible",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOb2pOa1NCTkhycV94OEZRUkpMSWtHTHZaMFZXT2U1czZINzdSdjY2YWFrTE43YmhlUkV4NXFkTmtBaWUxSi1uS3FxTFljcmpTNDIxU2pLb1ktODBsNVlVR0k1WEE3WWtraWQ2eVVMRWhsRFpxRkFmc3NNcGduWUtaMVRB?oc=5",
       "added": "2026-11-22"
+    },
+    {
+      "id": "grand-theft-auto-vi-shatters-records-with-3-79b-debut",
+      "title": "Grand Theft Auto VI Shatters Records With 3.79B Debut",
+      "body": "Fox Business covers the unprecedented financial figures and record-shattering debut of the game.",
+      "cat": "launch",
+      "status": "confirmed",
+      "source": "Fox Business",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPN241czJCWFM1TGtvSm1LbGctd2k5N1BwZTIyNXFZN2JHcEVycE96M1RtZlJvQjRHZFlfMkQ5dkh1MXotWGI0U0pnV1d5aVZvdmZXMnBEVjdxNGF3TjQyNEVBTHUySWI0OUJGTU41Qy1GbGVOQVphcmNSYW1qSkx5bTBxMmVzWVVGa3VkTTF5NUl3aldrWmowODR3T0JkNnlDZVM3bk1SWnJPQS1nb0dyQWlFWUtfZ9IBuwFBVV95cUxPNnJxaDlrbkZ4SlBDV2p0ekZkQjVBUWVpOHVzSkp4ZUZIQ1dEMTEzd055YmVFNk1DclFNZzRxUWNmMkRKYzFraGc4WU9RRGVGcWdJcWRYTTVMVVJ5SVh4LTJqZlRkQzBRSGtXVmFZYnZBbXdKMU5RbmlxOXBqOEhiZ0ROYkgxbGZ6Nlk5Mk5QSm5Ld0RGS2M1RUZoZkxkVVBLcmg4SHQ2OUYwT2d5NE5BQmYzNWYtaXc4aHAw?oc=5",
+      "added": "2026-11-21"
     },
     {
       "id": "grand-theft-auto-vi-sets-record-with-3-79b-in-first-day-retail-s",
@@ -1414,6 +2928,16 @@
       "status": "reported",
       "source": "Polygon.com",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBBR1Q3dFhsYWQ1MmQzODJTX2RCUDVzUGtvNmN3QTZBX2hkdEdlT0Iybm1pZ3J0NS1tQmY1OE1BdnhYNUJPZU4xWkZPSlFzdnZKRUkteV9wYS13TG8?oc=5",
+      "added": "2026-11-21"
+    },
+    {
+      "id": "gta-6-played-using-neuralink-brain-chip",
+      "title": "GTA 6 Played Using Neuralink Brain Chip",
+      "body": "Mashable reports on a viral video showing someone attempting to play GTA 6 using a Neuralink chip.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Mashable",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9ZMjRGc2kwUlN5Wm1xYzZlczItSkFubUhiY2h4VEVoX2NiR2xvNnBuUFBkZFQ3eklYM2c4TVFWWV9EUGh0blZEd2MxV0V6VTlGd3VZ?oc=5",
       "added": "2026-11-21"
     },
     {
@@ -1487,6 +3011,36 @@
       "added": "2026-11-21"
     },
     {
+      "id": "take-twos-gta-vi-hits-nearly-4-billion-in-sales",
+      "title": "Take Twos GTA VI Hits Nearly 4 Billion in Sales",
+      "body": "WSJ confirms record-breaking launch day sales approaching four billion dollars for Take-Two Interactive.",
+      "cat": "launch",
+      "status": "confirmed",
+      "source": "WSJ",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNQ21QbUU2aE9uVUNabDBiZk5IbnZxeGhTTnhaV0duNU8wWmxEVmlHbU9iN0I1TVdMX3R6OERSazRXY05xT1V3bTRXaHFhM0puRjZYVUZseHZpVzg3UUlnODhpSGM4QTB4eG9NWno0WmZIMFVEMWdrN0VuQWxtb1VzYTRoa25DTFFZTm9DQ1JXLWxGZFFLaHdONU8yazhXbmtzUV85MzBDei1nNFdnNlMwWXZuWUNFbVNiaEE?oc=5",
+      "added": "2026-11-20"
+    },
+    {
+      "id": "sales-of-grand-theft-auto-vi-hit-2-3-billion",
+      "title": "Sales of Grand Theft Auto VI Hit 2.3 Billion",
+      "body": "PBS reports stellar milestone sales surpassing 2.3 billion dollars following the long-awaited launch.",
+      "cat": "launch",
+      "status": "confirmed",
+      "source": "PBS",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxObmloRGhkTEliSm5SQkZ1anc5bGRwanh0Znd0R0dvU05nbkRmQU1wbWZqOV9oOXpBaTc1QTc4ZUoyZVZwbmxYQzRVdmFpZXVrekxYUUVTUWxhWlRPd1J3eDhjVUJPQ2R0RHdzVlkxWE9rc2VYSnh1U1ExQ3R4RGR0Q2VEVnhzQUF2QXh4c2lpUUtIaW5TNWYyNDVyNDhOSnZNOVdxZVFBeXlwRl9SOC1YTW5XNUd4d1kxTnc00gHAAUFVX3lxTFA0V0xCVVpTWjBlcC1qMV9ncWM5Q2N3NVUxUERXQ1k1bDNiaXRSczA2VlAxa09OQi1jWGZyZGpjQUZYSUxNS1h5T3VVRjVPMlBPaUdBREoxbFRjSDdFYTNmMERUVVdqam0xR2N6eTZYV0kwcm1taWRWT3ZCS3ZsakprM25haklwMmtGWUdVMHJwcnZVZXFHaE54eGk5WHdBa0VtZ0k3aFZoR0dubnBCWW1McDBXSWd5NDFyQVVzbTcyUg?oc=5",
+      "added": "2026-11-20"
+    },
+    {
+      "id": "playing-170-hours-of-grand-theft-auto-vi",
+      "title": "Playing 170 Hours of Grand Theft Auto VI",
+      "body": "The Washington Post shares early insights after spending 170 hours playing the highly anticipated game.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The Washington Post",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPcHZpaFZEWUZQekREc2ZEa043a0JpWVYyOXlsUF94VzRuSlJNclV0VWpVY2RXWElQYWdnUDc3WDBBX2R5TTdzNFRuVDdqVjNBUDZwNDA2TkJnY0w3eElqWjNlUUtpeFlHaXRyUmlvekVFRjNKRjNHMUtudjI1ellNQXRzWkpvZzY5QVlIN1J2T0o0STdxT0x1Tlc5VUJTTTJfU3N4cndMWm9yQkVWWTFKelM1bFpVeVFudnRlVFpYZWtIRFNRcUdsZ2RONUI3Z0MzTVppUQ?oc=5",
+      "added": "2026-11-20"
+    },
+    {
       "id": "the-best-early-game-gta-6-vehicle-isn-t-hidden-or-expensive",
       "title": "The Best Early-Game ‘GTA 6’ Vehicle Isn’t Hidden Or Expensive",
       "body": "",
@@ -1504,6 +3058,16 @@
       "status": "reported",
       "source": "The 19th News",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQRUtYcUV3YXJHYWJONlltQnpjUnVPTDgyNWFoRXY1Y3lvRVpaem1EQzRYNVE4WFFvWm0zZ2xtYWE0RVNYOFJTaVNhRExzQUtDb09JdFNJSTRwbUs1NVBva1kzc0FWbDZIcVExM2RzX1c2OW9yZEwyanlvUk8wX3h1V3pn?oc=5",
+      "added": "2026-11-20"
+    },
+    {
+      "id": "why-gta-vi-is-a-massive-entertainment-release",
+      "title": "Why GTA VI Is a Massive Entertainment Release",
+      "body": "MPR News discusses the historical scale and cultural significance of the new blockbuster release.",
+      "cat": "world",
+      "status": "reported",
+      "source": "MPR News",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOZkxEeV9OR1oyNTlKU201SDVvVGVuS2trUGVOWFBmVnk0ME14TGh2bkM0VHpFelRVMHBlMEVkdnBaSEdsWU9Kc0tIYVBmNzlDRWxFZ29vbUppeV9BT3FuSktrdEZ5eVk4Z2ZBNUlMZFlfenhSS1pVTXVWRGltdnl1T2ZlaTVKSEZ1NHFMUmZUa2pXSWZ4empYc0lrd1VXSk0?oc=5",
       "added": "2026-11-20"
     },
     {
@@ -1627,6 +3191,66 @@
       "added": "2026-11-20"
     },
     {
+      "id": "grand-theft-auto-vi-is-out-now",
+      "title": "Grand Theft Auto VI is Out Now",
+      "body": "Xbox Wire confirms that Grand Theft Auto VI is officially out now for players worldwide to experience.",
+      "cat": "launch",
+      "status": "confirmed",
+      "source": "XBOX Wire",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE93VDJCQURYaDRGSjl1akxGSk52S29VcEtoSkVKNklLbERQNEhITmJRU0htRXVDS2w4RTJmTGpPQzN5WTgxMmV3SGhEcW9Wbmdwa2RodW5QcWhCalhzRlpBdDlTQTRDUE1MTVR2X3RVbmU1LUsxeVdMS3B30gF_QVVfeXFMTzRxZVg4cDhmRG1wY2lET3B5WG01dWIyeFJWckdwandkTHdhUVhTUUpsRnZGeFotZkQzVldXd3dCc3hHdy13ZjRRVU5qOFI1Y2lHZVJCOU5Wd2o0RFU1ejh6NkhpOGdUYWExb1JEZHQzQ3U4YS0tWUtEVlA3QmVrOA?oc=5",
+      "added": "2026-11-19"
+    },
+    {
+      "id": "grand-theft-auto-vi-release-overview",
+      "title": "Grand Theft Auto VI Release Overview",
+      "body": "AP News breaks down everything you need to know about characters, music, and the huge launch hype.",
+      "cat": "world",
+      "status": "reported",
+      "source": "AP News",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQbnJrbHE5SXBnU3h4ZjViR0FJNGdwYW0ybkFhQUtndEFMd0FBUUp0b2x1eWE2QWpVX2NWQWM2Q3c4NVJPcEFMaHpUQ0YtRGtOMnZoSEdPTEg3SmVCajdTam1PRVdMT0UxWXhabkZPRnhqYXBEMlF3UEJPRkVzSVpTVEZOQkdFVVhRTHc?oc=5",
+      "added": "2026-11-19"
+    },
+    {
+      "id": "gta-6-songs-you-will-hear-cruising-around-vice-city",
+      "title": "GTA 6 Songs You Will Hear Cruising Around Vice City",
+      "body": "CBS News lists the standout tracks and radio stations featured while driving through the new map.",
+      "cat": "world",
+      "status": "reported",
+      "source": "CBS News",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9JSDVFUlp6dU1tRmpTZjZsZmV6UWRFNElzRkNjVWl0WF83emRTQy1XSTM5ajJCZTNENFdveER2cFlBbUdsWTBfdG1DWXhYejFnN2plaEUwdFdxa2dkM29QbXczNGlyQUtWY3lIOThmZw?oc=5",
+      "added": "2026-11-19"
+    },
+    {
+      "id": "big-tech-companies-are-the-butt-of-the-joke-in-gta-6",
+      "title": "Big Tech Companies Are the Butt of the Joke in GTA 6",
+      "body": "Business Insider highlights the sharp satirical jabs directed at modern tech giants within the game.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Business Insider",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPOXpmNmJKTUh4UGlYbVJaUVJ3c1B2ZlM4aHh2Q0Yyc2Vzd1NUTnplX3JIdzFIWFJaWGlzSi0tR194Z3J0dktTVlhxTFlZT0JOcUVXNUlnanZ0UDNIUWdDNFJuV1VzZDFpQmljNktmS3haU0RDUkhBbF9PNHoxNDJ6STVtOFo4NnJnbHhkUGVwSEJ3VmVZU21QcjkxYjlkdGhhcTU3N0l4OUlGR01IcGc?oc=5",
+      "added": "2026-11-19"
+    },
+    {
+      "id": "the-multibillion-dollar-frenzy-in-charts",
+      "title": "The Multibillion Dollar Frenzy in Charts",
+      "body": "WSJ uses detailed charts to illustrate the unprecedented financial scope of the GTA 6 launch.",
+      "cat": "world",
+      "status": "reported",
+      "source": "WSJ",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQMEdNaGdTb0NkZXhibnhvTW1qM2VqeFVBcTVnbzBNUGpMX2VGT2V1YXNOWEZ6RElielE2RldNNkhzcHEteFRVUmtPbElMdE90RW9BLVFnRlhCTl9uOUtMa2NZQlVXNE0tcHpfRzlLLVJsT1pTQ21GMXZ5amYyeVMyeGk3Nlp2ck5LNHJranNWdWpWcTJFLVJ3SFJsUTgzSnlxd0g1WWd6dDNOcHdvdkV2WlBkX3hJVDF1aWhrWA?oc=5",
+      "added": "2026-11-19"
+    },
+    {
+      "id": "why-gta-vi-is-more-than-just-a-video-game",
+      "title": "Why GTA VI Is More Than Just a Video Game",
+      "body": "DW explores how the massive cultural footprint of GTA VI transcends traditional video game boundaries.",
+      "cat": "world",
+      "status": "reported",
+      "source": "DW.com",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNWjRjSDlsNVEwS3NTM1dlUDNLZXBqZmRnQjNGLXB0aU5ITW5TeHU1VFV2NlRtQ1VPRzcyU0hXUFpYQ2NzeW9xVDlTVDJFcXZBTHVPcDhwTGQwaWZaR29CX3h1OGdubFR3NXhhOWtkWEMxYkZPRkdzWDhkQ3lseHJ1a3MydUhGM0VCODhrWEFn0gGOAUFVX3lxTE9DLVU5alAyWXFDenp0TzUzRWM4cWNiTWJMMzF1d2x2VXNVZzBKMUlobFo3bTZrUDN5b2NPX0tWVUNKVUtvcDNYdVpnYkhFX1E5UzVwZ040eU1NcklaWDFJVnZYU3FBN05oRGlESm12MGFtVGNyaWpLYWhUb1hudXYtWi15bWJYQmd2bGEtYUE?oc=5",
+      "added": "2026-11-19"
+    },
+    {
       "id": "gta-6-launch-breaks-internet-usage-records-livestreams-hit-nearl",
       "title": "‘GTA 6’ Launch Breaks Internet Usage Records, Livestreams Hit Nearly 8 Million Views on Twitch, YouTube and More in First Hours of Release",
       "body": "Latest GTA 6 coverage from Variety.",
@@ -1664,6 +3288,16 @@
       "status": "reported",
       "source": "Forbes",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOSVNBTGhvTllHRWtqbnpBTWppb0dLcGxYd0ZfY284eFdaNElSRkQ3RnJTY190YW51V1J0XzhUX2hpVzRINkxLTkV0bkZDSm11emc2NFdEZnNDMXFtZENkZHZvMG1mMi1fbkZNTld1UElScVN4YU5BR2JkMExVZ0pVdmVac3ZLTThLbVA2MXlud182dXcxU05iWHVTN2JSTVd3cVVWaXJTZw?oc=5",
+      "added": "2026-11-19"
+    },
+    {
+      "id": "food-delivery-is-making-a-killing-on-grand-theft-auto",
+      "title": "Food Delivery Is Making a Killing on Grand Theft Auto",
+      "body": "The New York Times explores how food delivery services surged during the massive launch week.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNa0xQVGQ2VXZlclNXSC1RNzRpRkhTTWlpSzFwQnZDTVBmQ1FfMENuTzh4Skw4eGlhby1PQ3lMSFM2N0F6YVJYazVNR3NFa19QUEloalVwSHVSQTVTc3gtc1Q3cFFnc0lpblUtZ1lDdzVxRFZhT19mbEtQUmgxcDYwckpGQQ?oc=5",
       "added": "2026-11-19"
     },
     {
@@ -1802,6 +3436,126 @@
       "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
       "title": "Locked at 30fps on PS5, PS5 Pro included",
       "body": "Reviewers report a 30fps cap on both PS5 models with no performance mode, with dips during heavy action on base PS5."
+    },
+    {
+      "id": "gta-6-review-an-unbelievable-achievement",
+      "title": "GTA 6 Review An Unbelievable Achievement",
+      "body": "SVG delivers a glowing review calling the game an unbelievable technical and creative achievement.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "SVG",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBUUnhqOFFRMlBPVTVzbHk3VXZyMjNrX0FwdW9NdWcwc3RLTlh2RjN3Qnk4Y04tQno3OERRMFRYZmN2TlVsYjFnSlowNjZoUUI1cHlZ?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "how-long-to-finish-gta-6-main-story-campaign",
+      "title": "How Long To Finish GTA 6 Main Story Campaign",
+      "body": "Kotaku estimates the completion time for players looking to rush or fully explore the main narrative.",
+      "cat": "tips",
+      "status": "reported",
+      "source": "Kotaku",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9kMXZQQkY2VnZfbmc4MkltcmgtWnRva0x3aXFpNE1ZTGVHYzVXV2tybnpUYmw3VmhUNW01a25OU0xkaDUzcUdyU0hZb01CTmhfdTFLWTJoZHJDZDg?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "grand-theft-auto-vi-launches-tomorrow",
+      "title": "Grand Theft Auto VI Launches Tomorrow",
+      "body": "PlayStation Blog prepares players for the massive launch of Grand Theft Auto VI arriving tomorrow.",
+      "cat": "launch",
+      "status": "confirmed",
+      "source": "PlayStation.Blog",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNTFc4c2VNaGx3Q1dvbVRQazRRSEZJM3dpNUhobHJXMi1nZUtYcDE4UEVGcFIwRkdmTXdBaVZ0bGxDbDhSSkpwbWVzYWdfNWpYT3NIeG1LY1pqdG5MMEJUci13M2V2Q010LVhfNmZ4NW9fcDU0T3prQVJGRjU1b3VPcUJaS2lvYjVQcHkyRkF6eWNSS29Y?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "i-reviewed-gta-6-for-70-hours",
+      "title": "I Reviewed GTA 6 for 70 Hours",
+      "body": "GAMINGbible shares an in-depth review perspective after spending 70 hours exploring Vice City.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "GAMINGbible",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5qREl2YnhEb0x1clNTNU9LZGxsOUpEUUV2d003eXRYcVhRZ3dfbXZQYTZHV1JCQVc5b2doMEZNN1VFVmZjU2cwWEFhaVF3ejdDQXBXOG11Zzh0endKYU16SG13U3RxVXplWFBwOTMxaVdhUQ?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "grand-theft-auto-vi-preorders-top-1-65-billion",
+      "title": "Grand Theft Auto VI Preorders Top 1.65 Billion",
+      "body": "Yahoo Finance reports record-breaking preorders as Grand Theft Auto VI aims for historic entertainment sales.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNR1R3eUwzcTFJOEpvN0NLTGRzanRXaHpKMlp2ZlJXS3NKdVBTY0FXTDF4R2x4by05ZjdMclJNc2VkaUxqMG1IOHV5TEE1Ul9BRjJPVDdGNjhqVWJwZ2NqaUZMNklDdU1jY3lNTkg2WGNRblp2Znk0UEFaRlZDNWF3Umh3YXFJbmhWdl96NzVBanphWE81amNacG1oUmxoQzNOY25KUHRUOERSTF81R0dadHQ4VmVNbWl1TGFtNWZNeFdMc05ZSVhSdXhXOGk1bGlxcHNTRWNUbElOX1lfa0hFUk1ZY2J0dGlOS21JR2pDNA?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "grand-theft-auto-vi-is-a-cultural-earthquake",
+      "title": "Grand Theft Auto VI Is a Cultural Earthquake",
+      "body": "The Washington Post details the massive cultural and economic impact of Rockstar's latest title.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The Washington Post",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNdml2aXIyREpwckNnYWJTdC1FRzNTb2VGUVY4c2ViX0RoS3RlRXlWY2s5S2ZYVzF6TUxKX2UwOVpXbTlDWVRpbGdjMWZvSmNuTXF6T04yWE94RUpPQXdHZ245cVhaTzV4Rndhc0owYW00YzVPcEt2MGJLOERKdXF1LTJwVzhWYXZvcE05YzEtNXAyMGJCZmFaWWh6N1hrQTdvdEV5bUFydC1CTlk?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "grand-theft-auto-vi-is-the-super-bowl-of-gaming",
+      "title": "Grand Theft Auto VI Is the Super Bowl of Gaming",
+      "body": "Axios equates the sheer magnitude and hype surrounding GTA 6 to the biggest sporting event of the year.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Axios",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOYkw1aUpxUURPajJDT3djRzc1dFQtaldMYS1YRk45U3dYaTdOdTR1WHBvRDd1QVA1VkFDMS16a1FXYzlQX2IzYU02VHdmQWR1NTBrUWVETjhVcTk1U3lkMVd1Nl9Wb25ETGRMYVBhLUdZc3FDNzcyM1FkNEdZSUFqeg?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "gta-6-review-three-weeks-in-vice-city",
+      "title": "GTA 6 Review Three Weeks in Vice City",
+      "body": "Creative Bloq shares a comprehensive review highlighting ongoing surprises found across Vice City.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Creative Bloq",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1BWjJPT25pMDVVUkQxcjJuSGo2WktPa0R3aXdZYTRkbjhCTHh4RkhQNl9nLVBfZXdFblE2cF9KdUhBdVg1Wm56QUloNTY5WjRtcEN4OXJmSUdLYVZoVjhnYjlwejg2OEVEb0tkeXJQN1RITDZYYWpV?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "grand-theft-auto-vi-defies-entertainment-economics",
+      "title": "Grand Theft Auto VI Defies Entertainment Economics",
+      "body": "Axios analyzes the unprecedented financial success and market impact of Rockstar's latest blockbuster.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Axios",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOWXljd2RUUkJtY3FFcjdVU2E1M0RoUk03UjZTYm5zNXB5cldvZUhVc0FkS0FOLXlnams3d3ZhLWhRNktKZUxTOWhRY213dldINlpTek5oVWM4T2Y4azNUOXlSQVBSWUpxbE5uZ0JKeUlLRzJ0bHk1TnBPc21Ib0V2S29uZw?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "why-grand-theft-auto-vi-release-is-major-cultural-moment",
+      "title": "Why Grand Theft Auto VI Release Is Major Cultural Moment",
+      "body": "PBS explores the societal factors turning the video game release into a defining cultural event.",
+      "cat": "world",
+      "status": "reported",
+      "source": "PBS",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQOFRKNmhlRXN6dlNVSks3Q3BSd00zd045Y0VKUXZzMjBnT3Yxb2FGVjVGUXhCMDdOaG8tUmNxclUyNjRqOThoSTlpZVY0RXp2WXdaQldzS0Iwc0stRTJOeTg3ZmRQdEJBMHdrZ0JpaFNkZXJZanhYdC1LV2ZlbG80LVB3ZkpMWktTcElsdFpocmtoOElrUnVBeQ?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "the-real-life-city-that-inspires-grand-theft-auto-vi",
+      "title": "The Real Life City That Inspires Grand Theft Auto VI",
+      "body": "The New York Times examines the real-world locations that inspired the layout and vibe of Vice City.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPVEJwZEhEVE4xMWIyWEgzNGdJRWNwZHROdDlHcmhfQnhZLXAxWTBpWW9NeGxSX1dkWGpmdHJxYXJYc1JudThVdmd5cDVKdHJpV2VuY09tY3o3eElvVUh6aE5TSWstRGhHdzl3QWxyZVZtalZtRFVPWUh0VHVWSzBzS290aGY?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "the-sound-of-gta-vi",
+      "title": "The Sound of GTA VI",
+      "body": "The New York Times goes behind the scenes to explore how the incredible soundtrack was crafted.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOTHo5VWtVLTZVc2FDNW9wVzVPSk1mbmlzRUd6MkV2TU9FaHR4RjZBN0tEUEU0amdNU3ljTFNQZ2hDYlY0dkk2RHJVUGxIaVhHYWRhcHAzd0EwZ3NraTJ6YmE1bXpfazBwdWRzS2dCT05xeVZwNXpTR2ZoRDRUTVVrd0NFVUloZ2Q4SWZfRzlrU3RaUQ?oc=5",
+      "added": "2026-11-18"
     },
     {
       "id": "gta-6-review-rockstar-s-magnum-opus",
@@ -2018,6 +3772,46 @@
       "body": "Listen for a loud roar in the swamplands, then use tracking to follow it."
     },
     {
+      "id": "gamers-make-getaways-in-gta-vi",
+      "title": "Gamers Make Getaways in GTA VI",
+      "body": "CNN highlights fan reactions and early gameplay experiences as millions dive into the new world.",
+      "cat": "world",
+      "status": "reported",
+      "source": "CNN",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNdGZBVUFTSG1sSnFTb0hlcGdfV2prUHpjNHZmME1seUU5SFV6MUlLSnpnUjAxRFRBNnY5LXpLVC13c295QWY0OUl4NWk3SVpnd2kwSldVRG5tZm1aSHJzNWRrQzRZTk9uR0NSRnN4bmg2VXV3Z0lUV2lHalhCZHhlTlNnZTRuTEdf?oc=5",
+      "added": "2026-11-17"
+    },
+    {
+      "id": "why-should-i-care-about-gta-6",
+      "title": "Why Should I Care About GTA 6",
+      "body": "Kotaku breaks down the reasons why even casual observers should pay attention to the new release.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Kotaku",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4QmJpUFhMdlF4amxVZXk5Vml3dEVCYWItV0MwMXRSSzBUa1dwRzdzS0JmWFotY250MW4ycEt6aDE4N1YyMmIxX0ZHUk9RNWxGWlc4czI5NktkYmJjalZ5YUlDRDJ0TVd0a3hn?oc=5",
+      "added": "2026-11-17"
+    },
+    {
+      "id": "what-parents-need-to-know-about-gta-6",
+      "title": "What Parents Need to Know About GTA 6",
+      "body": "ABC News provides an informational guide for parents regarding adult content and game themes.",
+      "cat": "world",
+      "status": "reported",
+      "source": "ABC News - Breaking News, Latest News and Videos",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5PbEN4a1lzaGtSZzFJVjlVYVhYZjUtb0I0UG9mcU40TDdCcEZtbVRURXduVzV5LWVrMjlKV19uM3lmV3Z1SVBienNMTkIzbXBRWFVEQW5uWVktM29wa2ZJbVpkeDhlX2tlZ1FBLURFUkljSzh2V2s40gF8QVVfeXFMUGpZT296SDktUjQtTVRwX1pEVlZnbHppVk9CSGlqZURuanVGUTV0NlRYLUtmWE9wUHZNaU5MYXZsREdzSWpva3lPSjRtczZrRndkNndTMDRQMjRnbE16RVRISVNYUEdZVVo0NmhCc3pKeFdwa2w0eldOTmt6Sg?oc=5",
+      "added": "2026-11-17"
+    },
+    {
+      "id": "balancing-parenthood-and-gta-6",
+      "title": "Balancing Parenthood and GTA 6",
+      "body": "Business Insider looks at how longtime gamer parents plan to navigate the massive new release.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Business Insider",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPblBFZ2RUV0RyQWluUW9VTndLSElRbTA4MkM0eFZJZkoxbjUyZkpLWl9fNFRHaTlmelpxcklIRW16RUpwQ0QzaVRqNnhKMVBjZUxkSGlSaUtod000bmFITWxWUDd1QnZPeXVMRW5JdDE1MzNJTWRxMkkyWVVkeThxTjJpZGFheGJXZFdnLQ?oc=5",
+      "added": "2026-11-17"
+    },
+    {
       "id": "ten-years-thousands-of-staff-and-a-billion-dollars-the-exclusive",
       "title": "Ten years, thousands of staff and a billion dollars: the exclusive inside story of Grand Theft Auto VI",
       "body": "Latest GTA 6 coverage from The Guardian.",
@@ -2028,6 +3822,16 @@
       "added": "2026-11-15"
     },
     {
+      "id": "gaming-industry-braces-for-gta-6-pop-culture-takeover",
+      "title": "Gaming Industry Braces for GTA 6 Pop Culture Takeover",
+      "body": "Variety looks at how the rest of the entertainment industry is preparing for the massive GTA 6 launch.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Variety",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPVWx6NElrYi1Ka0pJM194cUpNLW1BYnNjX3R1TzE4OVdKdlcxVnQ2cGMtZm41SjNqS1ZjYVUtLW5vVGtrZXVKZWpiNEQ3am9lWFlCdzc5ckNua01ObUppZVJIVUdsVlR2YllFUWVHaUxqakVSaThWcFJodUZSZlFNVEdqenhtbTVBbVk0c0F4SDk?oc=5",
+      "added": "2026-11-12"
+    },
+    {
       "id": "youtube-celebrates-the-launch-and-cultural-impact-of-grand-theft",
       "title": "YouTube celebrates the launch and cultural impact of Grand Theft Auto VI",
       "body": "YouTube celebrat",
@@ -2036,6 +3840,16 @@
       "source": "blog.youtube",
       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1Sd1lfcmxvTHkzVXhXT2NCOV9VcUZPSmlJLWtZQWJZQWVaQU50bHB0bHZCNnVzQkxWUG95QkFLQlNqWHQ3NnJFMnhiZTlXOXJiUVk2MGNrT3d1ci1kV0FDT00yX1c5QmNvdURqUUNsRkN6bmJFRjgzN01pQmhqak0?oc=5",
       "added": "2026-11-12"
+    },
+    {
+      "id": "grand-theft-auto-vi-sales-top-1-billion",
+      "title": "Grand Theft Auto VI Sales Top 1 Billion",
+      "body": "Forbes reports early sales figures topping one billion dollars just one week prior to official release.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Forbes",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQaVMtVDcyelhRdE5GRnVKWGo4LUF1UHV3SU1TcnZiSmVsN2JHbW5JWlVvS1NwUTZBSGtXTVJfLWpySkdGWkExZ1A2b1FnMDh3S2pEMmJXREczQTQxYmNDemI3Si1OUmthUFVrOGxJSldnRTI1N1VWVExXazhJNnNQREdob01NYVY5UTVacUw3MHRVUER5bF9pWF9Fc0prVzVvellmOHlJT2MzM2xReXlxZ0o0WFhlNXNpNVpiUU9QTlBoM01rNTdXanllWUZlQQ?oc=5",
+      "added": "2026-11-11"
     },
     {
       "id": "how-years-of-research-built-grand-theft-auto-vi-s-obsessively-de",
@@ -2108,6 +3922,75 @@
     }
   ],
   "posts": [
+    {
+      "slug": "gta-6-launch-updates-record-breaking-debut-patch-notes",
+      "title": "Grand Theft Auto VI Shatters Records With Massive Launch",
+      "dek": "Players dive into the biggest entertainment debut in history while tackling essential Chapter 1 missions and new vehicle discoveries.",
+      "author": "Beat Six Staff",
+      "published": "2026-11-25",
+      "updated": "2026-11-25",
+      "tags": [
+        "GTA 6",
+        "Gaming News",
+        "Guides"
+      ],
+      "sections": [
+        {
+          "h": "Record Breaking Debut And Record Haul",
+          "p": [
+            "Grand Theft Auto VI has officially made history by pulling in an astonishing 3.8 billion dollars during its opening window. Axios reports that these figures shatter all previous entertainment launch records.",
+            "While millions of players explore the massive open world, Rockstar's parent company has also moved quickly to shut down unauthorized PC ports circulating online."
+          ]
+        },
+        {
+          "h": "Essential Chapter 1 Strategy And Advice",
+          "p": [
+            "Reviewers and players alike are praising the gripping opening narrative of the game. Many note that Chapter 1 delivers an unforgettable emotional experience anchored by its central love story.",
+            "Players should exercise caution before progressing too far. GAMINGbible highlights the importance of checking out essential advice for the Tourist Trap mission, which serves as a major point of no return in Chapter 1."
+          ]
+        },
+        {
+          "h": "Vehicles And Open World Discoveries",
+          "p": [
+            "For those focused on getting around the map in style, Forbes has detailed the location of the newly discovered top tier vehicle capable of stealing ATMs right off the street.",
+            "Beyond vehicular mayhem, players are also tracking down cosmetic items like Lucia's best hairstyle and taking time to appreciate the surprising depth of the wildlife simulation across the map."
+          ]
+        },
+        {
+          "h": "First Major Title Update And Bug Fixes",
+          "p": [
+            "To ensure a smoother experience for the massive player base, Game Informer reports that a recent update has addressed several critical bugs. The patch tackles frustrating issues affecting autosaving, weather patterns, and story progression.",
+            "With these technical fixes now live, players can safely dive back into the open world without fearing unexpected progress loss or system instabilities."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Grand Theft Auto VI Makes History With 3.8B Haul",
+          "publisher": "Axios",
+          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1iamtSQzhNbkJDOEE2RmNjemNmaGNTbE15RmUxTzh4cDdZVWE3eTVXb3R3Vm9helREOVlRaklrMGN3ZEsxOHUxNFJMVW1QamlFNDFsVUFmY0N0NDRjQ2trdDNTQjJmR1dNdVdyOVk1NFRIQ1JXRVgw?oc=5",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "Essential GTA 6 Chapter 1 advice before starting ‘point of no return’ Tourist Trap mission",
+          "publisher": "GAMINGbible",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQQzRleDZ3dXA4U2FEcG85all1Z05fUW1FQlk3dVhBTnBLand3YXVOSjZPVEUxbUJqek9Ca0ZlOC1xc3JaZ0VkVldXd0pqeGJmb2JzakNRalVzRHpMekR2aVl5dnRzbFhBLXB5N01nYzZrYXBmX0xlSmZrUklXemIta0Fob3dMSWhrNHBqajBBUVVWNGY0N3BJ?oc=5",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "Where To Find The New Best Car In ‘GTA 6,’ Which Can Steal ATMs",
+          "publisher": "Forbes",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQNWRvWTdLeUNXQzNMZ0MweDFHT2Nxa1J4dHhfb2s5UEcybzJucDhQT2hqc0J1VGRHS0tqUDVXdHJJZnQ1Mll5MWFrMmpGNmpqTFRZQVRzWlo2M2FsTWx5dnlqVVRLNXVWcjJmYktWMmcxYURmZDVzLUdEZ1JYMDNjTTJfUnVQb3pTdjlCc3FuYm52Z2t4R3BEZ3B4NnpoTXh6cUQyQ0dXblQ1SkhiRkZiNQ?oc=5",
+          "date": "2026-11-24"
+        },
+        {
+          "title": "Grand Theft Auto VI Update Addresses Bugs Affecting Autosaving, Weather, Story Progression, And More",
+          "publisher": "Game Informer",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQU2FKcW15aDhTYkJzTGw4SzVKRlUwb3NrZHVGRWxNSjkwOXdiWjYtVkNvbWZGWDNIckVOdko0RlBrZUhKU3dKVUl5aF9FaFNUOENaeU1ROUwxaV9qTUdvcTRlYUd2Y0RTMjA3aG1NN0dMRld3d01XcGlTeF96UktkZkpBQWxTQTFPSkNjREdBX2dfNWpzYzRxUDVGb1ROaWx5MHVCaUNZei1qcWlab0xyV096YkJMZ0lLam4xeFBpYS1EUQ?oc=5",
+          "date": "2026-11-24"
+        }
+      ]
+    },
     {
       "slug": "gta-6-car-theft-tiers-pay-n-spray-meta",
       "title": "How GTA 6's 3-Tier Car Theft & Pay 'n' Spray System Changes the Vehicle Meta",
@@ -2266,6 +4149,10 @@
   "changelog": [
     {
       "date": "2026-11-25",
+      "text": "Daily refresh: +34 news stories, +52 Meta items & +13 critic rankings, +3 guides, +2 Discover lists, 1 cited article."
+    },
+    {
+      "date": "2026-11-25",
       "text": "Daily refresh: +45 news stories."
     },
     {
@@ -2293,6 +4180,243 @@
       "text": "Initial launch database published with 14 verified Command Center entries."
     }
   ],
-  "guides": [],
-  "lists": []
+  "guides": [
+    {
+      "id": "how-to-make-money-and-avoid-getting-busted-early",
+      "title": "How to Make Money and Avoid Getting Busted Early",
+      "summary": "Master early financial strategies to navigate strict cash limits and discover silenced weapon techniques to keep your wanted level down.",
+      "tags": [
+        "Money",
+        "Stealth",
+        "Economy"
+      ],
+      "steps": [
+        "Manage your cash reserves carefully around strict spending and savings account restrictions.",
+        "Equip legendary silenced weapons to eliminate targets without alerting nearby law enforcement.",
+        "Complete early-game money making activities ranked from worst to best for maximum efficiency.",
+        "Keep a low profile to prevent costly police encounters while building your early game fortune."
+      ],
+      "sources": [
+        {
+          "title": "15 Ways to Make Money in GTA 6, Ranked Worst to Best",
+          "publisher": "Vice City Dispatch",
+          "url": "https://www.youtube.com/watch?v=in0rg1FNcGA",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "11 Legendary Silenced Weapons You NEED to Get in GTA 6",
+          "publisher": "GameCraft",
+          "url": "https://www.youtube.com/watch?v=QVT66Ule-qs",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "How To Get Legendary WEAPONS & Make Money Early in GTA 6!",
+          "publisher": "KhrazeGaming",
+          "url": "https://www.youtube.com/watch?v=LHDZV2JouEY",
+          "date": "2026-11-25"
+        }
+      ],
+      "updated": "2026-11-25"
+    },
+    {
+      "id": "how-to-get-fast-cars-and-master-driving-mechanics",
+      "title": "How to Get Fast Cars and Master Driving Mechanics",
+      "summary": "Learn how to track down rare vehicles early in the game and understand the upgraded handling, turn signals, and performance stats.",
+      "tags": [
+        "Vehicles",
+        "Driving",
+        "Customization"
+      ],
+      "steps": [
+        "Locate specific spawn points for rare and unique supercars hidden throughout the open world.",
+        "Test out different vehicle handling profiles and compare physics mechanics in free roam.",
+        "Utilize turn signals and custom upgrade options to optimize your chosen ride.",
+        "Secure free fast cars early to easily outrun the authorities when wanted levels spike."
+      ],
+      "sources": [
+        {
+          "title": "GTA 6 - 9 MUST HAVE Cars You Don't Want to Miss! (FREE Fast & Furious, Super Cars & Drift Cars)",
+          "publisher": "Arekkz Gaming",
+          "url": "https://www.youtube.com/watch?v=0NIez05L0YE",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "GTA 6 Cars - Everything You NEED to Know! (Handling, Turn Signals, Customization, & More!)",
+          "publisher": "Digital Car Addict",
+          "url": "https://www.youtube.com/watch?v=ie4vtIle3lU",
+          "date": "2026-11-25"
+        }
+      ],
+      "updated": "2026-11-25"
+    },
+    {
+      "id": "how-to-find-free-gold-and-secret-weapons-early",
+      "title": "How to Find Free Gold and Secret Weapons Early",
+      "summary": "Discover how to locate hidden golden and unique legendary firearms scattered across the map during your first hours of gameplay.",
+      "tags": [
+        "Weapons",
+        "Secret Items",
+        "Guides"
+      ],
+      "steps": [
+        "Explore off-the-beaten-path locations across Leonida instead of relying on standard gun shops.",
+        "Search for hidden starks and concealed caches mentioned in unique weapon maps.",
+        "Collect free gold weapon variants before progressing deep into the main story chapters.",
+        "Equip your newly acquired firearms to gain an immediate advantage in early firefights."
+      ],
+      "sources": [
+        {
+          "title": "GTA 6: 16 FREE Gold Weapons You Get to Keep (All Locations)",
+          "publisher": "Caspahz",
+          "url": "https://www.youtube.com/watch?v=bs6VF8ZnKb4",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "GTA 6 - 9 Secret & GOLD Weapons You NEED To Get! (All Unique Locations)",
+          "publisher": "Arekkz Gaming",
+          "url": "https://www.youtube.com/watch?v=NsJ4RIdL0x8",
+          "date": "2026-11-25"
+        },
+        {
+          "title": "12+ Secret Legendary Weapons In GTA 6 You Can Grab In Chapter 1!",
+          "publisher": "LEWIS⚡",
+          "url": "https://www.youtube.com/watch?v=AK-VF14WWyI",
+          "date": "2026-11-25"
+        }
+      ],
+      "updated": "2026-11-25"
+    }
+  ],
+  "lists": [
+    {
+      "id": "ranked-money-methods-gta-6",
+      "title": "Best Money Making Methods in GTA 6 Ranked",
+      "dek": "A definitive ranking of cash generation strategies from casual side hustles to lucrative criminal enterprises.",
+      "kind": "ranked",
+      "stage": "Money",
+      "updated": "2026-11-25",
+      "entries": [
+        {
+          "title": "Clean Store Robberies",
+          "body": "Low risk early game cash grabs that let you quickly stack initial capital without heavy police response.",
+          "where": "Suburban convenience stores",
+          "ref": "money/money-clean-store-robberies",
+          "source": {
+            "name": "Vice City Dispatch",
+            "url": "https://www.youtube.com/watch?v=in0rg1FNcGA"
+          }
+        },
+        {
+          "title": "Rideshare Driving",
+          "body": "A steady civilian hustle that provides consistent daily income while you learn map shortcuts.",
+          "where": "City taxi and rideshare apps",
+          "ref": "money/money-rideshare-driving",
+          "source": {
+            "name": "Vice City Dispatch",
+            "url": "https://www.youtube.com/watch?v=in0rg1FNcGA"
+          }
+        },
+        {
+          "title": "Flipping Stolen Cars",
+          "body": "Mid game vehicle export operations yielding high payouts for tracking down specific imported models.",
+          "where": "Docks export garage",
+          "ref": "money/money-flipping-stolen-cars",
+          "source": {
+            "name": "Vice City Dispatch",
+            "url": "https://www.youtube.com/watch?v=in0rg1FNcGA"
+          }
+        },
+        {
+          "title": "Luxury Jewelry Store Heists",
+          "body": "High stakes planned robberies offering massive payouts for well equipped crews.",
+          "where": "Upscale shopping district",
+          "ref": "money/luxury-jewelry-store-heists",
+          "source": {
+            "name": "Vice City Dispatch",
+            "url": "https://www.youtube.com/watch?v=in0rg1FNcGA"
+          }
+        },
+        {
+          "title": "Heist Setup and Vault Jobs",
+          "body": "The ultimate late game criminal operations requiring extensive preparation and precision execution.",
+          "where": "Hidden planning hideouts",
+          "ref": "money/money-heist-setup-jobs",
+          "source": {
+            "name": "Vice City Dispatch",
+            "url": "https://www.youtube.com/watch?v=in0rg1FNcGA"
+          }
+        }
+      ]
+    },
+    {
+      "id": "essential-weapons-gta-6",
+      "title": "Essential Weapons to Acquire Early in GTA 6",
+      "dek": "A curated checklist of must-have firearms and loadout attachments to secure your survival across Vice City.",
+      "kind": "checklist",
+      "stage": "Combat",
+      "updated": "2026-11-25",
+      "entries": [
+        {
+          "title": "Carbine Rifle",
+          "body": "Your dependable primary assault rifle for medium range engagements and firefights.",
+          "where": "Ammu-Nation stores",
+          "ref": "weapons/weapons-carbine-rifle",
+          "source": {
+            "name": "AcezProduction",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        },
+        {
+          "title": "Pump Shotgun",
+          "body": "Essential close quarters stopping power when clearing tight indoor spaces.",
+          "where": "Local hardware and gun shops",
+          "ref": "weapons/weapons-pump-shotgun",
+          "source": {
+            "name": "AcezProduction",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        },
+        {
+          "title": "Heavy Sniper",
+          "body": "Crucial long range rifle for taking out high value targets and vehicle engines.",
+          "where": "Military surplus caches",
+          "ref": "weapons/weapons-heavy-sniper",
+          "source": {
+            "name": "AcezProduction",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        },
+        {
+          "title": "Micro SMG",
+          "body": "Compact submachine gun designed for accurate drive-by shootings and quick panic defense.",
+          "where": "Street gangs and black market dealers",
+          "ref": "weapons/weapons-micro-smg",
+          "source": {
+            "name": "AcezProduction",
+            "url": "https://www.youtube.com/watch?v=V81P61mE4CQ"
+          }
+        },
+        {
+          "title": "Rifle and Pistol Suppressor",
+          "body": "An indispensable attachment for keeping your operations quiet during stealth infiltrations.",
+          "where": "Gunsmith customization benches",
+          "ref": "gear/gear-suppressor",
+          "source": {
+            "name": "TheGigaDad",
+            "url": "https://www.youtube.com/watch?v=avVECaWDoSQ"
+          }
+        },
+        {
+          "title": "Heavy Body Armor",
+          "body": "Maximum protective plating to absorb heavy gunfire during high heat police chases.",
+          "where": "Convenience stores and armor lockers",
+          "ref": "gear/gear-body-armor",
+          "source": {
+            "name": "TheGigaDad",
+            "url": "https://www.youtube.com/watch?v=avVECaWDoSQ"
+          }
+        }
+      ]
+    }
+  ]
 }
