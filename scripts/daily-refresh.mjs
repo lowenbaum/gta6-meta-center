@@ -7,21 +7,23 @@ import fs from "node:fs";
 import path from "node:path";
 
 const DATA_PATH = path.resolve(process.cwd(), "data.json");
-const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim();
-const YOUTUBE_API_KEY = (process.env.YOUTUBE_API_KEY || "").trim();
+// Strip accidental surrounding quotes/whitespace if pasted into GitHub Secrets
+const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim().replace(/^["']|["']$/g, "");
+const YOUTUBE_API_KEY = (process.env.YOUTUBE_API_KEY || "").trim().replace(/^["']|["']$/g, "");
 
-const MODEL_CANDIDATES = [
+const FALLBACK_MODELS = [
   "gemini-2.5-flash",
   "gemini-2.5-flash-lite",
-  "gemini-2.0-flash"
+  "gemini-2.0-flash",
+  "gemini-2.0-flash-lite"
 ];
+
+let ACTIVE_MODELS = [...FALLBACK_MODELS];
 
 const MAX_NEWS_ITEMS = 140;
 const MAX_POSTS_ITEMS = 40;
 const MAX_GUIDES_ITEMS = 35;
 const MAX_LISTS_ITEMS = 14;
-const MAX_ITEMS_PER_CATEGORY = 60;
-const MAX_NEW_ITEMS_PER_CAT_PER_RUN = 15;
 
 const VALID_NEWS_CATS = new Set(["launch", "tips", "eggs", "weapons", "vehicles", "items", "world"]);
 const VALID_STATUSES = new Set(["confirmed", "reported", "disputed"]);
@@ -37,6 +39,8 @@ const GAMING_SAFETY_SETTINGS = [
 const CATEGORY_CONFIG = {
   cars: {
     label: "Cars & Vehicles",
+    cap: 60,
+    targetPerRun: 20,
     factKey1: "Top speed",
     factExample1: "132 mph",
     factKey2: "Class",
@@ -52,6 +56,8 @@ const CATEGORY_CONFIG = {
   },
   weapons: {
     label: "Weapons & Loadouts",
+    cap: 60,
+    targetPerRun: 20,
     factKey1: "Damage",
     factExample1: "High (2-shot chest) or 85/100",
     factKey2: "Best use",
@@ -67,6 +73,8 @@ const CATEGORY_CONFIG = {
   },
   money: {
     label: "Money Methods & Economy",
+    cap: 30,
+    targetPerRun: 12,
     factKey1: "Payout",
     factExample1: "$120,000 - $250,000 per run",
     factKey2: "Time",
@@ -82,6 +90,8 @@ const CATEGORY_CONFIG = {
   },
   gear: {
     label: "Gear, Tools & Upgrades",
+    cap: 60,
+    targetPerRun: 20,
     factKey1: "Effect",
     factExample1: "Unlocks high-end supercars silently or +40% armor capacity",
     factKey2: "Unlock",
@@ -240,13 +250,24 @@ function extractTag(block, tagName) {
   return m ? m[1].trim() : "";
 }
 
-function safeParseJson(rawText) {
-  const cleaned = String(rawText || "")
+// Resilient JSON extractor: strips code fences and finds the outermost JSON object
+function extractJsonObject(rawText) {
+  let cleaned = String(rawText || "")
     .trim()
     .replace(new RegExp("^\\x60{3}(?:json)?\\s*", "i"), "")
     .replace(new RegExp("\\s*\\x60{3}$", "i"), "")
     .trim();
-  return JSON.parse(cleaned);
+
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    const firstBrace = cleaned.indexOf("{");
+    const lastBrace = cleaned.lastIndexOf("}");
+    if (firstBrace !== -1 && lastBrace > firstBrace) {
+      return JSON.parse(cleaned.slice(firstBrace, lastBrace + 1));
+    }
+    throw new Error("Response did not contain a valid JSON object");
+  }
 }
 
 async function fetchTextWithTimeout(url, timeoutMs = 10000, accept = "text/html,application/xml,*/*") {
@@ -267,6 +288,45 @@ async function fetchTextWithTimeout(url, timeoutMs = 10000, accept = "text/html,
     return null;
   } finally {
     clearTimeout(timer);
+  }
+}
+
+// Automatically discovers live Flash models enabled on this GEMINI_API_KEY
+async function discoverWorkingModels() {
+  if (!GEMINI_API_KEY) return;
+  try {
+    const resp = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(GEMINI_API_KEY)}`
+    );
+    const json = await resp.json();
+    if (!resp.ok || json.error) {
+      geminiLastError = `Model list HTTP ${resp.status}: ${json.error?.message || "Invalid API key or permission error"}`;
+      console.warn(`[Gemini:Init] ${geminiLastError}`);
+      return;
+    }
+
+    const available = (json.models || [])
+      .filter(m => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes("generateContent"))
+      .map(m => String(m.name || "").replace(/^models\//, ""))
+      .filter(name => /^gemini-.*flash/i.test(name) && !/image|tts|audio|live|thinking|robotics|computer/i.test(name));
+
+    if (available.length > 0) {
+      // Prioritize stable 2.5-flash, 2.5-flash-lite, 2.0-flash, then newest discovered flash models
+      const preferred = [];
+      for (const f of FALLBACK_MODELS) {
+        if (available.includes(f)) preferred.push(f);
+      }
+      for (const m of available) {
+        if (!preferred.includes(m)) preferred.push(m);
+      }
+      ACTIVE_MODELS = preferred.slice(0, 4);
+      console.log(`[Gemini:Init] Discovered live Flash models: ${ACTIVE_MODELS.join(", ")}`);
+    } else {
+      console.warn(`[Gemini:Init] No flash models returned from /models; using fallback list.`);
+    }
+  } catch (err) {
+    geminiLastError = `Model discovery failed: ${err.message}`;
+    console.warn(`[Gemini:Init] ${geminiLastError}`);
   }
 }
 
@@ -394,7 +454,6 @@ async function fetchYouTubeForCategory(catKey) {
   const videos = [];
   const seen = new Set();
 
-  // Path A: Official YouTube Data API v3 (when YOUTUBE_API_KEY is configured)
   if (YOUTUBE_API_KEY) {
     const publishedAfter = new Date(Date.now() - 90 * 86400000).toISOString();
     for (const q of cfg.ytQueries) {
@@ -424,7 +483,6 @@ async function fetchYouTubeForCategory(catKey) {
     }
   }
 
-  // Path B: Zero-API-key YouTube Search fallback (always fills in if API key is missing or sparse)
   if (videos.length < 6) {
     for (const q of cfg.ytQueries) {
       const scraped = await scrapeYouTubeSearchNoKey(q, 8);
@@ -444,7 +502,6 @@ async function fetchAllOnlineArticles() {
   const general = [];
   const byCategory = { cars: [], weapons: [], money: [], gear: [] };
 
-  // 1. Fetch general + major gaming outlet RSS feeds
   for (const feed of GENERAL_RSS_FEEDS) {
     const xml = await fetchTextWithTimeout(feed.url, 10000, "application/rss+xml,application/xml,text/xml,*/*");
     if (!xml) continue;
@@ -453,7 +510,6 @@ async function fetchAllOnlineArticles() {
     general.push(...parsed);
   }
 
-  // 2. Fetch dedicated per-category Meta RSS feeds
   for (const catKey of CATEGORY_KEYS) {
     for (const url of CATEGORY_CONFIG[catKey].rssUrls) {
       const xml = await fetchTextWithTimeout(url, 10000, "application/rss+xml,application/xml,text/xml,*/*");
@@ -468,7 +524,6 @@ async function fetchAllOnlineArticles() {
     console.log(`[MetaRSS:${catKey}] Collected ${byCategory[catKey].length} category-specific links`);
   }
 
-  // Route general outlet guides into matching category buckets as well
   for (const item of general) {
     const text = `${item.title} ${item.body}`.toLowerCase();
     if (/\b(car|cars|supercar|vehicle|bike|motorcycle|speed|garage|drift)\b/.test(text)) byCategory.cars.push(item);
@@ -477,7 +532,6 @@ async function fetchAllOnlineArticles() {
     if (/\b(gear|upgrade|armor|tool|equipment|attachment|lockpick|cloner|gadget|vest)\b/.test(text)) byCategory.gear.push(item);
   }
 
-  // Enrich up to 4 direct non-Google-News articles per category with real page excerpts
   for (const catKey of CATEGORY_KEYS) {
     const directArticles = byCategory[catKey]
       .filter(a => a.kind === "web" && !/news\.google\.com/i.test(a.url))
@@ -514,62 +568,72 @@ function heuristicHeroScore(item) {
 }
 
 let geminiCallCount = 0;
+let geminiSuccessCount = 0;
+let geminiFailCount = 0;
+let geminiLastError = "";
 
 async function callGeminiJson(label, promptText, responseSchema) {
   if (!GEMINI_API_KEY) {
-    console.warn(`[Gemini:${label}] Skipped — GEMINI_API_KEY secret is empty or missing.`);
+    geminiLastError = "GEMINI_API_KEY secret is empty or missing";
+    console.warn(`[Gemini:${label}] Skipped — ${geminiLastError}.`);
     return null;
   }
 
-  // 6-second pause between calls keeps us comfortably inside Google AI Studio's free-tier RPM
+  // 7-second pause between calls keeps us safely inside Google AI Studio's free-tier RPM
   if (geminiCallCount > 0) {
-    await sleep(6000);
+    await sleep(7000);
   }
   geminiCallCount++;
 
   let lastErr = null;
-  for (const modelId of MODEL_CANDIDATES) {
-    // Try with responseSchema first, then fall back to schema-free JSON mode if rejected
+  for (const modelId of ACTIVE_MODELS) {
     const attempts = responseSchema ? [true, false] : [false];
 
     for (const useSchema of attempts) {
       try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
-        const body = {
-          contents: [{ parts: [{ text: promptText }] }],
-          safetySettings: GAMING_SAFETY_SETTINGS,
-          generationConfig: {
-            responseMimeType: "application/json",
-            temperature: 0.35,
-            maxOutputTokens: 8192
-          }
+        const generationConfig = {
+          responseMimeType: "application/json",
+          temperature: 0.35,
+          maxOutputTokens: 8192
         };
+
+        // Turn off hidden thinking tokens on Gemini 2.5 models so JSON output never truncates
+        if (/2\.5/.test(modelId)) {
+          generationConfig.thinkingConfig = { thinkingBudget: 0 };
+        }
         if (useSchema && responseSchema) {
-          body.generationConfig.responseSchema = responseSchema;
+          generationConfig.responseSchema = responseSchema;
         }
 
         const resp = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body)
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: promptText }] }],
+            safetySettings: GAMING_SAFETY_SETTINGS,
+            generationConfig
+          })
         });
 
         const json = await resp.json();
         if (!resp.ok || json.error) {
           lastErr = new Error(`${modelId} (schema=${useSchema}) HTTP ${resp.status}: ${json.error?.message || "Unknown error"}`);
           console.warn(`[Gemini:${label}] ${lastErr.message}`);
-          if (resp.status === 429) await sleep(6000);
+          if (resp.status === 429) await sleep(8000);
           continue;
         }
 
-        const rawText = json.candidates?.[0]?.content?.parts?.[0]?.text;
+        const parts = json.candidates?.[0]?.content?.parts || [];
+        const rawText = parts.map(p => p.text || "").join("").trim();
         if (!rawText) {
           lastErr = new Error(`${modelId} empty response (finishReason=${json.candidates?.[0]?.finishReason || "unknown"})`);
           console.warn(`[Gemini:${label}] ${lastErr.message}`);
           continue;
         }
 
-        const parsed = safeParseJson(rawText);
+        const parsed = extractJsonObject(rawText);
+        geminiSuccessCount++;
         console.log(`[Gemini:${label}] Success via ${modelId} (schema=${useSchema})`);
         return parsed;
       } catch (err) {
@@ -578,7 +642,10 @@ async function callGeminiJson(label, promptText, responseSchema) {
       }
     }
   }
-  console.warn(`[Gemini:${label}] All models failed: ${lastErr?.message || "unknown"}`);
+
+  geminiFailCount++;
+  geminiLastError = lastErr?.message || "All models failed";
+  console.warn(`[Gemini:${label}] All models failed: ${geminiLastError}`);
   return null;
 }
 
@@ -655,11 +722,12 @@ Rules:
 
 // CALLS 2-5: Dedicated Per-Category Meta Extractor (pulls from BOTH YouTube & Online Articles)
 async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
+  const cfg = CATEGORY_CONFIG[catKey];
   const list = data.categories[catKey] || [];
-  const slotsLeft = MAX_ITEMS_PER_CATEGORY - list.length;
+  const slotsLeft = cfg.cap - list.length;
   if (!GEMINI_API_KEY) return { addedItems: 0, addedRanks: 0 };
 
-  const targetNew = Math.min(MAX_NEW_ITEMS_PER_CAT_PER_RUN, Math.max(0, slotsLeft));
+  const targetNew = Math.min(cfg.targetPerRun, Math.max(0, slotsLeft));
 
   // Deduplicate and interleave YouTube videos + online articles so Gemini cites BOTH
   const seen = new Set();
@@ -691,8 +759,6 @@ async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
     name: i.name,
     ranksCount: (i.ranks || []).length
   }));
-
-  const cfg = CATEGORY_CONFIG[catKey];
 
   const schema = {
     type: "OBJECT",
@@ -746,14 +812,14 @@ ${JSON.stringify(compactSources)}
 
 Task:
 Return valid JSON with two arrays: "newItems" and "extraRanks".
-1. In "newItems", extract as many distinct, real GTA 6 ${cfg.label} items as possible — target ${targetNew} brand-new items (minimum 8 if slots allow) NOT already listed above.
-   - Draw from the YouTube videos, article excerpts, and known GTA 6 ${cfg.label} meta covered by these sources.
+1. In "newItems", extract as many distinct, real GTA 6 ${cfg.label} items as possible — target ${targetNew} brand-new items (minimum 10 if slots allow) NOT already listed above.
+   - Draw from the YouTube videos, article excerpts, and GTA 6 ${cfg.label} meta covered by these sources.
    - Spread ranks realistically from 1 to 10 so the tier list populates S, A, B, and C tiers.
    - factVal1 is "${cfg.factKey1}" (e.g. "${cfg.factExample1}").
    - factVal2 is "${cfg.factKey2}" (e.g. "${cfg.factExample2}").
    - Cite 1 to 2 distinct sourceIdx values (prefer pairing 1 YouTube creator + 1 web article when both are present).
-   - Keep blurb under 180 chars and quotes under 150 chars. Plain text only, no HTML/URLs.
-2. In "extraRanks", add 4 to 8 additional critic rankings (from YouTube or online articles) for existing itemIds above so items accumulate multi-source consensus.`;
+   - Keep blurb under 160 chars and quotes under 130 chars. Plain text only, no HTML/URLs.
+2. In "extraRanks", add 4 to 6 additional critic rankings (from YouTube or online articles) for existing itemIds above so items accumulate multi-source consensus.`;
 
   const res = await callGeminiJson(`Meta:${catKey}`, prompt, schema);
   if (!res) return { addedItems: 0, addedRanks: 0 };
@@ -762,7 +828,7 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
   let addedRanks = 0;
 
   for (const item of (res.newItems || [])) {
-    if (list.length >= MAX_ITEMS_PER_CATEGORY) break;
+    if (list.length >= cfg.cap) break;
     const cleanName = cleanHeadline(item.name);
     const id = slugify(cleanName);
     if (!id || cleanName.length < 2) continue;
@@ -1142,7 +1208,10 @@ async function main() {
   }
 
   console.log("=== Beat Six Maximum-Coverage Refresh Starting ===");
-  console.log(`[Config] GEMINI_API_KEY: ${GEMINI_API_KEY ? "SET (" + GEMINI_API_KEY.slice(0, 6) + "...)" : "MISSING"} | YOUTUBE_API_KEY: ${YOUTUBE_API_KEY ? "SET" : "USING ZERO-KEY FALLBACK"}`);
+  console.log(`[Config] GEMINI_API_KEY: ${GEMINI_API_KEY ? "SET (len=" + GEMINI_API_KEY.length + ")" : "MISSING"} | YOUTUBE_API_KEY: ${YOUTUBE_API_KEY ? "SET" : "USING ZERO-KEY FALLBACK"}`);
+
+  // Discover live Flash models available to this API key before making calls
+  await discoverWorkingModels();
 
   const data = JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
   data.meta = data.meta || {};
@@ -1324,7 +1393,10 @@ async function main() {
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2) + "\n", "utf8");
 
   console.log("=== Refresh Complete ===");
-  console.log(`Total Gemini calls used: ${geminiCallCount}`);
+  console.log(`Gemini calls: ${geminiCallCount} attempted | ${geminiSuccessCount} succeeded | ${geminiFailCount} failed`);
+  if (geminiLastError) {
+    console.log(`Last Gemini error: ${geminiLastError}`);
+  }
   console.log(`News: ${beforeNewsCount} -> ${data.news.length} (+${processedNew.length} new, ${scrubbedCount} scrubbed)`);
   console.log(`Primary Hero Lead (#1): "${data.news[0]?.title || "none"}" (${data.news[0]?.source || ""})`);
   console.log(`Meta totals -> Cars: ${data.categories.cars.length}, Weapons: ${data.categories.weapons.length}, Money: ${data.categories.money.length}, Gear: ${data.categories.gear.length}`);
