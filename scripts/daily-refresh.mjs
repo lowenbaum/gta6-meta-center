@@ -1,5 +1,5 @@
 // scripts/daily-refresh.mjs
-// Beat Six Maximum-Coverage Meta & Content Aggregator
+// Beat Six Balanced Tier List & Canonical Meta Aggregator
 // Free-Tier Safe: max 8 paced Gemini calls/day ($0.00 on Google AI Studio Free Tier)
 // Strictly updates data.json only; never touches index.html.
 
@@ -7,7 +7,6 @@ import fs from "node:fs";
 import path from "node:path";
 
 const DATA_PATH = path.resolve(process.cwd(), "data.json");
-// Strip accidental surrounding quotes/whitespace if pasted into GitHub Secrets
 const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || "").trim().replace(/^["']|["']$/g, "");
 const YOUTUBE_API_KEY = (process.env.YOUTUBE_API_KEY || "").trim().replace(/^["']|["']$/g, "");
 
@@ -36,78 +35,122 @@ const GAMING_SAFETY_SETTINGS = [
   { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" }
 ];
 
+// Deterministic Rockstar / GTA canonical brand & item typo fixer
+const CANONICAL_REPLACEMENTS = [
+  [/\bGotti\b/gi, "Grotti"],
+  [/\bGroti\b/gi, "Grotti"],
+  [/\bPegasi\b/gi, "Pegassi"],
+  [/\bPeggassi\b/gi, "Pegassi"],
+  [/\bDewbauch(e|ee)?\b/gi, "Dewbauchee"],
+  [/\bTruffad\b/gi, "Truffade"],
+  [/\bBenefacter\b/gi, "Benefactor"],
+  [/\bLampdati\b/gi, "Lampadati"],
+  [/\bOverflod\b/gi, "Överflöd"],
+  [/\bUbermacht\b/gi, "Übermacht"],
+  [/\bPfisterr\b/gi, "Pfister"],
+  [/\bFister\b/gi, "Pfister"],
+  [/\bDeclase\b/gi, "Declasse"],
+  [/\bBravdo\b/gi, "Bravado"],
+  [/\bImpont\b/gi, "Imponte"],
+  [/\bInvetro\b/gi, "Invetero"],
+  [/\bOcelote\b/gi, "Ocelot"],
+  [/\bProgene\b/gi, "Progen"],
+  [/\bAnis\b/gi, "Annis"],
+  [/\bMaibastu\b/gi, "Maibatsu"],
+  [/\bNagaskai\b/gi, "Nagasaki"],
+  [/\bShitzhu\b/gi, "Shitzu"],
+  [/\bGalivanter\b/gi, "Gallivanter"],
+  [/\bVapidde\b/gi, "Vapid"],
+  [/\bZentoro\b/gi, "Zentorno"],
+  [/\bInfernous\b/gi, "Infernus"],
+  [/\bBanshe\b/gi, "Banshee"],
+  [/\bCheetah\s+Clasico\b/gi, "Cheetah Classic"],
+  [/\bKurma\b/gi, "Kuruma"],
+  [/\bKrieger\s+RS\b/gi, "Krieger"]
+];
+
+const CANONICAL_BRAND_GLOSSARY =
+  "Grotti, Pegassi, Dewbauchee, Truffade, Pfister, Bravado, Declasse, Vapid, Karin, Albany, Imponte, Benefactor, Lampadati, Ocelot, Progen, Coil, Übermacht, Överflöd, Annis, Dinka, Shitzu, Nagasaki, Maibatsu, Enus, Gallivanter, Obey, Invetero, Mammoth, HVY, Western, Principe, Canis, Weeny, Vom Feuer, Hawk & Little, Shrewsbury";
+
 const CATEGORY_CONFIG = {
   cars: {
     label: "Cars & Vehicles",
     cap: 60,
-    targetPerRun: 20,
+    targetPerRun: 18,
     factKey1: "Top speed",
     factExample1: "132 mph",
     factKey2: "Class",
-    factExample2: "Super, Sports, Muscle, Motorcycle, Off-Road, or Aircraft",
+    factExample2: "Super, Sports, Muscle, Sedan, Compact, SUV, Motorcycle, or Off-Road",
+    bottomTierGuidance:
+      "Include starter sedans, heavy SUVs, slow compacts, budget vans, and overpriced/poor-handling cars in ranks 6-12 (B and C tiers), not just S-tier supercars.",
     ytQueries: [
-      "GTA 6 fastest cars tier list tested",
-      "GTA 6 best vehicles cars bikes ranking"
+      "GTA 6 car tier list best and worst vehicles ranked",
+      "GTA 6 every car ranked fast slow starter vehicles"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22best+cars%22+OR+%22fastest+car%22+OR+%22vehicle+tier+list%22+OR+supercar+OR+motorcycle+OR+vehicles)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(cars+OR+vehicles+OR+fastest+OR+supercar)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22cars%22+OR+%22vehicles%22+OR+%22tier+list%22+OR+supercar+OR+motorcycle+OR+%22worst+cars%22)+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(cars+OR+vehicles+OR+tier+list+OR+ranked)&hl=en-US&gl=US&ceid=US:en"
     ]
   },
   weapons: {
     label: "Weapons & Loadouts",
     cap: 60,
-    targetPerRun: 20,
+    targetPerRun: 18,
     factKey1: "Damage",
-    factExample1: "High (2-shot chest) or 85/100",
+    factExample1: "High (2-shot chest) or Low (starter sidearm)",
     factKey2: "Best use",
-    factExample2: "Mid-range firefights, stealth, close quarters, or anti-vehicle",
+    factExample2: "Mid-range firefights, stealth, close quarters, or early-game backup",
+    bottomTierGuidance:
+      "Include weak starter pistols, low-DPS SMGs, slow-reload shotguns, situational melee weapons, and outclassed rifles in ranks 6-12 (B and C tiers), not just meta rifles.",
     ytQueries: [
-      "GTA 6 best weapons tier list guns ranked",
-      "GTA 6 best loadout rifles pistols shotguns"
+      "GTA 6 weapon tier list best and worst guns ranked",
+      "GTA 6 all guns ranked rifles pistols shotguns melee"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22best+weapons%22+OR+%22best+guns%22+OR+%22weapon+tier+list%22+OR+rifle+OR+shotgun+OR+loadout)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(weapons+OR+guns+OR+loadout+OR+tier+list)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22weapons%22+OR+%22guns%22+OR+%22weapon+tier+list%22+OR+rifle+OR+pistol+OR+shotgun)+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(weapons+OR+guns+OR+tier+list+OR+loadout)&hl=en-US&gl=US&ceid=US:en"
     ]
   },
   money: {
     label: "Money Methods & Economy",
-    cap: 30,
-    targetPerRun: 12,
+    cap: 28,
+    targetPerRun: 10,
     factKey1: "Payout",
-    factExample1: "$120,000 - $250,000 per run",
+    factExample1: "$120,000 - $250,000 per run or $8,000/hr early grind",
     factKey2: "Time",
-    factExample2: "15-20 min solo or Passive hourly",
+    factExample2: "15-20 min solo, Passive hourly, or 5 min quick hustle",
+    bottomTierGuidance:
+      "Every entry MUST be a genuinely distinct income mechanic — NEVER split the same activity into synonyms (e.g. do NOT list both 'Vault Jobs' and 'Vault Raids', or both 'Store Robberies' and 'Convenience Store Holdups'). Include slow or low-payout early hustles (e.g. ATM/register skims, taxi/delivery odd jobs, low-end car flipping, petty street muggings) in ranks 6-12 (B and C tiers) alongside top-tier heists and businesses.",
     ytQueries: [
-      "GTA 6 best money making methods guide fast cash",
-      "GTA 6 heist payout business tier list money"
+      "GTA 6 money methods tier list best and worst ways to make money",
+      "GTA 6 heist payout business side hustle money guide"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22make+money%22+OR+%22money+guide%22+OR+%22money+methods%22+OR+heist+OR+robbery+OR+payout+OR+business)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(money+OR+heist+OR+cash+OR+business)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22make+money%22+OR+%22money+guide%22+OR+%22money+methods%22+OR+heist+OR+robbery+OR+business+OR+%22side+hustle%22)+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(money+OR+heist+OR+cash+OR+business+OR+tier+list)&hl=en-US&gl=US&ceid=US:en"
     ]
   },
   gear: {
-    label: "Gear, Tools & Upgrades",
+    label: "Gear, Tools, Attachments & Upgrades",
     cap: 60,
     targetPerRun: 20,
     factKey1: "Effect",
-    factExample1: "Unlocks high-end supercars silently or +40% armor capacity",
+    factExample1: "Unlocks high-end cars silently, +40% armor, or reduces recoil",
     factKey2: "Unlock",
-    factExample2: "Chapter 2 pawn shop, Safehouse bench, or Gun van",
+    factExample2: "Pawn shop, Ammu-Nation, Safehouse bench, or Mechanic shop",
+    bottomTierGuidance:
+      "Cover the FULL spectrum of GTA 6 gear: body armor tiers, car-theft tools (slim jim, key fob cloner, OBD scanner), heist gadgets (signal jammer, thermal charge, hacking deck, duffel bag), weapon attachments (suppressors, extended mags, scopes, flashlights, grips), survival/utility items (parachute, rebreather, binoculars, medkits, night vision), and vehicle upgrades (bulletproof tires, turbo, armor plating). Put basic, early-game, situational, or outclassed gear in ranks 6-12 (B and C tiers).",
     ytQueries: [
-      "GTA 6 best gear upgrades tools attachments guide",
-      "GTA 6 must have items equipment armor unlock early"
+      "GTA 6 best gear tools equipment armor attachments tier list",
+      "GTA 6 upgrades items gadgets unlock early worth buying"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22best+gear%22+OR+upgrades+OR+armor+OR+tools+OR+equipment+OR+attachments+OR+unlock+early)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(gear+OR+upgrades+OR+tools+OR+items)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(gear+OR+upgrades+OR+armor+OR+tools+OR+attachments+OR+equipment+OR+gadgets+OR+lockpick+OR+cloner+OR+backpack+OR+duffel)+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(gear+OR+upgrades+OR+tools+OR+attachments+OR+armor+OR+items)&hl=en-US&gl=US&ceid=US:en"
     ]
   }
 };
 
-// General News & Gaming Outlet RSS Feeds
 const GENERAL_RSS_FEEDS = [
   {
     name: "Google News (GTA 6 Latest)",
@@ -157,13 +200,23 @@ function daysAgoIso(days) {
 
 function slugify(str) {
   return String(str || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 64);
 }
 
-// Decodes HTML entities BEFORE stripping tags so Google News <a href="..."> never leaks
+// Applies deterministic Rockstar/GTA canonical spelling fixes
+function fixCanonicalName(name) {
+  let out = cleanHeadline(name || "");
+  for (const [pattern, replacement] of CANONICAL_REPLACEMENTS) {
+    out = out.replace(pattern, replacement);
+  }
+  return out.replace(/\s+/g, " ").trim();
+}
+
 function decodeHtml(str) {
   if (!str) return "";
   let s = String(str).replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
@@ -244,13 +297,115 @@ function isSimilarHeadline(a, b) {
   return (overlap / Math.min(wa.size, wb.size)) >= 0.65;
 }
 
+// Normalizes item names to catch duplicates like "Vault Jobs" vs "Vault Raids"
+function canonicalConceptKey(catKey, name) {
+  const base = fixCanonicalName(name)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ");
+
+  const words = base.split(/\s+/).filter(Boolean);
+  if (catKey !== "money") {
+    return words.join(" ");
+  }
+
+  const MONEY_NOISE = new Set([
+    "job", "jobs", "raid", "raids", "heist", "heists", "robbery", "robberies",
+    "holdup", "holdups", "mission", "missions", "run", "runs", "grind", "grinding",
+    "farm", "farming", "method", "methods", "hustle", "hustles", "contract", "contracts",
+    "gig", "gigs", "work", "money", "cash", "income", "payout", "the", "and", "for"
+  ]);
+
+  const core = words
+    .map(w => w.replace(/(ies)$/, "y").replace(/(s)$/, ""))
+    .filter(w => w.length > 1 && !MONEY_NOISE.has(w));
+
+  return core.length > 0 ? core.sort().join(" ") : words.join(" ");
+}
+
+function isDuplicateCategoryItem(catKey, nameA, nameB) {
+  const fixedA = fixCanonicalName(nameA);
+  const fixedB = fixCanonicalName(nameB);
+  if (slugify(fixedA) === slugify(fixedB)) return true;
+
+  const keyA = canonicalConceptKey(catKey, fixedA);
+  const keyB = canonicalConceptKey(catKey, fixedB);
+  if (keyA && keyB && keyA === keyB) return true;
+
+  return false;
+}
+
+// Mirrors Beat Six index.html scoring so we can measure exact tier distribution
+function criticScoreOf(it) {
+  const rs = (it.ranks || []).filter(r => Number.isFinite(r.rank) && r.rank >= 1);
+  if (!rs.length) return null;
+  const pts = rs.map(r => Math.max(40, 100 - 6 * (r.rank - 1)));
+  return Math.round(pts.reduce((a, b) => a + b, 0) / pts.length);
+}
+
+function tierOfScore(score) {
+  if (score == null) return "none";
+  if (score >= 90) return "S";
+  if (score >= 80) return "A";
+  if (score >= 70) return "B";
+  return "C";
+}
+
+function getTierDistribution(list) {
+  const dist = { S: 0, A: 0, B: 0, C: 0 };
+  for (const it of list) {
+    const t = tierOfScore(criticScoreOf(it));
+    if (dist[t] != null) dist[t]++;
+  }
+  return dist;
+}
+
+// Cleans typos (like "Gotti Cheetah" -> "Grotti Cheetah") & merges duplicate entries (like "Vault Jobs" + "Vault Raids")
+function cleanAndDeduplicateCategory(catKey, list) {
+  let fixedNames = 0;
+  let mergedCount = 0;
+  const cleaned = [];
+
+  for (const rawItem of list) {
+    if (!rawItem || !rawItem.name) continue;
+    const correctedName = fixCanonicalName(rawItem.name);
+    if (correctedName !== rawItem.name) fixedNames++;
+
+    const item = {
+      ...rawItem,
+      id: slugify(correctedName) || rawItem.id,
+      name: correctedName,
+      ranks: Array.isArray(rawItem.ranks) ? [...rawItem.ranks] : []
+    };
+
+    const existing = cleaned.find(x => isDuplicateCategoryItem(catKey, x.name, item.name));
+    if (!existing) {
+      cleaned.push(item);
+    } else {
+      mergedCount++;
+      // Merge unique critic ranks into the kept entry
+      for (const r of item.ranks) {
+        if (!r || !r.source) continue;
+        const hasSrc = existing.ranks.some(er => er.source && er.source.toLowerCase() === r.source.toLowerCase());
+        if (!hasSrc) existing.ranks.push(r);
+      }
+      // Keep the richer blurb/facts if the existing one is thin
+      if ((!existing.blurb || existing.blurb.length < 25) && item.blurb) existing.blurb = item.blurb;
+      if ((!existing.get || existing.get.length < 10) && item.get) existing.get = item.get;
+      existing.facts = { ...(item.facts || {}), ...(existing.facts || {}) };
+    }
+  }
+
+  return { items: cleaned, fixedNames, mergedCount };
+}
+
 function extractTag(block, tagName) {
   const re = new RegExp(`<${tagName}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tagName}>`, "i");
   const m = block.match(re);
   return m ? m[1].trim() : "";
 }
 
-// Resilient JSON extractor: strips code fences and finds the outermost JSON object
 function extractJsonObject(rawText) {
   let cleaned = String(rawText || "")
     .trim()
@@ -291,7 +446,6 @@ async function fetchTextWithTimeout(url, timeoutMs = 10000, accept = "text/html,
   }
 }
 
-// Automatically discovers live Flash models enabled on this GEMINI_API_KEY
 async function discoverWorkingModels() {
   if (!GEMINI_API_KEY) return;
   try {
@@ -300,7 +454,7 @@ async function discoverWorkingModels() {
     );
     const json = await resp.json();
     if (!resp.ok || json.error) {
-      geminiLastError = `Model list HTTP ${resp.status}: ${json.error?.message || "Invalid API key or permission error"}`;
+      geminiLastError = `Model list HTTP ${resp.status}: ${json.error?.message || "Invalid API key"}`;
       console.warn(`[Gemini:Init] ${geminiLastError}`);
       return;
     }
@@ -311,7 +465,6 @@ async function discoverWorkingModels() {
       .filter(name => /^gemini-.*flash/i.test(name) && !/image|tts|audio|live|thinking|robotics|computer/i.test(name));
 
     if (available.length > 0) {
-      // Prioritize stable 2.5-flash, 2.5-flash-lite, 2.0-flash, then newest discovered flash models
       const preferred = [];
       for (const f of FALLBACK_MODELS) {
         if (available.includes(f)) preferred.push(f);
@@ -321,8 +474,6 @@ async function discoverWorkingModels() {
       }
       ACTIVE_MODELS = preferred.slice(0, 4);
       console.log(`[Gemini:Init] Discovered live Flash models: ${ACTIVE_MODELS.join(", ")}`);
-    } else {
-      console.warn(`[Gemini:Init] No flash models returned from /models; using fallback list.`);
     }
   } catch (err) {
     geminiLastError = `Model discovery failed: ${err.message}`;
@@ -375,7 +526,6 @@ function parseRssXml(xml, feedMeta) {
   return results;
 }
 
-// Reads clean text excerpt from direct online guide articles (skips Google News redirectors)
 async function fetchArticleExcerpt(url) {
   if (!url || /news\.google\.com|youtube\.com|youtu\.be/i.test(url)) return "";
   const html = await fetchTextWithTimeout(url, 4500, "text/html");
@@ -401,7 +551,6 @@ async function fetchArticleExcerpt(url) {
   return headingsAndParas.join(" | ").slice(0, 1800);
 }
 
-// Zero-API-key YouTube Search scraper via ytInitialData
 async function scrapeYouTubeSearchNoKey(query, maxItems = 8) {
   const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}&sp=CAMSAhAB`;
   const html = await fetchTextWithTimeout(url, 9000, "text/html");
@@ -528,8 +677,8 @@ async function fetchAllOnlineArticles() {
     const text = `${item.title} ${item.body}`.toLowerCase();
     if (/\b(car|cars|supercar|vehicle|bike|motorcycle|speed|garage|drift)\b/.test(text)) byCategory.cars.push(item);
     if (/\b(weapon|gun|rifle|pistol|shotgun|sniper|loadout|combat|dps)\b/.test(text)) byCategory.weapons.push(item);
-    if (/\b(money|cash|heist|robbery|payout|million|economy|farm|profit|business)\b/.test(text)) byCategory.money.push(item);
-    if (/\b(gear|upgrade|armor|tool|equipment|attachment|lockpick|cloner|gadget|vest)\b/.test(text)) byCategory.gear.push(item);
+    if (/\b(money|cash|heist|robbery|payout|million|economy|farm|profit|business|hustle)\b/.test(text)) byCategory.money.push(item);
+    if (/\b(gear|upgrade|armor|tool|equipment|attachment|lockpick|cloner|gadget|vest|backpack|duffel|jammer|scope|suppressor)\b/.test(text)) byCategory.gear.push(item);
   }
 
   for (const catKey of CATEGORY_KEYS) {
@@ -579,9 +728,8 @@ async function callGeminiJson(label, promptText, responseSchema) {
     return null;
   }
 
-  // 7-second pause between calls keeps us safely inside Google AI Studio's free-tier RPM
   if (geminiCallCount > 0) {
-    await sleep(7000);
+    await sleep(7500);
   }
   geminiCallCount++;
 
@@ -594,11 +742,10 @@ async function callGeminiJson(label, promptText, responseSchema) {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
         const generationConfig = {
           responseMimeType: "application/json",
-          temperature: 0.35,
+          temperature: 0.3,
           maxOutputTokens: 8192
         };
 
-        // Turn off hidden thinking tokens on Gemini 2.5 models so JSON output never truncates
         if (/2\.5/.test(modelId)) {
           generationConfig.thinkingConfig = { thinkingBudget: 0 };
         }
@@ -620,7 +767,7 @@ async function callGeminiJson(label, promptText, responseSchema) {
         if (!resp.ok || json.error) {
           lastErr = new Error(`${modelId} (schema=${useSchema}) HTTP ${resp.status}: ${json.error?.message || "Unknown error"}`);
           console.warn(`[Gemini:${label}] ${lastErr.message}`);
-          if (resp.status === 429) await sleep(8000);
+          if (resp.status === 429) await sleep(10000);
           continue;
         }
 
@@ -720,7 +867,7 @@ Rules:
   return enriched;
 }
 
-// CALLS 2-5: Dedicated Per-Category Meta Extractor (pulls from BOTH YouTube & Online Articles)
+// CALLS 2-5: Dedicated Per-Category Meta Extractor (Balanced Across S, A, B, and C/Bottom Tiers)
 async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
   const cfg = CATEGORY_CONFIG[catKey];
   const list = data.categories[catKey] || [];
@@ -728,8 +875,24 @@ async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
   if (!GEMINI_API_KEY) return { addedItems: 0, addedRanks: 0 };
 
   const targetNew = Math.min(cfg.targetPerRun, Math.max(0, slotsLeft));
+  const dist = getTierDistribution(list);
 
-  // Deduplicate and interleave YouTube videos + online articles so Gemini cites BOTH
+  // Build explicit tier-balancing quotas based on what is currently underrepresented
+  const topHeavy = (dist.S + dist.A) > (dist.B + dist.C + 2);
+  const quotaGuidance = topHeavy
+    ? `CURRENT BOARD IS TOP-HEAVY (S=${dist.S}, A=${dist.A}, B=${dist.B}, C=${dist.C}).
+To balance the tier list top-to-bottom, your newItems MUST follow this rank quota:
+- At most 1-2 items with rank 1-2 (S tier, score 90-100)
+- At most 2-3 items with rank 3-4 (A tier, score 80-89)
+- At least 35% of newItems MUST have rank 5-6 (B tier, score 70-76: solid mid-tier / situational)
+- At least 45% of newItems MUST have rank 7-12 (C / bottom tier, score 40-64: starter, budget, slow, weak, or outclassed)`
+    : `Current tier counts: S=${dist.S}, A=${dist.A}, B=${dist.B}, C=${dist.C}.
+Distribute your newItems EVENLY across all four tiers (~25% each):
+- ~25% rank 1-2 (S tier, score 90-100)
+- ~25% rank 3-4 (A tier, score 80-89)
+- ~25% rank 5-6 (B tier, score 70-76)
+- ~25% rank 7-12 (C / bottom tier, score 40-64)`;
+
   const seen = new Set();
   const combinedSources = [];
   const maxLen = Math.max(ytSources.length, webSources.length);
@@ -757,6 +920,7 @@ async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
   const existingSummary = list.map(i => ({
     id: i.id,
     name: i.name,
+    tier: tierOfScore(criticScoreOf(i)),
     ranksCount: (i.ranks || []).length
   }));
 
@@ -804,22 +968,30 @@ async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
   const prompt = `Context: Benign video game tier-list curation for Beat Six (a GTA 6 Meta aggregator).
 Category: "${catKey}" (${cfg.label})
 
-Items ALREADY in this category (DO NOT duplicate any of these):
+Items ALREADY in this category (DO NOT duplicate or create synonym variants of any of these):
 ${JSON.stringify(existingSummary)}
 
 Verified YouTube videos and online articles for "${catKey}" (0-indexed):
 ${JSON.stringify(compactSources)}
 
+TIER DISTRIBUTION RULES (CRITICAL):
+${quotaGuidance}
+Category guidance: ${cfg.bottomTierGuidance}
+
+SPELLING & CANONICAL NAME RULES (CRITICAL):
+- Double-check every official Rockstar / GTA brand and item spelling before outputting.
+- Exact spellings include: ${CANONICAL_BRAND_GLOSSARY}.
+- NEVER misspell "Grotti" as "Gotti", "Pegassi" as "Pegasi", or "Dewbauchee" as "Dewbauch".
+
 Task:
 Return valid JSON with two arrays: "newItems" and "extraRanks".
-1. In "newItems", extract as many distinct, real GTA 6 ${cfg.label} items as possible — target ${targetNew} brand-new items (minimum 10 if slots allow) NOT already listed above.
-   - Draw from the YouTube videos, article excerpts, and GTA 6 ${cfg.label} meta covered by these sources.
-   - Spread ranks realistically from 1 to 10 so the tier list populates S, A, B, and C tiers.
+1. In "newItems", extract up to ${targetNew} brand-new, distinct GTA 6 ${cfg.label} items NOT already listed above (minimum 10 if slots allow).
+   - Follow the tier distribution quota above strictly (ranks 1-12; higher rank number = lower tier).
    - factVal1 is "${cfg.factKey1}" (e.g. "${cfg.factExample1}").
    - factVal2 is "${cfg.factKey2}" (e.g. "${cfg.factExample2}").
    - Cite 1 to 2 distinct sourceIdx values (prefer pairing 1 YouTube creator + 1 web article when both are present).
    - Keep blurb under 160 chars and quotes under 130 chars. Plain text only, no HTML/URLs.
-2. In "extraRanks", add 4 to 6 additional critic rankings (from YouTube or online articles) for existing itemIds above so items accumulate multi-source consensus.`;
+2. In "extraRanks", add 4 to 6 honest critic rankings (ranks 1-12) for existing itemIds above. If an existing item is overrated or mid-tier, give it an honest rank (5-10) so the board stays realistically calibrated.`;
 
   const res = await callGeminiJson(`Meta:${catKey}`, prompt, schema);
   if (!res) return { addedItems: 0, addedRanks: 0 };
@@ -829,10 +1001,10 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
 
   for (const item of (res.newItems || [])) {
     if (list.length >= cfg.cap) break;
-    const cleanName = cleanHeadline(item.name);
+    const cleanName = fixCanonicalName(item.name);
     const id = slugify(cleanName);
     if (!id || cleanName.length < 2) continue;
-    if (list.some(x => x.id === id || x.name.toLowerCase() === cleanName.toLowerCase())) continue;
+    if (list.some(x => isDuplicateCategoryItem(catKey, x.name, cleanName))) continue;
 
     const src1 = combinedSources[item.sourceIdx1] || combinedSources[0];
     if (!src1) continue;
@@ -845,7 +1017,7 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
       {
         source: src1.source,
         kind: src1.kind || "web",
-        rank: Math.min(10, Math.max(1, Number(item.rank1) || 4)),
+        rank: Math.min(12, Math.max(1, Number(item.rank1) || 6)),
         quote: decodeHtml(item.quote1 || "").slice(0, 180),
         url: safeUrl(src1.url)
       }
@@ -856,7 +1028,7 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
       ranks.push({
         source: src2.source,
         kind: src2.kind || "web",
-        rank: Math.min(10, Math.max(1, Number(item.rank2) || 4)),
+        rank: Math.min(12, Math.max(1, Number(item.rank2) || 6)),
         quote: decodeHtml(item.quote2 || "").slice(0, 180),
         url: safeUrl(src2.url)
       });
@@ -885,7 +1057,7 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
     target.ranks.push({
       source: src.source,
       kind: src.kind || "web",
-      rank: Math.min(10, Math.max(1, Number(r.rank) || 3)),
+      rank: Math.min(12, Math.max(1, Number(r.rank) || 5)),
       quote: decodeHtml(r.quote || "").slice(0, 180),
       url: safeUrl(src.url)
     });
@@ -893,7 +1065,8 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
   }
 
   data.categories[catKey] = list;
-  console.log(`[Meta:${catKey}] +${addedItems} new items, +${addedRanks} extra critic ranks (total now: ${list.length})`);
+  const newDist = getTierDistribution(list);
+  console.log(`[Meta:${catKey}] +${addedItems} new items, +${addedRanks} extra ranks | Total=${list.length} (S=${newDist.S}, A=${newDist.A}, B=${newDist.B}, C=${newDist.C})`);
   return { addedItems, addedRanks };
 }
 
@@ -1207,10 +1380,9 @@ async function main() {
     throw new Error(`data.json not found at ${DATA_PATH}`);
   }
 
-  console.log("=== Beat Six Maximum-Coverage Refresh Starting ===");
+  console.log("=== Beat Six Balanced Meta & Content Refresh Starting ===");
   console.log(`[Config] GEMINI_API_KEY: ${GEMINI_API_KEY ? "SET (len=" + GEMINI_API_KEY.length + ")" : "MISSING"} | YOUTUBE_API_KEY: ${YOUTUBE_API_KEY ? "SET" : "USING ZERO-KEY FALLBACK"}`);
 
-  // Discover live Flash models available to this API key before making calls
   await discoverWorkingModels();
 
   const data = JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
@@ -1228,7 +1400,20 @@ async function main() {
   const beforeNewsCount = data.news.length;
   const today = todayIso();
 
-  // 1. Auto-scrub existing data.news (fixes any leftover <a href="...">)
+  // 1. Auto-fix existing typos (e.g. "Gotti Cheetah" -> "Grotti Cheetah") & merge duplicates (e.g. "Vault Jobs" + "Vault Raids")
+  let totalTyposFixed = 0;
+  let totalDuplicatesMerged = 0;
+  for (const catKey of CATEGORY_KEYS) {
+    const cleaned = cleanAndDeduplicateCategory(catKey, data.categories[catKey]);
+    data.categories[catKey] = cleaned.items;
+    totalTyposFixed += cleaned.fixedNames;
+    totalDuplicatesMerged += cleaned.mergedCount;
+    if (cleaned.fixedNames > 0 || cleaned.mergedCount > 0) {
+      console.log(`[Cleanup:${catKey}] Fixed ${cleaned.fixedNames} typos, merged ${cleaned.mergedCount} duplicates.`);
+    }
+  }
+
+  // 2. Auto-scrub existing data.news
   let scrubbedCount = 0;
   for (const n of data.news) {
     const origBody = n.body || "";
@@ -1245,7 +1430,7 @@ async function main() {
     }
   }
 
-  // 2. Fetch Online Articles (12+ gaming outlets + per-category Meta RSS) & YouTube videos for all 4 categories
+  // 3. Fetch Online Articles & YouTube videos for all 4 categories
   const [articleData, ytCars, ytWeapons, ytMoney, ytGear] = await Promise.all([
     fetchAllOnlineArticles(),
     fetchYouTubeForCategory("cars"),
@@ -1257,7 +1442,7 @@ async function main() {
   const ytByCategory = { cars: ytCars, weapons: ytWeapons, money: ytMoney, gear: ytGear };
   const allYt = [...ytCars, ...ytWeapons, ...ytMoney, ...ytGear];
 
-  // 3. Deduplicate fresh news candidates
+  // 4. Deduplicate fresh news candidates
   const existingUrls = new Set(data.news.map(n => safeUrl(n.url)).filter(Boolean));
   const candidates = [];
   for (const item of articleData.general) {
@@ -1268,7 +1453,7 @@ async function main() {
   }
   console.log(`[News] Unique new candidates after deduplication: ${candidates.length}`);
 
-  // 4. Call 1: Enrich fresh news
+  // 5. Call 1: Enrich fresh news
   let processedNew = [];
   if (candidates.length > 0) {
     const geminiEnriched = await enrichNewsWithGemini(candidates);
@@ -1306,11 +1491,15 @@ async function main() {
   });
   data.news = mergedNews.slice(0, MAX_NEWS_ITEMS).map(({ heroScore, ...cleanItem }) => cleanItem);
 
-  // 5. Calls 2, 3, 4, 5: Dedicated Per-Category Meta Expansion (Cars, Weapons, Money, Gear)
+  // 6. Calls 2-5: Expand Meta categories in SMALLEST-FIRST order so Gear (5 items) gets top priority
   let totalMetaItemsAdded = 0;
   let totalMetaRanksAdded = 0;
+  const prioritizedCategories = [...CATEGORY_KEYS].sort(
+    (a, b) => data.categories[a].length - data.categories[b].length
+  );
+  console.log(`[Meta] Category priority order (smallest first): ${prioritizedCategories.join(" -> ")}`);
 
-  for (const catKey of CATEGORY_KEYS) {
+  for (const catKey of prioritizedCategories) {
     const webPool = [
       ...articleData.byCategory[catKey],
       ...articleData.general.slice(0, 12)
@@ -1325,15 +1514,15 @@ async function main() {
     totalMetaRanksAdded += addedRanks;
   }
 
-  // 6. Build unified verified source pool for Guides, Lists, and Tracked Sources
+  // 7. Build unified verified source pool for Guides, Lists, and Tracked Sources
   const seenPoolUrls = new Set();
   const verifiedSourcePool = [];
   const rawPool = [
     ...allYt,
+    ...articleData.byCategory.gear.slice(0, 6),
     ...articleData.byCategory.cars.slice(0, 6),
     ...articleData.byCategory.weapons.slice(0, 6),
     ...articleData.byCategory.money.slice(0, 6),
-    ...articleData.byCategory.gear.slice(0, 6),
     ...data.news.slice(0, 20).map(n => ({
       title: n.title,
       body: n.body,
@@ -1350,12 +1539,12 @@ async function main() {
     verifiedSourcePool.push({ ...s, url: u });
   }
 
-  // 7. Calls 6, 7, 8: Guides, Discover Lists, and Cited Article
+  // 8. Calls 6, 7, 8: Guides, Discover Lists, and Cited Article
   const guidesAdded = await expandGuidesWithGemini(data, verifiedSourcePool);
   const listsAdded = await expandDiscoverListsWithGemini(data, verifiedSourcePool);
   const publishedArticle = await maybeGenerateCitedArticle(data, data.news);
 
-  // 8. Update tracked sources list for the Methodology page
+  // 9. Update tracked sources list for the Methodology page
   const trackedMap = new Map();
   for (const s of (data.meta.sourcesTracked || [])) {
     if (s && s.name) trackedMap.set(s.name.toLowerCase(), s);
@@ -1369,12 +1558,15 @@ async function main() {
   }
   data.meta.sourcesTracked = Array.from(trackedMap.values()).slice(0, 50);
 
-  // 9. Update metadata & changelog
+  // 10. Update metadata & changelog
   data.meta.updated = today;
   const summaryParts = [];
   if (processedNew.length > 0) summaryParts.push(`+${processedNew.length} news stories`);
   if (totalMetaItemsAdded > 0 || totalMetaRanksAdded > 0) {
     summaryParts.push(`+${totalMetaItemsAdded} Meta items & +${totalMetaRanksAdded} critic rankings`);
+  }
+  if (totalTyposFixed > 0 || totalDuplicatesMerged > 0) {
+    summaryParts.push(`fixed ${totalTyposFixed} typos & merged ${totalDuplicatesMerged} duplicates`);
   }
   if (guidesAdded > 0) summaryParts.push(`+${guidesAdded} guides`);
   if (listsAdded > 0) summaryParts.push(`+${listsAdded} Discover lists`);
@@ -1397,9 +1589,13 @@ async function main() {
   if (geminiLastError) {
     console.log(`Last Gemini error: ${geminiLastError}`);
   }
+  console.log(`Cleanup: ${totalTyposFixed} typos fixed | ${totalDuplicatesMerged} duplicates merged`);
   console.log(`News: ${beforeNewsCount} -> ${data.news.length} (+${processedNew.length} new, ${scrubbedCount} scrubbed)`);
   console.log(`Primary Hero Lead (#1): "${data.news[0]?.title || "none"}" (${data.news[0]?.source || ""})`);
-  console.log(`Meta totals -> Cars: ${data.categories.cars.length}, Weapons: ${data.categories.weapons.length}, Money: ${data.categories.money.length}, Gear: ${data.categories.gear.length}`);
+  for (const c of CATEGORY_KEYS) {
+    const d = getTierDistribution(data.categories[c]);
+    console.log(`Meta [${c}]: ${data.categories[c].length} total (S=${d.S}, A=${d.A}, B=${d.B}, C=${d.C})`);
+  }
   console.log(`Search Guides: ${data.guides.length} | Discover Lists: ${data.lists.length} | Articles: ${data.posts.length}`);
 }
 
