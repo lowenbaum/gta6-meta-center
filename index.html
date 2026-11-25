@@ -237,6 +237,10 @@ mark { background: rgba(34, 228, 211, .22); color: var(--foam); border-radius: 3
 .tile b { font-weight: 700; line-height: 1.25; }
 .tile small { color: var(--haze); font-size: .82rem; }
 .tile .sc { font-weight: 700; color: var(--t); }
+
+/* Paste the two thumbnail rules right here */
+.tile .thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; margin-bottom: 8px; background: var(--night); display: block; }
+.detail .dthumb { width: 100%; max-height: 210px; object-fit: cover; border-radius: 12px; margin-bottom: 14px; background: var(--dusk); display: block; }
 .trow .none-msg { color: var(--haze-2); font-size: .9rem; align-self: center; padding-left: 4px; }
 .detail { position: sticky; top: 92px; background: var(--night-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; }
 .detail .dh { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
@@ -351,6 +355,8 @@ pre.codeout { white-space: pre-wrap; font-size: .85rem; color: var(--haze); max-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+.tile .thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; margin-bottom: 8px; background: var(--night); display: block; }
+.detail .dthumb { width: 100%; max-height: 210px; object-fit: cover; border-radius: 12px; margin-bottom: 14px; background: var(--dusk); display: block; }
 </style>
 </head>
 <body>
@@ -687,6 +693,7 @@ function newsCard(n) {
 }
 function postCard(p) {
   const a = link("#a-" + p.slug, "pcard");
+  if (safeUrl(it.image)) { const img = el("img", "thumb"); img.src = it.image; img.alt = it.name; img.loading = "lazy"; img.decoding = "async"; img.onerror = () => img.remove(); a.append(img); }
   a.append(el("span", "pk", [(p.tags || [])[0], shortDate(p.published)].filter(Boolean).join(", ")), el("h3", "", p.title), el("p", "", p.dek || ""));
   return a;
 }
@@ -952,6 +959,8 @@ function detailNode(cat, it) {
   const dh = el("div", "dh"); const nm = el("div");
   nm.append(el("h2", "", it.name), el("div", "sub", [it.type, CATS[cat].tab].filter(Boolean).join(", ")));
   dh.append(tierBox(t, "sm"), nm); d.append(dh);
+  if (safeUrl(it.image)) { const img = el("img", "dthumb"); img.src = it.image; img.alt = it.name; img.loading = "lazy"; img.decoding = "async"; img.onerror = () => img.remove(); d.append(img); }
+
   if (it.blurb) d.append(el("p", "", it.blurb));
   const cs = critic(it), ps = player(it), nRanks = (it.ranks || []).length;
   const scores = el("div", "scores");
