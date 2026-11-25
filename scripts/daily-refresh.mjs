@@ -1,5 +1,5 @@
 // scripts/daily-refresh.mjs
-// Beat Six Balanced Tier List & Canonical Meta Aggregator
+// Beat Six GTA 6-Only Meta Aggregator + Named Weapons + Lean Thumbnails
 // Free-Tier Safe: max 8 paced Gemini calls/day ($0.00 on Google AI Studio Free Tier)
 // Strictly updates data.json only; never touches index.html.
 
@@ -64,89 +64,202 @@ const CANONICAL_REPLACEMENTS = [
   [/\bZentoro\b/gi, "Zentorno"],
   [/\bInfernous\b/gi, "Infernus"],
   [/\bBanshe\b/gi, "Banshee"],
-  [/\bCheetah\s+Clasico\b/gi, "Cheetah Classic"],
-  [/\bKurma\b/gi, "Kuruma"],
-  [/\bKrieger\s+RS\b/gi, "Krieger"]
+  [/\bCheetah\s+Clasico\b/gi, "Cheetah Classic"]
 ];
 
 const CANONICAL_BRAND_GLOSSARY =
   "Grotti, Pegassi, Dewbauchee, Truffade, Pfister, Bravado, Declasse, Vapid, Karin, Albany, Imponte, Benefactor, Lampadati, Ocelot, Progen, Coil, Übermacht, Överflöd, Annis, Dinka, Shitzu, Nagasaki, Maibatsu, Enus, Gallivanter, Obey, Invetero, Mammoth, HVY, Western, Principe, Canis, Weeny, Vom Feuer, Hawk & Little, Shrewsbury";
 
+// Bare generic weapon classes that should NEVER be used as a weapon's actual name
+const GENERIC_WEAPON_NAMES = new Set([
+  "pistol",
+  "handgun",
+  "sidearm",
+  "revolver",
+  "rifle",
+  "assault rifle",
+  "battle rifle",
+  "shotgun",
+  "smg",
+  "submachine gun",
+  "machine gun",
+  "lmg",
+  "light machine gun",
+  "sniper",
+  "sniper rifle",
+  "marksman",
+  "melee",
+  "melee weapon",
+  "knife",
+  "blade",
+  "explosive",
+  "explosives",
+  "throwable",
+  "thrown weapon",
+  "heavy weapon",
+  "launcher",
+  "rocket launcher",
+  "grenade"
+]);
+
+// Known GTA V / GTA Online-only vehicles, sci-fi weapons, and businesses to purge & block
+const GTA5_ONLINE_ONLY_REGEX = new RegExp(
+  "\\b(" +
+    [
+      "oppressor",
+      "deluxo",
+      "toreador",
+      "scramjet",
+      "vigilante",
+      "stromberg",
+      "ruiner 2000",
+      "kosatka",
+      "terrorbyte",
+      "mobile operations center",
+      "avenger",
+      "armored kuruma",
+      "kuruma",
+      "benefactor krieger",
+      "krieger",
+      "progen emerus",
+      "emerus",
+      "deveste eight",
+      "ocelot pariah",
+      "itali gto",
+      "itali rsx",
+      "calico gtf",
+      "hakuchou drag",
+      "powersurge",
+      "hsw",
+      "hao's special works",
+      "up-n-atomizer",
+      "unholy hellbringer",
+      "widowmaker",
+      "cayo perico",
+      "diamond casino",
+      "acid lab",
+      "doomsday heist",
+      "bogdan",
+      "cluckin bell farm raid",
+      "los santos",
+      "vinewood",
+      "ls customs",
+      "ls car meet",
+      "gta online",
+      "gta v",
+      "gta 5"
+    ].join("|") +
+    ")\\b",
+  "i"
+);
+
+// Source-level filter: reject articles/videos primarily about GTA V or GTA Online
+function isGta5OrOnlineSource(title, body = "") {
+  const t = String(title || "");
+  const mentionsGta6 = /\b(gta\s*6|gta\s*vi|grand\s+theft\s+auto\s*(6|vi)|leonida|vice\s+city)\b/i.test(t);
+  const mentionsGta5 = /\b(gta\s*5|gta\s*v|gta\s*online|gtao|los\s+santos|cayo\s+perico|diamond\s+casino|podium\s+vehicle|weekly\s+update)\b/i.test(t);
+  if (mentionsGta5 && !mentionsGta6) return true;
+  if (/\b(gta\s*online|gta\s*5|gta\s*v)\b/i.test(t) && /\b(tier\s*list|best\s+cars|best\s+weapons|money\s+guide|weekly\s+update)\b/i.test(t)) {
+    return !/\bgta\s*(6|vi)\s+(tier\s*list|best|cars|weapons|money|guide)\b/i.test(t);
+  }
+  return false;
+}
+
+function isGta5OrOnlineOnlyItem(item) {
+  const combined = `${item?.name || ""} ${item?.blurb || ""} ${item?.get || ""}`;
+  return GTA5_ONLINE_ONLY_REGEX.test(combined);
+}
+
+function isGenericWeaponName(name) {
+  const norm = String(name || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!norm) return true;
+  if (GENERIC_WEAPON_NAMES.has(norm)) return true;
+  // Also catch "Starter Pistol", "Basic Shotgun", "Standard Rifle", "Heavy Sniper" generic labels without a model
+  if (/^(starter|basic|standard|default|generic|weak|best)\s+(pistol|rifle|shotgun|smg|sniper|handgun|melee|gun)$/i.test(norm)) {
+    return true;
+  }
+  return false;
+}
+
 const CATEGORY_CONFIG = {
   cars: {
-    label: "Cars & Vehicles",
+    label: "GTA 6 Cars & Vehicles",
     cap: 60,
-    targetPerRun: 18,
+    targetPerRun: 14,
     factKey1: "Top speed",
     factExample1: "132 mph",
     factKey2: "Class",
     factExample2: "Super, Sports, Muscle, Sedan, Compact, SUV, Motorcycle, or Off-Road",
     bottomTierGuidance:
-      "Include starter sedans, heavy SUVs, slow compacts, budget vans, and overpriced/poor-handling cars in ranks 6-12 (B and C tiers), not just S-tier supercars.",
+      "STRICTLY GTA 6 ONLY: Include ONLY vehicles confirmed for Grand Theft Auto VI (Leonida / Vice City) in trailers, official screenshots, or GTA 6 guides. NEVER pad with unannounced GTA V / GTA Online cars. Include confirmed starter sedans, SUVs, compacts, pickups, and mid-tier cars in ranks 5-12 (B and C tiers), not just supercars.",
     ytQueries: [
-      "GTA 6 car tier list best and worst vehicles ranked",
-      "GTA 6 every car ranked fast slow starter vehicles"
+      "GTA 6 confirmed cars tier list vehicles ranked Leonida",
+      "GTA 6 every confirmed vehicle car list trailer breakdown"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22cars%22+OR+%22vehicles%22+OR+%22tier+list%22+OR+supercar+OR+motorcycle+OR+%22worst+cars%22)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(cars+OR+vehicles+OR+tier+list+OR+ranked)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22cars%22+OR+%22vehicles%22+OR+%22car+list%22)+-GTA5+-GTAV+-%22GTA+Online%22+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(confirmed+cars+OR+vehicles+OR+tier+list)+-GTA5+-%22GTA+Online%22&hl=en-US&gl=US&ceid=US:en"
     ]
   },
   weapons: {
-    label: "Weapons & Loadouts",
+    label: "GTA 6 Weapons (Named Models)",
     cap: 60,
-    targetPerRun: 18,
+    targetPerRun: 14,
     factKey1: "Damage",
     factExample1: "High (2-shot chest) or Low (starter sidearm)",
     factKey2: "Best use",
     factExample2: "Mid-range firefights, stealth, close quarters, or early-game backup",
     bottomTierGuidance:
-      "Include weak starter pistols, low-DPS SMGs, slow-reload shotguns, situational melee weapons, and outclassed rifles in ranks 6-12 (B and C tiers), not just meta rifles.",
+      "CRITICAL NAMING RULE: Every weapon's `name` MUST be its specific in-game model name (e.g. 'Carbine Rifle', 'Polymer Pistol', 'Pump-Action Shotgun', 'Micro SMG', 'Tactical SMG', 'Combat Pistol', 'Service Carbine', 'Double-Barrel Shotgun') — NEVER use generic class labels like 'Assault Rifle', 'Pistol', 'Shotgun', 'SMG', or 'Sniper Rifle' as the `name`! Put the class ('Assault Rifle', 'Handgun', 'Shotgun', 'SMG', 'Sniper Rifle', 'Melee') in the `type` field instead. STRICTLY GTA 6 ONLY: Do NOT include GTA Online sci-fi weapons or unannounced GTA V weapons. Put starter sidearms, low-DPS SMGs, and situational melee/shotguns in ranks 5-12 (B and C tiers).",
     ytQueries: [
-      "GTA 6 weapon tier list best and worst guns ranked",
-      "GTA 6 all guns ranked rifles pistols shotguns melee"
+      "GTA 6 confirmed weapons list every gun ranked tier list",
+      "GTA 6 all guns rifles pistols shotguns confirmed"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22weapons%22+OR+%22guns%22+OR+%22weapon+tier+list%22+OR+rifle+OR+pistol+OR+shotgun)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(weapons+OR+guns+OR+tier+list+OR+loadout)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22weapons%22+OR+%22guns%22+OR+%22weapon+list%22)+-GTA5+-GTAV+-%22GTA+Online%22+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(weapons+OR+guns+OR+loadout)+-GTA5+-%22GTA+Online%22&hl=en-US&gl=US&ceid=US:en"
     ]
   },
   money: {
-    label: "Money Methods & Economy",
+    label: "GTA 6 Money Methods & Economy",
     cap: 28,
-    targetPerRun: 10,
+    targetPerRun: 8,
     factKey1: "Payout",
     factExample1: "$120,000 - $250,000 per run or $8,000/hr early grind",
     factKey2: "Time",
     factExample2: "15-20 min solo, Passive hourly, or 5 min quick hustle",
     bottomTierGuidance:
-      "Every entry MUST be a genuinely distinct income mechanic — NEVER split the same activity into synonyms (e.g. do NOT list both 'Vault Jobs' and 'Vault Raids', or both 'Store Robberies' and 'Convenience Store Holdups'). Include slow or low-payout early hustles (e.g. ATM/register skims, taxi/delivery odd jobs, low-end car flipping, petty street muggings) in ranks 6-12 (B and C tiers) alongside top-tier heists and businesses.",
+      "STRICTLY GTA 6 ONLY: NEVER include GTA Online businesses/heists (no Cayo Perico, Diamond Casino, Acid Lab, Bunker, Nightclub, or Los Santos activities). Every entry MUST be a genuinely distinct GTA 6 income mechanic — NEVER split the same activity into synonyms (e.g. do NOT list both 'Vault Jobs' and 'Vault Raids'). Include slow/low-payout early hustles in ranks 6-12 (B and C tiers).",
     ytQueries: [
-      "GTA 6 money methods tier list best and worst ways to make money",
-      "GTA 6 heist payout business side hustle money guide"
+      "GTA 6 money methods tier list make money fast Leonida",
+      "GTA 6 heist robbery side hustle money guide"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22make+money%22+OR+%22money+guide%22+OR+%22money+methods%22+OR+heist+OR+robbery+OR+business+OR+%22side+hustle%22)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(money+OR+heist+OR+cash+OR+business+OR+tier+list)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(%22make+money%22+OR+%22money+guide%22+OR+%22money+methods%22+OR+heist+OR+robbery)+-GTA5+-GTAV+-%22GTA+Online%22+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(money+OR+heist+OR+cash+OR+robbery)+-GTA5+-%22GTA+Online%22&hl=en-US&gl=US&ceid=US:en"
     ]
   },
   gear: {
-    label: "Gear, Tools, Attachments & Upgrades",
+    label: "GTA 6 Gear, Tools, Attachments & Upgrades",
     cap: 60,
-    targetPerRun: 20,
+    targetPerRun: 16,
     factKey1: "Effect",
     factExample1: "Unlocks high-end cars silently, +40% armor, or reduces recoil",
     factKey2: "Unlock",
     factExample2: "Pawn shop, Ammu-Nation, Safehouse bench, or Mechanic shop",
     bottomTierGuidance:
-      "Cover the FULL spectrum of GTA 6 gear: body armor tiers, car-theft tools (slim jim, key fob cloner, OBD scanner), heist gadgets (signal jammer, thermal charge, hacking deck, duffel bag), weapon attachments (suppressors, extended mags, scopes, flashlights, grips), survival/utility items (parachute, rebreather, binoculars, medkits, night vision), and vehicle upgrades (bulletproof tires, turbo, armor plating). Put basic, early-game, situational, or outclassed gear in ranks 6-12 (B and C tiers).",
+      "STRICTLY GTA 6 ONLY: NEVER include GTA Online-only tech (no Oppressor upgrades, Terrorbyte, Kosatka, or HSW). Cover the full spectrum of GTA 6 gear: body armor tiers, car-theft tools (slim jim, key fob cloner, OBD scanner), heist gadgets (signal jammer, duffel bag, thermal charge, hacking tool), weapon attachments (suppressors, extended mags, optics, grips), utility items (parachute, binoculars, medkits), and vehicle upgrades. Put basic, early-game, or situational gear in ranks 6-12 (B and C tiers).",
     ytQueries: [
-      "GTA 6 best gear tools equipment armor attachments tier list",
-      "GTA 6 upgrades items gadgets unlock early worth buying"
+      "GTA 6 gear tools equipment armor attachments tier list",
+      "GTA 6 items gadgets upgrades unlock early guide"
     ],
     rssUrls: [
-      "https://news.google.com/rss/search?q=%22GTA+6%22+(gear+OR+upgrades+OR+armor+OR+tools+OR+attachments+OR+equipment+OR+gadgets+OR+lockpick+OR+cloner+OR+backpack+OR+duffel)+when:60d&hl=en-US&gl=US&ceid=US:en",
-      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(gear+OR+upgrades+OR+tools+OR+attachments+OR+armor+OR+items)&hl=en-US&gl=US&ceid=US:en"
+      "https://news.google.com/rss/search?q=%22GTA+6%22+(gear+OR+upgrades+OR+armor+OR+tools+OR+attachments+OR+equipment+OR+gadgets+OR+lockpick+OR+cloner+OR+duffel)+-GTA5+-GTAV+-%22GTA+Online%22+when:60d&hl=en-US&gl=US&ceid=US:en",
+      "https://news.google.com/rss/search?q=site:youtube.com+%22GTA+6%22+(gear+OR+upgrades+OR+tools+OR+attachments+OR+armor)+-GTA5+-%22GTA+Online%22&hl=en-US&gl=US&ceid=US:en"
     ]
   }
 };
@@ -154,12 +267,12 @@ const CATEGORY_CONFIG = {
 const GENERAL_RSS_FEEDS = [
   {
     name: "Google News (GTA 6 Latest)",
-    url: "https://news.google.com/rss/search?q=%22GTA+6%22+OR+%22Grand+Theft+Auto+VI%22+when:14d&hl=en-US&gl=US&ceid=US:en",
+    url: "https://news.google.com/rss/search?q=%22GTA+6%22+OR+%22Grand+Theft+Auto+VI%22+-GTA5+-GTAV+-%22GTA+Online%22+when:14d&hl=en-US&gl=US&ceid=US:en",
     requireGtaMatch: false
   },
   {
     name: "Google News (GTA 6 Guides & Tips)",
-    url: "https://news.google.com/rss/search?q=%22GTA+6%22+(guide+OR+tips+OR+walkthrough+OR+%22tier+list%22+OR+secret+OR+%22easter+egg%22)+when:30d&hl=en-US&gl=US&ceid=US:en",
+    url: "https://news.google.com/rss/search?q=%22GTA+6%22+(guide+OR+tips+OR+walkthrough+OR+%22tier+list%22+OR+secret+OR+%22easter+egg%22)+-GTA5+-%22GTA+Online%22+when:30d&hl=en-US&gl=US&ceid=US:en",
     requireGtaMatch: false
   },
   { name: "IGN", url: "https://feeds.feedburner.com/ign/games-all", requireGtaMatch: true },
@@ -176,7 +289,7 @@ const GENERAL_RSS_FEEDS = [
   { name: "DualShockers", url: "https://www.dualshockers.com/feed/", requireGtaMatch: true }
 ];
 
-const GTA_REGEX = /\b(gta\s*6|gta\s*vi|grand\s+theft\s+auto\s*(6|vi)|leonida|vice\s+city|rockstar\s+games)\b/i;
+const GTA6_REGEX = /\b(gta\s*6|gta\s*vi|grand\s+theft\s+auto\s*(6|vi)|leonida|vice\s+city)\b/i;
 
 const BOILERPLATE_IDS = new Set([
   "ps5-system-update",
@@ -208,7 +321,6 @@ function slugify(str) {
     .slice(0, 64);
 }
 
-// Applies deterministic Rockstar/GTA canonical spelling fixes
 function fixCanonicalName(name) {
   let out = cleanHeadline(name || "");
   for (const [pattern, replacement] of CANONICAL_REPLACEMENTS) {
@@ -297,7 +409,6 @@ function isSimilarHeadline(a, b) {
   return (overlap / Math.min(wa.size, wb.size)) >= 0.65;
 }
 
-// Normalizes item names to catch duplicates like "Vault Jobs" vs "Vault Raids"
 function canonicalConceptKey(catKey, name) {
   const base = fixCanonicalName(name)
     .normalize("NFKD")
@@ -336,7 +447,6 @@ function isDuplicateCategoryItem(catKey, nameA, nameB) {
   return false;
 }
 
-// Mirrors Beat Six index.html scoring so we can measure exact tier distribution
 function criticScoreOf(it) {
   const rs = (it.ranks || []).filter(r => Number.isFinite(r.rank) && r.rank >= 1);
   if (!rs.length) return null;
@@ -361,15 +471,95 @@ function getTierDistribution(list) {
   return dist;
 }
 
-// Cleans typos (like "Gotti Cheetah" -> "Grotti Cheetah") & merges duplicate entries (like "Vault Jobs" + "Vault Raids")
+// Lean, zero-cost thumbnail lookup via GTA Wiki MediaWiki API (320px WebP/JPG, ~15-25 KB)
+async function fetchLeanThumbnail(itemName, catKey) {
+  if (!itemName || (catKey !== "cars" && catKey !== "weapons")) return "";
+
+  const clean = fixCanonicalName(itemName);
+  // Also try model name without manufacturer (e.g. "Grotti Cheetah Classic" -> "Cheetah Classic")
+  const parts = clean.split(/\s+/);
+  const modelOnly = parts.length >= 2 ? parts.slice(1).join(" ") : "";
+
+  const queries = [
+    `${clean} GTA VI`,
+    clean,
+    ...(modelOnly && modelOnly.length >= 4 ? [`${modelOnly} GTA VI`, modelOnly] : [])
+  ];
+
+  for (const q of queries) {
+    try {
+      const apiUrl =
+        "https://gta.fandom.com/api.php?action=query&generator=search" +
+        `&gsrsearch=${encodeURIComponent(q)}&gsrlimit=3` +
+        "&prop=pageimages&piprop=thumbnail&pithumbsize=320&format=json";
+
+      const raw = await fetchTextWithTimeout(apiUrl, 6000, "application/json");
+      if (!raw) continue;
+      const json = JSON.parse(raw);
+      const pages = Object.values(json?.query?.pages || {});
+      if (!pages.length) continue;
+
+      // Sort by search index so the best match comes first
+      pages.sort((a, b) => (a.index || 99) - (b.index || 99));
+
+      for (const p of pages) {
+        const thumb = safeUrl(p?.thumbnail?.source);
+        if (!thumb) continue;
+        // Skip tiny icons or generic wiki logos
+        if (/logo|icon|placeholder|badge/i.test(thumb)) continue;
+        return thumb;
+      }
+    } catch {
+      // Ignore single lookup failure and try next query
+    }
+  }
+  return "";
+}
+
+async function populateThumbnailsForCategories(data) {
+  let addedThumbs = 0;
+  const targetCats = ["cars", "weapons"];
+
+  for (const catKey of targetCats) {
+    const list = data.categories[catKey] || [];
+    const missing = list.filter(it => !safeUrl(it.image)).slice(0, 20);
+    if (!missing.length) continue;
+
+    for (const it of missing) {
+      const thumb = await fetchLeanThumbnail(it.name, catKey);
+      if (thumb) {
+        it.image = thumb;
+        addedThumbs++;
+      }
+      await sleep(250);
+    }
+  }
+  console.log(`[Thumbnails] Populated ${addedThumbs} lean 320px thumbnails for Cars & Weapons.`);
+  return addedThumbs;
+}
+
+// Cleans typos, merges duplicates, removes GTA V/Online-only items, and strips generic weapon labels
 function cleanAndDeduplicateCategory(catKey, list) {
   let fixedNames = 0;
   let mergedCount = 0;
+  let purgedGta5 = 0;
+  let purgedGenericWeapons = 0;
   const cleaned = [];
 
   for (const rawItem of list) {
     if (!rawItem || !rawItem.name) continue;
+
+    if (isGta5OrOnlineOnlyItem(rawItem)) {
+      purgedGta5++;
+      continue;
+    }
+
     const correctedName = fixCanonicalName(rawItem.name);
+    if (catKey === "weapons" && isGenericWeaponName(correctedName)) {
+      purgedGenericWeapons++;
+      continue;
+    }
+
     if (correctedName !== rawItem.name) fixedNames++;
 
     const item = {
@@ -384,20 +574,19 @@ function cleanAndDeduplicateCategory(catKey, list) {
       cleaned.push(item);
     } else {
       mergedCount++;
-      // Merge unique critic ranks into the kept entry
       for (const r of item.ranks) {
         if (!r || !r.source) continue;
         const hasSrc = existing.ranks.some(er => er.source && er.source.toLowerCase() === r.source.toLowerCase());
         if (!hasSrc) existing.ranks.push(r);
       }
-      // Keep the richer blurb/facts if the existing one is thin
+      if (!existing.image && item.image) existing.image = item.image;
       if ((!existing.blurb || existing.blurb.length < 25) && item.blurb) existing.blurb = item.blurb;
       if ((!existing.get || existing.get.length < 10) && item.get) existing.get = item.get;
       existing.facts = { ...(item.facts || {}), ...(existing.facts || {}) };
     }
   }
 
-  return { items: cleaned, fixedNames, mergedCount };
+  return { items: cleaned, fixedNames, mergedCount, purgedGta5, purgedGenericWeapons };
 }
 
 function extractTag(block, tagName) {
@@ -500,7 +689,8 @@ function parseRssXml(xml, feedMeta) {
     if (!rawTitle || !link) continue;
 
     const fullText = `${rawTitle} ${rawDesc}`;
-    if (feedMeta.requireGtaMatch && !GTA_REGEX.test(fullText)) continue;
+    if (feedMeta.requireGtaMatch && !GTA6_REGEX.test(fullText)) continue;
+    if (isGta5OrOnlineSource(rawTitle, rawDesc)) continue;
 
     let publisher = decodeHtml(rawSource);
     if (!publisher) {
@@ -556,8 +746,9 @@ async function scrapeYouTubeSearchNoKey(query, maxItems = 8) {
   const html = await fetchTextWithTimeout(url, 9000, "text/html");
   if (!html) return [];
 
-  const match = html.match(/var\s+ytInitialData\s*=\s*(\{[\s\S]*?\});<\/script>/) ||
-                html.match(/window\["ytInitialData"\]\s*=\s*(\{[\s\S]*?\});/);
+  const match =
+    html.match(/var\s+ytInitialData\s*=\s*(\{[\s\S]*?\});<\/script>/) ||
+    html.match(/window\["ytInitialData"\]\s*=\s*(\{[\s\S]*?\});/);
   if (!match) return [];
 
   try {
@@ -570,9 +761,11 @@ async function scrapeYouTubeSearchNoKey(query, maxItems = 8) {
         const vr = node.videoRenderer;
         const title = (vr.title?.runs || []).map(r => r.text).join("") || vr.title?.simpleText || "";
         const channel = (vr.ownerText?.runs || []).map(r => r.text).join("") || "YouTube Creator";
-        const snippet = (vr.detailedMetadataSnippets?.[0]?.snippetText?.runs || []).map(r => r.text).join("") ||
-                        (vr.descriptionSnippet?.runs || []).map(r => r.text).join("") || "";
-        if (title && GTA_REGEX.test(`${title} ${snippet}`)) {
+        const snippet =
+          (vr.detailedMetadataSnippets?.[0]?.snippetText?.runs || []).map(r => r.text).join("") ||
+          (vr.descriptionSnippet?.runs || []).map(r => r.text).join("") ||
+          "";
+        if (title && GTA6_REGEX.test(`${title} ${snippet}`) && !isGta5OrOnlineSource(title, snippet)) {
           found.push({
             title: cleanHeadline(title),
             body: cleanBodyText(snippet, title, channel),
@@ -615,6 +808,7 @@ async function fetchYouTubeForCategory(catKey) {
           const vidId = item.id?.videoId;
           const snip = item.snippet;
           if (!vidId || !snip?.title || seen.has(vidId)) continue;
+          if (isGta5OrOnlineSource(snip.title, snip.description || "")) continue;
           seen.add(vidId);
           videos.push({
             title: cleanHeadline(snip.title),
@@ -643,7 +837,7 @@ async function fetchYouTubeForCategory(catKey) {
     }
   }
 
-  console.log(`[YouTube:${catKey}] Collected ${videos.length} creator videos`);
+  console.log(`[YouTube:${catKey}] Collected ${videos.length} GTA 6 creator videos`);
   return videos;
 }
 
@@ -655,7 +849,7 @@ async function fetchAllOnlineArticles() {
     const xml = await fetchTextWithTimeout(feed.url, 10000, "application/rss+xml,application/xml,text/xml,*/*");
     if (!xml) continue;
     const parsed = parseRssXml(xml, feed);
-    console.log(`[RSS] ${feed.name}: ${parsed.length} matching articles`);
+    console.log(`[RSS] ${feed.name}: ${parsed.length} GTA 6 articles`);
     general.push(...parsed);
   }
 
@@ -685,10 +879,12 @@ async function fetchAllOnlineArticles() {
     const directArticles = byCategory[catKey]
       .filter(a => a.kind === "web" && !/news\.google\.com/i.test(a.url))
       .slice(0, 4);
-    await Promise.all(directArticles.map(async (art) => {
-      const excerpt = await fetchArticleExcerpt(art.url);
-      if (excerpt) art.excerpt = excerpt;
-    }));
+    await Promise.all(
+      directArticles.map(async art => {
+        const excerpt = await fetchArticleExcerpt(art.url);
+        if (excerpt) art.excerpt = excerpt;
+      })
+    );
   }
 
   return { general, byCategory };
@@ -710,7 +906,7 @@ function heuristicHeroScore(item) {
   const s = `${item.title} ${item.body}`.toLowerCase();
   const ageDays = Math.max(0, Math.round((Date.now() - new Date((item.added || todayIso()) + "T12:00:00Z").getTime()) / 86400000));
   score += Math.max(0, 30 - ageDays * 4);
-  if (/\b(patch|update|meta|fastest|best|new|confirmed|rockstar|official|heist|map|dlc|online|trailer|record|release)\b/.test(s)) score += 18;
+  if (/\b(patch|update|meta|fastest|best|new|confirmed|rockstar|official|heist|map|dlc|trailer|record|release)\b/.test(s)) score += 18;
   if (/\b(system update|firmware|install size|deadzone|how to save)\b/.test(s)) score -= 80;
   if (BOILERPLATE_IDS.has(item.id)) score -= 120;
   return score;
@@ -742,7 +938,7 @@ async function callGeminiJson(label, promptText, responseSchema) {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
         const generationConfig = {
           responseMimeType: "application/json",
-          temperature: 0.3,
+          temperature: 0.25,
           maxOutputTokens: 8192
         };
 
@@ -796,7 +992,7 @@ async function callGeminiJson(label, promptText, responseSchema) {
   return null;
 }
 
-// CALL 1: Enrich & rank fresh RSS news items
+// CALL 1: Enrich & rank fresh RSS news items (GTA 6 only)
 async function enrichNewsWithGemini(candidates) {
   if (!GEMINI_API_KEY || !candidates.length) return null;
 
@@ -831,13 +1027,13 @@ async function enrichNewsWithGemini(candidates) {
     required: ["items"]
   };
 
-  const prompt = `You are the news editor for Beat Six, a GTA 6 guide and meta aggregator.
-Review these real, freshly fetched GTA 6 news items:
+  const prompt = `You are the news editor for Beat Six, a GTA 6-only guide and meta aggregator.
+Review these freshly fetched news items:
 ${JSON.stringify(batch)}
 
 Return valid JSON matching {"items":[{"idx":0,"keep":true,"title":"...","body":"...","cat":"world","status":"reported","heroScore":80}]}.
 Rules:
-- Set keep=false ONLY if it is pure off-topic spam, non-GTA-6, or obvious clickbait rumor garbage.
+- Set keep=false if it is about GTA V / GTA Online instead of GTA 6, off-topic spam, or clickbait rumor garbage.
 - Clean up title if needed (no semicolons, no em-dashes).
 - Write a crisp, plain-text 1-2 sentence summary (100-190 chars) with NO HTML tags and NO URLs.
 - Assign cat strictly from: "launch", "tips", "eggs", "weapons", "vehicles", "items", "world".
@@ -867,7 +1063,7 @@ Rules:
   return enriched;
 }
 
-// CALLS 2-5: Dedicated Per-Category Meta Extractor (Balanced Across S, A, B, and C/Bottom Tiers)
+// CALLS 2-5: Dedicated Per-Category Meta Extractor (Strictly GTA 6 Only, Named Weapons, Balanced Tiers)
 async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
   const cfg = CATEGORY_CONFIG[catKey];
   const list = data.categories[catKey] || [];
@@ -877,11 +1073,10 @@ async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
   const targetNew = Math.min(cfg.targetPerRun, Math.max(0, slotsLeft));
   const dist = getTierDistribution(list);
 
-  // Build explicit tier-balancing quotas based on what is currently underrepresented
   const topHeavy = (dist.S + dist.A) > (dist.B + dist.C + 2);
   const quotaGuidance = topHeavy
     ? `CURRENT BOARD IS TOP-HEAVY (S=${dist.S}, A=${dist.A}, B=${dist.B}, C=${dist.C}).
-To balance the tier list top-to-bottom, your newItems MUST follow this rank quota:
+Balance the tier list top-to-bottom across your newItems:
 - At most 1-2 items with rank 1-2 (S tier, score 90-100)
 - At most 2-3 items with rank 3-4 (A tier, score 80-89)
 - At least 35% of newItems MUST have rank 5-6 (B tier, score 70-76: solid mid-tier / situational)
@@ -905,7 +1100,7 @@ Distribute your newItems EVENLY across all four tiers (~25% each):
   }
 
   if (combinedSources.length === 0) {
-    console.warn(`[Meta:${catKey}] No sources available for this category.`);
+    console.warn(`[Meta:${catKey}] No GTA 6 sources available for this category.`);
     return { addedItems: 0, addedRanks: 0 };
   }
 
@@ -936,6 +1131,7 @@ Distribute your newItems EVENLY across all four tiers (~25% each):
             type: { type: "STRING" },
             blurb: { type: "STRING" },
             get: { type: "STRING" },
+            gta6Evidence: { type: "STRING" },
             factVal1: { type: "STRING" },
             factVal2: { type: "STRING" },
             rank1: { type: "INTEGER" },
@@ -945,7 +1141,7 @@ Distribute your newItems EVENLY across all four tiers (~25% each):
             quote2: { type: "STRING" },
             sourceIdx2: { type: "INTEGER" }
           },
-          required: ["name", "type", "blurb", "get", "factVal1", "factVal2", "rank1", "quote1", "sourceIdx1"]
+          required: ["name", "type", "blurb", "get", "gta6Evidence", "factVal1", "factVal2", "rank1", "quote1", "sourceIdx1"]
         }
       },
       extraRanks: {
@@ -965,33 +1161,39 @@ Distribute your newItems EVENLY across all four tiers (~25% each):
     required: ["newItems", "extraRanks"]
   };
 
-  const prompt = `Context: Benign video game tier-list curation for Beat Six (a GTA 6 Meta aggregator).
+  const prompt = `Context: Benign video game tier-list curation for Beat Six (a strictly GTA 6-only Meta aggregator).
 Category: "${catKey}" (${cfg.label})
 
 Items ALREADY in this category (DO NOT duplicate or create synonym variants of any of these):
 ${JSON.stringify(existingSummary)}
 
-Verified YouTube videos and online articles for "${catKey}" (0-indexed):
+Verified GTA 6 YouTube videos and online articles for "${catKey}" (0-indexed):
 ${JSON.stringify(compactSources)}
 
-TIER DISTRIBUTION RULES (CRITICAL):
+STRICT GTA 6-ONLY RULE (CRITICAL):
+- ONLY include items that are explicitly covered in the GTA 6 sources above OR officially confirmed for Grand Theft Auto VI (Leonida / Vice City).
+- NEVER pad the list with unannounced GTA V or GTA Online items, cars, sci-fi weapons, or Los Santos businesses.
+- If the GTA 6 sources only support 3 or 5 verified items today, return ONLY those 3 or 5 — quality and GTA 6 accuracy ALWAYS beat padding.
+- Fill "gta6Evidence" with a brief note explaining where this item is confirmed in GTA 6 (e.g. "GTA 6 launch guide", "Trailer 1/2 Vice City reveal", or creator test).
+
+TIER DISTRIBUTION RULES:
 ${quotaGuidance}
 Category guidance: ${cfg.bottomTierGuidance}
 
-SPELLING & CANONICAL NAME RULES (CRITICAL):
+SPELLING & CANONICAL NAME RULES:
 - Double-check every official Rockstar / GTA brand and item spelling before outputting.
 - Exact spellings include: ${CANONICAL_BRAND_GLOSSARY}.
 - NEVER misspell "Grotti" as "Gotti", "Pegassi" as "Pegasi", or "Dewbauchee" as "Dewbauch".
 
 Task:
 Return valid JSON with two arrays: "newItems" and "extraRanks".
-1. In "newItems", extract up to ${targetNew} brand-new, distinct GTA 6 ${cfg.label} items NOT already listed above (minimum 10 if slots allow).
-   - Follow the tier distribution quota above strictly (ranks 1-12; higher rank number = lower tier).
+1. In "newItems", extract up to ${targetNew} verified, distinct GTA 6 ${cfg.label} items NOT already listed above.
+   - Follow the tier distribution quota above (ranks 1-12; higher rank number = lower tier).
    - factVal1 is "${cfg.factKey1}" (e.g. "${cfg.factExample1}").
    - factVal2 is "${cfg.factKey2}" (e.g. "${cfg.factExample2}").
    - Cite 1 to 2 distinct sourceIdx values (prefer pairing 1 YouTube creator + 1 web article when both are present).
    - Keep blurb under 160 chars and quotes under 130 chars. Plain text only, no HTML/URLs.
-2. In "extraRanks", add 4 to 6 honest critic rankings (ranks 1-12) for existing itemIds above. If an existing item is overrated or mid-tier, give it an honest rank (5-10) so the board stays realistically calibrated.`;
+2. In "extraRanks", add up to 5 honest critic rankings (ranks 1-12) for existing itemIds above.`;
 
   const res = await callGeminiJson(`Meta:${catKey}`, prompt, schema);
   if (!res) return { addedItems: 0, addedRanks: 0 };
@@ -1001,7 +1203,11 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
 
   for (const item of (res.newItems || [])) {
     if (list.length >= cfg.cap) break;
+    if (isGta5OrOnlineOnlyItem(item)) continue;
+
     const cleanName = fixCanonicalName(item.name);
+    if (catKey === "weapons" && isGenericWeaponName(cleanName)) continue;
+
     const id = slugify(cleanName);
     if (!id || cleanName.length < 2) continue;
     if (list.some(x => isDuplicateCategoryItem(catKey, x.name, cleanName))) continue;
@@ -1023,7 +1229,11 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
       }
     ];
 
-    if (Number.isInteger(item.sourceIdx2) && combinedSources[item.sourceIdx2] && combinedSources[item.sourceIdx2].source !== src1.source) {
+    if (
+      Number.isInteger(item.sourceIdx2) &&
+      combinedSources[item.sourceIdx2] &&
+      combinedSources[item.sourceIdx2].source !== src1.source
+    ) {
       const src2 = combinedSources[item.sourceIdx2];
       ranks.push({
         source: src2.source,
@@ -1040,6 +1250,7 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
       type: decodeHtml(item.type || "Standard").slice(0, 40),
       blurb: decodeHtml(item.blurb || "").slice(0, 220),
       get: decodeHtml(item.get || "").slice(0, 140),
+      image: "",
       facts,
       ranks
     });
@@ -1108,7 +1319,7 @@ async function expandGuidesWithGemini(data, sourcePool) {
     required: ["guides"]
   };
 
-  const prompt = `You are the guide editor for Beat Six (a GTA 6 answer engine).
+  const prompt = `You are the guide editor for Beat Six (a strictly GTA 6-only answer engine).
 Existing guides already on the site (do NOT duplicate these):
 ${JSON.stringify(existingTitles)}
 
@@ -1117,6 +1328,7 @@ ${JSON.stringify(compactSources)}
 
 Create 3 practical, high-demand GTA 6 how-to guides inspired by the sources above.
 Rules:
+- Strictly GTA 6 only (never GTA V or GTA Online).
 - Clear question or action title (no semicolons or em-dashes).
 - 1-2 sentence summary (plain text, no HTML/URLs).
 - 4 to 6 concrete, actionable steps.
@@ -1226,7 +1438,7 @@ async function expandDiscoverListsWithGemini(data, sourcePool) {
     required: ["lists"]
   };
 
-  const prompt = `You are the curation editor for Beat Six's "Discover" checklists and ranked lists.
+  const prompt = `You are the curation editor for Beat Six's "Discover" checklists and ranked lists (strictly GTA 6 only).
 Existing lists (do NOT duplicate these):
 ${JSON.stringify(existingIds)}
 
@@ -1236,8 +1448,9 @@ ${JSON.stringify(metaRefs)}
 Recent verified GTA 6 sources (0-indexed):
 ${JSON.stringify(compactSources)}
 
-Create 2 fresh, genuinely useful Discover lists (1 "checklist" and 1 "ranked") for GTA 6 players.
+Create 2 fresh, genuinely useful GTA 6 Discover lists (1 "checklist" and 1 "ranked").
 Rules:
+- Strictly GTA 6 only (never GTA V or GTA Online).
 - Each list must have 5 to 7 concrete entries.
 - kind must be strictly "checklist" or "ranked".
 - stage should be concise (e.g., "Early game", "Mid game", "Money", "Combat", "Exploration", "Vehicles").
@@ -1325,8 +1538,8 @@ async function maybeGenerateCitedArticle(data, freshNews) {
     required: ["slug", "title", "dek", "tags", "sections", "sourceIndexes"]
   };
 
-  const prompt = `You are a senior editor at Beat Six (a GTA 6 guide and meta site).
-Using ONLY the verified recent sources below, write ONE sharp, timely, original GTA 6 briefing article synthesizing the biggest current developments for players.
+  const prompt = `You are a senior editor at Beat Six (a strictly GTA 6-only guide and meta site).
+Using ONLY the verified recent GTA 6 sources below, write ONE sharp, timely, original GTA 6 briefing article synthesizing the biggest current developments for players.
 Sources (0-indexed):
 ${JSON.stringify(sourcePool)}
 
@@ -1380,7 +1593,7 @@ async function main() {
     throw new Error(`data.json not found at ${DATA_PATH}`);
   }
 
-  console.log("=== Beat Six Balanced Meta & Content Refresh Starting ===");
+  console.log("=== Beat Six GTA 6-Only Meta & Content Refresh Starting ===");
   console.log(`[Config] GEMINI_API_KEY: ${GEMINI_API_KEY ? "SET (len=" + GEMINI_API_KEY.length + ")" : "MISSING"} | YOUTUBE_API_KEY: ${YOUTUBE_API_KEY ? "SET" : "USING ZERO-KEY FALLBACK"}`);
 
   await discoverWorkingModels();
@@ -1400,16 +1613,23 @@ async function main() {
   const beforeNewsCount = data.news.length;
   const today = todayIso();
 
-  // 1. Auto-fix existing typos (e.g. "Gotti Cheetah" -> "Grotti Cheetah") & merge duplicates (e.g. "Vault Jobs" + "Vault Raids")
+  // 1. Auto-cleanup: fix typos, merge duplicates, purge GTA V/Online items, and drop generic weapon labels
   let totalTyposFixed = 0;
   let totalDuplicatesMerged = 0;
+  let totalPurgedGta5 = 0;
+  let totalPurgedGenericWeapons = 0;
+
   for (const catKey of CATEGORY_KEYS) {
     const cleaned = cleanAndDeduplicateCategory(catKey, data.categories[catKey]);
     data.categories[catKey] = cleaned.items;
     totalTyposFixed += cleaned.fixedNames;
     totalDuplicatesMerged += cleaned.mergedCount;
-    if (cleaned.fixedNames > 0 || cleaned.mergedCount > 0) {
-      console.log(`[Cleanup:${catKey}] Fixed ${cleaned.fixedNames} typos, merged ${cleaned.mergedCount} duplicates.`);
+    totalPurgedGta5 += cleaned.purgedGta5;
+    totalPurgedGenericWeapons += cleaned.purgedGenericWeapons;
+    if (cleaned.fixedNames || cleaned.mergedCount || cleaned.purgedGta5 || cleaned.purgedGenericWeapons) {
+      console.log(
+        `[Cleanup:${catKey}] typos=${cleaned.fixedNames}, merged=${cleaned.mergedCount}, purgedGTA5=${cleaned.purgedGta5}, purgedGenericWeapons=${cleaned.purgedGenericWeapons}`
+      );
     }
   }
 
@@ -1430,7 +1650,7 @@ async function main() {
     }
   }
 
-  // 3. Fetch Online Articles & YouTube videos for all 4 categories
+  // 3. Fetch Online Articles & YouTube videos for all 4 categories (GTA 6 only)
   const [articleData, ytCars, ytWeapons, ytMoney, ytGear] = await Promise.all([
     fetchAllOnlineArticles(),
     fetchYouTubeForCategory("cars"),
@@ -1451,7 +1671,7 @@ async function main() {
     if (candidates.some(c => c.url === item.url || isSimilarHeadline(c.title, item.title))) continue;
     candidates.push(item);
   }
-  console.log(`[News] Unique new candidates after deduplication: ${candidates.length}`);
+  console.log(`[News] Unique new GTA 6 candidates after deduplication: ${candidates.length}`);
 
   // 5. Call 1: Enrich fresh news
   let processedNew = [];
@@ -1491,7 +1711,7 @@ async function main() {
   });
   data.news = mergedNews.slice(0, MAX_NEWS_ITEMS).map(({ heroScore, ...cleanItem }) => cleanItem);
 
-  // 6. Calls 2-5: Expand Meta categories in SMALLEST-FIRST order so Gear (5 items) gets top priority
+  // 6. Calls 2-5: Expand Meta categories in SMALLEST-FIRST order
   let totalMetaItemsAdded = 0;
   let totalMetaRanksAdded = 0;
   const prioritizedCategories = [...CATEGORY_KEYS].sort(
@@ -1514,7 +1734,10 @@ async function main() {
     totalMetaRanksAdded += addedRanks;
   }
 
-  // 7. Build unified verified source pool for Guides, Lists, and Tracked Sources
+  // 7. Populate lean 320px thumbnails for Cars & Weapons (0 Gemini tokens, $0.00 cost)
+  const thumbsAdded = await populateThumbnailsForCategories(data);
+
+  // 8. Build unified verified source pool for Guides, Lists, and Tracked Sources
   const seenPoolUrls = new Set();
   const verifiedSourcePool = [];
   const rawPool = [
@@ -1539,12 +1762,12 @@ async function main() {
     verifiedSourcePool.push({ ...s, url: u });
   }
 
-  // 8. Calls 6, 7, 8: Guides, Discover Lists, and Cited Article
+  // 9. Calls 6, 7, 8: Guides, Discover Lists, and Cited Article
   const guidesAdded = await expandGuidesWithGemini(data, verifiedSourcePool);
   const listsAdded = await expandDiscoverListsWithGemini(data, verifiedSourcePool);
   const publishedArticle = await maybeGenerateCitedArticle(data, data.news);
 
-  // 9. Update tracked sources list for the Methodology page
+  // 10. Update tracked sources list for the Methodology page
   const trackedMap = new Map();
   for (const s of (data.meta.sourcesTracked || [])) {
     if (s && s.name) trackedMap.set(s.name.toLowerCase(), s);
@@ -1558,15 +1781,16 @@ async function main() {
   }
   data.meta.sourcesTracked = Array.from(trackedMap.values()).slice(0, 50);
 
-  // 10. Update metadata & changelog
+  // 11. Update metadata & changelog
   data.meta.updated = today;
   const summaryParts = [];
   if (processedNew.length > 0) summaryParts.push(`+${processedNew.length} news stories`);
   if (totalMetaItemsAdded > 0 || totalMetaRanksAdded > 0) {
-    summaryParts.push(`+${totalMetaItemsAdded} Meta items & +${totalMetaRanksAdded} critic rankings`);
+    summaryParts.push(`+${totalMetaItemsAdded} GTA 6 Meta items & +${totalMetaRanksAdded} critic rankings`);
   }
-  if (totalTyposFixed > 0 || totalDuplicatesMerged > 0) {
-    summaryParts.push(`fixed ${totalTyposFixed} typos & merged ${totalDuplicatesMerged} duplicates`);
+  if (thumbsAdded > 0) summaryParts.push(`+${thumbsAdded} car/weapon thumbnails`);
+  if (totalPurgedGta5 > 0 || totalPurgedGenericWeapons > 0) {
+    summaryParts.push(`filtered out ${totalPurgedGta5} GTA V/Online items & ${totalPurgedGenericWeapons} generic weapon labels`);
   }
   if (guidesAdded > 0) summaryParts.push(`+${guidesAdded} guides`);
   if (listsAdded > 0) summaryParts.push(`+${listsAdded} Discover lists`);
@@ -1589,12 +1813,16 @@ async function main() {
   if (geminiLastError) {
     console.log(`Last Gemini error: ${geminiLastError}`);
   }
-  console.log(`Cleanup: ${totalTyposFixed} typos fixed | ${totalDuplicatesMerged} duplicates merged`);
+  console.log(
+    `Cleanup: typos=${totalTyposFixed} | merged=${totalDuplicatesMerged} | purgedGTA5=${totalPurgedGta5} | purgedGenericWeapons=${totalPurgedGenericWeapons}`
+  );
+  console.log(`Thumbnails added: ${thumbsAdded}`);
   console.log(`News: ${beforeNewsCount} -> ${data.news.length} (+${processedNew.length} new, ${scrubbedCount} scrubbed)`);
   console.log(`Primary Hero Lead (#1): "${data.news[0]?.title || "none"}" (${data.news[0]?.source || ""})`);
   for (const c of CATEGORY_KEYS) {
     const d = getTierDistribution(data.categories[c]);
-    console.log(`Meta [${c}]: ${data.categories[c].length} total (S=${d.S}, A=${d.A}, B=${d.B}, C=${d.C})`);
+    const withImg = data.categories[c].filter(i => safeUrl(i.image)).length;
+    console.log(`Meta [${c}]: ${data.categories[c].length} total (${withImg} with thumbs | S=${d.S}, A=${d.A}, B=${d.B}, C=${d.C})`);
   }
   console.log(`Search Guides: ${data.guides.length} | Discover Lists: ${data.lists.length} | Articles: ${data.posts.length}`);
 }
