@@ -184,6 +184,76 @@
         "name": "The Atlantic",
         "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNSm1EQWVMMUlUWWhRUGN5MjV4bHJvZWZUdDlUWE5WOGRvdVJhcGRlcENoYVFFLTdPMi1DM0IwaDVFRi1rVHdoMW9wcTNRUTFPcjZJUkNkVnBFZXJWaDczQlR6aDhicjkyaDBMUl9wMmNELXRIaGQwOXBOWm01cXdHS3RB?oc=5",
         "kind": "web"
+      },
+      {
+        "name": "Onespot Gaming",
+        "url": "https://www.youtube.com/watch?v=CK6XFkFSoyc",
+        "kind": "youtube"
+      },
+      {
+        "name": "T5G",
+        "url": "https://www.youtube.com/watch?v=wE8xTNg62ng",
+        "kind": "youtube"
+      },
+      {
+        "name": "Hazardous",
+        "url": "https://www.youtube.com/watch?v=GXdpFmHYL8c",
+        "kind": "youtube"
+      },
+      {
+        "name": "Runner Unknown",
+        "url": "https://www.youtube.com/watch?v=27s0FD2hJEU",
+        "kind": "youtube"
+      },
+      {
+        "name": "Arekkz Gaming",
+        "url": "https://www.youtube.com/watch?v=0NIez05L0YE",
+        "kind": "youtube"
+      },
+      {
+        "name": "Digital Car Addict",
+        "url": "https://www.youtube.com/watch?v=ie4vtIle3lU",
+        "kind": "youtube"
+      },
+      {
+        "name": "Vice City Dispatch",
+        "url": "https://www.youtube.com/watch?v=in0rg1FNcGA",
+        "kind": "youtube"
+      },
+      {
+        "name": "KhrazeGaming",
+        "url": "https://www.youtube.com/watch?v=XSuYYbxVGfI",
+        "kind": "youtube"
+      },
+      {
+        "name": "Legacy Gaming",
+        "url": "https://www.youtube.com/watch?v=XbSRUlQwW7A",
+        "kind": "youtube"
+      },
+      {
+        "name": "AcezProduction",
+        "url": "https://www.youtube.com/watch?v=V81P61mE4CQ",
+        "kind": "youtube"
+      },
+      {
+        "name": "Caspahz",
+        "url": "https://www.youtube.com/watch?v=bs6VF8ZnKb4",
+        "kind": "youtube"
+      },
+      {
+        "name": "GameCraft",
+        "url": "https://www.youtube.com/watch?v=QVT66Ule-qs",
+        "kind": "youtube"
+      },
+      {
+        "name": "TheGigaDad",
+        "url": "https://www.youtube.com/watch?v=avVECaWDoSQ",
+        "kind": "youtube"
+      },
+      {
+        "name": "vAnother Level",
+        "url": "https://www.youtube.com/watch?v=VPo_ZVih0e0",
+        "kind": "youtube"
       }
     ]
   },
@@ -977,6 +1047,16 @@
   },
   "news": [
     {
+      "id": "gta-6-online-release-update-what-we-know-about-when-it-comes-out",
+      "title": "'GTA 6' Online release update: What we know about when it comes out.",
+      "body": "Latest GTA 6 coverage from Mashable.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Mashable",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTzB4dmRBVlpRMUpYZnJRX3lnZkdTczgxS2s4cW1FVGhtbExIREl6RFNYaHphY1BZNzUtWDg5RlhDVmd6cUtFdmlGVzBwQVZXeW04Y05QMFJpNGdLNjNjdkwxSWxEeV9PRjdGMnhRV093aW9pS1NBRFpIbGd3WlJjTzZR?oc=5",
+      "added": "2026-11-25"
+    },
+    {
       "id": "i-feared-gta-6-was-a-rockstar-retread-until-its-love-story-stole",
       "title": "I Feared GTA 6 Was a Rockstar Retread, Until Its Love Story Stole My Heart",
       "body": "",
@@ -985,6 +1065,336 @@
       "source": "PCMag",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxORzVfXzNodnc2Q0RxdGZxOVdKbEY4OVA1bm9BTEltX0hfZ1JmYklZNXpFRlhYSlBsdUpZSnZsLXYtaVdNaTcwM0plZm9WMldXYWZ6aFF6aUZrbmF0OWxtTWVUTmRPZ3pwcFRNUDRBdTFFZVJRUmFJZXkxRWhWTmZIbzg5YVZTREFzVzZ5bGF4eXRQYU1UYUs4V0Y4WmhxWWZBWktuYWZ2NA?oc=5",
       "added": "2026-11-25"
+    },
+    {
+      "id": "gta-6-chapter-1-is-so-good-that-i-m-afraid-to-move-on-to-chapter",
+      "title": "'GTA 6' chapter 1 is so good that I'm afraid to move on to chapter 2",
+      "body": "Latest GTA 6 coverage from Mashable.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Mashable",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQUERUaGJBUEpZWGpoa244OTJMTU1wdGRpUkFUYkktSzhBcUpVX1FRdEdtYmJRQkNwMjBySmpuV0VfNWY5TTZGdmpHUi1USjlVSWcxbm5NVFI3bXlYSmRzaXZnRHdXblIyajd4SUN0U0ktTU1hWTBZRFZCOW5jQ2p6bA?oc=5",
+      "added": "2026-11-25"
+    },
+    {
+      "id": "essential-gta-6-chapter-1-advice-before-starting-point-of-no-ret",
+      "title": "Essential GTA 6 Chapter 1 advice before starting ‘point of no return’ Tourist Trap mission",
+      "body": "Latest GTA 6 coverage from GAMINGbible.",
+      "cat": "world",
+      "status": "reported",
+      "source": "GAMINGbible",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQQzRleDZ3dXA4U2FEcG85all1Z05fUW1FQlk3dVhBTnBLand3YXVOSjZPVEUxbUJqek9Ca0ZlOC1xc3JaZ0VkVldXd0pqeGJmb2JzakNRalVzRHpMekR2aVl5dnRzbFhBLXB5N01nYzZrYXBmX0xlSmZrUklXemIta0Fob3dMSWhrNHBqajBBUVVWNGY0N3BJ?oc=5",
+      "added": "2026-11-25"
+    },
+    {
+      "id": "unauthorized-gta-6-pc-port-shut-down-by-rockstar-games-parent-co",
+      "title": "Unauthorized 'GTA 6' PC port shut down by Rockstar Games' parent company",
+      "body": "Latest GTA 6 coverage from Mashable.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Mashable",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE12VTc3ZHQtR2xucW9IU0RZNmRsYVVMWUViamJ5Xzh4R3FJc1ZHc1V1STRLeDk1aEJfQ25TbTk1bTk5OVRpU21xSF9hNjNjQTdJNEd5d1pYXy1NU2s5TlhWLTEyOENSa0hPRHBMcVpZOWViY3dRejhjSQ?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "where-to-find-the-new-best-car-in-gta-6-which-can-steal-atms",
+      "title": "Where To Find The New Best Car In ‘GTA 6,’ Which Can Steal ATMs",
+      "body": "Latest GTA 6 coverage from Forbes.",
+      "cat": "vehicles",
+      "status": "reported",
+      "source": "Forbes",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQNWRvWTdLeUNXQzNMZ0MweDFHT2Nxa1J4dHhfb2s5UEcybzJucDhQT2hqc0J1VGRHS0tqUDVXdHJJZnQ1Mll5MWFrMmpGNmpqTFRZQVRzWlo2M2FsTWx5dnlqVVRLNXVWcjJmYktWMmcxYURmZDVzLUdEZ1JYMDNjTTJfUnVQb3pTdjlCc3FuYm52Z2t4R3BEZ3B4NnpoTXh6cUQyQ0dXblQ1SkhiRkZiNQ?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "grand-theft-auto-vi-update-addresses-bugs-affecting-autosaving-w",
+      "title": "Grand Theft Auto VI Update Addresses Bugs Affecting Autosaving, Weather, Story Progression, And More",
+      "body": "Latest GTA 6 coverage from Game Informer.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Game Informer",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQU2FKcW15aDhTYkJzTGw4SzVKRlUwb3NrZHVGRWxNSjkwOXdiWjYtVkNvbWZGWDNIckVOdko0RlBrZUhKU3dKVUl5aF9FaFNUOENaeU1ROUwxaV9qTUdvcTRlYUd2Y0RTMjA3aG1NN0dMRld3d01XcGlTeF96UktkZkpBQWxTQTFPSkNjREdBX2dfNWpzYzRxUDVGb1ROaWx5MHVCaUNZei1qcWlab0xyV096YkJMZ0lLam4xeFBpYS1EUQ?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "where-to-find-lucia-s-best-hairstyle-in-gta-6",
+      "title": "Where To Find Lucia’s Best Hairstyle In ‘GTA 6’",
+      "body": "Latest GTA 6 coverage from Forbes.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Forbes",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPc2dIektMcDluTEF1M0hpTldPMTZDX1U5em1NLVBZSUpjTGZ4eGswNmJrdWFpSGVLUjZRRGpRV3gtbWY1MG1PYUNXd1EzbEZRUVUzdURBeW4zUnVSNUlTMlhiYWtaQmdubG9zZnBCbnhnRWN5SmE3Y0hHRG1rNFJWMENGLTh1UktYemR3M3dkSFQwbFBfR1lRbGNxQQ?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "grand-theft-auto-vi-is-asking-you-to-hold-multiple-thoughts-in-y",
+      "title": "Grand Theft Auto VI Is Asking You To Hold Multiple Thoughts In Your Head At Once About A Complex Video Game Release",
+      "body": "Latest GTA 6 coverage from Aftermath.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Aftermath",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1DMlpJeWpxVVVTdzdKX195NDdiQ2g4bDJTakJFbW1pY204YW85SE1OYW84RHpaYXh1M2xab3YydllDZ3BaYXh4MDNfeUxjY1YxcDYwdGt1amhGY0FDRERzUnlpNlFXUTA4M1pqck9QNllOMzRy?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "chatting-with-people-in-gta-online-about-why-they-re-not-playing",
+      "title": "Chatting With People In GTA Online About Why They’re Not Playing GTA 6: '$80 Is Too Much For Me, Bro'",
+      "body": "Latest GTA 6 coverage from Kotaku.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Kotaku",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNS2JlaDljLU5JbnRSemJNUHJTV2FFRHZqT2hseXNDanpmbDN0VTZHZUdoRVo2UFBMQjRzSURocXROSVhLSF9CRDh3Wlo4RU9zNVpOZnBFR19jNGx5LTRjMlJ1c3VjQjJncF9vc29xYXkwQ204b01FREpoczFFOUJqUDR6ZGhXWEZnNnFNSFFCUFk1TmVfZVJmakctWktjeWxvalVwbkpFZklFd1dmTS1nbTJkdlRVVXJ3Z0dsRlR1LWVOT2c?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "gta-6-is-a-birder-s-paradise",
+      "title": "‘GTA 6’ Is a Birder’s Paradise",
+      "body": "Latest GTA 6 coverage from WIRED.",
+      "cat": "world",
+      "status": "reported",
+      "source": "WIRED",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBsb2Z0QVlma1lMOC1jM2M5clFrUXFxX3hYV1RxVjJWWGVzWVRFZmlxZWRXVVpkcXJidEg3akptWnpZeHI1V3VYNm1wZjF3MkRCZFkzQ0hhZzZpMUdSNC1xMnpn?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "i-hate-video-game-romance-here-s-why-grand-theft-auto-vi-is-the-",
+      "title": "I Hate Video Game Romance, Here's Why Grand Theft Auto VI Is The Exception",
+      "body": "Latest GTA 6 coverage from Game Informer.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Game Informer",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOemZxT0Uwai1CYjBGampGdVVxaHVDUVZfMXR5MXRFQ0hmNGhfbGt2WTdoWEpJLTREQVdtRkNQSFlyT0ZDYWNoTzlnVUgzbFRyQzRpem93cHpldWFZUFVPVlVzbjhlYW42Y3I2bi0ycVVHd1RPUGg0eHZCR2NMc0RTN2tjRzhGN0xfSmNZMlNFSVd1blZHLWNyaDk1bHlkMEFibHoyZW56MTBlR0FqYXlRMVlxUEpRTzg?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "is-there-a-point-of-no-return-before-the-18-gta-6-endings",
+      "title": "Is There A Point Of No Return Before The 18 ‘GTA 6’ Endings?",
+      "body": "Latest GTA 6 coverage from Forbes.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Forbes",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOZmNYQTNBTmZzU1Y2TmZ1bjFZS0FvNE8xU2pMS3NjVDY5SnJqR3IyU0h0S2pBSWR0ZXpZNDhlQmFXbDRRWXl6STBCYVNZbklvMGZjMzZUOGNVcnMxUVFEOW1VQUtUMkt5c25fdWVOY1FsWTRteHF4UWRhb0hjQ1RZa24yX2ppazlHUkQ3NW9ZVlR4aXYxUjZvYTBFUy1SUVRMMDdjQVMzTlRtM0x6?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "the-big-gta-6-console-comparison-ps5-vs-ps5-pro-xbox-series-x-an",
+      "title": "The Big GTA 6 Console Comparison: PS5 vs PS5 Pro, Xbox Series X and Series S",
+      "body": "Latest GTA 6 coverage from Digital Foundry.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Digital Foundry",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPZWVSMEdnOU5kN0pwSFhLUC1nWFJlQWJRYTkwRHNwdjJQRmpFaUFWdlFPdGYzVFliY2ZNT2VQeVRQTGVnSzNYRmpSS0JoZ3lGbWU2RkxNaXVJMWN1VHF1Z0tFcXh4VlFWQlkyNmJabklIdUxfeXNYQmtWMmhlVV9HU0plTjZoUWhGMEJEMXRNV3NENlZYVFhzUHFoamVzRzJEaExpT0t2QUdiRVZNNHFSODVOLWk?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "grand-theft-auto-vi-review-a-bloody-boundary-shifting-reclamatio",
+      "title": "‘Grand Theft Auto VI’ Review: A Bloody, Boundary-Shifting Reclamation of the American Dream",
+      "body": "Latest GTA 6 coverage from Variety.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Variety",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQaVdCM19LdktlOGMzT01FQ2tXQ0Y2emh2VEZRSC1PU3k1WmJWQ0d4TlNFdGNpOE1hclduaWJ3Nnh3cUlSWHdWemJnbVcya2g3eUhwbE9UTDFUUG1DQmxzR1A2NTZUWGE5Y2FyaExpTGhTczFoVnRQRi1hSzV6UTRmOVdRcmkxR1BsYUh2Zw?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "a-month-in-and-i-thought-i-d-seen-all-of-gta-6-i-was-so-wrong",
+      "title": "A Month In, and I Thought I'd Seen All of GTA 6. I Was So Wrong",
+      "body": "Latest GTA 6 coverage from PCMag.",
+      "cat": "world",
+      "status": "reported",
+      "source": "PCMag",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQS0lfRG1YNVFVSDA0MUxWOFBVRlMydHljRUk3UVNYdkZLcGlnOWVlSll3dmc4RXIzXzNoa1gtZF9EOVlvZUd5Tm1WM2REN2NndEwxZkU5enlNVGY2cHF3VDdDejY1T1FuN3QyTk9kM0tYeEpGSDlQYWpQNzl0Vzd1U1NYSlBsR3dWV3dzUEF3M0E?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "richmond-s-bunny-machine-on-keeping-her-gta-6-secret",
+      "title": "Richmond’s Bunny Machine on Keeping Her GTA 6 Secret",
+      "body": "Latest GTA 6 coverage from RVA Mag.",
+      "cat": "eggs",
+      "status": "reported",
+      "source": "RVA Mag",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPVTVIVnJuQnVTdkdLTWJxZ1FuYkRmNXZXS0N0SkVxdjRLX2h2ZUdKM1U2d3hvanh3dkRhQWtPREJsb3BiM2ZJQnRBUTFUODlMc2N3MVdHMzg1bDJpemZMdU91YWR5OFhXV1EyMjh0U3RwZ1pMQXR5dXNiQ2hrNmhUa1U1dElQejA5OWtMSGVZcUU?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "grand-theft-auto-vi-reaches-highest-concurrent-player-count-ever",
+      "title": "Grand Theft Auto VI Reaches Highest Concurrent Player Count Ever For PS5, More than 683 Million Hours Logged Already",
+      "body": "Latest GTA 6 coverage from Game Informer.",
+      "cat": "items",
+      "status": "reported",
+      "source": "Game Informer",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNWm8wZjY2SEk0MEFPdkI5bE1nckYwMWJSRGhxdndGcTdLeEhSV1p6OU5kNnZaUEJ0blR5bFhJX0RaN2pCYy1rMkJGbGNkYzEwbGplTGUwQXN3SUJHQk9oRk44aTI0UDlfN1VTMVdmQlJoOEVpRE9QQ2J6YzZVdWN4d0RwM1JpVGVMdkhJYkp6YjdEakRBaUZ4QzJQSUZFUUtsRDkzbDdwRUZqNTRRZHBxNzl3endsQ3BwdW9YeG5Gbw?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "grand-theft-auto-vi-album-s-secret-weapon-the-barbie-soundtrack-",
+      "title": "‘Grand Theft Auto VI’ Album’s Secret Weapon? The ‘Barbie’ Soundtrack Creator",
+      "body": "Latest GTA 6 coverage from The Hollywood Reporter.",
+      "cat": "eggs",
+      "status": "reported",
+      "source": "The Hollywood Reporter",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPQ092d3RieEtmWWt5RWVmWlNRWFVDMnhvMWR1VUcyRFcyN29rUENJNGdxbEdGYUphYlBvZXViQnlpZk9Qc1NXd1pWbjlxaWZGaDloa3BBdHFWTEhLZzNqSzhaYVhuZGw3czZFSDZJVkdUOG1QUFlwMml6UkJ5X21fSm5RWmR0aWIyWEVhTm5xdW1Wd1ZoV2tTSmNDR1FRM3JUM0w4akVSU2VZNXRqU0psX1ZuUWRrVmRDRWZz?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "i-watched-gta-6-s-in-game-tv-shows-for-hours-they-re-absolutely-",
+      "title": "I Watched GTA 6's In-Game TV Shows for Hours, They're Absolutely Wild",
+      "body": "Latest GTA 6 coverage from IGN.",
+      "cat": "world",
+      "status": "reported",
+      "source": "IGN",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPYURlWVU4bUo4UHJIemQ4YThuc3dMdTEtWFFkRTgyUDJ4ZUhYMFh5OEN0ZEtEY1c4M1dfN0d5VVhXd20zLWZrRkFLSUpWalUza2g4N1d5MVM0bi1kWW5rMC1fd3NPb1NsQW1WdHhVaVU3STRwSFAtWGFFY2pLQWVUU0dMREJNWmQ4M1dmcl9hLWtEX01uaC01Y2Jadw?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "anthropic-and-grand-theft-auto-vi-launched-on-the-same-day-the-v",
+      "title": "Anthropic and 'Grand Theft Auto VI' launched on the same day. The video game trade is winning for now.",
+      "body": "Latest GTA 6 coverage from Yahoo Finance.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPb0I5TjlDM0NCWld1NUotWkpKaFJDRGRZeF9IYTdtQnhyVmR3ZzV6eVhFVmRwS1J4UHVOR20yazE2VGtoXzc5WnE4STBSWjBmM2cta3Q1NFZjdHkxVWR0X0xoX1U4cHB0TUhqSHZOUEJZN3d3cF8wSzJ3SURlM1dzN1VEU2xNV1VkZHNKLXUycnVXMGdteGdrX0tQUWdZcWRydmxQOXZNSVh3SzlySDd0Z200M0dJdTVxNEstNTJTZTFUVVl0RXEyaEYzYnA4dE1wMTIyZG9ETHkyQkVhQjVfTmxFN2VHenJJMGhqMFJCMA?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "in-gta-vi-every-stolen-car-is-a-music-discovery-machine",
+      "title": "In 'GTA VI,' every stolen car is a music discovery machine",
+      "body": "Latest GTA 6 coverage from NPR.",
+      "cat": "vehicles",
+      "status": "reported",
+      "source": "NPR",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE15QUwySXZWWWQ5RDRlVUp2QXMweHNGdjhsblVrbHkxdWZnZTEyUWRxUTB5SEE0QWNRR0pQU2xwckI3M3NiMWZJd3lOUkJiaWw1TW51b2l4VHplT3U5QkNkSzhXWDN0TkdnREUzSTR3RnNTenA1LUZ1LW5KdkRGQQ?oc=5",
+      "added": "2026-11-24"
+    },
+    {
+      "id": "every-playable-video-game-in-gta-6-ranked-worst-to-best",
+      "title": "Every Playable Video Game in GTA 6, Ranked Worst to Best",
+      "body": "Latest GTA 6 coverage from Polygon.com.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Polygon.com",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1NdEd0XzVMOG10RnBGWXdkZGJQa2xDeGlDZ1lIeTB3Zm1HcDg2OWVBdnk0Smc0MnhOb3hlSUsxU2VhMHBaUUdTZ2otVjBfY0p3V3FoQ2J4SW5XU3dxUWxNNHVtNFR4Mzh4UlE?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "60-hours-in-gta-6-has-me-yearning-for-an-online-leonida",
+      "title": "60 hours in GTA 6 has me yearning for an online Leonida",
+      "body": "Latest GTA 6 coverage from PC Gamer.",
+      "cat": "world",
+      "status": "reported",
+      "source": "PC Gamer",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQaFdJQ184Ml9ZRTJzVWF6dWVUM3pwWjBpTjZCck9HODRweS1vay1QTk8yZDkyb3BaTjZpQndHWXBXZ19oam9uSDBIdDEyak9QMDlVZlBVb3NEUG9VOVFtSXljWnB6QklOYTFUb1N3Zk1uMGFJSmNVR0dhemZTb2dRZnpWZl9EOWZ2TVRjSVVDNW9MWlc3SmVPb1JFM2dwbnpEekpkWG93?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "what-it-s-like-to-go-birding-in-grand-theft-auto-vi",
+      "title": "What It’s Like to Go Birding in Grand Theft Auto VI",
+      "body": "Latest GTA 6 coverage from The New Yorker.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The New Yorker",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQRWdkdmZqbHRyWEExdTI5RUgyQTRNNThzMk1MVXVBQmVpY1lKSlhIMmxaeWFmSzd3VFFsUGJTa01SVjBSdi1nR1F3RkVkU0tkWTVnSTBVWmhyR1N4dXlBZmNfbnBTa19Ybkd4TF9ZTjZENS1LWTZZTENuS2pJdFBYSlpZemdjaDhxRUNfQnVZRkw4STZLTER6bg?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "clearing-up-false-info-about-the-gta-6-criminal-profile-system",
+      "title": "Clearing Up False Info About The ‘GTA 6’ Criminal Profile System",
+      "body": "Latest GTA 6 coverage from Forbes.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Forbes",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTkdoTkNnR1ZzZTE2dnRmRF9zaG1OT0IwM3p1cGtQRFBlcFlkVEViR3dkS1RCb294QTJkX21SQUxLR21oTkVtOEhUSVh2ZmFheTY3TmhTWE5CLVB6S091YzhzT3dnc2JHWVYyQWJ2ZU9GVWdIZ2tZRGdwNmg0Y096YTh0Q1JlZ1hvRTROTnhsUGZ5RVRxTllJaGlCU0NCNzdFOXg4LXZ6WENjcUIySEhKZW43WQ?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "thank-you-for-making-grand-theft-auto-vi-the-biggest-launch-in-p",
+      "title": "Thank you for making Grand Theft Auto VI the biggest launch in PlayStation history",
+      "body": "Latest GTA 6 coverage from PlayStation.Blog.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "PlayStation.Blog",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQVVBWLThKR2w4Vm9HUkxoSG91ZERKODFVOWRHcDhvRjdEZGhnLW80S25VVy04V1VIVmxrMVhud0N1aThKTTJ4NDB2YjJFNEQzc1NLMDdzcmJIeG5CNlppWHJLRUxTYV8tdDNoVFlXaVRlN3BYekFDYlFoN3R5TGtFWmtvM3hDMmRaaEIwY1paSGlBSE5TN2dKdXpBaU52UmR4WEFNcEdKZGFyT09nVEZPMzBwdVozYnZjb2JiTnFXTG4?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "this-gta-6-glitch-almost-ruined-the-game-s-most-iconic-scene",
+      "title": "This GTA 6 Glitch (Almost) Ruined The Game’s Most Iconic Scene",
+      "body": "Latest GTA 6 coverage from GameSpot.",
+      "cat": "world",
+      "status": "reported",
+      "source": "GameSpot",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQY3VRY0JmZXdVN2duVzhYUHg4YWVYa0NDZkY1bVN2NU43NFBVbE8xam5yRkN2dExLbWxZWWFOY2JvbGlwcWVySzRMTkVqWWNOakdaU1ppTm5rRHRLQnQzaGllSERIaWtSNGlwcVVjcUhXb1R1b0NEOEdjVW5oMGh2WWd1SC12dUZ5Yko2YVJCVkFxbGw3QjNYazJ3?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "how-amazon-cloudfront-helped-deliver-grand-theft-auto-vi-to-play",
+      "title": "How Amazon CloudFront helped deliver Grand Theft Auto VI to players | Amazon Web Services",
+      "body": "Latest GTA 6 coverage from Amazon Web Services.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Amazon Web Services",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQd2pWVUMzdVdCWjI0ZkRhUEJTYkctN0J4bkdNNEJCd2FGLWRCaU9uSFFpd0NNZlVnbmdFeTFhbkZaRE9sQ3ZwQW41Tm1tOENvWEplZ180R2RRbzFMRkdnVjhMdU14dTM4ODd0cW1idm55bzk4LUQzRUlVcEdURElESFN3RngzclI2bFlSRkNzbDdRdXpZVU5hcFlVdWI3VEN6UURWQUtZUS1GUE0tcl9jZW4teVQxRTdFU1lrMlVnc2RfVzRUSnF4Xw?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "how-to-play-grand-theft-auto-vi-in-the-cloud-and-with-remote-pla",
+      "title": "How to Play Grand Theft Auto VI in the Cloud and with Remote Play",
+      "body": "Latest GTA 6 coverage from XBOX Wire.",
+      "cat": "tips",
+      "status": "reported",
+      "source": "XBOX Wire",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPV1hHaFNKenloc0xyaG1vVWpJZFR4SlZOcF8taGNRWlk1TUUtTEg3Um5vSkZMQ3BWbTNraFNhWUNIalVmaHVvbFhXWmgxQ1pSOTdHZlN3SDMtMzJmVk5xeURpZ0ZSd3BES244cWhPb3otQmtJUHhqNFZVN3lnUDhwQlJNa1B5M0pacDl1cTAtNNIBlAFBVV95cUxQRnBQa0tCc245S0pfV1JoUl9WS1NWeF9uc2ZyZGhsZi1JazNuN2FYUndVcVpCRFR0a0xpSktQT1ZicEFFenNzOV9aX3ctU1I4ekNhb1o4NkJiVGVEa0F6NGtZY0VGRXZWSjZ1NU5MSUNnZ3dXRnZJVHlMUEQ0Q1RraDktX2RMajVNLXF1WEJzajRzQVJB?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "10-hacks-every-gta-6-player-should-know",
+      "title": "10 Hacks Every 'GTA 6' Player Should Know",
+      "body": "Latest GTA 6 coverage from Lifehacker.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Lifehacker",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE10NWlxUGlmMUhQdUJjTUstVGprSTl1TzhSb2ZsTkdfekpIN3J5UFB2RXBpcmwwTVZlRXdRQlRIM3hBQnYwTEhuUFdpYzcyOTMtcDE5REV0UGZhYTBjd2ZocHE4OFo2QndESVNJWFVaekp1cnVIUWc?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "grand-theft-auto-vi-review-the-cult-of-immensity",
+      "title": "‘Grand Theft Auto VI’ Review: The Cult of Immensity",
+      "body": "Latest GTA 6 coverage from ArtReview.",
+      "cat": "world",
+      "status": "reported",
+      "source": "ArtReview",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQclMtZGJ5X1dncFJRRllsYk5oc0FtbXlfMHRFRVZOR3BuUkZMaURBU2czT3hRRDlGanNjM3dQWG5NSlZOQjhDNHRlLVdBbEZKb1dIaEhJVTM1WkdRM0VPeFU1cVpua2p2OWduNXBsZzVQVFd6YjJtOEtESXlUZm1JdXg2bmU5c1BRQVNQQQ?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "it-s-not-just-a-song-on-the-radio-how-music-became-a-main-charac",
+      "title": "‘It’s Not Just a Song on the Radio’: How Music Became A Main Character In ‘Grand Theft Auto VI’",
+      "body": "Latest GTA 6 coverage from Billboard.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Billboard",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNR0R6ZEtaN01CTFpEMmNnZWRFMlZEM3hBTGdrdDlIUzFsVWRocVRFaGxKQTRXX2FvOXFWREN6NU55aVQ0c215M1JYbnhsa0xiWEJoSWVWa2xrUVdFX1lSSktDbDNNZUlxVDR3MGhKNzRqNWN1VzBvWVF3elJjdU1wV1hpaWlRU1QtUWVxYi13eEo4ejduYmZnRXNfV2FEUE4zM0I3OVVsT08?oc=5",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "i-m-playing-gta-6-like-it-s-the-sims-and-i-couldn-t-be-happier-w",
+      "title": "I'm playing GTA 6 like it's The Sims and I couldn't be happier with that",
+      "body": "Latest GTA 6 coverage from GAMINGbible.",
+      "cat": "world",
+      "status": "reported",
+      "source": "GAMINGbible",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOb2pOa1NCTkhycV94OEZRUkpMSWtHTHZaMFZXT2U1czZINzdSdjY2YWFrTE43YmhlUkV4NXFkTmtBaWUxSi1uS3FxTFljcmpTNDIxU2pLb1ktODBsNVlVR0k1WEE3WWtraWQ2eVVMRWhsRFpxRkFmc3NNcGduWUtaMVRB?oc=5",
+      "added": "2026-11-22"
+    },
+    {
+      "id": "grand-theft-auto-vi-sets-record-with-3-79b-in-first-day-retail-s",
+      "title": "‘Grand Theft Auto VI’ sets record with $3.79B in first-day retail sales, Rockstar Games reports",
+      "body": "Latest GTA 6 coverage from AP News.",
+      "cat": "world",
+      "status": "reported",
+      "source": "AP News",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQY0hRM1J3UzZkR2JvWnJYUDgyRE55OE9pbmJxM19vX2llS19QZjBTWkNVaVVZQTRJbnZ5N01NbEp5Qko2T3lGWlNERjFNYXF4Q2xiQVRZQUFmN2lWQ3V3YmpfYzZXNE5Lb2FuSFVJU2lBUW9VWVhRemxaY2dfamhRODlubjNmN0N6MU9DbENZd1NrdzNfeVFYWmtKNHJMQlBITXp0TQ?oc=5",
+      "added": "2026-11-21"
     },
     {
       "id": "the-fastest-way-to-increase-focus-levels-in-gta-6",
@@ -1004,6 +1414,26 @@
       "status": "reported",
       "source": "Polygon.com",
       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBBR1Q3dFhsYWQ1MmQzODJTX2RCUDVzUGtvNmN3QTZBX2hkdEdlT0Iybm1pZ3J0NS1tQmY1OE1BdnhYNUJPZU4xWkZPSlFzdnZKRUkteV9wYS13TG8?oc=5",
+      "added": "2026-11-21"
+    },
+    {
+      "id": "gta-6-is-out-and-ready-to-play-early-reviews-pricing-story-mode-",
+      "title": "‘GTA 6’ is out and ready to play: Early reviews, pricing, story mode and everything else you need to know about the biggest game launch of the year",
+      "body": "Latest GTA 6 coverage from Yahoo Tech.",
+      "cat": "launch",
+      "status": "reported",
+      "source": "Yahoo Tech",
+      "url": "https://news.google.com/rss/articles/CBMivgJBVV95cUxQaUNnMmRZcFRoTW41ZV9nZGJfT18wOE9FS25QVm1uUTJRdXRxTEZGdC1oRGNDdlhRMHJQWFJOLUlST3JwRU9zMXZqWV9DOHViQ3hmSjdJTjl6NlJuNjFES0duYlN5TUdBbmdod2k1akVNZnE0VXhfalN6bVUzQ3E0RGxTTnFsX1RJV3p3UTdTempLWGRpWEdDbVJzSjZlOVFJQUdMbXE1V3ZHVGh1WVVEVXVHcWZsblQ4X2E1SlE0cVFOREtoV0dieERZVUdDVmVxc1M4aHhkYnB5WEVZR2pQQVRvRHp1LWRzdXNGRG8tSW9MSGlxZ1UyZ0w3SEhaa0hzWVNYS2NGSnpDc0FFUy1vOW5JdmdLRFI1NGo2Z28xamE5VFBZSk5MbWY2Q25OYW9XSGxiVVhBdEE0V2tyaGc?oc=5",
+      "added": "2026-11-21"
+    },
+    {
+      "id": "gta-6-all-ultimate-edition-bonus-content-and-where-to-find-it",
+      "title": "GTA 6: All Ultimate Edition bonus content and where to find it",
+      "body": "Latest GTA 6 coverage from Red Bull.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Red Bull",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE11a2U2eXhCb21sMWlsOU9BR3dLdDRXZXFOQ3k0QTdKWnk2NExETUxmX2VsS2QtdFdTbzJGYlphcEpkcDQwRjFrMW0zekthdkZhVE5oanRaQm1WUWQwNFNMRXQ4eU1URG14Y3I5Tg?oc=5",
       "added": "2026-11-21"
     },
     {
@@ -1074,6 +1504,16 @@
       "status": "reported",
       "source": "The 19th News",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQRUtYcUV3YXJHYWJONlltQnpjUnVPTDgyNWFoRXY1Y3lvRVpaem1EQzRYNVE4WFFvWm0zZ2xtYWE0RVNYOFJTaVNhRExzQUtDb09JdFNJSTRwbUs1NVBva1kzc0FWbDZIcVExM2RzX1c2OW9yZEwyanlvUk8wX3h1V3pn?oc=5",
+      "added": "2026-11-20"
+    },
+    {
+      "id": "every-song-across-all-24-radio-stations-in-grand-theft-auto-vi",
+      "title": "Every Song Across All 24 Radio Stations in Grand Theft Auto VI",
+      "body": "Latest GTA 6 coverage from Consequence of Sound.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Consequence of Sound",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBFSFpXVUF2STZjYTZqb3BPMlJaQXdSTDJadU5EVVVSLVVCTTNndjExVnlzUHBlaDBkcG1mOWZYbUNiT0dFbUtKdmtJaldVUzRQZEJrdmlWbmNrMVZqemFJTmVSUk9XY3pPMmhYYzh3cFN5dDUwSUphS2Jn?oc=5",
       "added": "2026-11-20"
     },
     {
@@ -1187,6 +1627,16 @@
       "added": "2026-11-20"
     },
     {
+      "id": "gta-6-launch-breaks-internet-usage-records-livestreams-hit-nearl",
+      "title": "‘GTA 6’ Launch Breaks Internet Usage Records, Livestreams Hit Nearly 8 Million Views on Twitch, YouTube and More in First Hours of Release",
+      "body": "Latest GTA 6 coverage from Variety.",
+      "cat": "items",
+      "status": "reported",
+      "source": "Variety",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQd21HZXJfNEYzT01Zbm1uTmFmS0JmWTR3eW51OVJxRWVKS1hWeGU4QXBOX2pIcXdEdElrVjR5YVN5d0Y2el8zand6YjdTcGE2S2pfWmtucmRmUmprU015SWtHVDlwU1ZnVVBvM0k3LURiVDhkWWFmY2dRRkdqUS1zTTlOSWJWTkdOSi1PX25xN01OVTFKVlAyak5xeVBRUQ?oc=5",
+      "added": "2026-11-19"
+    },
+    {
       "id": "rockstar-games-announces-grand-theft-auto-vi-now-available-take-",
       "title": "Rockstar Games Announces Grand Theft Auto VI Now Available - Take-Two Interactive Software, Inc.",
       "body": "",
@@ -1214,6 +1664,16 @@
       "status": "reported",
       "source": "Forbes",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOSVNBTGhvTllHRWtqbnpBTWppb0dLcGxYd0ZfY284eFdaNElSRkQ3RnJTY190YW51V1J0XzhUX2hpVzRINkxLTkV0bkZDSm11emc2NFdEZnNDMXFtZENkZHZvMG1mMi1fbkZNTld1UElScVN4YU5BR2JkMExVZ0pVdmVac3ZLTThLbVA2MXlud182dXcxU05iWHVTN2JSTVd3cVVWaXJTZw?oc=5",
+      "added": "2026-11-19"
+    },
+    {
+      "id": "grand-theft-auto-vi-draws-rave-reviews-as-gamers-enter-vice-city",
+      "title": "Grand Theft Auto VI draws rave reviews as gamers enter Vice City",
+      "body": "Latest GTA 6 coverage from Reuters.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNcVVqRHRmV1VIanMwYjl6bHB4R0FTSWZOVFY5RXVYSmtaOVZQMVhXNkoxVjM1NF9ZUUZYa2hneUMxeTBzRC1WTFJQZVJBOTAweVhHOFhfZFJIVmt6cTdHMGxwYnFDUjZaYUZJVGlvV2dOVGFvVWVDY3FaX2VHQWZ4dlhlRGxQdDhETVN5aFA0OG9hOVVHMFBYbHFESkxEY0ZPeUV0a0U3LTFvZFRnWk9oQkhwdTVSbmdGQUZHSk02UzE?oc=5",
       "added": "2026-11-19"
     },
     {
@@ -1342,6 +1802,46 @@
       "url": "https://www.techradar.com/live/news/gta-6-launch-day-november-19",
       "title": "Locked at 30fps on PS5, PS5 Pro included",
       "body": "Reviewers report a 30fps cap on both PS5 models with no performance mode, with dips during heavy action on base PS5."
+    },
+    {
+      "id": "gta-6-review-rockstar-s-magnum-opus",
+      "title": "GTA 6 Review, Rockstar’s Magnum Opus",
+      "body": "Latest GTA 6 coverage from VICE.",
+      "cat": "world",
+      "status": "reported",
+      "source": "VICE",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE4waDl6NzQ0NzBzemdTaER0clIyOGZhTk16Z0h2b2M1Ry0zeDczcEVTWDZaWG1HLTFvb2QyTWxWUVBUUjBfMGdyNmVuOTNSUkJCY0E1U2ZPdFM?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "grand-theft-auto-vi-earns-more-than-1-5-billion-before-release-c",
+      "title": "‘Grand Theft Auto VI’ earns more than $1.5 billion before release | CNN Business",
+      "body": "Latest GTA 6 coverage from CNN.",
+      "cat": "items",
+      "status": "reported",
+      "source": "CNN",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQMlppVnJwUElWb1ltdlV4c2V3RUZIMUlUcVlQbWY4MlNrOFZuLW5Oa3pTZEhZRHRyNVU5Z2pNbkpYNndILUxDZ05YUjV5dTVwMlNOaWhfblVGRUdDNHoxNkQ0MmRyVVMwVDlmSE0tUkhINzhPSU15M3RtT2RIaUJQbkNn?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "grand-theft-auto-vi-review-outrageous-fortune",
+      "title": "Grand Theft Auto VI Review: Outrageous Fortune",
+      "body": "Latest GTA 6 coverage from Game Informer.",
+      "cat": "world",
+      "status": "reported",
+      "source": "Game Informer",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9WRG9KX3hhTnlWVmt1TjhUdDBUZ0tBcnhacHdfSG1kYUg3NTBEQWtTZjBBdGVrOFBNbkE5cGtkd1Ywa3BfRFNpeUNiOHZ2cnVrTTBvd0JIUTd1eG1WRm5BQmxadVVsdTRXQnZvVWpKUlVjMHhBNU53V0xn?oc=5",
+      "added": "2026-11-18"
+    },
+    {
+      "id": "gta-6-cheats-all-the-codes-and-how-to-unlock-them",
+      "title": "GTA 6 cheats: All the codes and how to unlock them",
+      "body": "Latest GTA 6 coverage from Red Bull.",
+      "cat": "tips",
+      "status": "reported",
+      "source": "Red Bull",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5fN0M0MldZbU1FaUhjeFlTRFBHenFZa0N6RWtlcWV5OVJydDNqVThyUC1IaWVVeEp0Z1Z5R2tndGZVTVVQakhfRTdQTEJxZFN4SUtYbHpwU1NadlVt?oc=5",
+      "added": "2026-11-18"
     },
     {
       "id": "grand-theft-auto-vi-the-ars-technica-review",
@@ -1518,6 +2018,16 @@
       "body": "Listen for a loud roar in the swamplands, then use tracking to follow it."
     },
     {
+      "id": "ten-years-thousands-of-staff-and-a-billion-dollars-the-exclusive",
+      "title": "Ten years, thousands of staff and a billion dollars: the exclusive inside story of Grand Theft Auto VI",
+      "body": "Latest GTA 6 coverage from The Guardian.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPd1o3QjBQeUxxMXBSWFBUZ3pGaTJxMFZiN1JBdmh4bEV5NjVGeFpsTGFHaDZMTXlrNkZqUGdSSUVWTXh6NEhjb1lNV2xDWkU4Um53RkI2QjBVQVJvRW80ZjVCVHhzbXloaE00RDJJYzN5SmRJN2FfRTFiNm96V3hsSlFXdzJmUVpDYTVhZVRjMU1wTVNaM0ViNjhLMk51U0I1NzVMZQ?oc=5",
+      "added": "2026-11-15"
+    },
+    {
       "id": "youtube-celebrates-the-launch-and-cultural-impact-of-grand-theft",
       "title": "YouTube celebrates the launch and cultural impact of Grand Theft Auto VI",
       "body": "YouTube celebrat",
@@ -1526,6 +2036,16 @@
       "source": "blog.youtube",
       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1Sd1lfcmxvTHkzVXhXT2NCOV9VcUZPSmlJLWtZQWJZQWVaQU50bHB0bHZCNnVzQkxWUG95QkFLQlNqWHQ3NnJFMnhiZTlXOXJiUVk2MGNrT3d1ci1kV0FDT00yX1c5QmNvdURqUUNsRkN6bmJFRjgzN01pQmhqak0?oc=5",
       "added": "2026-11-12"
+    },
+    {
+      "id": "how-years-of-research-built-grand-theft-auto-vi-s-obsessively-de",
+      "title": "How years of research built Grand Theft Auto VI’s obsessively detailed world",
+      "body": "Latest GTA 6 coverage from The Guardian.",
+      "cat": "world",
+      "status": "reported",
+      "source": "The Guardian",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOY1ZocUx4N0hZdnYwaWVObDNWRS1MZmpCQlhGUFlBRmdWc05TVDh1ZUFvZllab3RWeDd3aFFvbFFqeWVwb1RqelJXZFgyTHVrTDBVMk02bHVSbGkteWhMT1VKTVJiSkZoWVZMcjFFMEVGNW8xd0hyQUw2aHd0SnZVS2N0VWhzYTlWamJqbEp3YlhTdWRYX1d3RWxSMnRzZmVmNUF3OXFYS0gyM0gzaXZuV1pjZVJlQ0E3cDNva0l3YndTQQ?oc=5",
+      "added": "2026-11-11"
     },
     {
       "id": "saving",
@@ -1744,6 +2264,10 @@
     }
   ],
   "changelog": [
+    {
+      "date": "2026-11-25",
+      "text": "Daily refresh: +45 news stories."
+    },
     {
       "date": "2026-11-22",
       "text": "Cleaned HTML formatting across 45 news summaries."
