@@ -35,7 +35,6 @@ const GAMING_SAFETY_SETTINGS = [
   { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" }
 ];
 
-// Deterministic Rockstar / GTA canonical brand & item typo fixer
 const CANONICAL_REPLACEMENTS = [
   [/\bGotti\b/gi, "Grotti"],
   [/\bGroti\b/gi, "Grotti"],
@@ -70,7 +69,6 @@ const CANONICAL_REPLACEMENTS = [
 const CANONICAL_BRAND_GLOSSARY =
   "Grotti, Pegassi, Dewbauchee, Truffade, Pfister, Bravado, Declasse, Vapid, Karin, Albany, Imponte, Benefactor, Lampadati, Ocelot, Progen, Coil, Übermacht, Överflöd, Annis, Dinka, Shitzu, Nagasaki, Maibatsu, Enus, Gallivanter, Obey, Invetero, Mammoth, HVY, Western, Principe, Canis, Weeny, Vom Feuer, Hawk & Little, Shrewsbury";
 
-// Bare generic weapon classes that should NEVER be used as a weapon's actual name
 const GENERIC_WEAPON_NAMES = new Set([
   "pistol",
   "handgun",
@@ -102,7 +100,6 @@ const GENERIC_WEAPON_NAMES = new Set([
   "grenade"
 ]);
 
-// Known GTA V / GTA Online-only vehicles, sci-fi weapons, and businesses to purge & block
 const GTA5_ONLINE_ONLY_REGEX = new RegExp(
   "\\b(" +
     [
@@ -153,7 +150,6 @@ const GTA5_ONLINE_ONLY_REGEX = new RegExp(
   "i"
 );
 
-// Source-level filter: reject articles/videos primarily about GTA V or GTA Online
 function isGta5OrOnlineSource(title, body = "") {
   const t = String(title || "");
   const mentionsGta6 = /\b(gta\s*6|gta\s*vi|grand\s+theft\s+auto\s*(6|vi)|leonida|vice\s+city)\b/i.test(t);
@@ -178,7 +174,6 @@ function isGenericWeaponName(name) {
     .trim();
   if (!norm) return true;
   if (GENERIC_WEAPON_NAMES.has(norm)) return true;
-  // Also catch "Starter Pistol", "Basic Shotgun", "Standard Rifle", "Heavy Sniper" generic labels without a model
   if (/^(starter|basic|standard|default|generic|weak|best)\s+(pistol|rifle|shotgun|smg|sniper|handgun|melee|gun)$/i.test(norm)) {
     return true;
   }
@@ -471,12 +466,10 @@ function getTierDistribution(list) {
   return dist;
 }
 
-// Lean, zero-cost thumbnail lookup via GTA Wiki MediaWiki API (320px WebP/JPG, ~15-25 KB)
 async function fetchLeanThumbnail(itemName, catKey) {
   if (!itemName || (catKey !== "cars" && catKey !== "weapons")) return "";
 
   const clean = fixCanonicalName(itemName);
-  // Also try model name without manufacturer (e.g. "Grotti Cheetah Classic" -> "Cheetah Classic")
   const parts = clean.split(/\s+/);
   const modelOnly = parts.length >= 2 ? parts.slice(1).join(" ") : "";
 
@@ -499,13 +492,11 @@ async function fetchLeanThumbnail(itemName, catKey) {
       const pages = Object.values(json?.query?.pages || {});
       if (!pages.length) continue;
 
-      // Sort by search index so the best match comes first
       pages.sort((a, b) => (a.index || 99) - (b.index || 99));
 
       for (const p of pages) {
         const thumb = safeUrl(p?.thumbnail?.source);
         if (!thumb) continue;
-        // Skip tiny icons or generic wiki logos
         if (/logo|icon|placeholder|badge/i.test(thumb)) continue;
         return thumb;
       }
@@ -538,7 +529,6 @@ async function populateThumbnailsForCategories(data) {
   return addedThumbs;
 }
 
-// Cleans typos, merges duplicates, removes GTA V/Online-only items, and strips generic weapon labels
 function cleanAndDeduplicateCategory(catKey, list) {
   let fixedNames = 0;
   let mergedCount = 0;
@@ -992,7 +982,6 @@ async function callGeminiJson(label, promptText, responseSchema) {
   return null;
 }
 
-// CALL 1: Enrich & rank fresh RSS news items (GTA 6 only)
 async function enrichNewsWithGemini(candidates) {
   if (!GEMINI_API_KEY || !candidates.length) return null;
 
@@ -1063,7 +1052,6 @@ Rules:
   return enriched;
 }
 
-// CALLS 2-5: Dedicated Per-Category Meta Extractor (Strictly GTA 6 Only, Named Weapons, Balanced Tiers)
 async function expandSingleMetaCategory(data, catKey, ytSources, webSources) {
   const cfg = CATEGORY_CONFIG[catKey];
   const list = data.categories[catKey] || [];
@@ -1281,7 +1269,6 @@ Return valid JSON with two arrays: "newItems" and "extraRanks".
   return { addedItems, addedRanks };
 }
 
-// CALL 6: Expand Search How-To Guides (data.guides)
 async function expandGuidesWithGemini(data, sourcePool) {
   if (!GEMINI_API_KEY || sourcePool.length < 2) return 0;
 
@@ -1383,7 +1370,6 @@ Rules:
   return added;
 }
 
-// CALL 7: Expand Discover Checklists & Ranked Lists (data.lists)
 async function expandDiscoverListsWithGemini(data, sourcePool) {
   if (!GEMINI_API_KEY || sourcePool.length < 2) return 0;
 
@@ -1498,7 +1484,6 @@ Rules:
   return added;
 }
 
-// CALL 8: Publish 1 multi-source cited article per day (data.posts)
 async function maybeGenerateCitedArticle(data, freshNews) {
   if (!GEMINI_API_KEY) return false;
   const today = todayIso();
@@ -1613,7 +1598,6 @@ async function main() {
   const beforeNewsCount = data.news.length;
   const today = todayIso();
 
-  // 1. Auto-cleanup: fix typos, merge duplicates, purge GTA V/Online items, and drop generic weapon labels
   let totalTyposFixed = 0;
   let totalDuplicatesMerged = 0;
   let totalPurgedGta5 = 0;
@@ -1633,7 +1617,6 @@ async function main() {
     }
   }
 
-  // 2. Auto-scrub existing data.news
   let scrubbedCount = 0;
   for (const n of data.news) {
     const origBody = n.body || "";
@@ -1650,7 +1633,6 @@ async function main() {
     }
   }
 
-  // 3. Fetch Online Articles & YouTube videos for all 4 categories (GTA 6 only)
   const [articleData, ytCars, ytWeapons, ytMoney, ytGear] = await Promise.all([
     fetchAllOnlineArticles(),
     fetchYouTubeForCategory("cars"),
@@ -1662,7 +1644,6 @@ async function main() {
   const ytByCategory = { cars: ytCars, weapons: ytWeapons, money: ytMoney, gear: ytGear };
   const allYt = [...ytCars, ...ytWeapons, ...ytMoney, ...ytGear];
 
-  // 4. Deduplicate fresh news candidates
   const existingUrls = new Set(data.news.map(n => safeUrl(n.url)).filter(Boolean));
   const candidates = [];
   for (const item of articleData.general) {
@@ -1673,7 +1654,6 @@ async function main() {
   }
   console.log(`[News] Unique new GTA 6 candidates after deduplication: ${candidates.length}`);
 
-  // 5. Call 1: Enrich fresh news
   let processedNew = [];
   if (candidates.length > 0) {
     const geminiEnriched = await enrichNewsWithGemini(candidates);
@@ -1711,7 +1691,6 @@ async function main() {
   });
   data.news = mergedNews.slice(0, MAX_NEWS_ITEMS).map(({ heroScore, ...cleanItem }) => cleanItem);
 
-  // 6. Calls 2-5: Expand Meta categories in SMALLEST-FIRST order
   let totalMetaItemsAdded = 0;
   let totalMetaRanksAdded = 0;
   const prioritizedCategories = [...CATEGORY_KEYS].sort(
@@ -1734,10 +1713,8 @@ async function main() {
     totalMetaRanksAdded += addedRanks;
   }
 
-  // 7. Populate lean 320px thumbnails for Cars & Weapons (0 Gemini tokens, $0.00 cost)
   const thumbsAdded = await populateThumbnailsForCategories(data);
 
-  // 8. Build unified verified source pool for Guides, Lists, and Tracked Sources
   const seenPoolUrls = new Set();
   const verifiedSourcePool = [];
   const rawPool = [
@@ -1762,12 +1739,10 @@ async function main() {
     verifiedSourcePool.push({ ...s, url: u });
   }
 
-  // 9. Calls 6, 7, 8: Guides, Discover Lists, and Cited Article
   const guidesAdded = await expandGuidesWithGemini(data, verifiedSourcePool);
   const listsAdded = await expandDiscoverListsWithGemini(data, verifiedSourcePool);
   const publishedArticle = await maybeGenerateCitedArticle(data, data.news);
 
-  // 10. Update tracked sources list for the Methodology page
   const trackedMap = new Map();
   for (const s of (data.meta.sourcesTracked || [])) {
     if (s && s.name) trackedMap.set(s.name.toLowerCase(), s);
@@ -1781,7 +1756,6 @@ async function main() {
   }
   data.meta.sourcesTracked = Array.from(trackedMap.values()).slice(0, 50);
 
-  // 11. Update metadata & changelog
   data.meta.updated = today;
   const summaryParts = [];
   if (processedNew.length > 0) summaryParts.push(`+${processedNew.length} news stories`);
